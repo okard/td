@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,9 +28,11 @@
 class State
 {
   public:
-    ~State();
+    virtual ~State()
+    {
+    }
     
-    virtual void Update(float timeElapsed);
+    virtual void Update(float timeElapsed) = 0;
 };
 
 #endif // STATE_H_H

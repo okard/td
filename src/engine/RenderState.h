@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,7 +15,6 @@
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
 */
 
 #ifndef RENDERSTATE_H
@@ -26,10 +25,14 @@
 */
 class RenderState
 {
+  //TODO Take a look at sf::Drawable
+  
   public:
-      ~RenderState();
+      virtual ~RenderState()
+      {
+      }
       
-      virtual void Render();
+      virtual void Render() = 0;
 };
 
 #endif // RENDERSTATE_H

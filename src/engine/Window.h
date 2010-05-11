@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,17 +21,41 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-
+//SFML Includes
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
-class Window : public sf::Window
+//Project Includes
+#include "State.h"
+#include "RenderState.h"
+
+class Window : public sf::RenderWindow, State, RenderState
 {
   private:
     sf::Clock Clock;
+    float timeElapsed;
+    
+    //TODO RenderState
+    //TODO LogicState
   
   public:
     Window();
+    ~Window();
+    
+    ///////////////////////////////////////////////////////////////////////////
+    //Methods
     void run();
+    
+    //From RenderState
+    virtual void Render();
+    
+    //From logic State
+    virtual void Update(float timeElapsed);
+    
+    
+  private:
+    void InitializeGL();
+    void Resize(unsigned int width, unsigned int height);
 };
 
 #endif // WINDOW_H

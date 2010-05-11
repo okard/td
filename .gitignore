@@ -1,2 +1,5 @@
 *~
+build/*
+
+.kdev_include_paths
 
