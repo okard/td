@@ -8,4 +8,3 @@ find_library(SFML_GRAPHICS sfml-graphics)
 ADD_EXECUTABLE(td src/state/InGameMenuState.cpp src/state/GameState.cpp src/state/MenuState.cpp src/data/Creature.cpp src/data/Map.cpp src/data/Bullet.cpp src/data/Building.cpp src/engine/Window.cpp src/main.cpp)
 
 target_link_libraries(td ${SFML_SYSTEM} ${SFML_WINDOW} ${SFML_GRAPHICS})
-

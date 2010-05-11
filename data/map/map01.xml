@@ -1,0 +1,14 @@
+<map>
+  <!-- DRAFT -->
+  
+  <tileset name="main">
+    <tile id="a" image="" />
+  </tileset>
+  
+  
+  <!-- The map layer -->
+  <layer zindex="0" column="5" row="5">
+    <tile tileset="main" id="a"/>
+  </layer>
+   
+</map>
