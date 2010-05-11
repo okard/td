@@ -18,47 +18,25 @@
 
 */
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef BUILDING_H
+#define BUILDING_H
 
-//SFML Includes
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-
-//Project Includes
-#include "State.h"
-#include "RenderState.h"
 
 /**
-* Window Class
+* Represents a Building
 */
-class Window : public sf::RenderWindow, State, RenderState
+class Building
 {
-  private:
-    sf::Clock Clock;
-    float timeElapsed;
+    //TODO Name
+    //TODO Icon
+    //TODO Dependencies
+    //TODO Strategy
+    //TODO Upgrade
+    //TODO Level
+    //TODO Bullet
     
-    //TODO RenderState
-    //TODO LogicState
-  
-  public:
-    Window();
-    ~Window();
-    
-    ///////////////////////////////////////////////////////////////////////////
-    //Methods
-    void run();
-    
-    //From RenderState
-    virtual void Render();
-    
-    //From logic State
-    virtual void Update(float timeElapsed);
-    
-    
-  private:
-    void InitializeGL();
-    void Resize(unsigned int width, unsigned int height);
+    //TODO Sprite
+    //TODO Position
 };
 
-#endif // WINDOW_H
+#endif // BUILDING_H

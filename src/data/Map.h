@@ -18,47 +18,17 @@
 
 */
 
-#ifndef WINDOW_H
-#define WINDOW_H
-
-//SFML Includes
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-
-//Project Includes
-#include "State.h"
-#include "RenderState.h"
+#ifndef MAP_H
+#define MAP_H
 
 /**
-* Window Class
+* Map
 */
-class Window : public sf::RenderWindow, State, RenderState
+class Map
 {
-  private:
-    sf::Clock Clock;
-    float timeElapsed;
+    //TODO Tiles
+    //TODO File(name)
     
-    //TODO RenderState
-    //TODO LogicState
-  
-  public:
-    Window();
-    ~Window();
-    
-    ///////////////////////////////////////////////////////////////////////////
-    //Methods
-    void run();
-    
-    //From RenderState
-    virtual void Render();
-    
-    //From logic State
-    virtual void Update(float timeElapsed);
-    
-    
-  private:
-    void InitializeGL();
-    void Resize(unsigned int width, unsigned int height);
 };
 
-#endif // WINDOW_H
+#endif // MAP_H

@@ -18,47 +18,5 @@
 
 */
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#include "Building.h"
 
-//SFML Includes
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-
-//Project Includes
-#include "State.h"
-#include "RenderState.h"
-
-/**
-* Window Class
-*/
-class Window : public sf::RenderWindow, State, RenderState
-{
-  private:
-    sf::Clock Clock;
-    float timeElapsed;
-    
-    //TODO RenderState
-    //TODO LogicState
-  
-  public:
-    Window();
-    ~Window();
-    
-    ///////////////////////////////////////////////////////////////////////////
-    //Methods
-    void run();
-    
-    //From RenderState
-    virtual void Render();
-    
-    //From logic State
-    virtual void Update(float timeElapsed);
-    
-    
-  private:
-    void InitializeGL();
-    void Resize(unsigned int width, unsigned int height);
-};
-
-#endif // WINDOW_H

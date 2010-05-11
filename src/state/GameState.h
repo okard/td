@@ -18,47 +18,21 @@
 
 */
 
-#ifndef WINDOW_H
-#define WINDOW_H
-
-//SFML Includes
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
 
 //Project Includes
-#include "State.h"
-#include "RenderState.h"
+#include "../engine/RenderState.h"
 
 /**
-* Window Class
+* The Game State
 */
-class Window : public sf::RenderWindow, State, RenderState
+class GameState : public RenderState
 {
-  private:
-    sf::Clock Clock;
-    float timeElapsed;
-    
-    //TODO RenderState
-    //TODO LogicState
-  
-  public:
-    Window();
-    ~Window();
-    
-    ///////////////////////////////////////////////////////////////////////////
-    //Methods
-    void run();
-    
-    //From RenderState
-    virtual void Render();
-    
-    //From logic State
-    virtual void Update(float timeElapsed);
-    
-    
-  private:
-    void InitializeGL();
-    void Resize(unsigned int width, unsigned int height);
+    //TODO Map
+    //TODO Buildings
+    //TODO Current Stage
+    //TODO Creatures
 };
 
-#endif // WINDOW_H
+#endif // GAMESTATE_H

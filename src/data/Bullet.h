@@ -18,47 +18,19 @@
 
 */
 
-#ifndef WINDOW_H
-#define WINDOW_H
-
-//SFML Includes
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-
-//Project Includes
-#include "State.h"
-#include "RenderState.h"
+#ifndef BULLET_H
+#define BULLET_H
 
 /**
-* Window Class
+* Bullet
 */
-class Window : public sf::RenderWindow, State, RenderState
+class Bullet
 {
-  private:
-    sf::Clock Clock;
-    float timeElapsed;
-    
-    //TODO RenderState
-    //TODO LogicState
-  
-  public:
-    Window();
-    ~Window();
-    
-    ///////////////////////////////////////////////////////////////////////////
-    //Methods
-    void run();
-    
-    //From RenderState
-    virtual void Render();
-    
-    //From logic State
-    virtual void Update(float timeElapsed);
-    
-    
-  private:
-    void InitializeGL();
-    void Resize(unsigned int width, unsigned int height);
+    //TODO Sprite
+    //TODO Damage
+    //TODO Direction
+    //TODO Position
+    //TODO Speed
 };
 
-#endif // WINDOW_H
+#endif // BULLET_H

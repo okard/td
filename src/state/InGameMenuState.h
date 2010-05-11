@@ -18,47 +18,19 @@
 
 */
 
-#ifndef WINDOW_H
-#define WINDOW_H
-
-//SFML Includes
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+#ifndef INGAMEMENUSTATE_H
+#define INGAMEMENUSTATE_H
 
 //Project Includes
-#include "State.h"
-#include "RenderState.h"
+#include "../engine/RenderState.h"
 
 /**
-* Window Class
+* In game menu
 */
-class Window : public sf::RenderWindow, State, RenderState
+class InGameMenuState : public RenderState
 {
-  private:
-    sf::Clock Clock;
-    float timeElapsed;
-    
-    //TODO RenderState
-    //TODO LogicState
+  //TODO GameState
   
-  public:
-    Window();
-    ~Window();
-    
-    ///////////////////////////////////////////////////////////////////////////
-    //Methods
-    void run();
-    
-    //From RenderState
-    virtual void Render();
-    
-    //From logic State
-    virtual void Update(float timeElapsed);
-    
-    
-  private:
-    void InitializeGL();
-    void Resize(unsigned int width, unsigned int height);
 };
 
-#endif // WINDOW_H
+#endif // INGAMEMENUSTATE_H

@@ -33,6 +33,9 @@ class State
     }
     
     virtual void Update(float timeElapsed) = 0;
+    
+    //TODO Handle Key Events
+    //TODO Handle Mouse Events
 };
 
 #endif // STATE_H_H
