@@ -20,6 +20,9 @@
 
 #include "Window.h"
 
+//CPP Includes
+#include<sstream>
+
 /**
 * Constructor
 */
@@ -28,6 +31,9 @@ Window::Window() : sf::RenderWindow(sf::VideoMode(800, 600, 32), "td")
    SetFramerateLimit(60);
    PreserveOpenGLStates(true);
    InitializeGL();
+   
+   //Init Frame Label
+   frameLabel.SetFont(sf::Font::GetDefaultFont());
 }
 
 /**
@@ -107,6 +113,15 @@ void Window::run()
 	this->Clear();
 	this->SetActive();
 	this->Render();
+	
+	//Frame Rate Label
+	std::ostringstream out;
+	out << 1.f / GetFrameTime();;
+	frameLabel.SetText(sf::Unicode::Unicode::Text(out.str()));
+	sf::FloatRect r = frameLabel.GetRect();
+	frameLabel.SetPosition(0.5f, 0.5f);
+	this->Draw(frameLabel);
+	
 
 	this->Display();
     }

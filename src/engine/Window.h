@@ -38,6 +38,8 @@ class Window : public sf::RenderWindow, State, RenderState
     sf::Clock Clock;
     float timeElapsed;
     
+    sf::String frameLabel;
+    
     //TODO RenderState
     //TODO LogicState
   
