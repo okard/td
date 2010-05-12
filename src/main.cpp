@@ -17,13 +17,19 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "engine/Window.h"
+#include <engine/Window.h>
+#include <common/Log.h>
+
 
 /**
 * main
 */
 int main(int argc, char **argv) 
 {
+    ConsoleListener* l = new ConsoleListener();
+    Log::Source()->AddListener(l);
+    Log::Source()->Information("Program started");
+    
     //Running main window
     Window*  w = new Window();
     w->run();

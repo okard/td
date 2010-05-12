@@ -116,10 +116,12 @@ void Window::run()
 	
 	//Frame Rate Label
 	std::ostringstream out;
+	out.precision(3);
 	out << 1.f / GetFrameTime();;
 	frameLabel.SetText(sf::Unicode::Unicode::Text(out.str()));
 	sf::FloatRect r = frameLabel.GetRect();
-	frameLabel.SetPosition(0.5f, 0.5f);
+	//Position is in Pixel
+	frameLabel.SetPosition(GetWidth()-r.GetWidth(), 0.f);
 	this->Draw(frameLabel);
 	
 
