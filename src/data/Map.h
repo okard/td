@@ -26,9 +26,9 @@
 */
 class Map
 {
-    //TODO Tiles
     //TODO File(name)
-    
+    //TODO Tilesets
+    //TODO Layer
 };
 
 #endif // MAP_H

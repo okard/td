@@ -112,7 +112,7 @@ void Window::run()
 	//Render
 	this->Clear();
 	this->SetActive();
-	this->Render();
+	this->Render(this);
 	
 	//Frame Rate Label
 	std::ostringstream out;
@@ -132,7 +132,7 @@ void Window::run()
 /**
 * Render Window
 */
-void Window::Render()
+void Window::Render(const sf::RenderTarget* target)
 {
     //Basic OpenGL Initialization
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

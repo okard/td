@@ -21,19 +21,19 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-
 /**
-* Represents a Building
+* Represents a Building on the Map
+* Can be created over BuildingType
 */
 class Building
 {
-    //TODO Name
-    //TODO Icon
-    //TODO Dependencies
+    //TODO BuildingType
+  
     //TODO Strategy
     //TODO Upgrade
     //TODO Level
     //TODO Bullet
+    //TODO Range
     
     //TODO Sprite
     //TODO Position

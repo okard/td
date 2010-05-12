@@ -1,5 +1,10 @@
 <game>
   <!-- DRAFT -->
+  
+  <!-- available buildings -->
+  <buildings>
+    <building name="canontower" file="data/buildings/canontower.lua" />
+  </buildings>
 
   <!-- A stage presents a mob of creatures-->
   <stage number="1" map="map01.xml">

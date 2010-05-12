@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,24 +18,20 @@
 
 */
 
-#ifndef GAMESTATE_H
-#define GAMESTATE_H
-
-//Project Includes
-#include "../engine/RenderState.h"
+#ifndef BUILDINGTYPE_H
+#define BUILDINGTYPE_H
 
 /**
-* The Game State
+* Represents a BuildingType
+* 
 */
-class GameState : public RenderState
+class BuildingType
 {
-    //TODO Available Buildings
-    //TODO Available Researches
+    //TODO Name
+    //TODO Icon
+    //TODO Dependencies
     
-    //TODO Current Map
-    //TODO Current Buildings
-    //TODO Current Stage
-    //TODO Creatures
+    //TODO Building* Create();
 };
 
-#endif // GAMESTATE_H
+#endif // BUILDINGTYPE_H

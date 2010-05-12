@@ -52,7 +52,7 @@ class Window : public sf::RenderWindow, State, RenderState
     void run();
     
     //From RenderState
-    virtual void Render();
+    virtual void Render(const sf::RenderTarget* target);
     
     //From logic State
     virtual void Update(float timeElapsed);

@@ -20,6 +20,8 @@
 #ifndef RENDERSTATE_H
 #define RENDERSTATE_H
 
+#include <SFML/Graphics.hpp>
+
 /**
 * Interface RenderState
 */
@@ -32,7 +34,7 @@ class RenderState
       {
       }
       
-      virtual void Render() = 0;
+      virtual void Render(const sf::RenderTarget* target) = 0;
 };
 
 #endif // RENDERSTATE_H
