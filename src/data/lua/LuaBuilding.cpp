@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,5 +18,22 @@
 
 */
 
-#include "Creature.h"
+#include "LuaBuilding.h"
+
+LuaBuilding::LuaBuilding(BuildingType* buildingType, const char* luaName)
+  : buildingType(buildingType)
+{
+  //register own functions for this type
+  
+  //TODO Fire
+  
+}
+
+/**
+* Return Building Type
+*/
+BuildingType* LuaBuilding::GetType()
+{
+  return buildingType;
+}
 

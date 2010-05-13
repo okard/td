@@ -1,8 +1,7 @@
 -- DRAFT
 -- A canon tower specified through lua script
 
-CanonTower = {}
-CanonTower.__index = CanonTower
+CanonTower = BuildingType()
 
 
 -- image
@@ -19,6 +18,7 @@ CanonTower.buildAnimationStart = 7
 CanonTower.buildAnimationStop = 7
 
 --properties
+CanonTower.name = "CanonTower"
 CanonTower.category = "building"
 CanonTower.prefix = "ct"
 CanonTower.cost = 200
@@ -56,6 +56,6 @@ function CanonTower:Update(elapsedTime)
     -- position: bullet fly to position and hit the stuff there
 end
 
---Register Building Type 
-Shared.AddBuildingType("CanonTower", CanonTower);
+//Register CanonTower 
+CanonTower.RegisterType()
 

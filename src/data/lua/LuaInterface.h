@@ -21,16 +21,42 @@
 #ifndef LUAINTERFACE_H
 #define LUAINTERFACE_H
 
+//STL Includes
+#include <map>
+
+//Project Includes
+#include<data/Bullet.h>
+#include<data/Creature.h>
+#include<data/lua/LuaState.h>
+#include<data/lua/LuaBuildingType.h>
+
+class LuaBuildingType;
+
 /**
 * Lua Interface
 */
 class LuaInterface
 {
+  private:
+    lua_State* state;
+    
+    std::map<char*, LuaBuildingType*> buildingTypes;
+    std::map<char*, Bullet*> bulletTypes;
+    std::map<char*, Creature*> creatureTypes;
+    
   //Lua Functions from Game
   
-  //TODO  AddBuildingType(LuaState) (string, table) example:("CanonTower", CanonTower);
-  //TODO  AddCreatureType
-  //TODO  AddBulletType
+    LuaInterface(lua_State* state);
+    static bool IsRegistered(lua_State*  state);
+    
+  public:
+    ~LuaInterface();
+    void AddBuildingType(LuaBuildingType* buildingType); 
+    void AddCreatureType();
+    void AddBulletType();
+    
+
+    static LuaInterface* Instance(lua_State*  state); 
 };
 
 #endif // LUAINTERFACE_H

@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,36 +18,34 @@
 
 */
 
-#ifndef LUASTATE_H
-#define LUASTATE_H
+#ifndef LUABUILDINGTYPE_H
+#define LUABUILDINGTYPE_H
 
-//Cpp Includes
-#include<iostream>
-
-//Lua Includes
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-}
-
+//Project Includes
+#include <data/BuildingType.h>
+#include <data/lua/Luna.h>
+#include <data/lua/LuaState.h>
+#include<data/lua/LuaInterface.h>
 
 /**
-* Lua State
+* Building Type for Lua
 */
-class LuaState
+class LuaBuildingType : public BuildingType
 {
-  private:
-    lua_State *state;
-    
   public:
-    LuaState();
-    ~LuaState();
-    
-    void LoadFile(const char* file);
-    int Execute();
-    
-    
-    lua_State* operator*() const;  
+      LuaBuildingType(lua_State*);
+      virtual ~LuaBuildingType();
+      
+      
+      void RegisterType(lua_State* state);
+       
+      virtual char* GetName();
+      
+      virtual Building* Create();
+  
+      //For Lua Registration
+      static const char className[];
+      static const Luna<LuaBuildingType>::RegType Register[];
 };
 
-#endif // LUASTATE_H
+#endif // LUABUILDINGTYPE_H

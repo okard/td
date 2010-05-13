@@ -21,13 +21,35 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
+#include<data/BuildingType.h>
+
+class BuildingType;
+
+
+enum FireStrategy
+{
+    Weakest = 0,
+    Strongest = 1,
+    Nearest = 2,
+    Furthest = 3
+};
+
+enum FireType
+{
+    
+};
+
+
 /**
 * Represents a Building on the Map
 * Can be created over BuildingType
 */
 class Building
 {
-    //TODO BuildingType
+  public:
+    virtual ~Building(){}
+    
+    virtual BuildingType* GetType() = 0;
   
     //TODO Strategy
     //TODO Upgrade

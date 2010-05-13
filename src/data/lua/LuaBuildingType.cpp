@@ -18,29 +18,46 @@
 
 */
 
-#ifndef BUILDINGTYPE_H
-#define BUILDINGTYPE_H
+#include "LuaBuildingType.h"
 
-#include<data/Building.h>
+//COnfiguration for Lua
+const char LuaBuildingType::className[] = "BuildingType";
+const Luna<LuaBuildingType>::RegType LuaBuildingType::Register[] = 
+  {
+     // { "foo", &Foo::foo },
+      {0}
+  };
 
-class Building;
 
 /**
-* Represents a BuildingType
-* 
+* Constructor
 */
-class BuildingType
+LuaBuildingType::LuaBuildingType(lua_State* state)
 {
-  
-  public:
-    virtual ~BuildingType(){}
-    
-    virtual char* GetName() = 0;
-    
-    //TODO Icon
-    //TODO Dependencies
-    
-    virtual Building* Create() = 0;
-};
+    //Register itself at LuaInterface
+}
 
-#endif // BUILDINGTYPE_H
+LuaBuildingType::~LuaBuildingType()
+{
+}
+
+void LuaBuildingType::RegisterType(lua_State* state)
+{
+  //Register at Lua Interface
+  LuaInterface::Instance(state)->AddBuildingType(this);
+}
+       
+char* LuaBuildingType::GetName()
+{
+  return 0;
+}
+
+      
+Building* LuaBuildingType::Create()
+{
+  //Create new Table
+  //set metatable
+  //call OnCreate();
+  //return Building
+  return 0;
+}

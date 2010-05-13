@@ -20,3 +20,68 @@
 
 #include "LuaInterface.h"
 
+LuaInterface::LuaInterface(lua_State* state) : state(state)
+{
+  //Register Building Type
+  Luna<LuaBuildingType>::Register(state);
+  
+  //Chekc if already registed?
+  //Registering itself as
+  
+  //Shared.AddBuildingType
+  //Shared.AddBulletType
+  //Shared.AddCreatureType
+}
+
+
+/**
+* Destructor
+*/
+LuaInterface::~LuaInterface()
+{
+  //TODO Delete all building types, creature types and bullet types
+}
+
+/**
+* Interface for registering building types
+*/
+void LuaInterface::AddBuildingType(LuaBuildingType* buildingType)
+{
+  //buildingTypes.insert(buildingType->GetName(), buildingType);
+}
+
+/**
+* Interface for register bullet types
+*/
+void LuaInterface::AddBulletType()
+{
+  //table
+}
+
+/**
+* Interface for register creature types
+*/
+void LuaInterface::AddCreatureType()
+{
+  //table
+}
+
+/**
+* take a look if LuaInterface exist for this state
+*/
+bool LuaInterface::IsRegistered(lua_State*  state)
+{
+  return false;
+}
+
+/**
+* Returne the LuaInterface instance for this lua_state
+*/
+LuaInterface* LuaInterface::Instance(lua_State*  state)
+{
+   if(!IsRegistered(state))
+   {
+      //Register for lua_State
+   }
+   //get pointer from lua state and return  
+}

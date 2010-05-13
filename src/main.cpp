@@ -17,8 +17,10 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include <engine/Window.h>
 #include <common/Log.h>
+#include <engine/Window.h>
+
+#include <data/lua/LuaState.h>
 
 
 /**
@@ -26,6 +28,11 @@
 */
 int main(int argc, char **argv) 
 {
+    LuaState* state = new LuaState();
+    //LuaInterface* luin = LuaInterface::Instance(*state);
+    //state->LoadFile("data/buildings/canontower.lua");
+  
+  
     ConsoleListener* l = new ConsoleListener();
     Log::Source()->AddListener(l);
     Log::Source()->Information("Program started");

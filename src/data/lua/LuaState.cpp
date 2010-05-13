@@ -38,6 +38,15 @@ LuaState::~LuaState()
 }
 
 /**
+* returning lua_state
+*/
+lua_State* LuaState::operator*() const
+{
+  return state;
+}
+
+
+/**
 * Load lua file
 */
 void LuaState::LoadFile(const char* file)
