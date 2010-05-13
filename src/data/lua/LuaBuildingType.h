@@ -25,7 +25,7 @@
 #include <data/BuildingType.h>
 #include <data/lua/Luna.h>
 #include <data/lua/LuaState.h>
-#include<data/lua/LuaInterface.h>
+#include <data/lua/LuaInterface.h>
 
 /**
 * Building Type for Lua
@@ -37,7 +37,7 @@ class LuaBuildingType : public BuildingType
       virtual ~LuaBuildingType();
       
       
-      void RegisterType(lua_State* state);
+      int RegisterType(lua_State* state);
        
       virtual char* GetName();
       
@@ -47,5 +47,7 @@ class LuaBuildingType : public BuildingType
       static const char className[];
       static const Luna<LuaBuildingType>::RegType Register[];
 };
+
+
 
 #endif // LUABUILDINGTYPE_H

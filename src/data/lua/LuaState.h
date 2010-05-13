@@ -47,7 +47,7 @@ class LuaState
     int Execute();
     
     
-    lua_State* operator*() const;  
+    lua_State* getState() const;  
 };
 
 #endif // LUASTATE_H

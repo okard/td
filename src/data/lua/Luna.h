@@ -159,4 +159,68 @@ template<class T> class Luna
     };
 };
 
+/**
+* A simple class pointer store
+*/
+template<class T> class Lun 
+{
+  private:
+    static const char storeName[]; 
+    
+  public:
+    static T* Get(lua_State* state)
+    {
+      	T* obj = 0;
+	
+	//access table
+	lua_getglobal(state, Lun<T>::storeName);
+	if (!lua_istable(state, -1))
+	{
+	    //not exist create new one
+	    lua_newtable(state);
+	    
+	    //if not exist theres still no pointer create new one and got out
+	    obj = new T(state);
+	    
+	    lua_pushstring(state, T::className);
+	    //push ptr here
+	    lua_pushlightuserdata(state, obj);
+	    //T** a = static_cast<T**>(lua_newuserdata(state, sizeof(T*))); // store a ptr to the ptr
+	    //*a = obj;
+	    lua_settable(state, -3);
+
+	    //set global store table
+	    lua_setglobal(state, Lun<T>::storeName);	    
+	    return obj;
+	}
+	
+	
+	//get field here
+	lua_pushstring(state, T::className);
+	//lua_gettable(state, -2);
+	lua_rawget(state,-2);
+	//no field create new one
+	if(!lua_islightuserdata(state, -1))
+	{
+	    obj = new T(state);
+	    lua_pushstring(state, T::className);
+	    lua_pushlightuserdata(state, obj);
+	    lua_settable(state, -3);
+	    
+	    return obj;
+	}
+	
+	//lua_rawget(state,-2);
+	obj = static_cast<T*>(lua_touserdata(state,-1));
+	
+	lua_pop(state, -1);
+	
+	//return obj
+	return obj;
+    }
+    
+};
+
+template<class T> const char Lun<T>::storeName[] = "LunStore";
+
 #endif // LUNA_H

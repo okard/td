@@ -40,7 +40,7 @@ LuaState::~LuaState()
 /**
 * returning lua_state
 */
-lua_State* LuaState::operator*() const
+lua_State* LuaState::getState() const
 {
   return state;
 }

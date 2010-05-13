@@ -20,8 +20,16 @@
 
 #include "LuaInterface.h"
 
+#include <common/Log.h>
+
+const char LuaInterface::className[] = "LuaInterface";
+
+/**
+* Constructor
+*/
 LuaInterface::LuaInterface(lua_State* state) : state(state)
 {
+  Log::Source()->Information("LuaInterface created");
   //Register Building Type
   Luna<LuaBuildingType>::Register(state);
   
@@ -47,6 +55,8 @@ LuaInterface::~LuaInterface()
 */
 void LuaInterface::AddBuildingType(LuaBuildingType* buildingType)
 {
+  Log::Source()->Information("Add Building Type: ");
+  Log::Source()->Information(buildingType->GetName());
   //buildingTypes.insert(buildingType->GetName(), buildingType);
 }
 
@@ -67,21 +77,9 @@ void LuaInterface::AddCreatureType()
 }
 
 /**
-* take a look if LuaInterface exist for this state
-*/
-bool LuaInterface::IsRegistered(lua_State*  state)
-{
-  return false;
-}
-
-/**
 * Returne the LuaInterface instance for this lua_state
 */
 LuaInterface* LuaInterface::Instance(lua_State*  state)
 {
-   if(!IsRegistered(state))
-   {
-      //Register for lua_State
-   }
-   //get pointer from lua state and return  
+   return Lun<LuaInterface>::Get(state);
 }

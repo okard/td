@@ -56,6 +56,6 @@ function CanonTower:Update(elapsedTime)
     -- position: bullet fly to position and hit the stuff there
 end
 
-//Register CanonTower 
+--Register CanonTower 
 CanonTower.RegisterType()
 

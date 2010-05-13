@@ -37,6 +37,8 @@ class LuaBuildingType;
 */
 class LuaInterface
 {
+  friend class Lun<LuaInterface>;
+  
   private:
     lua_State* state;
     
@@ -46,16 +48,15 @@ class LuaInterface
     
   //Lua Functions from Game
   
+
     LuaInterface(lua_State* state);
-    static bool IsRegistered(lua_State*  state);
-    
   public:
     ~LuaInterface();
     void AddBuildingType(LuaBuildingType* buildingType); 
     void AddCreatureType();
     void AddBulletType();
     
-
+    static const char className[];
     static LuaInterface* Instance(lua_State*  state); 
 };
 

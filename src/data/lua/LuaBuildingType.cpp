@@ -20,11 +20,14 @@
 
 #include "LuaBuildingType.h"
 
+#include <common/Log.h>
+
 //COnfiguration for Lua
 const char LuaBuildingType::className[] = "BuildingType";
 const Luna<LuaBuildingType>::RegType LuaBuildingType::Register[] = 
   {
      // { "foo", &Foo::foo },
+      { "RegisterType", &LuaBuildingType::RegisterType},
       {0}
   };
 
@@ -34,6 +37,7 @@ const Luna<LuaBuildingType>::RegType LuaBuildingType::Register[] =
 */
 LuaBuildingType::LuaBuildingType(lua_State* state)
 {
+    Log::Source()->Information("LuaBuildingType created");
     //Register itself at LuaInterface
 }
 
@@ -41,8 +45,9 @@ LuaBuildingType::~LuaBuildingType()
 {
 }
 
-void LuaBuildingType::RegisterType(lua_State* state)
+int LuaBuildingType::RegisterType(lua_State* state)
 {
+  Log::Source()->Information("Register Type");
   //Register at Lua Interface
   LuaInterface::Instance(state)->AddBuildingType(this);
 }
