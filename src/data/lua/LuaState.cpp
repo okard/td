@@ -24,9 +24,8 @@
 /**
 * Constructor
 */
-LuaState::LuaState()
+LuaState::LuaState() : state(lua_open())
 {
-  state = luaL_newstate();
 }
 
 /**
@@ -46,7 +45,15 @@ void LuaState::LoadFile(const char* file)
     int status = luaL_loadfile(state, file);
     if (status) 
     {
-        fprintf(stderr, "Couldn't load file: %s\n", lua_tostring(state, -1));
+	std::cerr << "Couldn't load file: " << lua_tostring(state, -1) << std::endl;
     }
 
+}
+
+/**
+* Execute
+*/
+int LuaState::Execute()
+{
+  return lua_pcall(state, 0, LUA_MULTRET, 0);
 }

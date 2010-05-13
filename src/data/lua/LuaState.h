@@ -21,6 +21,8 @@
 #ifndef LUASTATE_H
 #define LUASTATE_H
 
+//Cpp Includes
+#include<iostream>
 
 //Lua Includes
 extern "C" {
@@ -37,12 +39,12 @@ class LuaState
   private:
     lua_State *state;
     
-  
   public:
     LuaState();
     ~LuaState();
     
     void LoadFile(const char* file);
+    int Execute();
     
 };
 

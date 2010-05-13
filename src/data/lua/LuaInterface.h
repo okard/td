@@ -18,27 +18,19 @@
 
 */
 
-#ifndef BUILDING_H
-#define BUILDING_H
+#ifndef LUAINTERFACE_H
+#define LUAINTERFACE_H
 
 /**
-* Represents a Building on the Map
-* Can be created over BuildingType
+* Lua Interface
 */
-class Building
+class LuaInterface
 {
-    //TODO BuildingType
+  //Lua Functions from Game
   
-    //TODO Strategy
-    //TODO Upgrade
-    //TODO Level
-    //TODO Bullet
-    //TODO Range
-    
-    //TODO Sprite
-    //TODO Position
-    
-    //TODO Bullet* Fire();
+  //TODO  AddBuildingType(LuaState) (string, table) example:("CanonTower", CanonTower);
+  //TODO  AddCreatureType
+  //TODO  AddBulletType
 };
 
-#endif // BUILDING_H
+#endif // LUAINTERFACE_H

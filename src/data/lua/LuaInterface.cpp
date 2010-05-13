@@ -18,27 +18,5 @@
 
 */
 
-#ifndef BUILDING_H
-#define BUILDING_H
+#include "LuaInterface.h"
 
-/**
-* Represents a Building on the Map
-* Can be created over BuildingType
-*/
-class Building
-{
-    //TODO BuildingType
-  
-    //TODO Strategy
-    //TODO Upgrade
-    //TODO Level
-    //TODO Bullet
-    //TODO Range
-    
-    //TODO Sprite
-    //TODO Position
-    
-    //TODO Bullet* Fire();
-};
-
-#endif // BUILDING_H
