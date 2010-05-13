@@ -57,5 +57,5 @@ function CanonTower:Update(elapsedTime)
 end
 
 --Register CanonTower 
-CanonTower.RegisterType()
+CanonTower:RegisterType()
 

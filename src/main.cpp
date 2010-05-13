@@ -38,7 +38,6 @@ int main(int argc, char **argv)
     //Lua Tests
     LuaState* state = new LuaState();
     LuaInterface* luin = LuaInterface::Instance(state->getState());
-    Luna<LuaBuildingType>::Register(state->getState());
     state->LoadFile("data/buildings/canontower.lua");
     state->Execute();
     

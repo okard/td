@@ -56,7 +56,7 @@ LuaInterface::~LuaInterface()
 void LuaInterface::AddBuildingType(LuaBuildingType* buildingType)
 {
   Log::Source()->Information("Add Building Type: ");
-  Log::Source()->Information(buildingType->GetName());
+  //Log::Source()->Information(buildingType->GetName());
   //buildingTypes.insert(buildingType->GetName(), buildingType);
 }
 

@@ -50,6 +50,7 @@ int LuaBuildingType::RegisterType(lua_State* state)
   Log::Source()->Information("Register Type");
   //Register at Lua Interface
   LuaInterface::Instance(state)->AddBuildingType(this);
+  return 1;
 }
        
 char* LuaBuildingType::GetName()
