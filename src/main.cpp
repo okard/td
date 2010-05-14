@@ -41,6 +41,12 @@ int main(int argc, char **argv)
     state->LoadFile("data/buildings/canontower.lua");
     state->Execute();
     
+    BuildingType* type = luin->GetBuildingType("CanonTower");
+    if(type == 0)
+      Log::Source()->Information("No CanonTower");
+    else
+      type->Create();
+    
     //Running main window
     Window*  w = new Window();
     w->run();

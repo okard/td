@@ -26,12 +26,18 @@
 #include <data/lua/Luna.h>
 #include <data/lua/LuaState.h>
 #include <data/lua/LuaInterface.h>
+#include <data/lua/LuaBuilding.h>
 
 /**
 * Building Type for Lua
 */
 class LuaBuildingType : public BuildingType
 {
+  private:
+      bool registered;
+      lua_State* state;
+      char* name;
+      
   public:
       LuaBuildingType(lua_State*);
       virtual ~LuaBuildingType();

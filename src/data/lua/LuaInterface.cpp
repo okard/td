@@ -32,6 +32,7 @@ LuaInterface::LuaInterface(lua_State* state) : state(state)
   Log::Source()->Information("LuaInterface created");
   //Register Building Type
   Luna<LuaBuildingType>::Register(state);
+  Luna<LuaBuilding>::Register(state);
   
   //Chekc if already registed?
   //Registering itself as
@@ -56,8 +57,17 @@ LuaInterface::~LuaInterface()
 void LuaInterface::AddBuildingType(LuaBuildingType* buildingType)
 {
   Log::Source()->Information("Add Building Type: ");
-  //Log::Source()->Information(buildingType->GetName());
-  //buildingTypes.insert(buildingType->GetName(), buildingType);
+  Log::Source()->Information(buildingType->GetName());
+  
+  buildingTypes[std::string(buildingType->GetName())] = buildingType;
+}
+
+/**
+* Get Type
+*/
+BuildingType* LuaInterface::GetBuildingType(char* typeName)
+{
+  return buildingTypes[std::string(typeName)];
 }
 
 /**

@@ -22,16 +22,23 @@
 #define LUABUILDING_H
 
 #include<data/Building.h>
+#include<data/lua/Luna.h>
 
 class LuaBuilding : public Building
 {
   private:
-    BuildingType* buildingType;
+    //BuildingType* buildingType;
     
   public:
-    LuaBuilding(BuildingType* buildingType, const char* luaName);
+    LuaBuilding(lua_State* state);
+    ~LuaBuilding();
     
     virtual BuildingType* GetType();
+    int Fire(lua_State* state);
+    
+    //For Lua Registration
+    static const char className[];
+    static const Luna<LuaBuilding>::RegType Register[];
 };
 
 #endif // LUABUILDING_H

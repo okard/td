@@ -20,20 +20,55 @@
 
 #include "LuaBuilding.h"
 
-LuaBuilding::LuaBuilding(BuildingType* buildingType, const char* luaName)
-  : buildingType(buildingType)
+//Project Includes
+#include <common/Log.h>
+
+
+//Configuration for Lua
+const char LuaBuilding::className[] = "Building";
+const Luna<LuaBuilding>::RegType LuaBuilding::Register[] = 
+  {
+     // { "foo", &Foo::foo },
+      { "Fire", &LuaBuilding::Fire},
+      {0}
+  };
+
+/**
+* Constructor
+*/
+LuaBuilding::LuaBuilding(lua_State* state)
 {
+  Log::Source()->Information("LuaBuilding created");
   //register own functions for this type
   
   //TODO Fire
-  
 }
+
+/**
+* Destructor
+*/
+LuaBuilding::~LuaBuilding()
+{
+
+}
+
+
+/**
+* Fire a Bullet
+*/
+int LuaBuilding::Fire(lua_State* state)
+{
+
+  return 0;
+}
+
 
 /**
 * Return Building Type
 */
 BuildingType* LuaBuilding::GetType()
 {
-  return buildingType;
+  //get from meta table the class pointer?
+  return 0;
 }
 

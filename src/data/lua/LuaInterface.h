@@ -22,6 +22,7 @@
 #define LUAINTERFACE_H
 
 //STL Includes
+#include <string>
 #include <map>
 
 //Project Includes
@@ -42,9 +43,9 @@ class LuaInterface
   private:
     lua_State* state;
     
-    std::map<char*, LuaBuildingType*> buildingTypes;
-    std::map<char*, Bullet*> bulletTypes;
-    std::map<char*, Creature*> creatureTypes;
+    std::map<std::string, LuaBuildingType*> buildingTypes;
+    std::map<std::string, Bullet*> bulletTypes;
+    std::map<std::string, Creature*> creatureTypes;
     
   //Lua Functions from Game
   
@@ -52,9 +53,14 @@ class LuaInterface
     LuaInterface(lua_State* state);
   public:
     ~LuaInterface();
+    
+    //adder
     void AddBuildingType(LuaBuildingType* buildingType); 
     void AddCreatureType();
     void AddBulletType();
+    
+    //getter
+    BuildingType* GetBuildingType(char*);
     
     static const char className[];
     static LuaInterface* Instance(lua_State*  state); 

@@ -49,13 +49,13 @@ function CanonTower:Update(elapsedTime)
     -- when enough time fire bullet at enemy
     -- bullet set current position from the self position
     -- bullet creates though native class for the right options?
-    self.Fire()
+    self:Fire()
     
     --target can be a creature or a position
     -- creature: bullet following automatically the aiming creature
     -- position: bullet fly to position and hit the stuff there
 end
 
---Register CanonTower 
-CanonTower:RegisterType()
+--Register CanonTower String must be identical to variable
+CanonTower:RegisterType("CanonTower") 
 
