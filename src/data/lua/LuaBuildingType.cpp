@@ -93,32 +93,5 @@ char* LuaBuildingType::GetName()
       
 Building* LuaBuildingType::Create()
 {
-  /*
-    Lua Code:
-    global type_1 = Building()
-    setmetatable(type_1, type)
-  */
-  
-  //Create new Building
-  lua_getfield(state, LUA_GLOBALSINDEX, LuaBuilding::className); 
-  lua_call(state, 0, 1);
-  
-  //set metatable
-  lua_getglobal(state, this->GetName());
-  if(lua_istable(state, -1))
-    lua_setmetatable(state, -2);
-  
-  //save value
-  lua_setfield(state, LUA_GLOBALSINDEX, "newBuilding_1"); 
-    
-  //void?
-  //extract class pointer?
-  //get the Building* from the new table?
-  
-  
-  //Create new Table
-  //set metatable
-  //call OnCreate();
-  //return Building
-  return 0;
+  return new LuaBuilding(state, this);
 }

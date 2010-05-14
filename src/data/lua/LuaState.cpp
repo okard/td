@@ -26,6 +26,7 @@
 */
 LuaState::LuaState() : state(lua_open())
 {
+  luaL_openlibs(state); 
 }
 
 /**

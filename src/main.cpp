@@ -45,7 +45,10 @@ int main(int argc, char **argv)
     if(type == 0)
       Log::Source()->Information("No CanonTower");
     else
-      type->Create();
+    {
+      Building* b = type->Create();
+      b->Update(500);
+    }
     
     //Running main window
     Window*  w = new Window();

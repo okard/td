@@ -32,7 +32,6 @@ LuaInterface::LuaInterface(lua_State* state) : state(state)
   Log::Source()->Information("LuaInterface created");
   //Register Building Type
   Luna<LuaBuildingType>::Register(state);
-  Luna<LuaBuilding>::Register(state);
   
   //Chekc if already registed?
   //Registering itself as

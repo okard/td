@@ -223,4 +223,38 @@ template<class T> class Lun
 
 template<class T> const char Lun<T>::storeName[] = "LunStore";
 
+
+
+template<class T> class WrapClassFunction
+{
+  public:
+    static void Register(lua_State* state, T* obj)
+    {
+	//TODO Check for Table
+	
+	for (int i = 0; T::Register[i].name; i++) 
+	{
+	  // register the functions
+	  lua_pushstring(state, T::Register[i].name);
+	  lua_pushlightuserdata(state, obj);
+	  lua_pushnumber(state, i); // let the thunk know which method we mean
+	  lua_pushcclosure(state, &WrapClassFunction<T>::dispatch, 2);
+	  lua_settable(state, -3); // self["function"] = thunk("function")
+	} 
+    }
+    
+    /**
+    * Dispatch to object
+    */
+    static int dispatch(lua_State *state) 
+    {
+	//get parameter 
+	T* obj = static_cast<T*>(lua_touserdata(state, -2));
+	int no = lua_tonumber(state, -1);
+	
+	//Execute Function
+	return (obj->*(T::Register[no].mfunc))(state); 
+    }
+};
+
 #endif // LUNA_H

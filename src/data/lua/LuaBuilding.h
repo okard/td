@@ -23,17 +23,26 @@
 
 #include<data/Building.h>
 #include<data/lua/Luna.h>
+#include<data/lua/LuaBuildingType.h>
+
+class LuaBuildingType;
 
 class LuaBuilding : public Building
 {
   private:
-    //BuildingType* buildingType;
+    BuildingType* buildingType;
+    char* name;
+    lua_State* state;
     
   public:
-    LuaBuilding(lua_State* state);
+    LuaBuilding(lua_State* state, LuaBuildingType* type);
     ~LuaBuilding();
     
+    //Building Interface
     virtual BuildingType* GetType();
+    virtual void Update(int time);
+    
+    //Lua Interface
     int Fire(lua_State* state);
     
     //For Lua Registration

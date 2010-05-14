@@ -32,6 +32,7 @@ CanonTower.dependency = nil         -- depends not on research
 
 -- Event Called after object creation
 function CanonTower:OnCreate()
+    print("On Create Called")
     -- New CanonTower Instance is already created from source
 end
 
@@ -43,14 +44,19 @@ end
 
 -- Fire Strategy: strongest, weakest, nearest, farthest
 
+function CanonTower:bla()
+end
 
 --update canon tower
 function CanonTower:Update(elapsedTime)
-    -- when enough time fire bullet at enemy
-    -- bullet set current position from the self position
-    -- bullet creates though native class for the right options?
+    --for k,v in pairs(getmetatable(newBuilding_1)) do print(k,v) end
+    --print(self)
+
     self:Fire()
-    
+    self:OnCreate()
+    print(elapsedTime)
+    print(self.name)
+
     --target can be a creature or a position
     -- creature: bullet following automatically the aiming creature
     -- position: bullet fly to position and hit the stuff there

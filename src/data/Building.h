@@ -49,6 +49,8 @@ class Building
   public:
     virtual ~Building(){}
     
+    virtual void Update(int time) = 0;
+    
     virtual BuildingType* GetType() = 0;
   
     //TODO Strategy
@@ -60,7 +62,7 @@ class Building
     //TODO Sprite
     //TODO Position
     
-    //TODO Bullet* Fire();
+
 };
 
 #endif // BUILDING_H

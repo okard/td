@@ -24,24 +24,46 @@
 #include <common/Log.h>
 
 
-//Configuration for Lua
+/**
+* Lua Class Name
+*/
 const char LuaBuilding::className[] = "Building";
+/**
+* Lua Functions
+*/
 const Luna<LuaBuilding>::RegType LuaBuilding::Register[] = 
-  {
-     // { "foo", &Foo::foo },
+{
       { "Fire", &LuaBuilding::Fire},
       {0}
-  };
+};
 
 /**
 * Constructor
 */
-LuaBuilding::LuaBuilding(lua_State* state)
+LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buildingType(buildingType), state(state)
 {
-  Log::Source()->Information("LuaBuilding created");
-  //register own functions for this type
+    Log::Source()->Information("LuaBuilding created");
+    //register own functions for this type
   
-  //TODO Fire
+    //New table
+    lua_newtable(state);
+    
+    //set metatable
+    lua_getglobal(state, buildingType->GetName());
+    if(lua_istable(state, -1))
+      lua_setmetatable(state, -2);
+    
+    //set index field
+    lua_getglobal(state, buildingType->GetName());
+    lua_setfield(state, -1, "__index");
+  
+    //Register Functions for new Table
+    WrapClassFunction<LuaBuilding>::Register(state, this);
+   
+    //save new building in lua with following name
+    this->name = "newBuilding_1";
+    //save value
+    lua_setfield(state, LUA_GLOBALSINDEX, this->name); 
 }
 
 /**
@@ -52,12 +74,28 @@ LuaBuilding::~LuaBuilding()
 
 }
 
+/**
+* Inform Lua Building about the elapsed time
+*/
+void LuaBuilding::Update(int time)
+{
+    Log::Source()->Information(this->name);
+    //Calls Update Function from Lua Script
+    lua_getfield(state, LUA_GLOBALSINDEX, this->name);
+    lua_getmetatable(state, -1);
+    lua_getfield(state, -1, "Update");
+    //the table is the first argument 'self'
+    lua_getfield(state, LUA_GLOBALSINDEX, this->name);
+    lua_pushnumber(state, time);
+    lua_call(state, 2, 0);
+}
 
 /**
 * Fire a Bullet
 */
 int LuaBuilding::Fire(lua_State* state)
 {
+  Log::Source()->Information("Fire Called");
 
   return 0;
 }
@@ -68,7 +106,6 @@ int LuaBuilding::Fire(lua_State* state)
 */
 BuildingType* LuaBuilding::GetType()
 {
-  //get from meta table the class pointer?
-  return 0;
+  return this->buildingType;
 }
 
