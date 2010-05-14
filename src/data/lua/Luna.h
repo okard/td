@@ -162,7 +162,7 @@ template<class T> class Luna
 /**
 * A simple class pointer store
 */
-template<class T> class Lun 
+template<class T> class LuaSingleton
 {
   private:
     static const char storeName[]; 
@@ -173,7 +173,7 @@ template<class T> class Lun
       	T* obj = 0;
 	
 	//access table
-	lua_getglobal(state, Lun<T>::storeName);
+	lua_getglobal(state, LuaSingleton<T>::storeName);
 	if (!lua_istable(state, -1))
 	{
 	    //not exist create new one
@@ -190,7 +190,7 @@ template<class T> class Lun
 	    lua_settable(state, -3);
 
 	    //set global store table
-	    lua_setglobal(state, Lun<T>::storeName);	    
+	    lua_setglobal(state, LuaSingleton<T>::storeName);	    
 	    return obj;
 	}
 	
@@ -221,7 +221,7 @@ template<class T> class Lun
     
 };
 
-template<class T> const char Lun<T>::storeName[] = "LunStore";
+template<class T> const char LuaSingleton<T>::storeName[] = "LuaSingleton";
 
 
 

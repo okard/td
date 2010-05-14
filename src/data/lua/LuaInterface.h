@@ -38,7 +38,7 @@ class LuaBuildingType;
 */
 class LuaInterface
 {
-  friend class Lun<LuaInterface>;
+  friend class LuaSingleton<LuaInterface>;
   
   private:
     lua_State* state;

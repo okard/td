@@ -90,5 +90,5 @@ void LuaInterface::AddCreatureType()
 */
 LuaInterface* LuaInterface::Instance(lua_State*  state)
 {
-   return Lun<LuaInterface>::Get(state);
+   return LuaSingleton<LuaInterface>::Get(state);
 }
