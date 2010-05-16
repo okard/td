@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,6 +34,8 @@ class LuaBuilding : public Building
     char* name;
     lua_State* state;
     
+    static unsigned short idIndex;
+    
   public:
     LuaBuilding(lua_State* state, LuaBuildingType* type);
     ~LuaBuilding();
@@ -48,6 +50,8 @@ class LuaBuilding : public Building
     //For Lua Registration
     static const char className[];
     static const Luna<LuaBuilding>::RegType Register[];
+    
+    static char* id(char* typeName);
 };
 
 #endif // LUABUILDING_H

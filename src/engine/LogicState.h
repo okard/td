@@ -18,17 +18,17 @@
 
 */
 
-#ifndef STATE_H_H
-#define STATE_H_H
+#ifndef LOGICSTATE_H
+#define LOGICSTATE_H
 
 /**
 * Interface State
 * Represents a logic state
 */
-class State
+class LogicState
 {
   public:
-    virtual ~State()
+    virtual ~LogicState()
     {
     }
     

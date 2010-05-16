@@ -22,12 +22,13 @@
 #define MENUSTATE_H
 
 //Project Includes
-#include "../engine/RenderState.h"
+#include <engine/LogicState.h>
+#include <engine/RenderState.h>
 
 /**
 * The main menu
 */
-class MenuState : public RenderState
+class MenuState : public RenderState, LogicState
 {
 };
 

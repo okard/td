@@ -26,21 +26,24 @@
 #include <SFML/Graphics.hpp>
 
 //Project Includes
-#include "State.h"
+#include "LogicState.h"
 #include "RenderState.h"
 
 /**
 * Window Class
 */
-class Window : public sf::RenderWindow, State, RenderState
+class Window : public sf::RenderWindow, LogicState, RenderState
 {
   private:
+    sf::Event lastEvent;
     sf::Clock Clock;
     float timeElapsed;
     
     sf::String frameLabel;
     
     //TODO RenderState
+    RenderState* renderState;
+    LogicState* logicState;
     //TODO LogicState
   
   public:
@@ -57,6 +60,7 @@ class Window : public sf::RenderWindow, State, RenderState
     //From logic State
     virtual void Update(float timeElapsed);
     
+    void SwitchState(LogicState* state, RenderState* renderState);
     
   private:
     void InitializeGL();

@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@
 
 #include "LuaBuilding.h"
 
+//Cpp Includes
+#include <string>
+#include <sstream>
+
 //Project Includes
 #include <common/Log.h>
 
@@ -36,6 +40,19 @@ const Luna<LuaBuilding>::RegType LuaBuilding::Register[] =
       { "Fire", &LuaBuilding::Fire},
       {0}
 };
+
+//id_index
+unsigned short LuaBuilding::idIndex = 0;
+
+/**
+* ID Generator
+*/
+char* LuaBuilding::id(char* typeName)
+{
+  std::ostringstream stream;
+  stream << typeName << "_" << idIndex++;
+  return const_cast<char*>(stream.str().c_str());
+}
 
 /**
 * Constructor
@@ -61,7 +78,7 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
     WrapClassFunction<LuaBuilding>::Register(state, this);
    
     //save new building in lua with following name
-    this->name = "newBuilding_1";
+    this->name = id(buildingType->GetName());
     //save value
     lua_setfield(state, LUA_GLOBALSINDEX, this->name); 
 }
@@ -71,7 +88,7 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
 */
 LuaBuilding::~LuaBuilding()
 {
-
+    //Delete Object from global lua table
 }
 
 /**
@@ -96,6 +113,9 @@ void LuaBuilding::Update(int time)
 int LuaBuilding::Fire(lua_State* state)
 {
   Log::Source()->Information("Fire Called");
+  //Get Property BulletType
+  //create a new Bullet with that type
+  //set target for bullet for strategy
 
   return 0;
 }

@@ -18,39 +18,15 @@
 
 */
 
-#ifndef LUASTATE_H
-#define LUASTATE_H
+#ifndef LOADINGSTATE_H
+#define LOADINGSTATE_H
 
-//Cpp Includes
-#include<iostream>
+//Project Includes
+#include <engine/LogicState.h>
+#include <engine/RenderState.h>
 
-//Lua Includes
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-}
-
-
-/**
-* Lua State
-*/
-class LuaState
+class LoadingState : public RenderState, LogicState
 {
-  private:
-    lua_State *state;
-    
-  public:
-    LuaState();
-    ~LuaState();
-    
-    void LoadFile(const char* file);
-    int Execute();
-    
-    //template<class T> void CreateGlobalObject(const char* metatableName, T* obj, const char* key);
-    
-    
-    lua_State* getState() const;  
 };
 
-#endif // LUASTATE_H
+#endif // LOADINGSTATE_H

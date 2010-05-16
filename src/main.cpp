@@ -20,9 +20,7 @@
 #include <common/Log.h>
 #include <engine/Window.h>
 
-#include <data/lua/LuaState.h>
-#include <data/lua/LuaInterface.h>
-#include <data/lua/LuaBuildingType.h>
+#include <state/GameState.h>
 
 #include<iostream>
 
@@ -35,26 +33,14 @@ int main(int argc, char **argv)
     Log::Source()->AddListener(l);
     Log::Source()->Information("Program started");
     
-    //Lua Tests
-    LuaState* state = new LuaState();
-    LuaInterface* luin = LuaInterface::Instance(state->getState());
-    state->LoadFile("data/buildings/canontower.lua");
-    state->Execute();
-    
-    BuildingType* type = luin->GetBuildingType("CanonTower");
-    if(type == 0)
-      Log::Source()->Information("No CanonTower");
-    else
-    {
-      Building* b = type->Create();
-      b->Update(500);
-    }
+    //TODO Initial load MenuState
     
     //Running main window
     Window*  w = new Window();
+    //GameState
+    GameState* gamestate = new GameState(w);
+    w->SwitchState(gamestate, gamestate);
     w->run();
     
-    //Load MenuState
-  
     return 0;
 }

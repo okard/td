@@ -6,8 +6,8 @@ CanonTower = BuildingType()
 
 -- image
 CanonTower.sprite = "data/building/canontower.png"
-CanonTower.spriteWidth =  16
-CanonTower.spriteHeight = 16
+CanonTower.spriteWidth =  50
+CanonTower.spriteHeight = 48
 
 -- animations
 CanonTower.idleAnimationStart = 1

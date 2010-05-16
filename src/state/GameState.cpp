@@ -20,3 +20,68 @@
 
 #include "GameState.h"
 
+
+/**
+* Constructor
+*/
+GameState::GameState(Window* window) : window(window)
+{
+    luaState = new LuaState();
+    luaInterface = LuaInterface::Instance(luaState->getState());
+    
+    luaState->LoadFile("data/buildings/canontower.lua");
+    luaState->Execute();
+    
+    BuildingType* type = luaInterface->GetBuildingType("CanonTower");
+    if(type == 0)
+      Log::Source()->Information("No CanonTower");
+    else
+    {
+      Building* b = type->Create();
+      b->Update(500);
+    }
+}
+
+/**
+* Destrcutor
+*/
+GameState::~GameState()
+{
+  delete luaState;
+}
+
+/**
+* Render Function
+*/
+void GameState::Render(const sf::RenderTarget* target)
+{
+  
+    //Basic OpenGL Initialization
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    
+    //Map
+    //Buildings
+    //Creatures
+    //Bullets
+    //GUI
+    //Mouse Cursor
+    
+    sf::Vector2f pos = window->ConvertCoords(window->GetInput().GetMouseX(), 
+					     window->GetInput().GetMouseY(), NULL);
+					  
+    //std::cout << "X: " << pos.x << " Y: " << pos.y << std::endl;
+    
+    sf::Shape quad = sf::Shape::Rectangle(pos.x-0.1f, pos.y-0.1f, pos.x+0.1f, pos.y+0.1f, sf::Color::Red);
+    
+    window->Draw(quad);
+}
+
+/**
+* Logic Update
+*/
+void GameState::Update(float timeElapsed)
+{
+
+}
