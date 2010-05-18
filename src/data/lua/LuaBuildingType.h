@@ -21,6 +21,9 @@
 #ifndef LUABUILDINGTYPE_H
 #define LUABUILDINGTYPE_H
 
+//Cpp Includes
+#include <string>
+
 //Project Includes
 #include <data/BuildingType.h>
 #include <data/lua/Luna.h>
@@ -36,7 +39,7 @@ class LuaBuildingType : public BuildingType
   private:
       bool registered;
       lua_State* state;
-      char* name;
+      std::string name;
       
   public:
       LuaBuildingType(lua_State*);
@@ -45,7 +48,7 @@ class LuaBuildingType : public BuildingType
       
       int RegisterType(lua_State* state);
        
-      virtual char* GetName();
+      virtual const char* GetName() const;
       
       virtual Building* Create();
   

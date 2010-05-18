@@ -27,6 +27,9 @@
 //SFML Includes
 #include <SFML/Graphics/Image.hpp>
 
+//Project Includes
+#include <common/Log.h>
+
 /**
 * Simple Resource Manager
 */
@@ -42,7 +45,7 @@ class ResourceManager
     
   public:
     
-    sf::Image& GetImage(std::string path);
+    const sf::Image& GetImage(std::string path);
     
     //TODO Manage Sounds
     

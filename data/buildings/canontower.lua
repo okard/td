@@ -44,16 +44,12 @@ end
 
 -- Fire Strategy: strongest, weakest, nearest, farthest
 
-function CanonTower:bla()
-end
-
 --update canon tower
 function CanonTower:Update(elapsedTime)
     --for k,v in pairs(getmetatable(newBuilding_1)) do print(k,v) end
     --print(self)
 
     self:Fire()
-    self:OnCreate()
     print(elapsedTime)
     print(self.name)
 

@@ -26,6 +26,7 @@
 #include <engine/Window.h>
 #include <engine/LogicState.h>
 #include <engine/RenderState.h>
+#include <engine/ResourceManager.h>
 
 #include <data/lua/LuaState.h>
 #include <data/lua/LuaInterface.h>
@@ -41,6 +42,8 @@ class GameState : public RenderState, public LogicState
     LuaState* luaState;
     LuaInterface* luaInterface;
     Window* window;
+    ResourceManager* res;
+    sf::Sprite cursor;
     //TODO Available Buildings
     //TODO Available Researches
     

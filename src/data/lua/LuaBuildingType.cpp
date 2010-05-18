@@ -41,7 +41,7 @@ const Luna<LuaBuildingType>::RegType LuaBuildingType::Register[] =
 /**
 * Constructor
 */
-LuaBuildingType::LuaBuildingType(lua_State* state) : state(state), registered(false), name(0)
+LuaBuildingType::LuaBuildingType(lua_State* state) : state(state), registered(false)
 {
     Log::Source()->Information("LuaBuildingType created");
     //Register itself at LuaInterface
@@ -52,7 +52,7 @@ LuaBuildingType::LuaBuildingType(lua_State* state) : state(state), registered(fa
 */
 LuaBuildingType::~LuaBuildingType()
 {
-  delete this->name;
+  //delete this->name;
   
   //TODO deregister from lua interface
 }
@@ -68,11 +68,16 @@ int LuaBuildingType::RegisterType(lua_State* state)
   if(!registered)
   {
     //Copy String from Lua
-    size_t len;
+    /*size_t len;
     const char* str = lua_tolstring(state, -1, &len);
     this->name = static_cast<char*>(malloc(len+1));
     strncpy(this->name, str, len);
     this->name[len] = '\0';
+    */
+    size_t len;
+    const char* str = lua_tolstring(state, -1, &len);
+    name = std::string(str, len);
+    
     
     //Register at Lua Interface
     LuaInterface::Instance(state)->AddBuildingType(this);
@@ -85,9 +90,9 @@ int LuaBuildingType::RegisterType(lua_State* state)
   return 0;
 }
        
-char* LuaBuildingType::GetName()
+const char* LuaBuildingType::GetName() const
 {
-  return name;
+  return name.c_str();
 }
 
       

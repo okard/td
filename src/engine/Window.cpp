@@ -30,7 +30,7 @@
 Window::Window() : sf::RenderWindow(sf::VideoMode(800, 600, 32), "td")
 {
    SetFramerateLimit(60);
-   PreserveOpenGLStates(true);
+   //PreserveOpenGLStates(true);
    ShowMouseCursor(false);
    InitializeGL();
    

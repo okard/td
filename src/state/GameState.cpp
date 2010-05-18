@@ -24,7 +24,7 @@
 /**
 * Constructor
 */
-GameState::GameState(Window* window) : window(window)
+GameState::GameState(Window* window) : window(window), res(ResourceManager::GetInstance())
 {
     luaState = new LuaState();
     luaInterface = LuaInterface::Instance(luaState->getState());
@@ -40,6 +40,10 @@ GameState::GameState(Window* window) : window(window)
       Building* b = type->Create();
       b->Update(500);
     }
+    
+    //load cursor
+    cursor.SetImage(res->GetImage("data/cursor.tga"));
+    cursor.Resize(0.05f, 0.05f);
 }
 
 /**
@@ -61,6 +65,7 @@ void GameState::Render(const sf::RenderTarget* target)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
+    //glEnable(GL_TEXTURE_2D);
     //Map
     //Buildings
     //Creatures
@@ -75,7 +80,12 @@ void GameState::Render(const sf::RenderTarget* target)
     
     sf::Shape quad = sf::Shape::Rectangle(pos.x-0.1f, pos.y-0.1f, pos.x+0.1f, pos.y+0.1f, sf::Color::Red);
     
-    window->Draw(quad);
+    cursor.SetPosition(pos);
+    
+    //window->Draw(quad);
+    window->Draw(cursor);
+    
+    
 }
 
 /**

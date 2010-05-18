@@ -26,6 +26,7 @@
 
 //Project Includes
 #include <common/Log.h>
+#include <data/lua/LuaUtils.h>
 
 
 /**
@@ -47,11 +48,11 @@ unsigned short LuaBuilding::idIndex = 0;
 /**
 * ID Generator
 */
-char* LuaBuilding::id(char* typeName)
+const char* LuaBuilding::id(const char* typeName)
 {
   std::ostringstream stream;
   stream << typeName << "_" << idIndex++;
-  return const_cast<char*>(stream.str().c_str());
+  return stream.str().c_str();
 }
 
 /**
@@ -62,25 +63,21 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
     Log::Source()->Information("LuaBuilding created");
     //register own functions for this type
   
-    //New table
-    lua_newtable(state);
-    
-    //set metatable
-    lua_getglobal(state, buildingType->GetName());
-    if(lua_istable(state, -1))
-      lua_setmetatable(state, -2);
-    
-    //set index field
-    lua_getglobal(state, buildingType->GetName());
-    lua_setfield(state, -1, "__index");
+    //Create Lua Table
+    LuaCreateTable(state, buildingType->GetName());
   
-    //Register Functions for new Table
+    //Register Instance Functions for new Table
     WrapClassFunction<LuaBuilding>::Register(state, this);
-   
+    
     //save new building in lua with following name
     this->name = id(buildingType->GetName());
+    
     //save value
-    lua_setfield(state, LUA_GLOBALSINDEX, this->name); 
+    LuaGlobalBind(state, this->name.c_str());
+    
+    //Call OnCreate
+    LuaPushTableFunction(state, this->name.c_str(), "OnCreate");
+    lua_call(state, 1, 0);
 }
 
 /**
@@ -96,13 +93,9 @@ LuaBuilding::~LuaBuilding()
 */
 void LuaBuilding::Update(int time)
 {
-    Log::Source()->Information(this->name);
-    //Calls Update Function from Lua Script
-    lua_getfield(state, LUA_GLOBALSINDEX, this->name);
-    lua_getmetatable(state, -1);
-    lua_getfield(state, -1, "Update");
-    //the table is the first argument 'self'
-    lua_getfield(state, LUA_GLOBALSINDEX, this->name);
+    Log::Source()->Information(this->name.c_str());
+    
+    LuaPushTableFunction(state, this->name.c_str(), "Update");
     lua_pushnumber(state, time);
     lua_call(state, 2, 0);
 }

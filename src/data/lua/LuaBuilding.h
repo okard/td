@@ -21,6 +21,8 @@
 #ifndef LUABUILDING_H
 #define LUABUILDING_H
 
+#include <string>
+
 #include<data/Building.h>
 #include<data/lua/Luna.h>
 #include<data/lua/LuaBuildingType.h>
@@ -31,7 +33,7 @@ class LuaBuilding : public Building
 {
   private:
     BuildingType* buildingType;
-    char* name;
+    std::string name;
     lua_State* state;
     
     static unsigned short idIndex;
@@ -51,7 +53,7 @@ class LuaBuilding : public Building
     static const char className[];
     static const Luna<LuaBuilding>::RegType Register[];
     
-    static char* id(char* typeName);
+    static const char* id(const char* typeName);
 };
 
 #endif // LUABUILDING_H

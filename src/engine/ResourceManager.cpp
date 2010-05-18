@@ -42,14 +42,19 @@ ResourceManager::~ResourceManager()
 /**
 * Get Image from ResourceManager
 */
-sf::Image& ResourceManager::GetImage(std::string path)
+const sf::Image& ResourceManager::GetImage(std::string path)
 {
   if(images.find(path) == images.end())
   {
-    images[path].LoadFromFile(path);
+    if(!images[path].LoadFromFile(path))
+    {
+        Log::Source()->Information("Loading Failed:");
+        Log::Source()->Information(path.c_str());
+    }
   }
   
-  return images[path];
+  sf::Image& img = images[path];
+  return img;
 }
 
 

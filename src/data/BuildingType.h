@@ -35,7 +35,7 @@ class BuildingType
   public:
     virtual ~BuildingType(){}
     
-    virtual char* GetName() = 0;
+    virtual const char* GetName() const = 0;
     
     //TODO Icon
     //TODO Dependencies
