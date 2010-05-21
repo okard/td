@@ -48,7 +48,7 @@ class LuaState
     int Execute();
     
     //template<class T> void CreateGlobalObject(const char* metatableName, T* obj, const char* key);
-    
+    operator lua_State* ();
     
     lua_State* getState() const;  
 };

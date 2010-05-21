@@ -30,22 +30,25 @@
 
 //Configuration for Lua
 const char LuaBuildingType::className[] = "BuildingType";
-const Luna<LuaBuildingType>::RegType LuaBuildingType::Register[] = 
+const LuaBind<LuaBuildingType>::RegType LuaBuildingType::Register[] = 
   {
      // { "foo", &Foo::foo },
-      { "RegisterType", &LuaBuildingType::RegisterType},
       {0}
   };
 
-
 /**
 * Constructor
-*/
-LuaBuildingType::LuaBuildingType(lua_State* state) : state(state), registered(false)
+*/ 
+LuaBuildingType::LuaBuildingType(lua_State* state, std::string name) : state(state), name(name), registered(true)
 {
     Log::Source()->Information("LuaBuildingType created");
-    //Register itself at LuaInterface
 }
+
+LuaBuildingType::LuaBuildingType()
+{
+ throw "can not instantiate LuaBuildingType with default contructor";
+}
+
 
 /**
 * Destructor
@@ -57,40 +60,8 @@ LuaBuildingType::~LuaBuildingType()
   //TODO deregister from lua interface
 }
 
-/**
-* Registering the type with the given name
-*/
-int LuaBuildingType::RegisterType(lua_State* state)
-{  
-  Log::Source()->Information("Register Type");
-  
-  //Register if not
-  if(!registered)
-  {
-    //Copy String from Lua
-    /*size_t len;
-    const char* str = lua_tolstring(state, -1, &len);
-    this->name = static_cast<char*>(malloc(len+1));
-    strncpy(this->name, str, len);
-    this->name[len] = '\0';
-    */
-    size_t len;
-    const char* str = lua_tolstring(state, -1, &len);
-    name = std::string(str, len);
-    
-    
-    //Register at Lua Interface
-    LuaInterface::Instance(state)->AddBuildingType(this);
-    registered = true;
-    return 0;
-  }
-  
-  lua_pop(state, -1);
-  
-  return 0;
-}
-       
-const char* LuaBuildingType::GetName() const
+     
+const char* LuaBuildingType::GetName()
 {
   return name.c_str();
 }

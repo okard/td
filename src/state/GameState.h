@@ -39,7 +39,7 @@
 class GameState : public RenderState, public LogicState
 {
   private:
-    LuaState* luaState;
+    LuaState luaState;
     LuaInterface* luaInterface;
     Window* window;
     ResourceManager* res;

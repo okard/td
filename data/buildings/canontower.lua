@@ -1,7 +1,7 @@
 -- DRAFT
 -- A canon tower specified through lua script
 
-CanonTower = BuildingType()
+CanonTower = {}
 
 
 -- image
@@ -58,6 +58,6 @@ function CanonTower:Update(elapsedTime)
     -- position: bullet fly to position and hit the stuff there
 end
 
---Register CanonTower String must be identical to variable
-CanonTower:RegisterType("CanonTower") 
+--Register CanonTower String must be identical to variable 
+Shared.AddBuildingType("CanonTower");
 

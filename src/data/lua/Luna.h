@@ -80,6 +80,23 @@ extern "C"
 #include "lauxlib.h"
 }
 
+//#include <iostream> //for debugging
+
+/**
+* General Lua Bind Structures
+*/
+template<class T> class LuaBind
+{
+    public:
+        
+    struct RegType
+    {
+      const char *name;
+      int(T::*mfunc)(lua_State*);
+    };
+};
+
+
 template<class T> class Luna 
 {
   public:
@@ -152,11 +169,7 @@ template<class T> class Luna
       return 0;
     }
 
-    struct RegType
-    {
-      const char *name;
-      int(T::*mfunc)(lua_State*);
-    };
+   
 };
 
 /**
@@ -176,18 +189,18 @@ template<class T> class LuaSingleton
 	lua_getglobal(state, LuaSingleton<T>::storeName);
 	if (!lua_istable(state, -1))
 	{
+            //pop nil after get global failed
+            if(lua_isnil(state, -1))
+                lua_pop(state, 1);
 	    //not exist create new one
 	    lua_newtable(state);
 	    
 	    //if not exist theres still no pointer create new one and got out
 	    obj = new T(state);
 	    
-	    lua_pushstring(state, T::className);
 	    //push ptr here
 	    lua_pushlightuserdata(state, obj);
-	    //T** a = static_cast<T**>(lua_newuserdata(state, sizeof(T*))); // store a ptr to the ptr
-	    //*a = obj;
-	    lua_settable(state, -3);
+            lua_setfield(state, -2, T::className);
 
 	    //set global store table
 	    lua_setglobal(state, LuaSingleton<T>::storeName);	    
@@ -195,17 +208,20 @@ template<class T> class LuaSingleton
 	}
 	
 	
-	//get field here
-	lua_pushstring(state, T::className);
-	//lua_gettable(state, -2);
-	lua_rawget(state,-2);
+	//get field
+        lua_getfield(state, -2, T::className);
 	//no field create new one
 	if(!lua_islightuserdata(state, -1))
 	{
+            if(lua_isnil(state, -1))
+                lua_pop(state, 1);
+            
 	    obj = new T(state);
-	    lua_pushstring(state, T::className);
 	    lua_pushlightuserdata(state, obj);
-	    lua_settable(state, -3);
+            lua_setfield(state, -2, T::className);
+            
+            //pops the table from stack
+            lua_pop(state, 1);
 	    
 	    return obj;
 	}
@@ -213,7 +229,9 @@ template<class T> class LuaSingleton
 	//lua_rawget(state,-2);
 	obj = static_cast<T*>(lua_touserdata(state,-1));
 	
-	lua_pop(state, -1);
+        //pops userdata and table
+	lua_pop(state, 2);
+        
 	
 	//return obj
 	return obj;
@@ -224,23 +242,66 @@ template<class T> class LuaSingleton
 template<class T> const char LuaSingleton<T>::storeName[] = "LuaSingleton";
 
 
-
-template<class T> class WrapClassFunction
+/**
+* Bind Class Function to Lua
+*/
+template<class T> class LuaFunctions
 {
   public:
-    static void Register(lua_State* state, T* obj)
+    /**
+    * Register Functions of class T to Table tableName
+    */
+    static bool RegisterTable(lua_State* state, T* obj, const char* tableName)
     {
+        bool newTable = false;
+        //Try to get Global Table
+        lua_getglobal(state, tableName);
+        if(!lua_istable(state, -1))
+        {
+            //pop nil
+            if(lua_isnil(state, -1))
+                lua_pop(state, 1);
+            //Does not exist create new one
+            lua_newtable(state);
+            newTable = true;
+        }
+        bool success = Register(state, obj);
+        
+        //newTable set name
+        if(newTable)
+            lua_setfield(state, LUA_GLOBALSINDEX, tableName);
+        else
+            lua_pop(state, 1);
+        
+        return success;
+    }
+      
+    /**
+    * Register the Functions of class T to current Table
+    */
+    static bool Register(lua_State* state, T* obj)
+    {
+        //std::cout << "Register Functions for Object: " << obj << std::endl;
+        
 	//TODO Check for Table
-	
+        if(!lua_istable(state, -1))
+            return false;
+        
+	//Register all Functions in Class Function Register
 	for (int i = 0; T::Register[i].name; i++) 
 	{
 	  // register the functions
-	  lua_pushstring(state, T::Register[i].name);
+	  //lua_pushstring(state, T::Register[i].name);
+          //T** a = static_cast<T**>(lua_newuserdata(state, sizeof(T*))); // store a ptr to the ptr
+          //*a = obj; 
 	  lua_pushlightuserdata(state, obj);
 	  lua_pushnumber(state, i); // let the thunk know which method we mean
-	  lua_pushcclosure(state, &WrapClassFunction<T>::dispatch, 2);
-	  lua_settable(state, -3); // self["function"] = thunk("function")
+	  lua_pushcclosure(state, &LuaFunctions<T>::dispatch, 2);
+	  //lua_settable(state, -3); // self["function"] = thunk("function")
+          lua_setfield(state, -2, T::Register[i].name);
 	} 
+	
+	return true;
     }
     
     /**
@@ -248,12 +309,19 @@ template<class T> class WrapClassFunction
     */
     static int dispatch(lua_State *state) 
     {
+        
+        
 	//get parameter 
-	T* obj = static_cast<T*>(lua_touserdata(state, -2));
-	int no = lua_tonumber(state, -1);
+	T* obj = static_cast<T*>(lua_touserdata(state, lua_upvalueindex(1)));
+        //T** obj = static_cast<T**>(lua_touserdata(state, -2));
+      
+	int no = lua_tonumber(state, lua_upvalueindex(2));
 	
+        //std::cout << "Dispatch Functions for Object: " << obj << std::endl;
+        
 	//Execute Function
-	return (obj->*(T::Register[no].mfunc))(state); 
+	//return (obj->*(T::Register[no].mfunc))(state); 
+        return (obj->*T::Register[no].mfunc)(state);
     }
 };
 

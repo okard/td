@@ -36,7 +36,7 @@ const char LuaBuilding::className[] = "Building";
 /**
 * Lua Functions
 */
-const Luna<LuaBuilding>::RegType LuaBuilding::Register[] = 
+const LuaBind<LuaBuilding>::RegType LuaBuilding::Register[] = 
 {
       { "Fire", &LuaBuilding::Fire},
       {0}
@@ -51,7 +51,10 @@ unsigned short LuaBuilding::idIndex = 0;
 const char* LuaBuilding::id(const char* typeName)
 {
   std::ostringstream stream;
-  stream << typeName << "_" << idIndex++;
+  stream << typeName << '_';
+  stream.width(4);
+  stream.fill('0');
+  stream << std::hex << idIndex++;
   return stream.str().c_str();
 }
 
@@ -67,7 +70,7 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
     LuaCreateTable(state, buildingType->GetName());
   
     //Register Instance Functions for new Table
-    WrapClassFunction<LuaBuilding>::Register(state, this);
+    LuaFunctions<LuaBuilding>::Register(state, this);
     
     //save new building in lua with following name
     this->name = id(buildingType->GetName());

@@ -42,19 +42,18 @@ class LuaBuildingType : public BuildingType
       std::string name;
       
   public:
-      LuaBuildingType(lua_State*);
+      LuaBuildingType(lua_State*, std::string);
+      LuaBuildingType();
       virtual ~LuaBuildingType();
       
-      
-      int RegisterType(lua_State* state);
        
-      virtual const char* GetName() const;
+      virtual const char* GetName();
       
       virtual Building* Create();
   
       //For Lua Registration
       static const char className[];
-      static const Luna<LuaBuildingType>::RegType Register[];
+      static const LuaBind<LuaBuildingType>::RegType Register[];
 };
 
 

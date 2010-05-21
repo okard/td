@@ -22,6 +22,7 @@
 #define LUAUTILS_H
 
 #include <cstdarg>
+#include <string>
 
 extern "C" 
 {
@@ -49,6 +50,7 @@ void LuaCreateTable(lua_State* state, const char* basisTable)
 
 /**
 * Pushs a Table Function in Lua
+* Add also table as 'self' parameter 
 */
 void LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName)
 {
@@ -67,6 +69,18 @@ void LuaPushTableFunction(lua_State* state, const char* tableName, const char* f
 void LuaGlobalBind(lua_State* state, const char* varName)
 {
     lua_setfield(state, LUA_GLOBALSINDEX, varName); 
+};
+
+/**
+* Get a String from Table Function
+*/
+std::string LuaStringTableFunction(lua_State* state, const char* tableName, const char* functionName)
+{
+    LuaPushTableFunction(state, tableName, functionName);
+    lua_call(state, 1, 1);
+    size_t len;
+    const char* str = lua_tolstring(state, -1, &len);
+    return std::string(str, len);
 };
 
 

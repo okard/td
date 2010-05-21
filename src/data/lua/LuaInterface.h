@@ -33,6 +33,9 @@
 
 class LuaBuildingType;
 
+typedef std::map<std::string, LuaBuildingType*> BuildingTypeList;
+
+
 /**
 * Lua Interface
 */
@@ -43,7 +46,7 @@ class LuaInterface
   private:
     lua_State* state;
     
-    std::map<std::string, LuaBuildingType*> buildingTypes;
+    BuildingTypeList buildingTypes;
     std::map<std::string, Bullet*> bulletTypes;
     std::map<std::string, Creature*> creatureTypes;
     
@@ -54,6 +57,12 @@ class LuaInterface
   public:
     ~LuaInterface();
     
+    //lua interface
+    int AddBuildingTypeLua(lua_State* state);
+    
+    //int LoadScript(lua_State* state);
+    //int CreateGameObject(lua_State* state);
+    
     //adder
     void AddBuildingType(LuaBuildingType* buildingType); 
     void AddCreatureType();
@@ -63,6 +72,8 @@ class LuaInterface
     BuildingType* GetBuildingType(char*);
     
     static const char className[];
+    static const LuaBind<LuaInterface>::RegType Register[];
+    
     static LuaInterface* Instance(lua_State*  state); 
 };
 

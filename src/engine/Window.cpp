@@ -36,6 +36,7 @@ Window::Window() : sf::RenderWindow(sf::VideoMode(800, 600, 32), "td")
    
    //Init Frame Label
    frameLabel.SetFont(sf::Font::GetDefaultFont());
+   frameLabel.SetScale(0.001f, 0.001f);
 }
 
 /**
@@ -131,7 +132,6 @@ void Window::run()
 	//std::cout << "Right: " << r.Right << " Top: " << r.Top << std::endl;
 	
 	//Position is in Pixel
-	frameLabel.SetScale(0.005f, 0.005f);
 	frameLabel.SetPosition(0.0f, 0.0f);
 	this->Draw(frameLabel);
 	

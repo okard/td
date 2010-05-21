@@ -51,7 +51,7 @@ class LuaBuilding : public Building
     
     //For Lua Registration
     static const char className[];
-    static const Luna<LuaBuilding>::RegType Register[];
+    static const LuaBind<LuaBuilding>::RegType Register[];
     
     static const char* id(const char* typeName);
 };

@@ -46,6 +46,10 @@ lua_State* LuaState::getState() const
   return state;
 }
 
+LuaState::operator lua_State*()
+{
+    return state;
+}
 
 /**
 * Load lua file

@@ -22,7 +22,19 @@
 
 #include <common/Log.h>
 
+/**
+* Lua Class Name
+*/
 const char LuaInterface::className[] = "LuaInterface";
+
+/**
+* Functions to Bind for Lua
+*/
+const LuaBind<LuaInterface>::RegType LuaInterface::Register[] = 
+{
+      { "AddBuildingType", &LuaInterface::AddBuildingTypeLua},
+      {0}
+};
 
 /**
 * Constructor
@@ -30,8 +42,12 @@ const char LuaInterface::className[] = "LuaInterface";
 LuaInterface::LuaInterface(lua_State* state) : state(state)
 {
   Log::Source()->Information("LuaInterface created");
+  buildingTypes.clear();
   //Register Building Type
-  Luna<LuaBuildingType>::Register(state);
+  //Luna<LuaBuildingType>::Register(state);
+  
+  //Registering itself to "Shared" table
+  LuaFunctions<LuaInterface>::RegisterTable(state, this, "Shared");
   
   //Chekc if already registed?
   //Registering itself as
@@ -50,15 +66,42 @@ LuaInterface::~LuaInterface()
   //TODO Delete all building types, creature types and bullet types
 }
 
+
+/**
+* Lua Functions
+* registering a building type
+*/
+int LuaInterface::AddBuildingTypeLua(lua_State* state)
+{
+    //get string and create BuildingType Object from it
+    size_t len;
+    const char* str = lua_tolstring(state, -1, &len);
+    std::string name(str,len);// = std::string(str, len);
+    lua_pop(state, 1);
+    
+    Log::Source()->Information(name.c_str());
+    
+    LuaBuildingType* buildingType = new LuaBuildingType(state, name);
+    //AddBuildingType(buildingType);
+    //buildingTypes.insert(std::map<std::string, LuaBuildingType>::value_type(name, LuaBuildingType(state, name)));
+    //buildingTypes[buildingType->GetName()] = 0;
+    //building
+    buildingTypes.insert(std::make_pair<std::string, LuaBuildingType*>(buildingType->GetName(), buildingType));
+    
+    
+    return 0;
+}
+
 /**
 * Interface for registering building types
 */
 void LuaInterface::AddBuildingType(LuaBuildingType* buildingType)
 {
   Log::Source()->Information("Add Building Type: ");
-  Log::Source()->Information(buildingType->GetName());
+  //Log::Source()->Information(buildingType->GetName());
   
-  buildingTypes[std::string(buildingType->GetName())] = buildingType;
+  //std::string name();
+  //buildingTypes[buildingType->GetName()] = buildingType;
 }
 
 /**
@@ -66,7 +109,10 @@ void LuaInterface::AddBuildingType(LuaBuildingType* buildingType)
 */
 BuildingType* LuaInterface::GetBuildingType(char* typeName)
 {
-  return buildingTypes[std::string(typeName)];
+    if(buildingTypes.find(typeName) == buildingTypes.end())
+        return 0;
+    else
+        return buildingTypes[std::string(typeName)];
 }
 
 /**

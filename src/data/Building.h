@@ -59,6 +59,10 @@ class Building
     //TODO Bullet
     //TODO Range
     
+    //For Blocking Buildings?
+    //TODO CurrentHP
+    //TODO HP
+    
     //TODO Sprite
     //TODO Position
     

@@ -28,6 +28,9 @@ class Creature
     //TODO Speed
     //TODO Sprite
     //TODO Name
+    
+    //For attacking blocking buildings
+    //TODO Damage
 };
 
 #endif // CREATURE_H

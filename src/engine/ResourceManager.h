@@ -26,6 +26,7 @@
 
 //SFML Includes
 #include <SFML/Graphics/Image.hpp>
+#include <SFML/Graphics/Font.hpp>
 
 //Project Includes
 #include <common/Log.h>
@@ -46,6 +47,8 @@ class ResourceManager
   public:
     
     const sf::Image& GetImage(std::string path);
+    
+    //const sf::Font& GetFont(std::string font);
     
     //TODO Manage Sounds
     

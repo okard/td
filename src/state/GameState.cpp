@@ -26,11 +26,10 @@
 */
 GameState::GameState(Window* window) : window(window), res(ResourceManager::GetInstance())
 {
-    luaState = new LuaState();
-    luaInterface = LuaInterface::Instance(luaState->getState());
+    luaInterface = LuaInterface::Instance(luaState);
     
-    luaState->LoadFile("data/buildings/canontower.lua");
-    luaState->Execute();
+    luaState.LoadFile("data/buildings/canontower.lua");
+    luaState.Execute();
     
     BuildingType* type = luaInterface->GetBuildingType("CanonTower");
     if(type == 0)
@@ -51,7 +50,7 @@ GameState::GameState(Window* window) : window(window), res(ResourceManager::GetI
 */
 GameState::~GameState()
 {
-  delete luaState;
+  //delete luaState;
 }
 
 /**
