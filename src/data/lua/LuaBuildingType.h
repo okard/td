@@ -43,12 +43,14 @@ class LuaBuildingType : public BuildingType
       
   public:
       LuaBuildingType(lua_State*, std::string);
-      LuaBuildingType();
+      //LuaBuildingType();
       virtual ~LuaBuildingType();
       
-       
-      virtual const char* GetName();
+      //Game Object Interface
+      virtual const char* ObjectName() const;
       
+      // Building Type Interface
+      virtual const char* GetName();
       virtual Building* Create();
   
       //For Lua Registration

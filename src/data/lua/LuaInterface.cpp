@@ -42,7 +42,7 @@ const LuaBind<LuaInterface>::RegType LuaInterface::Register[] =
 */
 LuaInterface::LuaInterface(lua_State* state) : state(state)
 {
-  Log::Source()->Information("LuaInterface created");
+  LogEvent(LogType::Information) << "LuaInterface created";
   buildingTypes.clear();
   //Register Building Type
   //Luna<LuaBuildingType>::Register(state);
@@ -80,7 +80,7 @@ int LuaInterface::AddBuildingTypeLua(lua_State* state)
     std::string name(str,len);// = std::string(str, len);
     lua_pop(state, 1);
     
-    Log::Source()->Information(name.c_str());
+    LogEvent(LogType::Information) << "BuildingType added: " << name;
     
     LuaBuildingType* buildingType = new LuaBuildingType(state, name);
     //AddBuildingType(buildingType);
@@ -103,7 +103,7 @@ int LuaInterface::LoadScript(lua_State* state)
     std::string scriptName(str,len);// = std::string(str, len);
     lua_pop(state, 1);
     
-    Log::Source()->Information(scriptName.c_str());
+    LogEvent(LogType::Information) << "Load Script: " << scriptName;
     //Load Script File
     int status = luaL_loadfile(state, scriptName.c_str());
     if (status) 
@@ -114,18 +114,6 @@ int LuaInterface::LoadScript(lua_State* state)
     return lua_pcall(state, 0, LUA_MULTRET, 0);
 }
 
-
-/**
-* Interface for registering building types
-*/
-void LuaInterface::AddBuildingType(LuaBuildingType* buildingType)
-{
-  Log::Source()->Information("Add Building Type: ");
-  //Log::Source()->Information(buildingType->GetName());
-  
-  //std::string name();
-  //buildingTypes[buildingType->GetName()] = buildingType;
-}
 
 /**
 * Get Type

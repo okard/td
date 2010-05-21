@@ -42,6 +42,9 @@ class LuaBuilding : public Building
     LuaBuilding(lua_State* state, LuaBuildingType* type);
     ~LuaBuilding();
     
+    //Game Object Interface
+    virtual const char* ObjectName() const;
+    
     //Building Interface
     virtual BuildingType* GetType();
     virtual void Update(int time);

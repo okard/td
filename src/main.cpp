@@ -30,8 +30,8 @@
 int main(int argc, char **argv) 
 {
     ConsoleListener* l = new ConsoleListener();
-    Log::Source()->AddListener(l);
-    Log::Source()->Information("Program started");
+    Log::Source().AddListener(l);
+    LogEvent() << "Program started" << LogEvent::End;
     
     //TODO Initial load MenuState
     

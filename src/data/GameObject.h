@@ -18,22 +18,15 @@
 
 */
 
-#ifndef BULLET_H
-#define BULLET_H
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 
-//Project Includes
-#include<data/GameObject.h>
-
-/**
-* Bullet
-*/
-class Bullet : public GameObject
+class GameObject
 {
-    //TODO Sprite
-    //TODO Damage
-    //TODO Direction
-    //TODO Position
-    //TODO Speed
+    public:
+        virtual ~GameObject() {}
+        
+        virtual const char* ObjectName() const = 0;
 };
 
-#endif // BULLET_H
+#endif // GAMEOBJECT_H

@@ -33,7 +33,7 @@ GameState::GameState(Window* window)
     
     BuildingType* type = luaInterface->GetBuildingType("CanonTower");
     if(type == 0)
-      Log::Source()->Information("No CanonTower");
+      LogEvent() << "No Canon Tower";
     else
     {
       Building* b = type->Create();

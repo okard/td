@@ -23,6 +23,153 @@
 //Cpp Includes
 #include<iostream>
 
+//== LOGEVENT ================================================================
+
+/**
+* Constructor
+*/
+LogEvent::LogEvent(LogSource& source) : logSource(source)
+{
+}
+
+/**
+* Constructor
+*/
+LogEvent::LogEvent(LogSource& source, LogType::LogType type): logSource(source), logType(type)
+{
+}
+
+/**
+* Constructor
+*/
+LogEvent::LogEvent() : logSource(Log::Source()), logType(LogType::Information)
+{
+}
+
+/**
+* Constructor
+*/
+LogEvent::LogEvent(LogType::LogType type) : logSource(Log::Source()), logType(type)
+{
+}
+
+
+/**
+* Destructor
+*/
+LogEvent::~LogEvent()
+{
+   log();
+}
+
+/**
+* Internal log event
+*/
+void LogEvent::log()
+{
+    if(stream.str().size() > 0)
+    {
+        logSource.logEvent(&logSource, this);
+        stream.clear();
+        stream.str("");
+    }
+}
+
+/**
+* Returning the interal ostringstream for logging listener
+*/
+std::ostringstream& LogEvent::GetStream()
+{
+    return stream;
+}
+
+
+LogEvent& LogEvent::operator<<(bool& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(short int& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(short unsigned int& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(int& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(unsigned int& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(long int& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(long unsigned int& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(float& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(double& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(long double& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(const void* val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(std::string& val)
+{
+    stream << val;
+    return *this;
+}
+
+LogEvent& LogEvent::operator<<(const char* val)
+{
+    stream << val;
+    return *this;
+}
+
+
+LogEvent& LogEvent::operator<<(LogEvent::LogEventAction )
+{
+    log();
+    return *this;
+}
+
+
 
 //== LOGSOURCE ================================================================
 
@@ -40,11 +187,17 @@ LogSource::LogSource(const char* name) : sourceName(name)
 {
 }
 
+/**
+* Add Log Listener
+*/
 void LogSource::AddListener(LogListener* listener)
 {
   this->listener.push_back(listener);
 }
 
+/**
+* Dispatch logevent to listener
+*/
 void LogSource::logEvent(const LogSource* src, const LogEvent* event)
 {
    //Inform all listener
@@ -54,66 +207,54 @@ void LogSource::logEvent(const LogSource* src, const LogEvent* event)
     }
 }
 
+/**
+* Log a Simple Message
+*/
 void LogSource::Log(LogType::LogType logType, const char* msg)
 {
     //TODO make save
-    LogEvent event;
-    event.msg = msg;
-    event.logType = logType;
+    LogEvent event(*this, logType);
+    event << msg;
     this->logEvent(this, &event);
-}
-
-void LogSource::Verbose(const char* msg)
-{
-  this->Log(LogType::Verbose, msg);
-}
-
-void LogSource::Information(const char* msg)
-{
-  this->Log(LogType::Information, msg);
-}
-
-void LogSource::Warning(const char* msg)
-{
-  this->Log(LogType::Warning, msg);
-}
-
-void LogSource::Error(const char* msg)
-{
-  this->Log(LogType::Error, msg);
-}
-
-void LogSource::Fatal(const char* msg)
-{
-  this->Log(LogType::Fatal, msg);
 }
 
 
 //== LOG ======================================================================
 
-Log* Log::logInstance = 0;
-
+/**
+* Constructor
+*/
 Log::Log()
 {
   
 }
 
+/**
+* Destructor
+*/
 Log::~Log()
 {
   
 }
 
+/**
+* LogListener interface
+* dispatch the event to the internal log source
+*/
 void Log::logEvent(const LogSource* src, const LogEvent* event)
 {
   logSource.logEvent(src, event);
 }
 
-Log* Log::getInstance()
+/**
+* Get Instance
+*/
+Log& Log::getInstance()
 {
-  if(Log::logInstance == 0)
-    Log::logInstance  = new Log();
-  return Log::logInstance;
-}
+    static Log instance;
+    return instance;
+};
+
 
 /**
 * Creates a new LogSource
@@ -124,17 +265,17 @@ LogSource* Log::Source(const char* name)
   
   //Add Default Listener
   
-  log->AddListener(getInstance());
+  log->AddListener(&Log::getInstance());
   
   return log;
 }
 
-LogSource* Log::Source()
+/**
+* Return Default LogSource
+*/
+LogSource& Log::Source()
 {
-  if(Log::logInstance == 0)
-    Log::logInstance  = new Log();
-  
-  return &(getInstance()->logSource);
+    return Log::getInstance().logSource;
 }
 
 //== ConsoleListener ==========================================================
@@ -144,7 +285,7 @@ ConsoleListener::~ConsoleListener()
 
 void ConsoleListener::logEvent(const LogSource* src, const LogEvent* event)
 {
-    std::cout << event->msg << std::endl;
+    std::cout << const_cast<LogEvent*>(event)->GetStream().str() << std::endl;
 }
     
   

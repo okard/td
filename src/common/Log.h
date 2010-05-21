@@ -21,10 +21,14 @@
 #ifndef LOG_H
 #define LOG_H
 
+//Cpp Includes
 #include<string>
+#include<sstream>
 
 //STL Includes
 #include<vector>
+
+class LogSource;
 
 //TODO Fix stupid enum
 namespace LogType
@@ -45,13 +49,42 @@ enum LogType
 /**
 * Represents a Log Event
 */
-struct LogEvent
+class LogEvent
 {
-  LogType::LogType logType;
-  std::string msg;
+    private:
+        std::ostringstream stream;
+        LogType::LogType logType;
+        LogSource& logSource;
+        
+        void log();
+          
+    public:
+        enum LogEventAction { End }; 
+        
+        LogEvent(LogSource&);
+        LogEvent(LogSource&, LogType::LogType); 
+        LogEvent();
+        LogEvent(LogType::LogType);
+        ~LogEvent();
+        
+        std::ostringstream& GetStream();
+        
+        LogEvent& operator<< (bool& val );
+        LogEvent& operator<< (short& val );
+        LogEvent& operator<< (unsigned short& val );
+        LogEvent& operator<< (int& val );
+        LogEvent& operator<< (unsigned int& val );
+        LogEvent& operator<< (long& val );
+        LogEvent& operator<< (unsigned long& val );
+        LogEvent& operator<< (float& val );
+        LogEvent& operator<< (double& val );
+        LogEvent& operator<< (long double& val );
+        LogEvent& operator<< (const void* val );
+        LogEvent& operator<< (std::string& val); 
+        LogEvent& operator<< (const char* val); 
+        LogEvent& operator<< (LogEventAction);
 };
 
-class LogSource;
 
 /**
 * LogListener
@@ -72,6 +105,7 @@ class LogListener
 class LogSource
 {
   friend class Log;
+  friend class LogEvent;
   
   private:
     const char* sourceName;
@@ -86,11 +120,11 @@ class LogSource
   public:
     void AddListener(LogListener* listener);
     void Log(LogType::LogType logType, const char* msg);
-    void Verbose(const char* msg);
-    void Information(const char* msg);
-    void Warning(const char* msg);
-    void Error(const char* msg);
-    void Fatal(const char* msg);
+    /*LogEvent& Verbose();
+    LogEvent& Information();
+    LogEvent& Warning();
+    LogEvent& Error();
+    LogEvent& Fatal(); */   
 };
 
 
@@ -100,18 +134,20 @@ class LogSource
 class Log : public LogListener
 {
   private:
-    static Log* logInstance;
     LogSource logSource;
   
   private:
     Log();
-    virtual ~Log();
-    
-    static Log* getInstance();
-  
+    Log(const Log& cc);
+
   public:
+    virtual ~Log();
+      
     static LogSource* Source(const char* name);
-    static LogSource* Source();
+    static LogSource& Source();
+    
+    static Log& getInstance();
+
     
     virtual void logEvent(const LogSource* src, const LogEvent* event);
 };

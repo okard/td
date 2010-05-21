@@ -34,6 +34,7 @@
 class LuaBuildingType;
 
 typedef std::map<std::string, LuaBuildingType*> BuildingTypeList;
+typedef std::map<std::string, GameObject*> GameObjectList;
 
 
 /**
@@ -65,7 +66,6 @@ class LuaInterface
     //int CreateGameObject(lua_State* state);
     
     //adder
-    void AddBuildingType(LuaBuildingType* buildingType); 
     void AddCreatureType();
     void AddBulletType();
     

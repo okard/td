@@ -63,7 +63,7 @@ const char* LuaBuilding::id(const char* typeName)
 */
 LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buildingType(buildingType), state(state)
 {
-    Log::Source()->Information("LuaBuilding created");
+    LogEvent(Log::Source()) << "LuaBuilding created";
     //register own functions for this type
   
     //Create Lua Table
@@ -91,12 +91,18 @@ LuaBuilding::~LuaBuilding()
     //Delete Object from global lua table
 }
 
+const char* LuaBuilding::ObjectName() const
+{
+    return name.c_str();
+}
+
+
 /**
 * Inform Lua Building about the elapsed time
 */
 void LuaBuilding::Update(int time)
 {
-    Log::Source()->Information(this->name.c_str());
+    LogEvent(Log::Source()) << this->name;
     
     LuaPushTableFunction(state, this->name.c_str(), "Update");
     lua_pushnumber(state, time);
@@ -108,7 +114,7 @@ void LuaBuilding::Update(int time)
 */
 int LuaBuilding::Fire(lua_State* state)
 {
-  Log::Source()->Information("Fire Called");
+  LogEvent(LogType::Information) << "Fire Called";
   //Get Property BulletType
   //create a new Bullet with that type
   //set target for bullet for strategy

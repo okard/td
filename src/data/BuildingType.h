@@ -21,6 +21,8 @@
 #ifndef BUILDINGTYPE_H
 #define BUILDINGTYPE_H
 
+//Project Includes
+#include<data/GameObject.h>
 #include<data/Building.h>
 
 class Building;
@@ -29,13 +31,14 @@ class Building;
 * Represents a BuildingType
 * 
 */
-class BuildingType
+class BuildingType : public GameObject
 {
   
   public:
     virtual ~BuildingType(){}
     
     virtual const char* GetName() = 0;
+    
     
     //TODO Icon //Sprite?
     //TODO Dependencies

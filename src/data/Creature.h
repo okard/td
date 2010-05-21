@@ -21,7 +21,10 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 
-class Creature
+//Project Includes
+#include<data/GameObject.h>
+
+class Creature : public GameObject
 {
     //TODO HP
     //TODO CurrentHP

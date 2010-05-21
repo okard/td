@@ -41,13 +41,14 @@ const LuaBind<LuaBuildingType>::RegType LuaBuildingType::Register[] =
 */ 
 LuaBuildingType::LuaBuildingType(lua_State* state, std::string name) : state(state), name(name), registered(true)
 {
-    Log::Source()->Information("LuaBuildingType created");
+    LogEvent(LogType::Information) << "LuaBuildingType created";
 }
 
+/*
 LuaBuildingType::LuaBuildingType()
 {
  throw "can not instantiate LuaBuildingType with default contructor";
-}
+}*/
 
 
 /**
@@ -59,6 +60,12 @@ LuaBuildingType::~LuaBuildingType()
   
   //TODO deregister from lua interface
 }
+
+const char* LuaBuildingType::ObjectName() const
+{
+    return name.c_str();
+}
+
 
      
 const char* LuaBuildingType::GetName()

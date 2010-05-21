@@ -21,6 +21,8 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
+//Project Includes
+#include<data/GameObject.h>
 #include<data/BuildingType.h>
 
 class BuildingType;
@@ -44,7 +46,7 @@ enum FireType
 * Represents a Building on the Map
 * Can be created over BuildingType
 */
-class Building
+class Building 
 {
   public:
     virtual ~Building(){}

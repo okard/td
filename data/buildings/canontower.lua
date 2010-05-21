@@ -53,6 +53,9 @@ function CanonTower:Update(elapsedTime)
     print(elapsedTime)
     print(self.name)
 
+    --Bullet = new Bullet();
+    --Shared.AddGameObject(Bullet);
+
     --target can be a creature or a position
     -- creature: bullet following automatically the aiming creature
     -- position: bullet fly to position and hit the stuff there
