@@ -24,11 +24,11 @@
 /**
 * Constructor
 */
-GameState::GameState(Window* window) : window(window), res(ResourceManager::GetInstance())
+GameState::GameState(Window* window) 
+    : window(window), res(ResourceManager::GetInstance()), luaInterface(LuaInterface::Instance(luaState))
 {
-    luaInterface = LuaInterface::Instance(luaState);
     
-    luaState.LoadFile("data/buildings/canontower.lua");
+    luaState.LoadFile("data/game.lua");
     luaState.Execute();
     
     BuildingType* type = luaInterface->GetBuildingType("CanonTower");

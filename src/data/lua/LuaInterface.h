@@ -59,6 +59,7 @@ class LuaInterface
     
     //lua interface
     int AddBuildingTypeLua(lua_State* state);
+    int LoadScript(lua_State* state);
     
     //int LoadScript(lua_State* state);
     //int CreateGameObject(lua_State* state);

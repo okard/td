@@ -33,7 +33,8 @@ const char LuaInterface::className[] = "LuaInterface";
 const LuaBind<LuaInterface>::RegType LuaInterface::Register[] = 
 {
       { "AddBuildingType", &LuaInterface::AddBuildingTypeLua},
-      {0}
+      { "LoadScript", &LuaInterface::LoadScript },
+      {0,0}
 };
 
 /**
@@ -91,6 +92,28 @@ int LuaInterface::AddBuildingTypeLua(lua_State* state)
     
     return 0;
 }
+
+/**
+* Lua Function loading script
+*/
+int LuaInterface::LoadScript(lua_State* state)
+{
+    size_t len;
+    const char* str = lua_tolstring(state, -1, &len);
+    std::string scriptName(str,len);// = std::string(str, len);
+    lua_pop(state, 1);
+    
+    Log::Source()->Information(scriptName.c_str());
+    //Load Script File
+    int status = luaL_loadfile(state, scriptName.c_str());
+    if (status) 
+    {
+        std::cerr << "Couldn't load file: " << lua_tostring(state, -1) << std::endl;
+        return 0;
+    }
+    return lua_pcall(state, 0, LUA_MULTRET, 0);
+}
+
 
 /**
 * Interface for registering building types
