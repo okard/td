@@ -291,13 +291,9 @@ template<class T> class LuaFunctions
 	for (int i = 0; T::Register[i].name; i++) 
 	{
 	  // register the functions
-	  //lua_pushstring(state, T::Register[i].name);
-          //T** a = static_cast<T**>(lua_newuserdata(state, sizeof(T*))); // store a ptr to the ptr
-          //*a = obj; 
 	  lua_pushlightuserdata(state, obj);
 	  lua_pushnumber(state, i); // let the thunk know which method we mean
 	  lua_pushcclosure(state, &LuaFunctions<T>::dispatch, 2);
-	  //lua_settable(state, -3); // self["function"] = thunk("function")
           lua_setfield(state, -2, T::Register[i].name);
 	} 
 	
@@ -309,18 +305,11 @@ template<class T> class LuaFunctions
     */
     static int dispatch(lua_State *state) 
     {
-        
-        
 	//get parameter 
 	T* obj = static_cast<T*>(lua_touserdata(state, lua_upvalueindex(1)));
-        //T** obj = static_cast<T**>(lua_touserdata(state, -2));
-      
 	int no = lua_tonumber(state, lua_upvalueindex(2));
-	
-        //std::cout << "Dispatch Functions for Object: " << obj << std::endl;
         
 	//Execute Function
-	//return (obj->*(T::Register[no].mfunc))(state); 
         return (obj->*T::Register[no].mfunc)(state);
     }
 };

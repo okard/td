@@ -23,12 +23,29 @@
 //Cpp Includes
 #include<iostream>
 
-//== LOGEVENT ================================================================
+//== LOGTYPE ==================================================================
+
+namespace LogType {
+const char* toString(LogType type)
+{
+    switch(type)
+    {
+        case Information: return "Information";
+        case Verbose: return "Verbose";
+        case Warning: return "Warning";
+        case Error: return "Error";
+        case Fatal: return "Fatal";
+        default: return "";
+    };
+}
+}
+
+//== LOGEVENT =================================================================
 
 /**
 * Constructor
 */
-LogEvent::LogEvent(LogSource& source) : logSource(source)
+LogEvent::LogEvent(LogSource& source) : logSource(source), logType(LogType::Information)
 {
 }
 
@@ -83,6 +100,13 @@ std::ostringstream& LogEvent::GetStream()
     return stream;
 }
 
+/**
+* Return the type
+*/
+LogType::LogType LogEvent::GetType()
+{
+    return logType;
+}
 
 LogEvent& LogEvent::operator<<(bool& val)
 {
@@ -162,6 +186,11 @@ LogEvent& LogEvent::operator<<(const char* val)
     return *this;
 }
 
+LogEvent& LogEvent::operator<<(LogType::LogType type)
+{
+    logType = type;
+    return *this;
+}
 
 LogEvent& LogEvent::operator<<(LogEvent::LogEventAction )
 {
@@ -279,13 +308,23 @@ LogSource& Log::Source()
 }
 
 //== ConsoleListener ==========================================================
+/**
+* Constructor
+*/
 ConsoleListener::~ConsoleListener()
 {
 }
 
+/**
+* Log event to console
+*/
 void ConsoleListener::logEvent(const LogSource* src, const LogEvent* event)
 {
-    std::cout << const_cast<LogEvent*>(event)->GetStream().str() << std::endl;
+    LogEvent* ev = const_cast<LogEvent*>(event);
+    if(ev->GetType() >= LogType::Error)
+        std::cerr << ev->GetStream().str() << std::endl;
+    else
+        std::cout << LogType::toString(ev->GetType()) << ": " << ev->GetStream().str() << std::endl;
 }
     
   

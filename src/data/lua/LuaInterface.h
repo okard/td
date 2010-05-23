@@ -63,7 +63,8 @@ class LuaInterface
     int LoadScript(lua_State* state);
     
     //int LoadScript(lua_State* state);
-    //int CreateGameObject(lua_State* state);
+    //int CreateGameObject(lua_State* state); //string?
+    //int AddGameObject(lua_State* state); //table, check for events the hame object (table) want
     
     //adder
     void AddCreatureType();

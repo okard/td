@@ -21,6 +21,9 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
+//STL Includes
+#include <list>
+
 //Project Includes
 #include <common/Log.h>
 #include <engine/Window.h>
@@ -31,6 +34,7 @@
 #include <data/lua/LuaState.h>
 #include <data/lua/LuaInterface.h>
 #include <data/lua/LuaBuildingType.h>
+#include <data/Building.h>
 
 
 /**
@@ -49,6 +53,7 @@ class GameState : public RenderState, public LogicState
     
     //TODO Current Map
     //TODO Current Buildings
+    std::list<Building*> buildings;
     //TODO Current Stage
     //TODO Creatures
   public:

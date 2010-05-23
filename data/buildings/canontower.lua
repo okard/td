@@ -5,9 +5,10 @@ CanonTower = {}
 
 
 -- image
-CanonTower.sprite = "data/building/canontower.png"
+CanonTower.sprite = "data/buildings/canontower.png"
 CanonTower.spriteWidth =  50
 CanonTower.spriteHeight = 48
+CanonTower.icon = "data/buildings/canontower_icon.png"
 
 -- animations
 CanonTower.idleAnimationStart = 1

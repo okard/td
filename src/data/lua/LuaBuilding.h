@@ -21,11 +21,14 @@
 #ifndef LUABUILDING_H
 #define LUABUILDING_H
 
+//Cpp Includes
 #include <string>
 
-#include<data/Building.h>
-#include<data/lua/Luna.h>
-#include<data/lua/LuaBuildingType.h>
+//Project Includes
+#include <engine/Sprite.h>
+#include <data/Building.h>
+#include <data/lua/Luna.h>
+#include <data/lua/LuaBuildingType.h>
 
 class LuaBuildingType;
 
@@ -36,11 +39,15 @@ class LuaBuilding : public Building
     std::string name;
     lua_State* state;
     
+    Sprite sprite;
+    Sprite icon;
+    
+    //id function generator
     static unsigned short idIndex;
     
   public:
     LuaBuilding(lua_State* state, LuaBuildingType* type);
-    ~LuaBuilding();
+    virtual ~LuaBuilding();
     
     //Game Object Interface
     virtual const char* ObjectName() const;
@@ -48,6 +55,8 @@ class LuaBuilding : public Building
     //Building Interface
     virtual BuildingType* GetType();
     virtual void Update(int time);
+    virtual const Sprite& GetSprite();
+    virtual const Sprite& GetIcon();
     
     //Lua Interface
     int Fire(lua_State* state);

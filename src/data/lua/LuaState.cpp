@@ -46,6 +46,9 @@ lua_State* LuaState::getState() const
   return state;
 }
 
+/**
+* Cast to lua_State
+*/
 LuaState::operator lua_State*()
 {
     return state;

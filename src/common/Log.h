@@ -44,6 +44,7 @@ enum LogType
   Error,
   Fatal
 };
+const char* toString(LogType type);
 }
 
 /**
@@ -68,6 +69,7 @@ class LogEvent
         ~LogEvent();
         
         std::ostringstream& GetStream();
+        LogType::LogType GetType();
         
         LogEvent& operator<< (bool& val );
         LogEvent& operator<< (short& val );
@@ -82,6 +84,7 @@ class LogEvent
         LogEvent& operator<< (const void* val );
         LogEvent& operator<< (std::string& val); 
         LogEvent& operator<< (const char* val); 
+        LogEvent& operator<< (LogType::LogType);
         LogEvent& operator<< (LogEventAction);
 };
 
@@ -119,12 +122,7 @@ class LogSource
     
   public:
     void AddListener(LogListener* listener);
-    void Log(LogType::LogType logType, const char* msg);
-    /*LogEvent& Verbose();
-    LogEvent& Information();
-    LogEvent& Warning();
-    LogEvent& Error();
-    LogEvent& Fatal(); */   
+    void Log(LogType::LogType logType, const char* msg);  
 };
 
 

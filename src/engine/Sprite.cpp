@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,38 +18,5 @@
 
 */
 
-#ifndef LUASTATE_H
-#define LUASTATE_H
+#include "Sprite.h"
 
-//Cpp Includes
-#include<iostream>
-
-//Lua Includes
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-}
-
-
-/**
-* Lua State
-*/
-class LuaState
-{
-  private:
-    lua_State *state;
-    
-  public:
-    LuaState();
-    ~LuaState();
-    
-    void LoadFile(const char* file);
-    int Execute();
-    
-    operator lua_State* ();
-    
-    lua_State* getState() const;  
-};
-
-#endif // LUASTATE_H

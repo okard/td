@@ -30,6 +30,22 @@ extern "C"
 }
 
 /**
+* Gets a CPP String from current lua_State
+*/
+std::string getLuaString(lua_State* state)
+{
+    if(lua_isstring(state, -1))
+    {
+        size_t len;
+        const char* str = lua_tolstring(state, -1, &len);
+        return std::string(str, len);
+    }
+    else
+        return "";
+}
+
+
+/**
 * Creates a new Table from Basis Table
 * set metatable and index property
 */
@@ -78,10 +94,20 @@ std::string LuaStringTableFunction(lua_State* state, const char* tableName, cons
 {
     LuaPushTableFunction(state, tableName, functionName);
     lua_call(state, 1, 1);
-    size_t len;
-    const char* str = lua_tolstring(state, -1, &len);
-    return std::string(str, len);
+    return getLuaString(state);
 };
+
+std::string LuaStringTableField(lua_State* state, const char* tableName, const char* fieldName)
+{
+    //get table
+    lua_getglobal(state, tableName);
+    
+    //get table field
+    lua_getfield(state, -1, fieldName);
+    
+    return getLuaString(state);
+}
+
 
 
 #endif // LUAUTILS_H

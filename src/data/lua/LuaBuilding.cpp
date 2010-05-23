@@ -27,6 +27,7 @@
 //Project Includes
 #include <common/Log.h>
 #include <data/lua/LuaUtils.h>
+#include <engine/ResourceManager.h>
 
 
 /**
@@ -81,6 +82,22 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
     //Call OnCreate
     LuaPushTableFunction(state, this->name.c_str(), "OnCreate");
     lua_call(state, 1, 0);
+    
+    //Load Fields now
+    lua_getglobal(state, this->name.c_str());
+    
+    //Sprite
+    lua_getfield(state, -1, "sprite");
+    sprite.SetImage(ResourceManager::GetInstance()->GetImage(getLuaString(state)));
+    sprite.Resize(0.2f, 0.2f);
+    lua_pop(state, 1);
+    
+    lua_getfield(state, -1, "icon");
+    icon.SetImage(ResourceManager::GetInstance()->GetImage(getLuaString(state)));
+    lua_pop(state, 1);
+    
+    //pop table
+    lua_pop(state, 1);
 }
 
 /**
@@ -108,6 +125,17 @@ void LuaBuilding::Update(int time)
     lua_pushnumber(state, time);
     lua_call(state, 2, 0);
 }
+
+const Sprite& LuaBuilding::GetIcon()
+{
+    return icon;
+}
+
+const Sprite& LuaBuilding::GetSprite()
+{
+    return sprite;
+}
+
 
 /**
 * Fire a Bullet

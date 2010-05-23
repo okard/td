@@ -48,8 +48,10 @@ const sf::Image& ResourceManager::GetImage(std::string path)
   {
     if(!images[path].LoadFromFile(path))
     {
-        LogEvent(Log::Source()) << "Loading Failed: " << path;
+        LogEvent() << "Loading Failed: " << path;
     }
+    else
+        LogEvent() << "Loading Image: " << path;
   }
   
   sf::Image& img = images[path];

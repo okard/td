@@ -22,6 +22,7 @@
 #define BUILDING_H
 
 //Project Includes
+#include<engine/Sprite.h>
 #include<data/GameObject.h>
 #include<data/BuildingType.h>
 
@@ -66,6 +67,8 @@ class Building
     //TODO HP
     
     //TODO Sprite
+    virtual const Sprite& GetSprite() = 0;
+    virtual const Sprite& GetIcon() = 0;
     //TODO Position
     
 

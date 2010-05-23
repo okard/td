@@ -20,6 +20,7 @@
 
 #include "GameState.h"
 
+#include <list>
 
 /**
 * Constructor
@@ -33,11 +34,17 @@ GameState::GameState(Window* window)
     
     BuildingType* type = luaInterface->GetBuildingType("CanonTower");
     if(type == 0)
+    {
       LogEvent() << "No Canon Tower";
+    }
     else
     {
-      Building* b = type->Create();
-      b->Update(500);
+      for(int i=0;i < 1;i++)
+      {
+        Building* b = type->Create();
+        b->Update(500);
+        buildings.push_back(b);
+      }
     }
     
     //load cursor
@@ -83,6 +90,11 @@ void GameState::Render(const sf::RenderTarget* target)
     
     //window->Draw(quad);
     window->Draw(cursor);
+    
+    for(std::list<Building*>::iterator it= buildings.begin(); it != buildings.end(); it++)
+    {
+        window->Draw((*it)->GetSprite());
+    }
     
     
 }
