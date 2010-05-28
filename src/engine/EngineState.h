@@ -18,26 +18,15 @@
 
 */
 
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef ENGINESTATE_H
+#define ENGINESTATE_H
 
-//SFMl Includes
-#include <SFML/Graphics.hpp>
-
-/**
-* Animated Sprite Class
-*/
-class Sprite : public sf::Sprite
+class EngineState
 {
-    //Image, FrameSize, DefaultFrame
-    //AddAnimation Name, start frame, end frame 
-    
-    //Play(name)
-    //Loop(name)
-    //Stop
-    //Pause
-    //status Running, Loop, Stopped
-    
+    public:
+        virtual ~EngineState(){}
+   
+        
 };
 
-#endif // SPRITE_H
+#endif // ENGINESTATE_H

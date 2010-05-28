@@ -22,13 +22,11 @@
 #define INGAMEMENUSTATE_H
 
 //Project Includes
-#include <engine/LogicState.h>
-#include <engine/RenderState.h>
 
 /**
 * In game menu
 */
-class InGameMenuState : public RenderState, LogicState
+class InGameMenuState
 {
   //TODO GameState
   

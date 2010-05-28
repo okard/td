@@ -18,41 +18,26 @@
 
 */
 
-#ifndef RESOURCEMANAGER_H
-#define RESOURCEMANAGER_H
+#include "EngineApplication.h"
 
-//STL Includes
-#include <map>
 
-//SFML Includes
-#include <SFML/Graphics/Image.hpp>
-#include <SFML/Graphics/Font.hpp>
-
-//Project Includes
-#include <common/Log.h>
-
-/**
-* Simple Resource Manager
-*/
-class ResourceManager
+EngineApplication::EngineApplication()
+    : root(new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log"))
 {
-  private:
-    ResourceManager();
-    ~ResourceManager();
-    
-    static ResourceManager* instance;
-    
-    std::map<std::string, sf::Image> images;
-    
-  public:
-    
-    const sf::Image& GetImage(std::string path);
-    
-    //const sf::Font& GetFont(std::string font);
-    
-    //TODO Manage Sounds
-    
-    static ResourceManager* GetInstance();
-};
+    root->setRenderSystem(root->getRenderSystemByName("OpenGL Rendering Subsystem"));
+    window = root->initialise(true, "td");
+    window->setFullscreen(false, 800, 600);
+}
 
-#endif // RESOURCEMANAGER_H
+EngineApplication::~EngineApplication()
+{
+
+}
+
+void EngineApplication::Run()
+{
+        root->startRendering();
+}
+
+
+

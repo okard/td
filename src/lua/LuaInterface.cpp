@@ -22,6 +22,8 @@
 
 #include <common/Log.h>
 
+using namespace Common;
+
 /**
 * Lua Class Name
 */

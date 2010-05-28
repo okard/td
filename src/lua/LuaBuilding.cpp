@@ -27,8 +27,8 @@
 //Project Includes
 #include <common/Log.h>
 #include <lua/LuaUtils.h>
-#include <engine/ResourceManager.h>
 
+using namespace Common;
 
 /**
 * Lua Class Name
@@ -87,6 +87,7 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
     lua_getglobal(state, this->name.c_str());
     
     //Sprite
+    /*
     lua_getfield(state, -1, "sprite");
     sprite.SetImage(ResourceManager::GetInstance()->GetImage(getLuaString(state)));
     sprite.Resize(0.2f, 0.2f);
@@ -95,6 +96,7 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
     lua_getfield(state, -1, "icon");
     icon.SetImage(ResourceManager::GetInstance()->GetImage(getLuaString(state)));
     lua_pop(state, 1);
+    */
     
     //pop table
     lua_pop(state, 1);
@@ -125,17 +127,6 @@ void LuaBuilding::Update(int time)
     lua_pushnumber(state, time);
     lua_call(state, 2, 0);
 }
-
-const Sprite& LuaBuilding::GetIcon()
-{
-    return icon;
-}
-
-const Sprite& LuaBuilding::GetSprite()
-{
-    return sprite;
-}
-
 
 /**
 * Fire a Bullet

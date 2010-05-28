@@ -25,8 +25,8 @@
 /**
 * Constructor
 */
-GameState::GameState(Window* window) 
-    : window(window), res(ResourceManager::GetInstance()), luaInterface(LuaInterface::Instance(luaState))
+GameState::GameState() 
+    :  luaInterface(LuaInterface::Instance(luaState))
 {
     
     luaState.LoadFile("data/game.lua");
@@ -35,7 +35,7 @@ GameState::GameState(Window* window)
     BuildingType* type = luaInterface->GetBuildingType("CanonTower");
     if(type == 0)
     {
-      LogEvent() << "No Canon Tower";
+      Common::LogEvent() << "No Canon Tower";
     }
     else
     {
@@ -47,9 +47,6 @@ GameState::GameState(Window* window)
       }
     }
     
-    //load cursor
-    cursor.SetImage(res->GetImage("data/cursor.tga"));
-    cursor.Resize(0.05f, 0.05f);
 }
 
 /**
@@ -60,49 +57,4 @@ GameState::~GameState()
   //delete luaState;
 }
 
-/**
-* Render Function
-*/
-void GameState::Render(const sf::RenderTarget* target)
-{
-  
-    //Basic OpenGL Initialization
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    
-    //glEnable(GL_TEXTURE_2D);
-    //Map
-    //Buildings
-    //Creatures
-    //Bullets
-    //GUI
-    //Mouse Cursor
-    
-    sf::Vector2f pos = window->ConvertCoords(window->GetInput().GetMouseX(), 
-					     window->GetInput().GetMouseY(), NULL);
-					  
-    //std::cout << "X: " << pos.x << " Y: " << pos.y << std::endl;
-    
-    //sf::Shape quad = sf::Shape::Rectangle(pos.x-0.1f, pos.y-0.1f, pos.x+0.1f, pos.y+0.1f, sf::Color::Red);
-    cursor.SetPosition(pos);
-    
-    //window->Draw(quad);
-    
-    //Draw Buildings
-    for(std::list<Building*>::iterator it= buildings.begin(); it != buildings.end(); it++)
-    {
-        window->Draw((*it)->GetSprite());
-    }
-    
-    //Mouse Cursor 
-    window->Draw(cursor);
-}
 
-/**
-* Logic Update
-*/
-void GameState::Update(float timeElapsed)
-{
-
-}

@@ -18,29 +18,22 @@
 */
 
 #include <common/Log.h>
-#include <engine/Window.h>
 
-#include <state/GameState.h>
-
-#include<iostream>
+#include "Game.h"
 
 /**
 * main
 */
 int main(int argc, char **argv) 
 {
-    ConsoleListener* l = new ConsoleListener();
-    Log::Source().AddListener(l);
-    LogEvent() << "Program started" << LogEvent::End;
+    Common::ConsoleListener* l = new Common::ConsoleListener();
+    Common::Log::Source().AddListener(l);
+    Common::LogEvent() << "Program started" << Common::LogEvent::End;
     
     //TODO Initial load MenuState
     
-    //Running main window
-    Window*  w = new Window();
-    //GameState
-    GameState* gamestate = new GameState(w);
-    w->SetLogic(gamestate).SetRender(gamestate);
-    w->run();
+    Game g;
+    g.Start();
     
     return 0;
 }

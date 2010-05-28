@@ -26,10 +26,6 @@
 
 //Project Includes
 #include <common/Log.h>
-#include <engine/Window.h>
-#include <engine/LogicState.h>
-#include <engine/RenderState.h>
-#include <engine/ResourceManager.h>
 
 #include <lua/LuaState.h>
 #include <lua/LuaInterface.h>
@@ -40,14 +36,12 @@
 /**
 * The Game State
 */
-class GameState : public RenderState, public LogicState
+class GameState
 {
   private:
     LuaState luaState;
     LuaInterface* luaInterface;
-    Window* window;
-    ResourceManager* res;
-    sf::Sprite cursor;
+   
     //TODO Available Buildings
     //TODO Available Researches
     
@@ -57,11 +51,9 @@ class GameState : public RenderState, public LogicState
     //TODO Current Stage
     //TODO Creatures
   public:
-    GameState(Window* window);
+    GameState();
     ~GameState();
-    
-    virtual void Update(float timeElapsed);
-    virtual void Render(const sf::RenderTarget* target);
+
 };
 
 #endif // GAMESTATE_H

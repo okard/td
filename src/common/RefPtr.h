@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,26 +15,17 @@
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 */
 
-#ifndef RENDERSTATE_H
-#define RENDERSTATE_H
-
-#include <SFML/Graphics.hpp>
+#ifndef REFPTR_H
+#define REFPTR_H
 
 /**
-* Interface RenderState
+* Reference Count based Smart Pointer 
 */
-class RenderState
+class RefPtr
 {
-  //TODO Take a look at sf::Drawable
-  
-  public:
-      virtual ~RenderState()
-      {
-      }
-      
-      virtual void Render(const sf::RenderTarget* target) = 0;
 };
 
-#endif // RENDERSTATE_H
+#endif // REFPTR_H

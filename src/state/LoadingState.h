@@ -22,10 +22,8 @@
 #define LOADINGSTATE_H
 
 //Project Includes
-#include <engine/LogicState.h>
-#include <engine/RenderState.h>
 
-class LoadingState : public RenderState, LogicState
+class LoadingState
 {
 };
 

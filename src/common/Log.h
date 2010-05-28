@@ -28,6 +28,9 @@
 //STL Includes
 #include<vector>
 
+namespace Common
+{
+
 class LogSource;
 
 //TODO Fix stupid enum
@@ -160,4 +163,6 @@ class ConsoleListener : public LogListener
     virtual ~ConsoleListener();
     virtual void logEvent(const LogSource* src, const LogEvent* event);
 };
+
+}
 #endif // LOG_H

@@ -23,6 +23,9 @@
 //Cpp Includes
 #include<iostream>
 
+namespace Common
+{
+
 //== LOGTYPE ==================================================================
 
 namespace LogType {
@@ -325,6 +328,8 @@ void ConsoleListener::logEvent(const LogSource* src, const LogEvent* event)
         std::cerr << ev->GetStream().str() << std::endl;
     else
         std::cout << LogType::toString(ev->GetType()) << ": " << ev->GetStream().str() << std::endl;
+}
+
 }
     
   

@@ -18,24 +18,19 @@
 
 */
 
-#ifndef LOGICSTATE_H
-#define LOGICSTATE_H
+#ifndef GAME_H
+#define GAME_H
 
-/**
-* Interface State
-* Represents a logic state
-*/
-class LogicState
+#include <engine/EngineApplication.h>
+
+class Game : public EngineApplication
 {
-  public:
-    virtual ~LogicState()
-    {
-    }
-    
-    virtual void Update(float timeElapsed) = 0;
-    
-    //TODO Handle Key Events
-    //TODO Handle Mouse Events
+    public:
+        void Start();
+        //GameState
+        //MenuState
+        //LoadingState
+        //InGameMenuState
 };
 
-#endif // STATE_H_H
+#endif // GAME_H

@@ -27,6 +27,8 @@
 //Project Includes
 #include <common/Log.h>
 
+using namespace Common;
+
 
 //Configuration for Lua
 const char LuaBuildingType::className[] = "BuildingType";

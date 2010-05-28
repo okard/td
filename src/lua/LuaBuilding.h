@@ -25,7 +25,6 @@
 #include <string>
 
 //Project Includes
-#include <engine/Sprite.h>
 #include <model/Building.h>
 #include <lua/Luna.h>
 #include <lua/LuaBuildingType.h>
@@ -39,8 +38,8 @@ class LuaBuilding : public Building
     std::string name;
     lua_State* state;
     
-    Sprite sprite;
-    Sprite icon;
+    //Sprite sprite;
+    //Sprite icon;
     
     //id function generator
     static unsigned short idIndex;
@@ -55,8 +54,6 @@ class LuaBuilding : public Building
     //Building Interface
     virtual BuildingType* GetType();
     virtual void Update(int time);
-    virtual const Sprite& GetSprite();
-    virtual const Sprite& GetIcon();
     
     //Lua Interface
     int Fire(lua_State* state);
