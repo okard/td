@@ -18,60 +18,22 @@
 
 */
 
-#ifndef BUILDING_H
-#define BUILDING_H
+#ifndef CREATURE_H
+#define CREATURE_H
 
 //Project Includes
-#include<engine/Sprite.h>
-#include<data/GameObject.h>
-#include<data/BuildingType.h>
+#include<model/GameObject.h>
 
-class BuildingType;
-
-
-enum FireStrategy
+class Creature : public GameObject
 {
-    Weakest = 0,
-    Strongest = 1,
-    Nearest = 2,
-    Furthest = 3
-};
-
-enum FireType
-{
-    
-};
-
-
-/**
-* Represents a Building on the Map
-* Can be created over BuildingType
-*/
-class Building 
-{
-  public:
-    virtual ~Building(){}
-    
-    virtual void Update(int time) = 0;
-    
-    virtual BuildingType* GetType() = 0;
-  
-    //TODO Strategy
-    //TODO Upgrade
-    //TODO Level
-    //TODO Bullet
-    //TODO Range
-    
-    //For Blocking Buildings?
-    //TODO CurrentHP
     //TODO HP
-    
+    //TODO CurrentHP
+    //TODO Speed
     //TODO Sprite
-    virtual const Sprite& GetSprite() = 0;
-    virtual const Sprite& GetIcon() = 0;
-    //TODO Position
+    //TODO Name
     
-
+    //For attacking blocking buildings
+    //TODO Damage
 };
 
-#endif // BUILDING_H
+#endif // CREATURE_H

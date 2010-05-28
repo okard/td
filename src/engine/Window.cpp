@@ -27,7 +27,7 @@
 /**
 * Constructor
 */
-Window::Window() : sf::RenderWindow(sf::VideoMode(800, 600, 32), "td")
+Window::Window() : sf::RenderWindow(sf::VideoMode(800, 600, 32), "td"), renderState(0), logicState(0), eventHandler(0)
 {
    SetFramerateLimit(60);
    //PreserveOpenGLStates(true);
@@ -106,6 +106,8 @@ void Window::run()
  
 	    //Handle Events here
 	    //if(Event.Type == sf::Event::MouseMoved)
+            if(eventHandler != 0)
+                eventHandler->HandleEvent(lastEvent);
 	      
 	}
 	
@@ -159,11 +161,21 @@ void Window::Update(float timeElapsed)
       logicState->Update(timeElapsed);
 }
 
-/**
-* Switch State
-*/
-void Window::SwitchState(LogicState* state, RenderState* renderState)
+Window& Window::SetLogic(LogicState* state)
 {
-  this->renderState = renderState;
-  this->logicState = state;
+    this->logicState = state;
+    return *this;
 }
+
+Window& Window::SetRender(RenderState* state)
+{
+    this->renderState = state;
+    return *this;
+}
+
+Window& Window::SetEvent(EventHandler* handler)
+{
+    this->eventHandler = handler;
+    return *this;
+}
+

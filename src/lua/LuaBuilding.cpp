@@ -26,7 +26,7 @@
 
 //Project Includes
 #include <common/Log.h>
-#include <data/lua/LuaUtils.h>
+#include <lua/LuaUtils.h>
 #include <engine/ResourceManager.h>
 
 

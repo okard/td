@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     Window*  w = new Window();
     //GameState
     GameState* gamestate = new GameState(w);
-    w->SwitchState(gamestate, gamestate);
+    w->SetLogic(gamestate).SetRender(gamestate);
     w->run();
     
     return 0;

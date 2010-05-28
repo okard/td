@@ -26,10 +26,10 @@
 #include <map>
 
 //Project Includes
-#include<data/Bullet.h>
-#include<data/Creature.h>
-#include<data/lua/LuaState.h>
-#include<data/lua/LuaBuildingType.h>
+#include<model/Bullet.h>
+#include<model/Creature.h>
+#include<lua/LuaState.h>
+#include<lua/LuaBuildingType.h>
 
 class LuaBuildingType;
 

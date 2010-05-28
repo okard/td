@@ -25,11 +25,11 @@
 #include <string>
 
 //Project Includes
-#include <data/BuildingType.h>
-#include <data/lua/Luna.h>
-#include <data/lua/LuaState.h>
-#include <data/lua/LuaInterface.h>
-#include <data/lua/LuaBuilding.h>
+#include <model/BuildingType.h>
+#include <lua/Luna.h>
+#include <lua/LuaState.h>
+#include <lua/LuaInterface.h>
+#include <lua/LuaBuilding.h>
 
 /**
 * Building Type for Lua

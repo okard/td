@@ -84,19 +84,19 @@ void GameState::Render(const sf::RenderTarget* target)
 					  
     //std::cout << "X: " << pos.x << " Y: " << pos.y << std::endl;
     
-    sf::Shape quad = sf::Shape::Rectangle(pos.x-0.1f, pos.y-0.1f, pos.x+0.1f, pos.y+0.1f, sf::Color::Red);
-    
+    //sf::Shape quad = sf::Shape::Rectangle(pos.x-0.1f, pos.y-0.1f, pos.x+0.1f, pos.y+0.1f, sf::Color::Red);
     cursor.SetPosition(pos);
     
     //window->Draw(quad);
-    window->Draw(cursor);
     
+    //Draw Buildings
     for(std::list<Building*>::iterator it= buildings.begin(); it != buildings.end(); it++)
     {
         window->Draw((*it)->GetSprite());
     }
     
-    
+    //Mouse Cursor 
+    window->Draw(cursor);
 }
 
 /**

@@ -26,9 +26,9 @@
 
 //Project Includes
 #include <engine/Sprite.h>
-#include <data/Building.h>
-#include <data/lua/Luna.h>
-#include <data/lua/LuaBuildingType.h>
+#include <model/Building.h>
+#include <lua/Luna.h>
+#include <lua/LuaBuildingType.h>
 
 class LuaBuildingType;
 

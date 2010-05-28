@@ -22,8 +22,8 @@
 #define BUILDINGTYPE_H
 
 //Project Includes
-#include<data/GameObject.h>
-#include<data/Building.h>
+#include<model/GameObject.h>
+#include<model/Building.h>
 
 class Building;
 

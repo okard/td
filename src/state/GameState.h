@@ -31,10 +31,10 @@
 #include <engine/RenderState.h>
 #include <engine/ResourceManager.h>
 
-#include <data/lua/LuaState.h>
-#include <data/lua/LuaInterface.h>
-#include <data/lua/LuaBuildingType.h>
-#include <data/Building.h>
+#include <lua/LuaState.h>
+#include <lua/LuaInterface.h>
+#include <lua/LuaBuildingType.h>
+#include <model/Building.h>
 
 
 /**

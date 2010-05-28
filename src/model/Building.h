@@ -18,22 +18,60 @@
 
 */
 
-#ifndef BULLET_H
-#define BULLET_H
+#ifndef BUILDING_H
+#define BUILDING_H
 
 //Project Includes
-#include<data/GameObject.h>
+#include<engine/Sprite.h>
+#include<model/GameObject.h>
+#include<model/BuildingType.h>
 
-/**
-* Bullet
-*/
-class Bullet : public GameObject
+class BuildingType;
+
+
+enum FireStrategy
 {
-    //TODO Sprite
-    //TODO Damage
-    //TODO Direction
-    //TODO Position
-    //TODO Speed
+    Weakest = 0,
+    Strongest = 1,
+    Nearest = 2,
+    Furthest = 3
 };
 
-#endif // BULLET_H
+enum FireType
+{
+    
+};
+
+
+/**
+* Represents a Building on the Map
+* Can be created over BuildingType
+*/
+class Building 
+{
+  public:
+    virtual ~Building(){}
+    
+    virtual void Update(int time) = 0;
+    
+    virtual BuildingType* GetType() = 0;
+  
+    //TODO Strategy
+    //TODO Upgrade
+    //TODO Level
+    //TODO Bullet
+    //TODO Range
+    
+    //For Blocking Buildings?
+    //TODO CurrentHP
+    //TODO HP
+    
+    //TODO Sprite
+    virtual const Sprite& GetSprite() = 0;
+    virtual const Sprite& GetIcon() = 0;
+    //TODO Position
+    
+
+};
+
+#endif // BUILDING_H

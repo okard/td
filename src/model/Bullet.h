@@ -18,22 +18,22 @@
 
 */
 
-#ifndef CREATURE_H
-#define CREATURE_H
+#ifndef BULLET_H
+#define BULLET_H
 
 //Project Includes
-#include<data/GameObject.h>
+#include<model/GameObject.h>
 
-class Creature : public GameObject
+/**
+* Bullet
+*/
+class Bullet : public GameObject
 {
-    //TODO HP
-    //TODO CurrentHP
-    //TODO Speed
     //TODO Sprite
-    //TODO Name
-    
-    //For attacking blocking buildings
     //TODO Damage
+    //TODO Direction
+    //TODO Position
+    //TODO Speed
 };
 
-#endif // CREATURE_H
+#endif // BULLET_H
