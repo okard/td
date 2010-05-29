@@ -22,20 +22,52 @@
 
 
 EngineApplication::EngineApplication()
-    : root(new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log"))
 {
-    root->setRenderSystem(root->getRenderSystemByName("OpenGL Rendering Subsystem"));
+    if(Root::getSingletonPtr() == 0)
+        root.reset(new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log"));
+    else
+        root.reset(Root::getSingletonPtr());
+    
+    //restore config
+    if(!root->restoreConfig())
+    {
+        if (!root->showConfigDialog())
+        {
+            Common::LogEvent() << Common::LogType::Fatal << "Can't initialize Ogre" << Common::LogEvent::End;
+        }
+    }
+    root->addFrameListener(this);
+   
+    
+    //create render window
     window = root->initialise(true, "td");
+    WindowEventUtilities::addWindowEventListener(window, this);
 }
 
 EngineApplication::~EngineApplication()
 {
-
+    root->removeFrameListener(this);
+    WindowEventUtilities::removeWindowEventListener(window, this);
 }
 
+bool EngineApplication::frameStarted(const Ogre::FrameEvent& evt)
+{
+    return engineManagerRunning;
+}
+
+void EngineApplication::windowClosed(RenderWindow* rw)
+{
+    engineManagerRunning = false;
+}
+
+
+/**
+* Run Application
+*/
 void EngineApplication::Run()
 {
-        root->startRendering();
+    engineManagerRunning = true;
+    root->startRendering();
 }
 
 

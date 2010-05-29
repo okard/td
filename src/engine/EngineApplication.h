@@ -29,6 +29,7 @@
 #include <OIS/OIS.h>
 
 //Project Includes
+#include <common/Log.h>
 #include "EngineState.h"
 
 
@@ -58,6 +59,19 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
         EngineApplication();
         virtual ~EngineApplication();
         
+        /**
+        * Called when the window is closed.
+        */
+        void windowClosed(RenderWindow* rw);
+        
+        /**
+        * Called once per frame.
+        */
+        bool frameStarted(const FrameEvent& evt);
+
+        /**
+        * Run Application
+        */
         void Run();
     
 };
