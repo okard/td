@@ -111,6 +111,15 @@ LogType::LogType LogEvent::GetType()
     return logType;
 }
 
+/**
+* Gets the LogSource
+*/
+LogSource& LogEvent::GetLogSource()
+{
+    return logSource;
+}
+
+
 LogEvent& LogEvent::operator<<(bool& val)
 {
     stream << val;

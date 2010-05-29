@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,27 +15,30 @@
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 */
 
-#include <common/Log.h>
-#include <engine/OgreLogListener.h>
+#ifndef OGRELOGLISTENER_H
+#define OGRELOGLISTENER_H
 
-#include "Game.h"
+//Ogre Includes
+#include <OGRE/OgreLog.h>
+#include <OGRE/OgreLogManager.h>
+
+//Project Includes
+#include <common/Log.h>
 
 /**
-* main
-*/
-int main(int argc, char **argv) 
+* Use the Ogre Log Listener for Logging Output
+*/ 
+class OgreLogListener : public Common::LogListener
 {
-    //Common::ConsoleListener* l = new Common::ConsoleListener();
-    OgreLogListener* l = new OgreLogListener();
-    Common::Log::Source().AddListener(l);
-    Common::LogEvent() << "Program started" << Common::LogEvent::End;
-    
-    //TODO Initial load MenuState
-    
-    Game g;
-    g.Start();
-    
-    return 0;
-}
+    private:
+        Ogre::Log* log;
+    public:
+        OgreLogListener();
+        virtual ~OgreLogListener();
+        virtual void logEvent(const Common::LogSource* src, const Common::LogEvent* event);
+};
+
+#endif // OGRELOGLISTENER_H

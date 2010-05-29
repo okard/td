@@ -18,25 +18,33 @@
 
 */
 
-#include "EngineApplication.h"
+#include "OgreLogListener.h"
 
-
-EngineApplication::EngineApplication()
-    : root(new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log"))
+OgreLogListener::OgreLogListener()
 {
-    root->setRenderSystem(root->getRenderSystemByName("OpenGL Rendering Subsystem"));
-    window = root->initialise(true, "td");
+    //create LogManage if not exist
+    if(Ogre::LogManager::getSingletonPtr() == 0)
+        Ogre::LogManager* mng = new Ogre::LogManager();
+    
+    //add default log if not exist
+    if(Ogre::LogManager::getSingleton().getDefaultLog() == 0)
+        Ogre::LogManager::getSingleton().createLog("ogre.log", true, true);
+    
+    //add application log
+    log = Ogre::LogManager::getSingleton().createLog("application.log", false, true);
 }
 
-EngineApplication::~EngineApplication()
-{
 
+OgreLogListener::~OgreLogListener()
+{
+    Ogre::LogManager::getSingleton().destroyLog(log);
 }
 
-void EngineApplication::Run()
-{
-        root->startRendering();
-}
 
+void OgreLogListener::logEvent(const Common::LogSource* src, const Common::LogEvent* event)
+{
+    Common::LogEvent* ev = const_cast<Common::LogEvent*>(event);
+    log->logMessage(ev->GetStream().str());
+}
 
 
