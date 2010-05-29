@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 * Constrcutor
 */
 EngineApplication::EngineApplication() 
-    : mRoot(0), mGenericCamera(0), mWindow(0), mRunning(false)
+    : mRoot(0), mCamera(0), mWindow(0), mRunning(false)
 {
     //initialize Root if it is not already done
     if(Root::getSingletonPtr() == 0)
@@ -41,6 +41,8 @@ EngineApplication::EngineApplication()
         }
     }
     
+    //Initialize Resource Location
+    Ogre::ResourceGroupManager::getSingleton().addResourceLocation(".", "FileSystem");
 
     //create render window
     mWindow = mRoot->initialise(true, "td");
@@ -50,6 +52,19 @@ EngineApplication::EngineApplication()
     mRoot->addFrameListener(this);
     WindowEventUtilities::addWindowEventListener(mWindow, this);
     
+    //Scene Manager
+    mSceneMng = mRoot->createSceneManager(Ogre::ST_GENERIC);
+    mCamera = mSceneMng->createCamera("Camera0");
+    Viewport *vp = mWindow->addViewport(mCamera);
+    vp->setDimensions(0.0f, 0.0f, 1.0f, 1.0f);
+    mCamera->setAspectRatio((float)vp->getActualWidth() / (float) vp->getActualHeight());
+    mCamera->setPosition(Vector3(0, 0, 100));
+    mCamera->lookAt(Vector3(0, 0, 0));
+    mCamera->setNearClipDistance(5);
+
+    //Setup Mouse Cursor
+    mMouseCursor = new MouseCursor("data/cursor.png");
+    mMouseCursor->UpdateDimension(mWindow->getWidth(), mWindow->getHeight());
 }
 
 /**
@@ -70,6 +85,11 @@ bool EngineApplication::frameStarted(const Ogre::FrameEvent& evt)
     mInputManager.Capture();
     if (mInputManager.Keyboard()->isKeyDown(OIS::KC_ESCAPE))
         return mRunning = false;
+    
+    mMouseCursor->setVisible(true);
+    
+    //set mouse cursor position
+    mMouseCursor->UpdatePosition(mInputManager.Mouse()->getMouseState().X.abs, mInputManager.Mouse()->getMouseState().Y.abs);
 
     
     return mRunning;
@@ -80,7 +100,8 @@ bool EngineApplication::frameStarted(const Ogre::FrameEvent& evt)
 */
 void EngineApplication::windowResized(RenderWindow* rw)
 {
-    
+    mInputManager.UpdateDimension();
+    mMouseCursor->UpdateDimension(rw->getWidth(), rw->getHeight());
 }
 
 
@@ -98,6 +119,18 @@ void EngineApplication::Run()
     mRunning = true;
     mRoot->startRendering();
 }
+
+
+RenderWindow* EngineApplication::getRenderWindow() const
+{
+    return mWindow;
+}
+
+SceneManager* EngineApplication::getSceneMng() const
+{
+    return mSceneMng;
+}
+
 
 
 

@@ -21,10 +21,15 @@
 #ifndef GAME_H
 #define GAME_H
 
+//Project Includes
 #include <engine/EngineApplication.h>
+#include <state/GameState.h>
 
 class Game : public EngineApplication
 {
+    private:
+        GameState gameState;
+        
     public:
         void Start();
         //GameState

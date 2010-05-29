@@ -18,27 +18,38 @@
 
 */
 
-#ifndef OGRELOGLISTENER_H
-#define OGRELOGLISTENER_H
+#ifndef MOUSECURSOR_H
+#define MOUSECURSOR_H
 
-//Ogre Includes
-#include <OGRE/OgreLog.h>
-#include <OGRE/OgreLogManager.h>
+#include <string>
 
-//Project Includes
-#include <common/Log.h>
+#include <OGRE/Ogre.h>
 
 /**
-* Use the Ogre Log Listener for Logging Output
-*/ 
-class OgreLogListener : public Common::LogListener
+* A Mouse Cursor Class
+*/
+class MouseCursor
 {
     private:
-        Ogre::Log* log;
+        Ogre::TexturePtr mTexture;
+        Ogre::MaterialPtr mMaterial;
+        
+        Ogre::Overlay* mGuiOverlay;
+        Ogre::OverlayContainer* mCursorContainer;
+
+        float mWindowWidth;
+        float mWindowHeight;
     public:
-        OgreLogListener();
-        virtual ~OgreLogListener();
-        virtual void logEvent(const Common::LogSource* src, const Common::LogEvent* event);
+        MouseCursor(std::string image);
+        
+        void UpdateDimension(unsigned int width, unsigned int height);
+        void UpdatePosition(int x, int y);
+        
+        void setVisible(bool visible);
+        
+    private:
+        void LoadImage(std::string image);
+   
 };
 
-#endif // OGRELOGLISTENER_H
+#endif // MOUSECURSOR_H

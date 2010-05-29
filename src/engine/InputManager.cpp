@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -63,6 +63,7 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
     
     if(!mExclusive)
     {
+        //TODO Hide or not Hide Mouse Cursor
         // non-exclusive input
         #if defined OIS_WIN32_PLATFORM
         pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
@@ -71,7 +72,7 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
         pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
         #elif defined OIS_LINUX_PLATFORM
         pl.insert(std::make_pair(std::string("x11_mouse_grab"), std::string("false")));
-        pl.insert(std::make_pair(std::string("x11_mouse_hide"), std::string("false")));
+        pl.insert(std::make_pair(std::string("x11_mouse_hide"), std::string("true")));
         pl.insert(std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
         pl.insert(std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
         #endif

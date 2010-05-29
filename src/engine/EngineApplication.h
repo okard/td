@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@
 #include <common/Log.h>
 #include "EngineState.h"
 #include "InputManager.h"
+#include "MouseCursor.h"
 
 
 // All OGRE objects are in the Ogre namespace.
@@ -45,14 +46,24 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
     private:
         /// OGRE Root
         Root*                   mRoot;
+        
         /// Default OGRE Camera
-        Camera*                 mGenericCamera;
+        Camera*                 mCamera;
+        
         /// OGRE RenderWindow
         RenderWindow*           mWindow;
+        
         /// flag indicating if the rendering loop is still running
         bool                    mRunning;
         
+        ///Input Manager
         InputManager            mInputManager;
+        
+        ///Mouse Cursor
+        MouseCursor*            mMouseCursor;
+        
+        ///Scene Manager
+        SceneManager*           mSceneMng;
     public:
         EngineApplication();
         virtual ~EngineApplication();
@@ -76,6 +87,11 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
         * Run Application
         */
         void Run();
+        
+        
+        RenderWindow* getRenderWindow() const;
+        
+        SceneManager* getSceneMng() const;
         
     private:
     
