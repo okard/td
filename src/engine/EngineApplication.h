@@ -64,6 +64,9 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
         
         ///Scene Manager
         SceneManager*           mSceneMng;
+        
+        ///Viewport
+        Viewport*               mViewport;
     public:
         EngineApplication();
         virtual ~EngineApplication();

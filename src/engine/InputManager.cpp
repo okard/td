@@ -89,7 +89,9 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
 
 void InputManager::Shutdown()
 {
-
+    mInputManager->destroyInputObject(mMouse);
+    mInputManager->destroyInputObject(mKeyboard);
+    OIS::InputManager::destroyInputSystem(mInputManager);
 }
 
 void InputManager::UpdateDimension()

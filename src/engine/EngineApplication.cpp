@@ -55,9 +55,9 @@ EngineApplication::EngineApplication()
     //Scene Manager
     mSceneMng = mRoot->createSceneManager(Ogre::ST_GENERIC);
     mCamera = mSceneMng->createCamera("Camera0");
-    Viewport *vp = mWindow->addViewport(mCamera);
-    vp->setDimensions(0.0f, 0.0f, 1.0f, 1.0f);
-    mCamera->setAspectRatio((float)vp->getActualWidth() / (float) vp->getActualHeight());
+    mViewport = mWindow->addViewport(mCamera);
+    mViewport->setDimensions(0.0f, 0.0f, 1.0f, 1.0f);
+    mCamera->setAspectRatio((float)mViewport->getActualWidth() / (float)mViewport->getActualHeight());
     mCamera->setPosition(Vector3(0, 0, 100));
     mCamera->lookAt(Vector3(0, 0, 0));
     mCamera->setNearClipDistance(5);
