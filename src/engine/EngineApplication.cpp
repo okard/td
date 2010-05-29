@@ -20,44 +20,73 @@
 
 #include "EngineApplication.h"
 
-
-EngineApplication::EngineApplication()
+/**
+* Constrcutor
+*/
+EngineApplication::EngineApplication() 
+    : mRoot(0), mGenericCamera(0), mWindow(0), mRunning(false)
 {
+    //initialize Root if it is not already done
     if(Root::getSingletonPtr() == 0)
-        root.reset(new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log"));
+        mRoot = new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log");
     else
-        root.reset(Root::getSingletonPtr());
+        mRoot = Root::getSingletonPtr();
     
     //restore config
-    if(!root->restoreConfig())
+    if(!mRoot->restoreConfig())
     {
-        if (!root->showConfigDialog())
+        if (!mRoot->showConfigDialog())
         {
             Common::LogEvent() << Common::LogType::Fatal << "Can't initialize Ogre" << Common::LogEvent::End;
         }
     }
-    root->addFrameListener(this);
-   
     
+
     //create render window
-    window = root->initialise(true, "td");
-    WindowEventUtilities::addWindowEventListener(window, this);
+    mWindow = mRoot->initialise(true, "td");
+    mInputManager.Start(mWindow);
+    
+    //add listener
+    mRoot->addFrameListener(this);
+    WindowEventUtilities::addWindowEventListener(mWindow, this);
+    
 }
 
+/**
+* Destructor
+*/
 EngineApplication::~EngineApplication()
 {
-    root->removeFrameListener(this);
-    WindowEventUtilities::removeWindowEventListener(window, this);
+    mInputManager.Shutdown();
+    mRoot->removeFrameListener(this);
+    WindowEventUtilities::removeWindowEventListener(mWindow, this);
 }
 
+/**
+* Frame Event
+*/
 bool EngineApplication::frameStarted(const Ogre::FrameEvent& evt)
 {
-    return engineManagerRunning;
+    mInputManager.Capture();
+    if (mInputManager.Keyboard()->isKeyDown(OIS::KC_ESCAPE))
+        return mRunning = false;
+
+    
+    return mRunning;
 }
+
+/**
+* Resize Event
+*/
+void EngineApplication::windowResized(RenderWindow* rw)
+{
+    
+}
+
 
 void EngineApplication::windowClosed(RenderWindow* rw)
 {
-    engineManagerRunning = false;
+    mRunning = false;
 }
 
 
@@ -66,8 +95,8 @@ void EngineApplication::windowClosed(RenderWindow* rw)
 */
 void EngineApplication::Run()
 {
-    engineManagerRunning = true;
-    root->startRendering();
+    mRunning = true;
+    mRoot->startRendering();
 }
 
 

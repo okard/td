@@ -26,11 +26,12 @@
 
 //OGRE Includes
 #include <OGRE/Ogre.h>
-#include <OIS/OIS.h>
+
 
 //Project Includes
 #include <common/Log.h>
 #include "EngineState.h"
+#include "InputManager.h"
 
 
 // All OGRE objects are in the Ogre namespace.
@@ -43,24 +44,26 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
 {
     private:
         /// OGRE Root
-        std::auto_ptr<Root>     root;
+        Root*                   mRoot;
         /// Default OGRE Camera
-        Camera*                 genericCamera;
+        Camera*                 mGenericCamera;
         /// OGRE RenderWindow
-        RenderWindow*           window;
+        RenderWindow*           mWindow;
         /// flag indicating if the rendering loop is still running
-        bool                    engineManagerRunning;
+        bool                    mRunning;
         
-        //OIS Input devices
-        OIS::InputManager*      mInputManager;
-        OIS::Mouse*             mMouse;
-        OIS::Keyboard*          mKeyboard;     
+        InputManager            mInputManager;
     public:
         EngineApplication();
         virtual ~EngineApplication();
         
         /**
-        * Called when the window is closed.
+        * Window Resize Event
+        */
+        void windowResized (RenderWindow *rw);
+        
+        /**
+        * Window Close Event
         */
         void windowClosed(RenderWindow* rw);
         
@@ -73,6 +76,8 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
         * Run Application
         */
         void Run();
+        
+    private:
     
 };
 
