@@ -23,7 +23,7 @@
 
 #include <common/Log.h>
 
-#include <OGRE/Ogre.h>
+#include <OGRE/OgreRenderWindow.h>
 #include <OIS/OIS.h>
 
 /**
@@ -32,34 +32,73 @@
 class InputManager
 {
     private:
-        //OIS Input devices
+        /// OIS InputManager
         OIS::InputManager*      mInputManager;
+        /// OIS Mouse
         OIS::Mouse*             mMouse;
+        /// OIS Keyboard
         OIS::Keyboard*          mKeyboard;  
-        
+        /// Render Window
         Ogre::RenderWindow*     mWindow;
+        /// Is registered for render window
         bool                    mRegistered;
+        /// Is exclusive Input
         bool                    mExclusive;
     public:
+        /**
+        * Create a new InputManager
+        */
         InputManager(const Ogre::RenderWindow* window);
+        
+        /**
+        * Create a new InputManager
+        */
         InputManager();
+        
+        /**
+        * Destructor
+        */
         virtual ~InputManager();
         
+        /**
+        * Start Input
+        */
         void Start(const Ogre::RenderWindow* window, bool autoExclusive = true, bool exclusive = false);
+        
+        /**
+        * Shutdown Input
+        */
         void Shutdown();
         
+        /**
+        * Update Dimensions for Mouse Input
+        */
         void UpdateDimension();
         
+        /**
+        * Capture Events
+        */
         void Capture();
         
-        //Exclusive
-        bool getExclusive();
+        /**
+        * Is Exclusive Input 
+        */
+        bool isExclusive() const;
         
-        bool isRegistered();
+        /**
+        * Is Registed for current render window
+        */
+        bool isRegistered() const;
         
+        /**
+        * Get Mouse
+        */ 
         OIS::Mouse* Mouse() const;
-        OIS::Keyboard* Keyboard() const;
         
+        /**
+        * Get Keyboard
+        */
+        OIS::Keyboard* Keyboard() const;        
 };
 
 #endif // INPUTMANAGER_H

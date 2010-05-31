@@ -27,6 +27,9 @@
 //Project Includes
 #include <common/Log.h>
 
+#include <engine/EngineState.h>
+#include <engine/EngineApplication.h>
+
 #include <lua/LuaState.h>
 #include <lua/LuaInterface.h>
 #include <lua/LuaBuildingType.h>
@@ -36,7 +39,7 @@
 /**
 * The Game State
 */
-class GameState
+class GameState : public EngineState
 {
   private:
     LuaState luaState;
@@ -49,10 +52,22 @@ class GameState
     //TODO Current Buildings
     std::list<Building*> buildings;
     //TODO Current Stage
-    //TODO Creatures
+    //TODO 
+    
+    //BuildingEntity <- LuaBuilding <- Building?
   public:
     GameState();
-    ~GameState();
+    virtual ~GameState();
+    
+    /**
+    * Start GameState
+    */
+    virtual void Start(EngineApplication& engine);
+    
+    /**
+    * Shutdown GameState
+    */
+    virtual void Shutdown();
 
 };
 

@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,18 +18,30 @@
 
 */
 
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef DOTSCENELOADER_H
+#define DOTSCENELOADER_H
 
-class GameObject
+#include <string>
+#include <OGRE/OgreSceneManager.h>
+
+/**
+* Loading .scene Files
+*/
+class DotSceneLoader
 {
+    private:
+        /// Current Scene Manager
+        Ogre::SceneManager* mSceneMng;
+        
+        //TODO lock? mutex? don't call parse before other call is finished
     public:
-        virtual ~GameObject() {}
+        /**
+        * Parse a .scene file and add scene to given SceneManager
+        */
+        void ParseFile(const std::string file, const Ogre::SceneManager* sceneMng); 
         
-        virtual const char* ObjectName() const = 0;
-        
-        
-        //virtual template<T> getProperty(const char* name)=0; T = int,string
+    protected:
+        //Parse Terrain   
 };
 
-#endif // GAMEOBJECT_H
+#endif // DOTSCENELOADER_H

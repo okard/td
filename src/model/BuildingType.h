@@ -40,7 +40,7 @@ class BuildingType : public GameObject
     virtual const char* GetName() = 0;
     
     
-    //TODO Icon //Sprite?
+    //TODO Icon //Sprite? pure logical?
     //TODO Dependencies
     
     virtual Building* Create() = 0;

@@ -41,7 +41,7 @@ using namespace Ogre;
 /**
 * Basic Ogre Application
 */
-class EngineApplication :  public WindowEventListener, public FrameListener, public EngineState
+class EngineApplication :  public WindowEventListener, public FrameListener
 {
     private:
         /// OGRE Root
@@ -67,8 +67,18 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
         
         ///Viewport
         Viewport*               mViewport;
+        
+        ///Current Engine State
+        EngineState*            mState;
     public:
+        /**
+        * Constructor
+        */
         EngineApplication();
+        
+        /**
+        * Destructor
+        */
         virtual ~EngineApplication();
         
         /**
@@ -91,10 +101,25 @@ class EngineApplication :  public WindowEventListener, public FrameListener, pub
         */
         void Run();
         
+        /**
+        * Start State
+        */
+        void StartState(EngineState* state, bool shutdown = true);
         
+        /**
+        * Get RenderWindow
+        */
         RenderWindow* getRenderWindow() const;
         
+        /**
+        * Get Scene Manager
+        */
         SceneManager* getSceneMng() const;
+        
+        /**
+        * Get Input Manager
+        */
+        InputManager& getInputManager();
         
     private:
     

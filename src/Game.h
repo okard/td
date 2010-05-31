@@ -25,13 +25,21 @@
 #include <engine/EngineApplication.h>
 #include <state/GameState.h>
 
+/**
+* Represents the game
+*/
 class Game : public EngineApplication
 {
     private:
+        /// The game state
         GameState gameState;
         
     public:
+        /**
+        * Start game
+        */
         void Start();
+        
         //GameState
         //MenuState
         //LoadingState

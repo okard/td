@@ -21,11 +21,13 @@
 #include "EngineApplication.h"
 
 /**
-* Constrcutor
+* Constructor
 */
 EngineApplication::EngineApplication() 
-    : mRoot(0), mCamera(0), mWindow(0), mRunning(false)
+    : mRoot(0), mCamera(0), mWindow(0), mRunning(false), mState(0)
 {
+    //TODO Full support for multiple engine Applications
+    
     //initialize Root if it is not already done
     if(Root::getSingletonPtr() == 0)
         mRoot = new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log");
@@ -105,6 +107,9 @@ void EngineApplication::windowResized(RenderWindow* rw)
 }
 
 
+/**
+* Window Closed Event
+*/
 void EngineApplication::windowClosed(RenderWindow* rw)
 {
     mRunning = false;
@@ -120,16 +125,45 @@ void EngineApplication::Run()
     mRoot->startRendering();
 }
 
+/**
+* Start a State
+*/
+void EngineApplication::StartState(EngineState* state, bool shutdown)
+{
+    assert(state != 0);
+    
+    if(shutdown && mState != 0)
+        mState->Shutdown();
+    
+    mState = state;
+    mState->Start(*this);
+}
 
+
+/**
+* Get the Render Window
+*/
 RenderWindow* EngineApplication::getRenderWindow() const
 {
     return mWindow;
 }
 
+/**
+* Get the Scene Manager
+*/
 SceneManager* EngineApplication::getSceneMng() const
 {
     return mSceneMng;
 }
+
+/**
+* Get InputManager
+*/
+InputManager& EngineApplication::getInputManager()
+{
+    return mInputManager;
+}
+
 
 
 

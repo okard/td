@@ -20,25 +20,37 @@
 
 #include "InputManager.h"
 
+/**
+* Constructor
+*/
 InputManager::InputManager(const Ogre::RenderWindow* window) 
     : mInputManager(0), mMouse(0), mKeyboard(0), mWindow(0), mRegistered(false), mExclusive(false)
 {
     Start(window);
 }
 
+/**
+* Constructor
+*/
 InputManager::InputManager()
     : mInputManager(0), mMouse(0), mKeyboard(0), mWindow(0), mRegistered(false), mExclusive(false)
 {
 }
 
+/**
+* Destructor
+*/
 InputManager::~InputManager()
 {
 
 }
 
-
+/**
+* Start Input Manager
+*/
 void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, bool exclusive)
 {
+    //check if InputManager is already registered for a window
     if(mRegistered)
         throw "Already registed it is required to shutdown first";
     
@@ -47,6 +59,7 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
     mRegistered = true;
     mWindow = const_cast<Ogre::RenderWindow*>(window);
     
+    //Set Exclusive Input Mode
     if(autoExclusive)
     {
         mExclusive = mWindow->isFullScreen();
@@ -54,6 +67,7 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
     else
         mExclusive = exclusive;
     
+    //Create Parameter List
     OIS::ParamList pl;
     size_t windowHnd = 0;
     std::ostringstream windowHndStr;
@@ -61,6 +75,7 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
     windowHndStr << windowHnd;
     pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
     
+    //When not Exclusive set right Parameter
     if(!mExclusive)
     {
         //TODO Hide or not Hide Mouse Cursor
@@ -78,22 +93,29 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
         #endif
     }
 
-    
+    //Create Input System
     mInputManager = OIS::InputManager::createInputSystem(pl);
-    
     mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(OIS::OISMouse, false));
     mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(OIS::OISKeyboard, false));
     
+    //Initial Updating Dimensions
     UpdateDimension();
 }
 
+/**
+* Shutdown InputManager
+*/
 void InputManager::Shutdown()
 {
     mInputManager->destroyInputObject(mMouse);
     mInputManager->destroyInputObject(mKeyboard);
     OIS::InputManager::destroyInputSystem(mInputManager);
+    mRegistered = false;
 }
 
+/**
+* Update Dimensions for Mouse Input
+*/
 void InputManager::UpdateDimension()
 {
     if(mMouse != 0)
@@ -108,6 +130,9 @@ void InputManager::UpdateDimension()
     }
 }
 
+/**
+* Capture the Events
+*/
 void InputManager::Capture()
 {
     if(mMouse != 0)
@@ -116,21 +141,33 @@ void InputManager::Capture()
         mKeyboard->capture();
 }
 
-bool InputManager::getExclusive()
+/**
+* Is exclusive Input
+*/
+bool InputManager::isExclusive() const
 {
     return mExclusive;
 }
 
-bool InputManager::isRegistered()
+/**
+* Is registered
+*/
+bool InputManager::isRegistered() const
 {
     return mRegistered;
 }
 
+/**
+* Get the keyboard
+*/
 OIS::Keyboard* InputManager::Keyboard() const
 {
     return mKeyboard;
 }
 
+/**
+* Get the mouse
+*/
 OIS::Mouse* InputManager::Mouse() const
 {
     return mMouse;

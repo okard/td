@@ -31,23 +31,44 @@
 class MouseCursor
 {
     private:
+        /// The mouse cursor texture
         Ogre::TexturePtr mTexture;
+        /// The mouse cursor material
         Ogre::MaterialPtr mMaterial;
-        
+        /// Overlay
         Ogre::Overlay* mGuiOverlay;
+        /// Overlay container for mosue cursor
         Ogre::OverlayContainer* mCursorContainer;
 
+        /// Window Width
         float mWindowWidth;
+        /// Window Height
         float mWindowHeight;
     public:
+        /**
+        * Creates a new Mouse Cursor with given image file
+        */
         MouseCursor(std::string image);
         
+        /**
+        * Update Dimensions of Overlay (Window Dimensions)
+        */
         void UpdateDimension(unsigned int width, unsigned int height);
+        
+        /**
+        * Set position of mouse cursor
+        */
         void UpdatePosition(int x, int y);
         
+        /**
+        * Set visibility of mouse cursor
+        */
         void setVisible(bool visible);
         
     private:
+        /**
+        * Load Image for MouseCursor
+        */
         void LoadImage(std::string image);
    
 };

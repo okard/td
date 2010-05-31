@@ -20,7 +20,7 @@
 
 #include "OgreLogListener.h"
 
-OgreLogListener::OgreLogListener()
+OgreLogListener::OgreLogListener() : log(0)
 {
     //create LogManage if not exist
     if(Ogre::LogManager::getSingletonPtr() == 0)

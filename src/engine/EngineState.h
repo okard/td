@@ -21,12 +21,21 @@
 #ifndef ENGINESTATE_H
 #define ENGINESTATE_H
 
+class EngineApplication;
+
+/**
+* A State for an EngineApplication
+*/
 class EngineState
 {
     public:
         virtual ~EngineState(){}
    
+        virtual void Start(EngineApplication& engine) = 0;
+        virtual void Shutdown() = 0;
         
+        //virtual void Pause() = 0;
+        //virtual bool isRunning() = 0;
 };
 
 #endif // ENGINESTATE_H

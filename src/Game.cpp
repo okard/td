@@ -25,7 +25,9 @@
 */
 void Game::Start()
 {
-    //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");
-    //getSceneMng()->getRootSceneNode()->createChildSceneNode()->attachObject(getSceneMng()->createEntity("ogre", "data/ogrehead.mesh"));
+    //Set GameState
+    StartState(&gameState);
+
+    //Run Application
     Run();
 }

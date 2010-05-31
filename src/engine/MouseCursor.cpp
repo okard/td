@@ -38,7 +38,9 @@ MouseCursor::MouseCursor(std::string image)
     mGuiOverlay->show();
 }
 
-
+/**
+* Set Dimension of Window 
+*/
 void MouseCursor::UpdateDimension(unsigned int width, unsigned int height)
 {
     mWindowWidth = (width > 0) ? width : 1;
@@ -48,6 +50,9 @@ void MouseCursor::UpdateDimension(unsigned int width, unsigned int height)
     mCursorContainer->setHeight(mTexture->getHeight() / mWindowHeight);
 }
 
+/**
+* Update the Position of Mouse Cursor
+*/
 void MouseCursor::UpdatePosition(int x, int y)
 {
     Ogre::Real rx = Ogre::Math::Clamp<Ogre::Real>(x / mWindowWidth, 0.0f, 1.0f);
@@ -55,6 +60,9 @@ void MouseCursor::UpdatePosition(int x, int y)
     mCursorContainer->setPosition(rx, ry);
 }
 
+/**
+* Set visibility of mouse cursor
+*/
 void MouseCursor::setVisible(bool visible)
 {
     if(!visible)
@@ -62,8 +70,6 @@ void MouseCursor::setVisible(bool visible)
     else
         mCursorContainer->show();
 }
-
-
 
 /**
 * Load the Cursor Image

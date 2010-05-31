@@ -28,26 +28,33 @@
 //STL Includes
 #include<vector>
 
+// Common Namespace
 namespace Common
 {
 
+//forward declaration
 class LogSource;
+
 
 //TODO Fix stupid enum
 namespace LogType
 {
-/**
-* Logging Types
-*/
-enum LogType
-{
-  Verbose,
-  Information,
-  Warning,
-  Error,
-  Fatal
-};
-const char* toString(LogType type);
+    /**
+    * Logging Types
+    */
+    enum LogType
+    {
+    Verbose,
+    Information,
+    Warning,
+    Error,
+    Fatal
+    };
+    
+    /**
+    * Convert a LogType to String
+    */
+    const char* toString(LogType type);
 }
 
 /**
@@ -56,13 +63,21 @@ const char* toString(LogType type);
 class LogEvent
 {
     private:
+        /// string string for formatting
         std::ostringstream stream;
+        /// log event type
         LogType::LogType logType;
+        /// LogSource
         LogSource& logSource;
         
-        void log();
-          
+        /**
+        * Log the current message
+        */
+        void log();  
     public:
+        /**
+        * Log Event Actions
+        */
         enum LogEventAction { End }; 
         
         LogEvent(LogSource&);
@@ -111,46 +126,68 @@ class LogListener
 */
 class LogSource
 {
-  friend class Log;
-  friend class LogEvent;
+    friend class Log;
+    friend class LogEvent;
   
-  private:
-    const char* sourceName;
-    std::vector<LogListener*> listener;
+    private:
+        /// Log Source Name
+        const char* sourceName;
+        /// Listener
+        std::vector<LogListener*> listener;
     
-  private:
-    LogSource();
-    LogSource(const char* name);
-    
-    void logEvent(const LogSource* src, const LogEvent* event);
-    
-  public:
-    void AddListener(LogListener* listener);
-    void Log(LogType::LogType logType, const char* msg);  
+        ///internal log event?
+    private:
+        LogSource();
+        LogSource(const char* name);
+ 
+    protected:
+        /**
+        * Internal Log Event Dispatch to Listener
+        */
+        void logEvent(const LogSource* src, const LogEvent* event); 
+    public:
+        /**
+        * Add a log listener to log source
+        */
+        void AddListener(LogListener* listener);
+        
+        /**
+        * Log a Simple Message
+        */
+        void Log(LogType::LogType logType, const char* msg);  
 };
 
 
 /**
 * Logger
 */
-class Log : public LogListener
+class Log : public LogSource, public LogListener
 {
-  private:
-    LogSource logSource;
-  
   private:
     Log();
     Log(const Log& cc);
 
   public:
     virtual ~Log();
-      
+    
+    /**
+    * Create a new LogSource with given name 
+    */
     static LogSource* Source(const char* name);
+    
+    /**
+    * Return the default LogSource
+    */
     static LogSource& Source();
     
+    /**
+    * Get Instacne of logging class
+    */
     static Log& getInstance();
 
-    
+    /**
+    * Implemented Log Listener Interface
+    */
     virtual void logEvent(const LogSource* src, const LogEvent* event);
 };
 
@@ -165,5 +202,5 @@ class ConsoleListener : public LogListener
     virtual void logEvent(const LogSource* src, const LogEvent* event);
 };
 
-}
+} //end namespace common
 #endif // LOG_H

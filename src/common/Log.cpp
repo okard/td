@@ -119,13 +119,18 @@ LogSource& LogEvent::GetLogSource()
     return logSource;
 }
 
-
+/**
+* Append a bool value to log message
+*/
 LogEvent& LogEvent::operator<<(bool& val)
 {
     stream << val;
     return *this;
 }
 
+/**
+* Append a short int value to log message
+*/
 LogEvent& LogEvent::operator<<(short int& val)
 {
     stream << val;
@@ -198,12 +203,19 @@ LogEvent& LogEvent::operator<<(const char* val)
     return *this;
 }
 
+/**
+* Set LogType of log message
+*/
 LogEvent& LogEvent::operator<<(LogType::LogType type)
 {
     logType = type;
     return *this;
 }
 
+
+/**
+* Execute Log Action
+*/
 LogEvent& LogEvent::operator<<(LogEvent::LogEventAction )
 {
     log();
@@ -284,7 +296,7 @@ Log::~Log()
 */
 void Log::logEvent(const LogSource* src, const LogEvent* event)
 {
-  logSource.logEvent(src, event);
+  LogSource::logEvent(src, event);
 }
 
 /**
@@ -305,7 +317,6 @@ LogSource* Log::Source(const char* name)
   LogSource *log = new LogSource(name);
   
   //Add Default Listener
-  
   log->AddListener(&Log::getInstance());
   
   return log;
@@ -316,7 +327,7 @@ LogSource* Log::Source(const char* name)
 */
 LogSource& Log::Source()
 {
-    return Log::getInstance().logSource;
+    return Log::getInstance();
 }
 
 //== ConsoleListener ==========================================================
@@ -339,6 +350,6 @@ void ConsoleListener::logEvent(const LogSource* src, const LogEvent* event)
         std::cout << LogType::toString(ev->GetType()) << ": " << ev->GetStream().str() << std::endl;
 }
 
-}
+} //end namespace common
     
   

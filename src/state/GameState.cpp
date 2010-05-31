@@ -28,10 +28,27 @@
 GameState::GameState() 
     :  luaInterface(LuaInterface::Instance(luaState))
 {
-    
+    //Load Lua Game File
     luaState.LoadFile("data/game.lua");
-    luaState.Execute();
+    luaState.Execute();   
+}
+
+/**
+* Destrcutor
+*/
+GameState::~GameState()
+{
+  //delete luaState;
+}
+
+/**
+* Start GameState
+*/
+void GameState::Start(EngineApplication& engine)
+{
+    Common::LogEvent() << "GameState started" << Common::LogEvent::End;
     
+    //test lua building
     BuildingType* type = luaInterface->GetBuildingType("CanonTower");
     if(type == 0)
     {
@@ -47,14 +64,17 @@ GameState::GameState()
       }
     }
     
+    
+    //Ogre test code
+    //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");
+    //getSceneMng()->getRootSceneNode()->createChildSceneNode()->attachObject(getSceneMng()->createEntity("ogre", "data/ogrehead.mesh")); 
 }
 
 /**
-* Destrcutor
+* Shutdown GameState
 */
-GameState::~GameState()
+void GameState::Shutdown()
 {
-  //delete luaState;
-}
 
+}
 
