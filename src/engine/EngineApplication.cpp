@@ -23,6 +23,15 @@
 //Project Includes
 #include <common/Log.h>
 
+//Due Ogres stupidity? plugins.cfg seems not to work cross platform specific 
+// so diff filename here
+#ifdef WIN32
+    const char PLUGINSCFG[] = "data/plugins.win.cfg";
+#else
+    const char PLUGINSCFG[] = "data/plugins.linux.cfg";
+#endif
+
+
 /**
 * Constructor
 */
@@ -33,7 +42,7 @@ EngineApplication::EngineApplication()
     
     //initialize Root if it is not already done
     if(Root::getSingletonPtr() == 0)
-        mRoot = new Root("data/plugins.cfg", "data/ogre.cfg", "ogre.log");
+        mRoot = new Root(PLUGINSCFG, "data/ogre.cfg", "ogre.log");
     else
         mRoot = Root::getSingletonPtr();
     
