@@ -129,6 +129,6 @@ void DotSceneLoader::ParseTerrain(TiXmlElement* terrainNode)
     }
     Common::LogEvent() << "Terrain: " << terrain << Common::LogEvent::End;
     
-    mSceneMng->setWorldGeometry(terrain);
+    //mSceneMng->setWorldGeometry(terrain);
 }
 
