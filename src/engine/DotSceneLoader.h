@@ -23,6 +23,7 @@
 
 #include <string>
 #include <OGRE/OgreSceneManager.h>
+#include <tinyxml/tinyxml.h>
 
 /**
 * Loading .scene Files
@@ -40,8 +41,16 @@ class DotSceneLoader
         */
         void ParseFile(const std::string file, const Ogre::SceneManager* sceneMng); 
         
-    protected:
-        //Parse Terrain   
+    protected:  
+        /**
+        * Parse the scene node
+        */
+        void ParseScene(TiXmlElement* rootNode);
+        /**
+        * Parse the terrain node
+        */
+        void ParseTerrain(TiXmlElement* terrainNode);
+        
 };
 
 #endif // DOTSCENELOADER_H

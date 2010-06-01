@@ -29,7 +29,6 @@
 
 
 //Project Includes
-#include <common/Log.h>
 #include "EngineState.h"
 #include "InputManager.h"
 #include "MouseCursor.h"
@@ -100,6 +99,11 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         * Run Application
         */
         void Run();
+        
+        /**
+        * Stop Application
+        */
+        void Stop();
         
         /**
         * Start State

@@ -21,6 +21,7 @@
 #include "GameState.h"
 
 #include <list>
+#include <engine/DotSceneLoader.h>
 
 /**
 * Constructor
@@ -63,6 +64,10 @@ void GameState::Start(EngineApplication& engine)
         buildings.push_back(b);
       }
     }
+    
+    DotSceneLoader loader;
+    loader.ParseFile("data/map01.scene", engine.getSceneMng());
+    
     
     
     //Ogre test code

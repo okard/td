@@ -20,6 +20,9 @@
 
 #include "OgreLogListener.h"
 
+/**
+* Constructor
+*/
 OgreLogListener::OgreLogListener() : log(0)
 {
     //create LogManage if not exist
@@ -34,13 +37,18 @@ OgreLogListener::OgreLogListener() : log(0)
     log = Ogre::LogManager::getSingleton().createLog("application.log", false, true);
 }
 
-
+/**
+* Destructor
+*/
 OgreLogListener::~OgreLogListener()
 {
     Ogre::LogManager::getSingleton().destroyLog(log);
 }
 
 
+/**
+* Log Event
+*/
 void OgreLogListener::logEvent(const Common::LogSource* src, const Common::LogEvent* event)
 {
     Common::LogEvent* ev = const_cast<Common::LogEvent*>(event);

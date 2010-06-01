@@ -34,10 +34,20 @@
 class OgreLogListener : public Common::LogListener
 {
     private:
+        ///Ogre Log Instance
         Ogre::Log* log;
     public:
+        /**
+        * Creates a new logger instance
+        */
         OgreLogListener();
+        /**
+        * Destructor
+        */
         virtual ~OgreLogListener();
+        /**
+        * Log Event
+        */
         virtual void logEvent(const Common::LogSource* src, const Common::LogEvent* event);
 };
 

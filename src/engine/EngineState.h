@@ -36,6 +36,9 @@ class EngineState
         
         //virtual void Pause() = 0;
         //virtual bool isRunning() = 0;
+        
+        //Update Event (frameStarted)
+        //Flags for Engine State? Update|Mouse|Keyboard
 };
 
 #endif // ENGINESTATE_H

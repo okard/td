@@ -21,8 +21,6 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
-#include <common/Log.h>
-
 #include <OGRE/OgreRenderWindow.h>
 #include <OIS/OIS.h>
 

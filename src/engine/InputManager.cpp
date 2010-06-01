@@ -20,6 +20,9 @@
 
 #include "InputManager.h"
 
+//Project Includes
+#include <common/Log.h>
+
 /**
 * Constructor
 */

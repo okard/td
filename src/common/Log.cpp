@@ -216,9 +216,15 @@ LogEvent& LogEvent::operator<<(LogType::LogType type)
 /**
 * Execute Log Action
 */
-LogEvent& LogEvent::operator<<(LogEvent::LogEventAction )
+LogEvent& LogEvent::operator<<(LogEvent::LogEventAction action )
 {
-    log();
+    switch(action)
+    {
+        case Endl:
+            stream << std::endl; break;
+        default:
+            log();
+    }
     return *this;
 }
 
@@ -229,16 +235,27 @@ LogEvent& LogEvent::operator<<(LogEvent::LogEventAction )
 /**
 * Constructor 
 */
-LogSource::LogSource() : sourceName("")
+LogSource::LogSource() : sourceName(""), event(0)
 {
+    event = new LogEvent(*this);
 }
 
 /**
 * Constructor 
 */
-LogSource::LogSource(const char* name) : sourceName(name)
+LogSource::LogSource(const char* name) : sourceName(name), event(0)
 {
+    event = new LogEvent(*this);
 }
+
+/**
+* Destructor
+*/
+LogSource::~LogSource()
+{
+    delete event;
+}
+
 
 /**
 * Add Log Listener
@@ -270,6 +287,15 @@ void LogSource::Log(LogType::LogType logType, const char* msg)
     event << msg;
     this->logEvent(this, &event);
 }
+
+/**
+* Return default log event
+*/
+LogEvent& LogSource::Event()
+{
+    return *event;
+}
+
 
 
 //== LOG ======================================================================

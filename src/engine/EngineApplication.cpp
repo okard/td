@@ -20,6 +20,9 @@
 
 #include "EngineApplication.h"
 
+//Project Includes
+#include <common/Log.h>
+
 /**
 * Constructor
 */
@@ -54,8 +57,8 @@ EngineApplication::EngineApplication()
     mRoot->addFrameListener(this);
     WindowEventUtilities::addWindowEventListener(mWindow, this);
     
-    //Scene Manager
-    mSceneMng = mRoot->createSceneManager(Ogre::ST_GENERIC);
+    //Scene Manager, Viewport, Camera
+    mSceneMng = mRoot->createSceneManager(Ogre::ST_EXTERIOR_FAR);
     mCamera = mSceneMng->createCamera("Camera0");
     mViewport = mWindow->addViewport(mCamera);
     mViewport->setDimensions(0.0f, 0.0f, 1.0f, 1.0f);
@@ -124,6 +127,15 @@ void EngineApplication::Run()
     mRunning = true;
     mRoot->startRendering();
 }
+
+/**
+* Stop Engine Application
+*/
+void EngineApplication::Stop()
+{
+    mRunning = false;
+}
+
 
 /**
 * Start a State

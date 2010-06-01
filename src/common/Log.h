@@ -78,7 +78,7 @@ class LogEvent
         /**
         * Log Event Actions
         */
-        enum LogEventAction { End }; 
+        enum LogEventAction { End, Endl }; 
         
         LogEvent(LogSource&);
         LogEvent(LogSource&, LogType::LogType); 
@@ -136,9 +136,11 @@ class LogSource
         std::vector<LogListener*> listener;
     
         ///internal log event?
+        LogEvent* event;
     private:
         LogSource();
         LogSource(const char* name);
+        ~LogSource();
  
     protected:
         /**
@@ -155,6 +157,11 @@ class LogSource
         * Log a Simple Message
         */
         void Log(LogType::LogType logType, const char* msg);  
+        
+        /**
+        * Get a Default Event
+        */
+        LogEvent& Event();
 };
 
 

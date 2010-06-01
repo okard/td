@@ -1,0 +1,19 @@
+<scene>
+    <!-- Sample test terrain for terrain scene manager -->
+    <terrain 
+                WorldTexture="terrain_texture.jpg" 
+                DetailTexture="terrain_detail.jpg" 
+                DetailTile="3"
+                PageSource="Heightmap"
+                Heightmap.image="terrain.png"
+                PageSize="513"
+                TileSize="65"
+                MaxPixelError="3"
+                PageWorldX="1500"
+                PageWorldZ="1500"
+                MaxHeight="100"
+                MaxMipMapLevel="5"
+                VertexProgramMorph="yes"
+                LODMorphStart="0.2"
+     />
+</scene>
