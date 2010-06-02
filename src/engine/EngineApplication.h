@@ -125,6 +125,11 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         */
         InputManager& getInputManager();
         
+        /**
+        * Get default Camera
+        */
+        Camera* getCamera();
+        
     private:
     
 };

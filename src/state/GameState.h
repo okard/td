@@ -29,6 +29,7 @@
 
 #include <engine/EngineState.h>
 #include <engine/EngineApplication.h>
+#include <engine/RtsCamera.h>
 
 #include <lua/LuaState.h>
 #include <lua/LuaInterface.h>
@@ -44,6 +45,10 @@ class GameState : public EngineState
   private:
     LuaState luaState;
     LuaInterface* luaInterface;
+    
+    RtsCamera* mCamera;
+    
+    EngineApplication* mEngine;
    
     //TODO Available Buildings
     //TODO Available Researches
@@ -62,12 +67,17 @@ class GameState : public EngineState
     /**
     * Start GameState
     */
-    virtual void Start(EngineApplication& engine);
+    virtual void Start(EngineApplication* engine);
     
     /**
     * Shutdown GameState
     */
     virtual void Shutdown();
+    
+    /**
+    * Update State
+    */
+    virtual void Update();
 
 };
 

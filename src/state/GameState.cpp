@@ -27,7 +27,7 @@
 * Constructor
 */
 GameState::GameState() 
-    :  luaInterface(LuaInterface::Instance(luaState))
+    :  luaInterface(LuaInterface::Instance(luaState)), mCamera(0), mEngine(0)
 {
     //Load Lua Game File
     luaState.LoadFile("data/game.lua");
@@ -39,14 +39,17 @@ GameState::GameState()
 */
 GameState::~GameState()
 {
+  //call shutdown?
+  Shutdown();
   //delete luaState;
 }
 
 /**
 * Start GameState
 */
-void GameState::Start(EngineApplication& engine)
+void GameState::Start(EngineApplication* engine)
 {
+    mEngine = engine;
     Common::LogEvent() << "GameState started" << Common::LogEvent::End;
     
     //test lua building
@@ -66,9 +69,10 @@ void GameState::Start(EngineApplication& engine)
     }
     
     DotSceneLoader loader;
-    loader.ParseFile("data/map01.scene", engine.getSceneMng());
+    loader.ParseFile("data/map01.scene", engine->getSceneMng());
     
-    
+    //Create Camera
+    mCamera = new RtsCamera(engine->getCamera());
     
     //Ogre test code
     //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");
@@ -80,6 +84,27 @@ void GameState::Start(EngineApplication& engine)
 */
 void GameState::Shutdown()
 {
+    if(mCamera)
+    {
+        delete mCamera;
+        mCamera = 0;
+    }
+}
 
+
+/**
+* Update State
+*/
+void GameState::Update()
+{
+    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_W))
+        mCamera->moveUp(1);
+    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_S))
+        mCamera->moveDown(1);
+    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_A))
+        mCamera->moveLeft(1);
+    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_D))
+        mCamera->moveRight(1);
+    
 }
 

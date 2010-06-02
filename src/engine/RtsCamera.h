@@ -18,30 +18,42 @@
 
 */
 
-#ifndef ENGINESTATE_H
-#define ENGINESTATE_H
+#ifndef RTSCAMERA_H
+#define RTSCAMERA_H
 
-class EngineApplication;
+#include <OGRE/OgreCamera.h>
 
 /**
-* A State for an EngineApplication
+* A RTS style camera class
 */
-class EngineState
+class RtsCamera
 {
+    Ogre::Camera* mCamera;
+    
+    //Current Angle
+    Ogre::Radian mAngle;
+    
     public:
-        virtual ~EngineState(){}
-   
-        virtual void Start(EngineApplication* engine) = 0;
-        virtual void Shutdown() = 0;
+        RtsCamera(Ogre::Camera* camera);
+        ~RtsCamera();
+        
+        //top and height of map and camera (y)
+        
+        //length of zoom axis
+        
+        //The Edges 
+        //void setLimits()
         
         
-        virtual void Update() = 0;
+        //void setPosition()
         
-        //virtual void Pause() = 0;
-        //virtual bool isRunning() = 0;
+        void zoomIn(const Ogre::Real v);
+        void zoomOut(const Ogre::Real v);
         
-        //Update Event (frameStarted)
-        //Flags for Engine State? Update|Mouse|Keyboard
+        void moveUp(const Ogre::Real v);
+        void moveDown(const Ogre::Real v);
+        void moveLeft(const Ogre::Real v);
+        void moveRight(const Ogre::Real v);
 };
 
-#endif // ENGINESTATE_H
+#endif // RTSCAMERA_H

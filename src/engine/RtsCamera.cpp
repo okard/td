@@ -18,30 +18,54 @@
 
 */
 
-#ifndef ENGINESTATE_H
-#define ENGINESTATE_H
+#include "RtsCamera.h"
 
-class EngineApplication;
 
 /**
-* A State for an EngineApplication
+* Constructor
 */
-class EngineState
+RtsCamera::RtsCamera(Ogre::Camera* camera) : mCamera(camera)
 {
-    public:
-        virtual ~EngineState(){}
-   
-        virtual void Start(EngineApplication* engine) = 0;
-        virtual void Shutdown() = 0;
-        
-        
-        virtual void Update() = 0;
-        
-        //virtual void Pause() = 0;
-        //virtual bool isRunning() = 0;
-        
-        //Update Event (frameStarted)
-        //Flags for Engine State? Update|Mouse|Keyboard
-};
 
-#endif // ENGINESTATE_H
+    
+}
+
+/**
+* Destructor
+*/
+RtsCamera::~RtsCamera()
+{
+
+}
+
+
+void RtsCamera::moveDown(const Ogre::Real v)
+{
+    mCamera->move(Ogre::Vector3(0, 0, -v));
+}
+
+void RtsCamera::moveLeft(const Ogre::Real v)
+{
+    mCamera->move(Ogre::Vector3(-v, 0, 0));
+}
+
+void RtsCamera::moveRight(const Ogre::Real v)
+{
+    mCamera->move(Ogre::Vector3(+v, 0, 0));
+}
+
+void RtsCamera::moveUp(const Ogre::Real v)
+{
+    mCamera->move(Ogre::Vector3(0, 0, +v));
+}
+
+void RtsCamera::zoomIn(const Ogre::Real v)
+{
+
+}
+
+void RtsCamera::zoomOut(const Ogre::Real v)
+{
+
+}
+

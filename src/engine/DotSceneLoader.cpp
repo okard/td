@@ -129,6 +129,11 @@ void DotSceneLoader::ParseTerrain(TiXmlElement* terrainNode)
     }
     Common::LogEvent() << "Terrain: " << terrain << Common::LogEvent::End;
     
-    //mSceneMng->setWorldGeometry(terrain);
+    void *pMem = OGRE_ALLOC_T(unsigned char, terrain.length()+1, Ogre::MEMCATEGORY_GENERAL);
+    memset(pMem, 0, terrain.length()+1);
+    memcpy(pMem, terrain.c_str(), terrain.length() + 1);
+    Ogre::DataStreamPtr pStr(new Ogre::MemoryDataStream(pMem, terrain.length() + 1, true));
+    
+    mSceneMng->setWorldGeometry(pStr);
 }
 

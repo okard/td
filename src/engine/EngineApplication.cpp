@@ -67,18 +67,22 @@ EngineApplication::EngineApplication()
     WindowEventUtilities::addWindowEventListener(mWindow, this);
     
     //Scene Manager, Viewport, Camera
-    mSceneMng = mRoot->createSceneManager(Ogre::ST_EXTERIOR_FAR);
+    mSceneMng = mRoot->createSceneManager(Ogre::ST_EXTERIOR_CLOSE);
+    //mSceneMng->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
     mCamera = mSceneMng->createCamera("Camera0");
     mViewport = mWindow->addViewport(mCamera);
     mViewport->setDimensions(0.0f, 0.0f, 1.0f, 1.0f);
     mCamera->setAspectRatio((float)mViewport->getActualWidth() / (float)mViewport->getActualHeight());
-    mCamera->setPosition(Vector3(0, 0, 100));
-    mCamera->lookAt(Vector3(0, 0, 0));
+    mCamera->rotate(Vector3(0, 1, 0), Ogre::Radian(45.0));
+    mCamera->setPosition(Vector3(250, 500, 250));
+    mCamera->lookAt(Vector3(200, 100, 200));
+    
     mCamera->setNearClipDistance(5);
 
     //Setup Mouse Cursor
     mMouseCursor = new MouseCursor("data/cursor.png");
     mMouseCursor->UpdateDimension(mWindow->getWidth(), mWindow->getHeight());
+    mMouseCursor->setVisible(true);
 }
 
 /**
@@ -89,6 +93,7 @@ EngineApplication::~EngineApplication()
     mInputManager.Shutdown();
     mRoot->removeFrameListener(this);
     WindowEventUtilities::removeWindowEventListener(mWindow, this);
+    delete mMouseCursor;
 }
 
 /**
@@ -100,11 +105,11 @@ bool EngineApplication::frameStarted(const Ogre::FrameEvent& evt)
     if (mInputManager.Keyboard()->isKeyDown(OIS::KC_ESCAPE))
         return mRunning = false;
     
-    mMouseCursor->setVisible(true);
-    
     //set mouse cursor position
     mMouseCursor->UpdatePosition(mInputManager.Mouse()->getMouseState().X.abs, mInputManager.Mouse()->getMouseState().Y.abs);
 
+    if(mState != 0)
+        mState->Update();
     
     return mRunning;
 }
@@ -157,7 +162,7 @@ void EngineApplication::StartState(EngineState* state, bool shutdown)
         mState->Shutdown();
     
     mState = state;
-    mState->Start(*this);
+    mState->Start(this);
 }
 
 
@@ -184,6 +189,15 @@ InputManager& EngineApplication::getInputManager()
 {
     return mInputManager;
 }
+
+/**
+* Get the default Camera
+*/
+Camera* EngineApplication::getCamera()
+{
+    return mCamera;
+}
+
 
 
 
