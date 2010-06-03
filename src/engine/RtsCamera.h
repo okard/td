@@ -28,21 +28,32 @@
 */
 class RtsCamera
 {
+    ///Pointer to Camera
     Ogre::Camera* mCamera;
     
     //Current Angle
     Ogre::Radian mAngle;
     
+    /// Limit Top Left
+    Ogre::Vector3 mLimitTL;
+    Ogre::Vector3 mLimitDR;
+    
     public:
         RtsCamera(Ogre::Camera* camera);
         ~RtsCamera();
+        
+        
+        Ogre::Camera* getCamera();
         
         //top and height of map and camera (y)
         
         //length of zoom axis
         
         //The Edges 
-        //void setLimits()
+        /**
+        * Set Limits of the Map given top left and down right point
+        */
+        void setLimits(Ogre::Vector3 tl, Ogre::Vector3 dr);
         
         
         //void setPosition()
@@ -54,6 +65,9 @@ class RtsCamera
         void moveDown(const Ogre::Real v);
         void moveLeft(const Ogre::Real v);
         void moveRight(const Ogre::Real v);
+        
+    protected:
+        void move(const Ogre::Vector3& vec);
 };
 
 #endif // RTSCAMERA_H

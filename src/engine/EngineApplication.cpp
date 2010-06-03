@@ -73,9 +73,11 @@ EngineApplication::EngineApplication()
     mViewport = mWindow->addViewport(mCamera);
     mViewport->setDimensions(0.0f, 0.0f, 1.0f, 1.0f);
     mCamera->setAspectRatio((float)mViewport->getActualWidth() / (float)mViewport->getActualHeight());
-    mCamera->rotate(Vector3(0, 1, 0), Ogre::Radian(45.0));
-    mCamera->setPosition(Vector3(250, 500, 250));
-    mCamera->lookAt(Vector3(200, 100, 200));
+    mCamera->setPosition(Vector3(0, 1000, 0));
+    //rotate 90° around x axis
+    mCamera->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5), -Ogre::Math::Sqrt(0.5) ,0.,0.));
+    //mCamera->lookAt(Vector3(0, 100, 0));
+    
     
     mCamera->setNearClipDistance(5);
 

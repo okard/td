@@ -71,8 +71,10 @@ void GameState::Start(EngineApplication* engine)
     DotSceneLoader loader;
     loader.ParseFile("data/map01.scene", engine->getSceneMng());
     
+    
     //Create Camera
     mCamera = new RtsCamera(engine->getCamera());
+    mCamera->setLimits(Ogre::Vector3(0,105,0), Ogre::Vector3(1000,1000,1000));
     
     //Ogre test code
     //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");
@@ -105,6 +107,12 @@ void GameState::Update()
         mCamera->moveLeft(1);
     if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_D))
         mCamera->moveRight(1);
+    
+    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_PERIOD))
+        mCamera->zoomIn(1);
+     
+    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_MINUS))
+        mCamera->zoomOut(1);
     
 }
 
