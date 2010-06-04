@@ -28,14 +28,24 @@
 */
 class RtsCamera
 {
+    //TODO Rotation for y axis
+    //TODO Better zoom functions
+    
     ///Pointer to Camera
     Ogre::Camera* mCamera;
+    
+    
+    /// Angle Limits
+    Ogre::Radian mLimitAMin;
+    Ogre::Radian mLimitAMax;
+    
     
     //Current Angle
     Ogre::Radian mAngle;
     
     /// Limit Top Left
     Ogre::Vector3 mLimitTL;
+    /// Limit Down Right
     Ogre::Vector3 mLimitDR;
     
     public:

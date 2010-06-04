@@ -20,6 +20,7 @@
 
 #include "RtsCamera.h"
 
+#include <common/Log.h>
 
 /**
 * Constructor
@@ -28,6 +29,9 @@ RtsCamera::RtsCamera(Ogre::Camera* camera) : mCamera(camera)
 {
     assert(camera != 0);
     
+    
+    mLimitAMin = Ogre::Degree(40);
+    mLimitAMax = Ogre::Degree(90);
 }
 
 /**
@@ -38,18 +42,22 @@ RtsCamera::~RtsCamera()
 
 }
 
+/**
+* Return the Ogre Camera
+*/
 Ogre::Camera* RtsCamera::getCamera()
 {
     return mCamera;
 }
 
-
-
+/**
+* Limited Movement for Camera
+*/
 void RtsCamera::move(const Ogre::Vector3& vec)
 {
     Ogre::Vector3 vecMov(mCamera->getPosition() + vec);
     
-    
+    //Check for Limits
     vecMov.x = Ogre::Math::Clamp<Ogre::Real>(vecMov.x, mLimitTL.x, mLimitDR.x);
     vecMov.y = Ogre::Math::Clamp<Ogre::Real>(vecMov.y, mLimitTL.y, mLimitDR.y);
     vecMov.z = Ogre::Math::Clamp<Ogre::Real>(vecMov.z, mLimitTL.z, mLimitDR.z);
@@ -58,40 +66,81 @@ void RtsCamera::move(const Ogre::Vector3& vec)
     //mCamera->move(vecMov);
 }
 
+/**
+* Set limits for camera
+*/
 void RtsCamera::setLimits(Ogre::Vector3 tl, Ogre::Vector3 dr)
 {
     mLimitTL = tl;
     mLimitDR = dr;
 }
 
-
+/**
+* Move camera down
+*/
 void RtsCamera::moveDown(const Ogre::Real v)
 {
     this->move(Ogre::Vector3(0, 0, +v));
 }
 
+/**
+* Move camera left
+*/
 void RtsCamera::moveLeft(const Ogre::Real v)
 {
     this->move(Ogre::Vector3(-v, 0, 0));
 }
 
+/**
+* Move camera right
+*/
 void RtsCamera::moveRight(const Ogre::Real v)
 {
     this->move(Ogre::Vector3(+v, 0, 0));
 }
 
+/**
+* Move camera up
+*/
 void RtsCamera::moveUp(const Ogre::Real v)
 {
     this->move(Ogre::Vector3(0, 0, -v));
 }
 
+/**
+* Zoom in
+*/
 void RtsCamera::zoomIn(const Ogre::Real v)
 {
     this->move(Ogre::Vector3(0, -v, 0));
+    
+    //TODO Optimize
+    Ogre::Degree d((mLimitAMax-mLimitAMin) / (mLimitDR.y-mLimitTL.y) * v);
+    
+    Ogre::Radian r;
+    Ogre::Vector3 vec(1, 0, 0);
+    mCamera->getOrientation().ToAngleAxis(r, vec);
+    
+    if(r > mLimitAMin)
+        mCamera->rotate(Ogre::Vector3(1, 0, 0), d);
 }
 
+
+/**
+* Zoom out
+*/
 void RtsCamera::zoomOut(const Ogre::Real v)
 {
     this->move(Ogre::Vector3(0, +v, 0));
+    
+    //TODO Optimize
+    Ogre::Degree d((mLimitAMax-mLimitAMin) / (mLimitDR.y-mLimitTL.y) * v);
+    
+    Ogre::Radian r;
+    Ogre::Vector3 vec(1, 0, 0);
+    mCamera->getOrientation().ToAngleAxis(r, vec);
+    
+    if(r < mLimitAMax)
+        mCamera->rotate(Ogre::Vector3(1, 0, 0), -d);
 }
 

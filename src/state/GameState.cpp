@@ -74,7 +74,7 @@ void GameState::Start(EngineApplication* engine)
     
     //Create Camera
     mCamera = new RtsCamera(engine->getCamera());
-    mCamera->setLimits(Ogre::Vector3(0,105,0), Ogre::Vector3(1000,1000,1000));
+    mCamera->setLimits(Ogre::Vector3(250, 105, 250), Ogre::Vector3(750, 700, 750));
     
     //Ogre test code
     //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");
@@ -112,7 +112,6 @@ void GameState::Update()
         mCamera->zoomIn(1);
      
     if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_MINUS))
-        mCamera->zoomOut(1);
-    
+        mCamera->zoomOut(1);    
 }
 

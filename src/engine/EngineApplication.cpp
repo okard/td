@@ -75,10 +75,8 @@ EngineApplication::EngineApplication()
     mCamera->setAspectRatio((float)mViewport->getActualWidth() / (float)mViewport->getActualHeight());
     mCamera->setPosition(Vector3(0, 1000, 0));
     //rotate 90° around x axis
-    mCamera->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5), -Ogre::Math::Sqrt(0.5) ,0.,0.));
-    //mCamera->lookAt(Vector3(0, 100, 0));
-    
-    
+    mCamera->setOrientation(Ogre::Quaternion(-Ogre::Degree(90), Ogre::Vector3(1, 0, 0)));
+   
     mCamera->setNearClipDistance(5);
 
     //Setup Mouse Cursor
