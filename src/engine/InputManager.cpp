@@ -23,6 +23,10 @@
 //Project Includes
 #include <common/Log.h>
 
+#ifdef OIS_WIN32_PLATFORM
+	#include<windows.h>
+#endif
+
 /**
 * Constructor
 */
@@ -84,6 +88,7 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
         //TODO Hide or not Hide Mouse Cursor
         // non-exclusive input
         #if defined OIS_WIN32_PLATFORM
+		ShowCursor(FALSE);
         pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
         pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
         pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
