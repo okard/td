@@ -55,6 +55,10 @@ EngineApplication::EngineApplication()
         }
     }
     
+    //TODO Seperate Initialzations?
+    //mRoot->initialise(false)
+    //mRoot->isInitialised()
+    
     //Initialize Resource Location
     Ogre::ResourceGroupManager::getSingleton().addResourceLocation(".", "FileSystem");
 

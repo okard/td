@@ -21,13 +21,15 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
+#include <vector>
+
 #include <OGRE/OgreRenderWindow.h>
 #include <OIS/OIS.h>
 
 /**
 * InputManager Class
 */
-class InputManager
+class InputManager : public OIS::MouseListener, public OIS::KeyListener
 {
     private:
         /// OIS InputManager
@@ -42,6 +44,18 @@ class InputManager
         bool                    mRegistered;
         /// Is exclusive Input
         bool                    mExclusive;
+        
+        /// Mouse Listener
+        std::vector<OIS::MouseListener*> mMouseListener;
+        
+        /// Key Listener
+        std::vector<OIS::KeyListener*> mKeyboardListener;
+        
+        /// Key Event Iterator
+        std::vector<OIS::KeyListener*>::iterator mKeyIterator;
+        
+        /// Mouse Event Iterator
+        std::vector<OIS::MouseListener*>::iterator mMouseIterator;
     public:
         /**
         * Create a new InputManager
@@ -96,7 +110,42 @@ class InputManager
         /**
         * Get Keyboard
         */
-        OIS::Keyboard* Keyboard() const;        
+        OIS::Keyboard* Keyboard() const;      
+        
+        /**
+        * Register Mouse Listener
+        */
+        void addMouseListener(OIS::MouseListener* listener);
+        
+        /**
+        * Register Key Listener
+        */
+        void addKeyListener(OIS::KeyListener* listener);
+        
+        /**
+        * Mouse has moved
+        */
+        virtual bool mouseMoved( const OIS::MouseEvent &arg );
+        
+        /**
+        * Mouse Button has been pressed
+        */
+        virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
+        
+        /**
+        * Mouse Button has been released
+        */
+        virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
+        
+        /**
+        * Key has been pressed
+        */
+        virtual bool keyPressed( const OIS::KeyEvent &arg );
+        
+        /**
+        * Key has been released
+        */
+        virtual bool keyReleased( const OIS::KeyEvent &arg );
 };
 
 #endif // INPUTMANAGER_H

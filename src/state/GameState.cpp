@@ -99,19 +99,53 @@ void GameState::Shutdown()
 */
 void GameState::Update()
 {
-    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_W))
+    const InputManager& input = mEngine->getInputManager();
+    
+    if(input.Keyboard()->isKeyDown(OIS::KC_W))
         mCamera->moveUp(1);
-    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_S))
+    if(input.Keyboard()->isKeyDown(OIS::KC_S))
         mCamera->moveDown(1);
-    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_A))
+    if(input.Keyboard()->isKeyDown(OIS::KC_A))
         mCamera->moveLeft(1);
-    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_D))
+    if(input.Keyboard()->isKeyDown(OIS::KC_D))
         mCamera->moveRight(1);
     
-    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_PERIOD))
+    if(input.Keyboard()->isKeyDown(OIS::KC_PERIOD))
         mCamera->zoomIn(1);
      
-    if(mEngine->getInputManager().Keyboard()->isKeyDown(OIS::KC_MINUS))
-        mCamera->zoomOut(1);    
+    if(input.Keyboard()->isKeyDown(OIS::KC_MINUS))
+        mCamera->zoomOut(1);
+    
+    //Mouse State
+    const OIS::MouseState& mouseState = input.Mouse()->getMouseState();
+    
+    //zoom using mouse wheel
+    int z = (mouseState.Z.rel);
+    if(z < 0)
+        mCamera->zoomIn(-z/12);
+    if(z > 0)
+        mCamera->zoomOut(z/12);
+    
+    //Move on X Axis
+    int x = mouseState.X.abs;
+    if(x < 20)
+        mCamera->moveLeft(2);
+    if(x > mouseState.width-20)
+        mCamera->moveRight(2);
+    
+    //Move on Y Axis
+    if(mouseState.Y.abs < 20)
+        mCamera->moveUp(2);
+    if(mouseState.Y.abs > mouseState.height -20)
+        mCamera->moveDown(2);
 }
+
+/**
+* Mouse Moved
+*/
+bool GameState::mouseMoved(const OIS::MouseEvent& arg)
+{
+    
+}
+
 

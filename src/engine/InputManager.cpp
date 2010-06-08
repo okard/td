@@ -103,6 +103,10 @@ void InputManager::Start(const Ogre::RenderWindow* window, bool autoExclusive, b
     
     //Initial Updating Dimensions
     UpdateDimension();
+    
+    //Set Event Callbacks
+    mMouse->setEventCallback(this);
+    mKeyboard->setEventCallback(this);
 }
 
 /**
@@ -114,6 +118,12 @@ void InputManager::Shutdown()
     mInputManager->destroyInputObject(mKeyboard);
     OIS::InputManager::destroyInputSystem(mInputManager);
     mRegistered = false;
+    mMouse = 0;
+    mKeyboard = 0;
+    mInputManager = 0;
+    
+    mMouseListener.clear();
+    mKeyboardListener.clear();
 }
 
 /**
@@ -175,6 +185,69 @@ OIS::Mouse* InputManager::Mouse() const
 {
     return mMouse;
 }
+
+/**
+* Mouse Moved
+*/
+bool InputManager::mouseMoved(const OIS::MouseEvent& arg)
+{
+    for(mMouseIterator = mMouseListener.begin(); mMouseIterator != mMouseListener.end(); mMouseIterator++)
+        (*mMouseIterator)->mouseMoved(arg);
+}
+
+/**
+* Mouse Button pressed
+*/
+bool InputManager::mousePressed(const OIS::MouseEvent& arg, OIS::MouseButtonID id)
+{
+    for(mMouseIterator = mMouseListener.begin(); mMouseIterator != mMouseListener.end(); mMouseIterator++)
+        (*mMouseIterator)->mousePressed(arg, id);
+}
+
+/**
+* Mouse Button released
+*/
+bool InputManager::mouseReleased(const OIS::MouseEvent& arg, OIS::MouseButtonID id)
+{
+    for(mMouseIterator = mMouseListener.begin(); mMouseIterator != mMouseListener.end(); mMouseIterator++)
+        (*mMouseIterator)->mouseReleased(arg, id);
+}
+
+/**
+* Key Pressed
+*/
+bool InputManager::keyPressed(const OIS::KeyEvent& arg)
+{
+    for(mKeyIterator = mKeyboardListener.begin(); mKeyIterator != mKeyboardListener.end(); mKeyIterator++)
+        (*mKeyIterator)->keyPressed(arg);
+}
+
+/**
+* Key released
+*/
+bool InputManager::keyReleased(const OIS::KeyEvent& arg)
+{
+    for(mKeyIterator = mKeyboardListener.begin(); mKeyIterator != mKeyboardListener.end(); mKeyIterator++)
+        (*mKeyIterator)->keyReleased(arg);
+}
+
+/**
+* Register Key Listener
+*/
+void InputManager::addKeyListener(OIS::KeyListener* listener)
+{
+    mKeyboardListener.push_back(listener);
+}
+
+/**
+* Register Mouse Listener
+*/
+void InputManager::addMouseListener(OIS::MouseListener* listener)
+{
+    mMouseListener.push_back(listener);
+}
+
+
 
 
 

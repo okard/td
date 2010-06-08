@@ -29,9 +29,10 @@ RtsCamera::RtsCamera(Ogre::Camera* camera) : mCamera(camera)
 {
     assert(camera != 0);
     
-    
     mLimitAMin = Ogre::Degree(40);
     mLimitAMax = Ogre::Degree(90);
+    
+    //TODO Initialize Rotations of Camera
 }
 
 /**
@@ -112,6 +113,7 @@ void RtsCamera::moveUp(const Ogre::Real v)
 */
 void RtsCamera::zoomIn(const Ogre::Real v)
 {
+    if(v <= 0) return;
     this->move(Ogre::Vector3(0, -v, 0));
     
     //TODO Optimize
@@ -131,6 +133,8 @@ void RtsCamera::zoomIn(const Ogre::Real v)
 */
 void RtsCamera::zoomOut(const Ogre::Real v)
 {
+    if(v <= 0) return;
+    
     this->move(Ogre::Vector3(0, +v, 0));
     
     //TODO Optimize

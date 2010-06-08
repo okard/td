@@ -24,6 +24,9 @@
 //STL Includes
 #include <list>
 
+// OIS & Ogre Includes
+#include <OIS/OISMouse.h>
+
 //Project Includes
 #include <common/Log.h>
 
@@ -40,7 +43,7 @@
 /**
 * The Game State
 */
-class GameState : public EngineState
+class GameState : public EngineState, public OIS::MouseListener
 {
   private:
     LuaState luaState;
@@ -78,6 +81,21 @@ class GameState : public EngineState
     * Update State
     */
     virtual void Update();
+    
+    /**
+    * Mouse Moved
+    */
+    virtual bool mouseMoved( const OIS::MouseEvent &arg );
+    
+    /**
+    * Mouse Button Pressed
+    */
+    virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id ){};
+    
+    /**
+    * Mouse Released
+    */
+    virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id ){};
 
 };
 
