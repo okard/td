@@ -1,4 +1,4 @@
 cd build
-cmake -G "MinGW Makefiles" ..
+cmake -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles" ..
 mingw32-make
 cd ..
