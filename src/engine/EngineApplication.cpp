@@ -42,28 +42,31 @@ EngineApplication::EngineApplication()
     
     //initialize Root if it is not already done
     if(Root::getSingletonPtr() == 0)
+    {
         mRoot = new Root(PLUGINSCFG, "data/ogre.cfg", "ogre.log");
+        
+        //restore config
+        if(!mRoot->restoreConfig())
+        {
+            if (!mRoot->showConfigDialog())
+            {
+                Common::LogEvent() << Common::LogType::Fatal << "Can't initialize Ogre" << Common::LogEvent::End;
+            }
+        }
+    }
     else
         mRoot = Root::getSingletonPtr();
     
-    //restore config
-    if(!mRoot->restoreConfig())
-    {
-        if (!mRoot->showConfigDialog())
-        {
-            Common::LogEvent() << Common::LogType::Fatal << "Can't initialize Ogre" << Common::LogEvent::End;
-        }
-    }
-    
-    //TODO Seperate Initialzations?
-    //mRoot->initialise(false)
-    //mRoot->isInitialised()
+    //initialise
+    if(!mRoot->isInitialised())
+        mRoot->initialise(false);
     
     //Initialize Resource Location
     Ogre::ResourceGroupManager::getSingleton().addResourceLocation(".", "FileSystem");
 
     //create render window
-    mWindow = mRoot->initialise(true, "td");
+    //mWindow = mRoot->initialise(true, "td");
+    mWindow = mRoot->createRenderWindow("td", 1024, 768, false);
     mInputManager.Start(mWindow);
     
     //add listener
