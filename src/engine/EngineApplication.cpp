@@ -146,7 +146,21 @@ void EngineApplication::windowClosed(RenderWindow* rw)
 void EngineApplication::Run()
 {
     mRunning = true;
-    mRoot->startRendering();
+
+    //init render system
+    mRoot->getRenderSystem()->_initRenderTargets();
+    mRoot->clearEventTimes();
+    
+    //main loop
+    while(true)
+    {
+        //system message loop
+        Ogre::WindowEventUtilities::messagePump();
+        
+        //render frames
+        if(!mRoot->renderOneFrame())
+            break;
+    }
 }
 
 /**
