@@ -36,7 +36,7 @@
 * Constructor
 */
 EngineApplication::EngineApplication() 
-    : mRoot(0), mCamera(0), mWindow(0), mRunning(false), mState(0)
+    : mRoot(0), mWindow(0), mRunning(false), mState(0)
 {
     //TODO Full support for multiple engine Applications
     
@@ -66,25 +66,12 @@ EngineApplication::EngineApplication()
 
     //create render window
     //mWindow = mRoot->initialise(true, "td");
-    mWindow = mRoot->createRenderWindow("td", 1024, 768, false);
+    mWindow = this->createRenderWindow();
     mInputManager.Start(mWindow);
     
     //add listener
     mRoot->addFrameListener(this);
     WindowEventUtilities::addWindowEventListener(mWindow, this);
-    
-    //Scene Manager, Viewport, Camera
-    mSceneMng = mRoot->createSceneManager(Ogre::ST_EXTERIOR_CLOSE);
-    //mSceneMng->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-    mCamera = mSceneMng->createCamera("Camera0");
-    mViewport = mWindow->addViewport(mCamera);
-    mViewport->setDimensions(0.0f, 0.0f, 1.0f, 1.0f);
-    mCamera->setAspectRatio((float)mViewport->getActualWidth() / (float)mViewport->getActualHeight());
-    mCamera->setPosition(Vector3(0, 1000, 0));
-    //rotate 90° around x axis
-    mCamera->setOrientation(Ogre::Quaternion(-Ogre::Degree(90), Ogre::Vector3(1, 0, 0)));
-   
-    mCamera->setNearClipDistance(5);
 
     //Setup Mouse Cursor
     mMouseCursor = new MouseCursor("data/cursor.png");
@@ -188,6 +175,15 @@ void EngineApplication::StartState(EngineState* state, bool shutdown)
 
 
 /**
+* return ogre root
+*/
+Root* EngineApplication::getRoot() const
+{
+    return mRoot;
+}
+
+
+/**
 * Get the Render Window
 */
 RenderWindow* EngineApplication::getRenderWindow() const
@@ -195,13 +191,6 @@ RenderWindow* EngineApplication::getRenderWindow() const
     return mWindow;
 }
 
-/**
-* Get the Scene Manager
-*/
-SceneManager* EngineApplication::getSceneMng() const
-{
-    return mSceneMng;
-}
 
 /**
 * Get InputManager
@@ -211,16 +200,14 @@ InputManager& EngineApplication::getInputManager()
     return mInputManager;
 }
 
+
 /**
-* Get the default Camera
+* Create Render Window
 */
-Camera* EngineApplication::getCamera()
+RenderWindow* EngineApplication::createRenderWindow()
 {
-    return mCamera;
+    //add config parser for default window
+    return mRoot->createRenderWindow("td", 1024, 768, false);
 }
-
-
-
-
 
 

@@ -27,7 +27,7 @@
 * Constructor
 */
 GameState::GameState() 
-    :  luaInterface(LuaInterface::Instance(luaState)), mCamera(0), mEngine(0)
+    :  luaInterface(LuaInterface::Instance(luaState)), mEngine(0)
 {
     //Load Lua Game File
     luaState.LoadFile("data/game.lua");
@@ -49,6 +49,9 @@ GameState::~GameState()
 */
 void GameState::Start(EngineApplication* engine)
 {
+    // Start up enviroment
+    RtsEnvironment::Start(engine);
+    
     mEngine = engine;
     Common::LogEvent() << "GameState started" << Common::LogEvent::End;
     
@@ -69,12 +72,7 @@ void GameState::Start(EngineApplication* engine)
     }
     
     DotSceneLoader loader;
-    loader.ParseFile("data/map01.scene", engine->getSceneMng());
-    
-    
-    //Create Camera
-    mCamera = new RtsCamera(engine->getCamera());
-    mCamera->setLimits(Ogre::Vector3(250, 105, 250), Ogre::Vector3(750, 700, 750));
+    loader.ParseFile("data/map01.scene", this->getSceneManager());
     
     //Ogre test code
     //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");
@@ -86,11 +84,7 @@ void GameState::Start(EngineApplication* engine)
 */
 void GameState::Shutdown()
 {
-    if(mCamera)
-    {
-        delete mCamera;
-        mCamera = 0;
-    }
+
 }
 
 
@@ -100,21 +94,22 @@ void GameState::Shutdown()
 void GameState::Update()
 {
     const InputManager& input = mEngine->getInputManager();
+    RtsCamera* camera = getRtsCamera();
     
     if(input.Keyboard()->isKeyDown(OIS::KC_W))
-        mCamera->moveUp(1);
+        camera->moveUp(1);
     if(input.Keyboard()->isKeyDown(OIS::KC_S))
-        mCamera->moveDown(1);
+        camera->moveDown(1);
     if(input.Keyboard()->isKeyDown(OIS::KC_A))
-        mCamera->moveLeft(1);
+        camera->moveLeft(1);
     if(input.Keyboard()->isKeyDown(OIS::KC_D))
-        mCamera->moveRight(1);
+        camera->moveRight(1);
     
     if(input.Keyboard()->isKeyDown(OIS::KC_PERIOD))
-        mCamera->zoomIn(1);
+        camera->zoomIn(1);
      
     if(input.Keyboard()->isKeyDown(OIS::KC_MINUS))
-        mCamera->zoomOut(1);
+        camera->zoomOut(1);
     
     //Mouse State
     const OIS::MouseState& mouseState = input.Mouse()->getMouseState();
@@ -122,22 +117,22 @@ void GameState::Update()
     //zoom using mouse wheel
     int z = (mouseState.Z.rel);
     if(z < 0)
-        mCamera->zoomIn(-z/12);
+        camera->zoomIn(-z/12);
     if(z > 0)
-        mCamera->zoomOut(z/12);
+        camera->zoomOut(z/12);
     
     //Move on X Axis
     int x = mouseState.X.abs;
     if(x < 20)
-        mCamera->moveLeft(2);
+        camera->moveLeft(2);
     if(x > mouseState.width-20)
-        mCamera->moveRight(2);
+        camera->moveRight(2);
     
     //Move on Y Axis
     if(mouseState.Y.abs < 20)
-        mCamera->moveUp(2);
+        camera->moveUp(2);
     if(mouseState.Y.abs > mouseState.height -20)
-        mCamera->moveDown(2);
+        camera->moveDown(2);
 }
 
 /**

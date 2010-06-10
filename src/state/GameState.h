@@ -33,6 +33,7 @@
 #include <engine/EngineState.h>
 #include <engine/EngineApplication.h>
 #include <engine/RtsCamera.h>
+#include <engine/RtsEnvironment.h>
 
 #include <lua/LuaState.h>
 #include <lua/LuaInterface.h>
@@ -43,14 +44,16 @@
 /**
 * The Game State
 */
-class GameState : public EngineState, public OIS::MouseListener
+class GameState : public EngineState, public RtsEnvironment, public OIS::MouseListener
 {
   private:
+    /// Lua VM
     LuaState luaState;
+    
+    /// Lua Game Interface
     LuaInterface* luaInterface;
     
-    RtsCamera* mCamera;
-    
+    /// Engine Application
     EngineApplication* mEngine;
    
     //TODO Available Buildings

@@ -46,9 +46,6 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         /// OGRE Root
         Root*                   mRoot;
         
-        /// Default OGRE Camera
-        Camera*                 mCamera;
-        
         /// OGRE RenderWindow
         RenderWindow*           mWindow;
         
@@ -60,12 +57,6 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         
         ///Mouse Cursor
         MouseCursor*            mMouseCursor;
-        
-        ///Scene Manager
-        SceneManager*           mSceneMng;
-        
-        ///Viewport
-        Viewport*               mViewport;
         
         ///Current Engine State
         EngineState*            mState;
@@ -116,21 +107,20 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         RenderWindow* getRenderWindow() const;
         
         /**
-        * Get Scene Manager
+        * Get Ogre Root
         */
-        SceneManager* getSceneMng() const;
+        Root* getRoot() const;
         
         /**
         * Get Input Manager
         */
         InputManager& getInputManager();
         
+    protected:
         /**
-        * Get default Camera
+        * Create the Render Window
         */
-        Camera* getCamera();
-        
-    private:
+        virtual RenderWindow* createRenderWindow();
     
 };
 
