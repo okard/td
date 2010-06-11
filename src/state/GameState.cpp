@@ -72,7 +72,7 @@ void GameState::Start(EngineApplication* engine)
     }
     
     DotSceneLoader loader;
-    loader.ParseFile("data/map01.scene", this->getSceneManager());
+    loader.ParseFile("map/map01.scene", this->getSceneManager());
     
     //Ogre test code
     //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");

@@ -1,11 +1,11 @@
 <scene>
     <!-- Sample test terrain for terrain scene manager -->
     <terrain 
-                WorldTexture="data/terrain_texture.jpg" 
-                DetailTexture="data/terrain_detail.jpg" 
+                WorldTexture="data/map/map01_terrain_texture.jpg" 
+                DetailTexture="data/map/map01_terrain_detail.jpg" 
                 DetailTile="3"
                 PageSource="Heightmap"
-                Heightmap.image="data/terrain.png"
+                Heightmap.image="data/map/map01_terrain.png"
                 PageSize="513"
                 TileSize="65"
                 MaxPixelError="3"

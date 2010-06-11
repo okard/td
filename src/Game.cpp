@@ -25,6 +25,9 @@
 */
 void Game::Start()
 {
+    //add default resource for game
+    getRoot()->addResourceLocation("./data/", "FileSystem");
+    
     //Set GameState
     StartState(&gameState);
 

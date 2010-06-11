@@ -1,5 +1,6 @@
 -- DRAFT
 -- A canon tower specified through lua script
+-- License GPLv2
 
 CanonTower = {}
 
