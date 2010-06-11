@@ -1,5 +1,5 @@
 -- DRAFT
--- A canon tower specified through lua script
+-- A research
 -- License GPLv2
 
 KillBonusResearch = {}

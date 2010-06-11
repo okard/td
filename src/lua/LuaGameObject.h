@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,32 +18,19 @@
 
 */
 
-#ifndef BUILDINGTYPE_H
-#define BUILDINGTYPE_H
+#ifndef LUAGAMEOBJECT_H
+#define LUAGAMEOBJECT_H
 
-//Project Includes
-#include<model/GameObject.h>
-#include<model/Building.h>
-
-class Building;
+#include <model/GameObject.h>
 
 /**
-* Represents a BuildingType
-* 
+* Represents Lua Game Object
 */
-class BuildingType : public GameObject
+class LuaGameObject : public GameObject
 {
-  
-  public:
-    virtual ~BuildingType(){}
-    
-    virtual const char* GetName() = 0;
     
     
-    //TODO Icon //Sprite? pure logical?
-    //TODO Dependencies
-    
-    virtual Building* Create() = 0;
+    //create new
 };
 
-#endif // BUILDINGTYPE_H
+#endif // LUAGAMEOBJECT_H

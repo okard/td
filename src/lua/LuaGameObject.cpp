@@ -18,32 +18,5 @@
 
 */
 
-#ifndef BUILDINGTYPE_H
-#define BUILDINGTYPE_H
+#include "LuaGameObject.h"
 
-//Project Includes
-#include<model/GameObject.h>
-#include<model/Building.h>
-
-class Building;
-
-/**
-* Represents a BuildingType
-* 
-*/
-class BuildingType : public GameObject
-{
-  
-  public:
-    virtual ~BuildingType(){}
-    
-    virtual const char* GetName() = 0;
-    
-    
-    //TODO Icon //Sprite? pure logical?
-    //TODO Dependencies
-    
-    virtual Building* Create() = 0;
-};
-
-#endif // BUILDINGTYPE_H
