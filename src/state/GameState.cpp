@@ -50,7 +50,7 @@ GameState::~GameState()
 void GameState::Start(EngineApplication* engine)
 {
     // Start up enviroment
-    RtsEnvironment::Start(engine);
+    RtsEnvironment::Initialize(engine);
     
     mEngine = engine;
     Common::LogEvent() << "GameState started" << Common::LogEvent::End;

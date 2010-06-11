@@ -24,7 +24,7 @@
 /**
 * Constructor
 */
-RtsEnvironment::RtsEnvironment() : mSceneManager(0), mViewport(0), mCamera(0), mRtsCamera(0)
+RtsEnvironment::RtsEnvironment() : mSceneManager(0), mViewport(0), mCamera(0), mRtsCamera(0), mInitialized(false)
 {
     
 }
@@ -32,8 +32,11 @@ RtsEnvironment::RtsEnvironment() : mSceneManager(0), mViewport(0), mCamera(0), m
 /**
 * Start environment
 */
-void RtsEnvironment::Start(EngineApplication* engine)
+void RtsEnvironment::Initialize(EngineApplication* engine)
 {
+    if(mInitialized)
+        return;
+    
      //Scene Manager, Viewport, Camera
     mSceneManager = engine->getRoot()->createSceneManager(Ogre::ST_EXTERIOR_CLOSE);
     
@@ -55,7 +58,7 @@ void RtsEnvironment::Start(EngineApplication* engine)
     mRtsCamera = new RtsCamera(mCamera);
     mRtsCamera->setLimits(Ogre::Vector3(250, 105, 250), Ogre::Vector3(750, 700, 750));
     
-   
+   mInitialized = true;
 }
 
 
@@ -68,13 +71,25 @@ RtsEnvironment::~RtsEnvironment()
 
 }
 
+/**
+* Is Initialized
+*/ 
+bool RtsEnvironment::IsInitialized()
+{
+    return mInitialized;
+}
 
+/**
+* Return Scene Manager
+*/
 SceneManager* RtsEnvironment::getSceneManager() const
 {
     return mSceneManager;
 }
 
-
+/**
+* Get Rts Camera
+*/
 RtsCamera* RtsEnvironment::getRtsCamera() const
 {
     return mRtsCamera;

@@ -27,12 +27,13 @@
 #include <OGRE/OgreCamera.h>
 
 #include "EngineApplication.h"
+#include "IEnvironment.h"
 #include "RtsCamera.h"
 
 /**
 * Realtime Strategy Enviroment Class
 */
-class RtsEnvironment
+class RtsEnvironment : public IEnvironment
 {
     private:
         //Scene Manager
@@ -47,6 +48,8 @@ class RtsEnvironment
         ///Rts Camera
         RtsCamera* mRtsCamera;
         
+        /// Is initialized
+        bool mInitialized;
     public:
         /**
         * Constructor
@@ -56,14 +59,16 @@ class RtsEnvironment
         /**
         * Destructor
         */
-        ~RtsEnvironment();
+        virtual ~RtsEnvironment();
         
         /**
-        * Starts initilize the enviroment
+        * Initialize the enviroment
         */
-        void Start(EngineApplication* engine); 
+        virtual void Initialize(EngineApplication* engine); 
         //setActive()
         //setInactive()
+        
+        virtual bool IsInitialized(); 
         
         /**
         * get Rts Camera
