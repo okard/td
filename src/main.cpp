@@ -28,8 +28,7 @@
 int main(int argc, char **argv) 
 {
     //Common::ConsoleListener* l = new Common::ConsoleListener();
-    OgreLogListener* l = new OgreLogListener();
-    Common::Log::Source().AddListener(l);
+    Common::Log::Source().AddListener(OgreLogListener::getSingletonPtr());
     Common::LogEvent() << "Program started" << Common::LogEvent::End;
     
     //TODO Initial load MenuState

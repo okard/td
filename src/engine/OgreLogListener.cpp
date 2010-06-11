@@ -25,6 +25,22 @@
 */
 OgreLogListener::OgreLogListener() : log(0)
 {
+   init("application.log");
+}
+
+/**
+* Creates a new OgreLogListener with given filename
+*/
+OgreLogListener::OgreLogListener(std::string name) : log(0)
+{
+  init(name);
+}
+
+/**
+* initialize listener
+*/
+void OgreLogListener::init(std::string name)
+{
     //create LogManage if not exist
     if(Ogre::LogManager::getSingletonPtr() == 0)
         Ogre::LogManager* mng = new Ogre::LogManager();
@@ -34,8 +50,10 @@ OgreLogListener::OgreLogListener() : log(0)
         Ogre::LogManager::getSingleton().createLog("ogre.log", true, true);
     
     //add application log
-    log = Ogre::LogManager::getSingleton().createLog("application.log", false, true);
+    log = Ogre::LogManager::getSingleton().createLog(name, false, true);
 }
+
+
 
 /**
 * Destructor
@@ -53,6 +71,15 @@ void OgreLogListener::logEvent(const Common::LogSource* src, const Common::LogEv
 {
     Common::LogEvent* ev = const_cast<Common::LogEvent*>(event);
     log->logMessage(ev->GetStream().str());
+}
+
+/**
+* Get default instance
+*/ 
+OgreLogListener* OgreLogListener::getSingletonPtr()
+{
+    static OgreLogListener listener;
+    return &listener;
 }
 
 
