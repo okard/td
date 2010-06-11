@@ -162,7 +162,7 @@ void EngineApplication::Stop()
 /**
 * Start a State
 */
-void EngineApplication::StartState(EngineState* state, bool shutdown)
+void EngineApplication::StartState(IEngineState* state, bool shutdown)
 {
     assert(state != 0);
     

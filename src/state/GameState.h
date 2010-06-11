@@ -30,7 +30,7 @@
 //Project Includes
 #include <common/Log.h>
 
-#include <engine/EngineState.h>
+#include <engine/IEngineState.h>
 #include <engine/EngineApplication.h>
 #include <engine/RtsCamera.h>
 #include <engine/RtsEnvironment.h>
@@ -44,7 +44,7 @@
 /**
 * The Game State
 */
-class GameState : public EngineState, public RtsEnvironment, public OIS::MouseListener
+class GameState : public IEngineState, public RtsEnvironment, public OIS::MouseListener
 {
   private:
     /// Lua VM

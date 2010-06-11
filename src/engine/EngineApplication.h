@@ -29,7 +29,7 @@
 
 
 //Project Includes
-#include "EngineState.h"
+#include "IEngineState.h"
 #include "InputManager.h"
 #include "MouseCursor.h"
 
@@ -59,7 +59,7 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         MouseCursor*            mMouseCursor;
         
         ///Current Engine State
-        EngineState*            mState;
+        IEngineState*            mState;
     public:
         /**
         * Constructor
@@ -99,7 +99,7 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         /**
         * Start State
         */
-        void StartState(EngineState* state, bool shutdown = true);
+        void StartState(IEngineState* state, bool shutdown = true);
         
         /**
         * Get RenderWindow

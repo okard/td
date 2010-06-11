@@ -26,10 +26,10 @@ class EngineApplication;
 /**
 * A State for an EngineApplication
 */
-class EngineState
+class IEngineState
 {
     public:
-        virtual ~EngineState(){}
+        virtual ~IEngineState(){}
    
         virtual void Start(EngineApplication* engine) = 0;
         virtual void Shutdown() = 0;
