@@ -28,27 +28,32 @@
 class BuildingType;
 
 
-enum FireStrategy
-{
-    Weakest = 0,
-    Strongest = 1,
-    Nearest = 2,
-    Furthest = 3
-};
 
-enum FireType
-{
-    
-};
 
 
 /**
 * Represents a Building on the Map
 * Can be created over BuildingType
 */
-class Building 
+class Building : public GameObject
 {
   public:
+    enum FireStrategy
+    {
+        Weakest = 0,
+        Strongest = 1,
+        Nearest = 2,
+        Furthest = 3
+    };
+
+    enum FireType
+    {
+        FollowPosition,
+        CalculatePosition,
+        CurrentPosition
+    };  
+      
+      
     virtual ~Building(){}
     
     virtual void Update(int time) = 0;

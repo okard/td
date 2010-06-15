@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Tower Defense Game
+    Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,16 +21,66 @@
 #ifndef LUAGAMEOBJECT_H
 #define LUAGAMEOBJECT_H
 
+//Cpp Includes
+#include <string>
+
+//Project Includes
+#include "LuaUtils.h"
 #include <model/GameObject.h>
+
 
 /**
 * Represents Lua Game Object
 */
 class LuaGameObject : public GameObject
 {
-    
-    
-    //create new
+    private:
+        /// Object Name
+        std::string mName;
+        
+        /// Lua State
+        lua_State* mLuaState;
+        
+    public:
+        /**
+        * Constructor
+        */
+        LuaGameObject(lua_State* state, std::string& name);
+        
+        /**
+        * Destructor
+        */
+        ~LuaGameObject();
+        
+        /**
+        * get Object Name
+        */
+        virtual const char* getObjectName() const;
+        
+        /**
+        * return lua state
+        */
+        lua_State* getLuaState();
+        
+        /**
+        * Create a new LuaGameObject inherited from current one
+        */
+        virtual void Create(std::string& name);
+        
+        
+        //get property?
+        //getStringProperty()
+        //getIntProperty()
+        
+        //general: LuaTable?
+        //get type?
+        
+    private:
+        /// id count for id generator
+        static unsigned short idIndex;
+    protected:
+        /// id generator function
+        static const char* id(const char* typeName);
 };
 
 #endif // LUAGAMEOBJECT_H

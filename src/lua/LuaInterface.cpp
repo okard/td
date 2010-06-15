@@ -89,7 +89,7 @@ int LuaInterface::AddBuildingTypeLua(lua_State* state)
     //buildingTypes.insert(std::map<std::string, LuaBuildingType>::value_type(name, LuaBuildingType(state, name)));
     //buildingTypes[buildingType->GetName()] = 0;
     //building
-    buildingTypes.insert(std::make_pair<std::string, LuaBuildingType*>(buildingType->GetName(), buildingType));
+    buildingTypes.insert(std::make_pair<std::string, LuaBuildingType*>(buildingType->getTypeName(), buildingType));
     
     
     return 0;

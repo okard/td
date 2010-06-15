@@ -38,17 +38,38 @@ extern "C" {
 class LuaState
 {
   private:
+    /// the lua state
     lua_State *state;
     
   public:
+    /**
+    * Creates a new LuaState
+    */
     LuaState();
+    
+    /**
+    * Destructor
+    */
     ~LuaState();
     
+    /**
+    * Load a file
+    */
     void LoadFile(const char* file);
+    
+    /**
+    * Execute Lua Scripts
+    */
     int Execute();
     
+    /**
+    * Cast Operator for lua_State*
+    */
     operator lua_State* ();
     
+    /**
+    * Get the lua state manually
+    */
     lua_State* getState() const;  
 };
 

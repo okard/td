@@ -37,7 +37,7 @@ class BuildingType : public GameObject
   public:
     virtual ~BuildingType(){}
     
-    virtual const char* GetName() = 0;
+    virtual const char* getTypeName() = 0;
     
     
     //TODO Icon //Sprite? pure logical?

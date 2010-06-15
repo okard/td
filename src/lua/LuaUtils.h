@@ -29,84 +29,18 @@ extern "C"
 #include <lua.h>
 }
 
-/**
-* Gets a CPP String from current lua_State
-*/
-std::string getLuaString(lua_State* state)
-{
-    if(lua_isstring(state, -1))
-    {
-        size_t len;
-        const char* str = lua_tolstring(state, -1, &len);
-        return std::string(str, len);
-    }
-    else
-        return "";
-}
 
+std::string getLuaString(lua_State* state);
 
-/**
-* Creates a new Table from Basis Table
-* set metatable and index property
-*/
-void LuaCreateTable(lua_State* state, const char* basisTable)
-{
-    //New table
-    lua_newtable(state);
-    
-    //set metatable
-    lua_getglobal(state, basisTable);
-    if(lua_istable(state, -1))
-      lua_setmetatable(state, -2);
-    
-    //set index field
-    lua_getglobal(state, basisTable);
-    lua_setfield(state, -1, "__index");
-};
+void LuaCreateTable(lua_State* state, const char* basisTable);
 
-/**
-* Pushs a Table Function in Lua
-* Add also table as 'self' parameter 
-*/
-void LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName)
-{
-    //Calls Update Function from Lua Script
-    lua_getfield(state, LUA_GLOBALSINDEX, tableName);
-    //lua_getmetatable(state, -1);
-    lua_getfield(state, -1, functionName);
-    //the table is the first argument 'self'
-    lua_getfield(state, LUA_GLOBALSINDEX, tableName);
-};
+void LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName);
 
+void LuaGlobalBind(lua_State* state, const char* varName);
 
-/**
-* Bind Current Value to a name
-*/
-void LuaGlobalBind(lua_State* state, const char* varName)
-{
-    lua_setfield(state, LUA_GLOBALSINDEX, varName); 
-};
+std::string LuaStringTableFunction(lua_State* state, const char* tableName, const char* functionName);
 
-/**
-* Get a String from Table Function
-*/
-std::string LuaStringTableFunction(lua_State* state, const char* tableName, const char* functionName)
-{
-    LuaPushTableFunction(state, tableName, functionName);
-    lua_call(state, 1, 1);
-    return getLuaString(state);
-};
-
-std::string LuaStringTableField(lua_State* state, const char* tableName, const char* fieldName)
-{
-    //get table
-    lua_getglobal(state, tableName);
-    
-    //get table field
-    lua_getfield(state, -1, fieldName);
-    
-    return getLuaString(state);
-}
+std::string LuaStringTableField(lua_State* state, const char* tableName, const char* fieldName);
 
 
 

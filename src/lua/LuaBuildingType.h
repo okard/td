@@ -26,33 +26,48 @@
 
 //Project Includes
 #include <model/BuildingType.h>
-#include <lua/Luna.h>
-#include <lua/LuaState.h>
-#include <lua/LuaInterface.h>
-#include <lua/LuaBuilding.h>
+#include "Luna.h"
+#include "LuaState.h"
+#include "LuaInterface.h"
+#include "LuaGameObject.h"
+#include "LuaBuilding.h"
 
 /**
 * Building Type for Lua
 */
-class LuaBuildingType : public BuildingType
+class LuaBuildingType : public BuildingType, public LuaGameObject
 {
   private:
       bool registered;
-      lua_State* state;
-      std::string name;
       
   public:
+      /**
+      * Create new Lua Building
+      */
       LuaBuildingType(lua_State*, std::string);
-      //LuaBuildingType();
+      
+      /**
+      * Destructor
+      */
       virtual ~LuaBuildingType();
+
+      ///////////////////////////////////////////////////////
+      // Game Object
+      virtual const char* getObjectName() const;
       
-      //Game Object Interface
-      virtual const char* ObjectName() const;
-      
+      ///////////////////////////////////////////////////////
       // Building Type Interface
-      virtual const char* GetName();
+      /**
+      * get Type Name
+      */
+      virtual const char* getTypeName();
+      
+      /**
+      * Create new Building of this type
+      */
       virtual Building* Create();
   
+      
       //For Lua Registration
       static const char className[];
       static const LuaBind<LuaBuildingType>::RegType Register[];

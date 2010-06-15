@@ -43,48 +43,27 @@ const LuaBind<LuaBuilding>::RegType LuaBuilding::Register[] =
       {0}
 };
 
-//id_index
-unsigned short LuaBuilding::idIndex = 0;
 
-/**
-* ID Generator
-*/
-const char* LuaBuilding::id(const char* typeName)
-{
-  std::ostringstream stream;
-  stream << typeName << '_';
-  stream.width(4);
-  stream.fill('0');
-  stream << std::hex << idIndex++;
-  return stream.str().c_str();
-}
+
 
 /**
 * Constructor
 */
-LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buildingType(buildingType), state(state)
+LuaBuilding::LuaBuilding(lua_State* state, std::string& name, LuaBuildingType* buildingType) 
+    : LuaGameObject(state, name), buildingType(buildingType)
 {
-    LogEvent(Log::Source()) << "LuaBuilding created";
-    //register own functions for this type
-  
-    //Create Lua Table
-    LuaCreateTable(state, buildingType->GetName());
-  
+    //Open Table
+    lua_getglobal(state, getObjectName());
+    
     //Register Instance Functions for new Table
     LuaFunctions<LuaBuilding>::Register(state, this);
     
-    //save new building in lua with following name
-    this->name = id(buildingType->GetName());
-    
-    //save value
-    LuaGlobalBind(state, this->name.c_str());
-    
     //Call OnCreate
-    LuaPushTableFunction(state, this->name.c_str(), "OnCreate");
+    LuaPushTableFunction(state, getObjectName(), "OnCreate");
     lua_call(state, 1, 0);
     
     //Load Fields now
-    lua_getglobal(state, this->name.c_str());
+    lua_getglobal(state, getObjectName());
     
     //Sprite
     /*
@@ -100,6 +79,7 @@ LuaBuilding::LuaBuilding(lua_State* state, LuaBuildingType* buildingType) : buil
     
     //pop table
     lua_pop(state, 1);
+    
 }
 
 /**
@@ -110,22 +90,16 @@ LuaBuilding::~LuaBuilding()
     //Delete Object from global lua table
 }
 
-const char* LuaBuilding::ObjectName() const
-{
-    return name.c_str();
-}
-
-
 /**
 * Inform Lua Building about the elapsed time
 */
 void LuaBuilding::Update(int time)
 {
-    LogEvent(Log::Source()) << this->name;
+    LogEvent(Log::Source()) << LuaGameObject::getObjectName();
     
-    LuaPushTableFunction(state, this->name.c_str(), "Update");
-    lua_pushnumber(state, time);
-    lua_call(state, 2, 0);
+    LuaPushTableFunction(getLuaState(), LuaGameObject::getObjectName(), "Update");
+    lua_pushnumber(getLuaState(), time);
+    lua_call(getLuaState(), 2, 0);
 }
 
 /**
@@ -150,3 +124,8 @@ BuildingType* LuaBuilding::GetType()
   return this->buildingType;
 }
 
+
+const char* LuaBuilding::getObjectName() const
+{
+    return LuaGameObject::getObjectName();
+}

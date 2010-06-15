@@ -26,7 +26,7 @@ class GameObject
     public:
         virtual ~GameObject() {}
         
-        virtual const char* ObjectName() const = 0;
+        virtual const char* getObjectName() const = 0;
         
         
         //virtual template<T> getProperty(const char* name)=0; T = int,string

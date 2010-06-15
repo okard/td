@@ -31,10 +31,22 @@ class IEnvironment
 {
     
     public:
+        /**
+        * Destructor
+        */
         virtual ~IEnvironment(){};
         
+        /**
+        * Initialize
+        */
         virtual void Initialize(EngineApplication* engine) = 0;
+        
+        /**
+        * Is initialized
+        */
         virtual bool IsInitialized() = 0;
+        
+        //virtual void Dispose() = 0;
 };
 
 #endif // IENVIRONMENT_H

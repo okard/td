@@ -36,7 +36,7 @@
 class RtsEnvironment : public IEnvironment
 {
     private:
-        //Scene Manager
+        /// Scene Manager
         Ogre::SceneManager* mSceneManager;
         
         /// Viewport
@@ -45,7 +45,7 @@ class RtsEnvironment : public IEnvironment
         /// Camera
         Ogre::Camera* mCamera;
         
-        ///Rts Camera
+        /// Rts Camera
         RtsCamera* mRtsCamera;
         
         /// Is initialized
@@ -65,10 +65,14 @@ class RtsEnvironment : public IEnvironment
         * Initialize the enviroment
         */
         virtual void Initialize(EngineApplication* engine); 
-        //setActive()
-        //setInactive()
         
+        /**
+        * Is Environment initialized
+        * return true or false
+        */
         virtual bool IsInitialized(); 
+        
+        //virtual bool Dispose();
         
         /**
         * get Rts Camera

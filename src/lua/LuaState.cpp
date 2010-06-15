@@ -36,6 +36,7 @@ LuaState::~LuaState()
 {
   //delete luastate
   lua_close(state);
+  state = 0;
 }
 
 /**

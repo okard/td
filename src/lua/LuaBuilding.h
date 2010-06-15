@@ -31,25 +31,19 @@
 
 class LuaBuildingType;
 
-class LuaBuilding : public Building
+class LuaBuilding : public Building, public LuaGameObject
 {
   private:
     BuildingType* buildingType;
-    std::string name;
-    lua_State* state;
     
-    //Sprite sprite;
-    //Sprite icon;
-    
-    //id function generator
-    static unsigned short idIndex;
+
     
   public:
-    LuaBuilding(lua_State* state, LuaBuildingType* type);
+    LuaBuilding(lua_State* state, std::string& name, LuaBuildingType* type);
     virtual ~LuaBuilding();
     
     //Game Object Interface
-    virtual const char* ObjectName() const;
+    virtual const char* getObjectName() const;
     
     //Building Interface
     virtual BuildingType* GetType();
@@ -62,7 +56,7 @@ class LuaBuilding : public Building
     static const char className[];
     static const LuaBind<LuaBuilding>::RegType Register[];
     
-    static const char* id(const char* typeName);
+    
 };
 
 #endif // LUABUILDING_H

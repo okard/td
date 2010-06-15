@@ -20,3 +20,71 @@
 
 #include "LuaGameObject.h"
 
+#include <sstream>
+
+#include <common/Log.h>
+
+/**
+* Constructor
+*/
+LuaGameObject::LuaGameObject(lua_State* state, std::string& name): mLuaState(state), mName(name)
+{
+    //check if table with given name exist?
+    //else throw exception
+    
+    Common::LogEvent() << "GameObject created: " << mName << Common::LogEvent::End;
+}
+
+/**
+* Destructor
+*/
+LuaGameObject::~LuaGameObject()
+{
+    //set to nil?
+}
+
+/**
+* Get Name
+*/
+const char* LuaGameObject::getObjectName() const
+{
+    return mName.c_str();
+}
+
+/**
+* Create new GameObject inherited from this
+*/
+void LuaGameObject::Create(std::string& name)
+{
+    //Create Lua Table inherit from mName
+    LuaCreateTable(mLuaState, mName.c_str());
+    
+    //Save value
+    LuaGlobalBind(mLuaState, name.c_str());
+}
+
+/**
+* Return Lua State
+*/
+lua_State* LuaGameObject::getLuaState()
+{
+    return mLuaState;
+}
+
+
+//id_index
+unsigned short LuaGameObject::idIndex = 0;
+
+
+/**
+* ID Generator
+*/
+const char* LuaGameObject::id(const char* typeName)
+{
+  std::ostringstream stream;
+  stream << typeName << '_';
+  stream.width(4);
+  stream.fill('0');
+  stream << std::hex << idIndex++;
+  return stream.str().c_str();
+}
