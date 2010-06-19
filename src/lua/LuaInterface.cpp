@@ -34,9 +34,10 @@ const char LuaInterface::className[] = "LuaInterface";
 */
 const LuaBind<LuaInterface>::RegType LuaInterface::Register[] = 
 {
-      { "AddBuildingType", &LuaInterface::AddBuildingTypeLua},
-      { "LoadScript", &LuaInterface::LoadScript },
-      {0,0}
+    { "RegisterGameObject", &LuaInterface::RegisterGameObject},
+    { "AddBuildingType", &LuaInterface::AddBuildingTypeLua},
+    { "LoadScript", &LuaInterface::LoadScript },
+    {0,0}
 };
 
 /**
@@ -71,6 +72,66 @@ LuaInterface::~LuaInterface()
 
 
 /**
+* Register a Game Object
+*/
+int LuaInterface::RegisterGameObject(lua_State* state)
+{
+    //requires two parameter table, string
+    //get the type property from table
+    //and register the right type with given name
+    //lua_istable(state, -1);
+    
+    //check first param
+    if(!lua_istable(state, -2))
+    {
+        LogEvent() << "RegisterGameObject: Require Table as first parameter" << LogEvent::End;
+        lua_pop(state, 2);
+        return 0;
+    }
+    
+    //check second param
+    if(!lua_isstring(state, -1))
+    {
+        LogEvent() << "RegisterGameObject: Require String as second parameter" << LogEvent::End;
+        lua_pop(state, 2);
+        return 0;
+    }
+    
+    //get typefield from table
+    lua_getfield(state, -2, "type");
+    
+    //error check
+    if(!lua_isstring(state, -1))
+    {
+        LogEvent() << "RegisterGameObject: Given table needs a string type field" << LogEvent::End;
+        lua_pop(state, 3); //pop table, string, and not right field value
+        return 0;
+    }
+    
+    std::string type = getLuaString(state);
+    lua_pop(state, 1);
+    
+    //get object name to register it
+    std::string objectName = getLuaString(state);
+    
+    //register objects for types
+    if(type == "Building")
+    {
+        LuaBuildingType* buildingType = new LuaBuildingType(state, objectName);
+        buildingTypes.insert(std::make_pair<std::string, LuaBuildingType*>(buildingType->getTypeName(), buildingType));
+    }
+    
+    LogEvent() << "RegisterGameObject: '" << objectName << "' with type: " << type << LogEvent::End;
+    
+    //pop table and string
+    lua_pop(state, 2);
+    
+    //important to set return values
+    return 0;
+}
+
+
+/**
 * Lua Functions
 * registering a building type
 */
@@ -90,7 +151,6 @@ int LuaInterface::AddBuildingTypeLua(lua_State* state)
     //buildingTypes[buildingType->GetName()] = 0;
     //building
     buildingTypes.insert(std::make_pair<std::string, LuaBuildingType*>(buildingType->getTypeName(), buildingType));
-    
     
     return 0;
 }

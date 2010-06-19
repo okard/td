@@ -24,7 +24,8 @@
 /**
 * Constructor
 */
-RtsEnvironment::RtsEnvironment() : mSceneManager(0), mViewport(0), mCamera(0), mRtsCamera(0), mInitialized(false)
+RtsEnvironment::RtsEnvironment() 
+ : mSceneManager(0), mViewport(0), mCamera(0), mRtsCamera(0), mInitialized(false), mRaySceneQuery(0)
 {
     
 }
@@ -56,9 +57,12 @@ void RtsEnvironment::Initialize(EngineApplication* engine)
     
     //Rts Camera
     mRtsCamera = new RtsCamera(mCamera);
-    mRtsCamera->setLimits(Ogre::Vector3(250, 105, 250), Ogre::Vector3(750, 700, 750));
+    mRtsCamera->setLimits(Ogre::Vector3(250, 105, 250), Ogre::Vector3(750, 300, 750));
     
-   mInitialized = true;
+    //Ray Scene Query
+    mRaySceneQuery = mSceneManager->createRayQuery(Ogre::Ray());
+    
+    mInitialized = true;
 }
 
 

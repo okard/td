@@ -73,7 +73,7 @@ class LuaGameObject : public GameObject
         //getIntProperty()
         
         //general: LuaTable?
-        //get type?
+        //get type? Building, Bullet, Research, Creatures
         
     private:
         /// id count for id generator

@@ -25,6 +25,7 @@
 
 #include <OGRE/OgreViewport.h>
 #include <OGRE/OgreCamera.h>
+#include <OGRE/OgreRay.h>
 
 #include "EngineApplication.h"
 #include "IEnvironment.h"
@@ -44,6 +45,9 @@ class RtsEnvironment : public IEnvironment
         
         /// Camera
         Ogre::Camera* mCamera;
+        
+        /// Ray Scene Query
+        Ogre::RaySceneQuery* mRaySceneQuery;
         
         /// Rts Camera
         RtsCamera* mRtsCamera;

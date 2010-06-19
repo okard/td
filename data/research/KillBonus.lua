@@ -4,9 +4,13 @@
 
 KillBonusResearch = {}
 
-KillBonusResearch.type = "research"
+KillBonusResearch.type = "Research"
 KillBonusResearch.global = "true"
 
 KillBonusResearch.name = "Kill Bonus"
 KillBonusResearch.decription = "Get extra money when killing an enemy"
+
+
+
+Shared.RegisterGameObject(KillBonusResearch, "KillBonusResearch")
 

@@ -58,15 +58,31 @@ class LuaInterface
   public:
     ~LuaInterface();
     
-    //lua interface
+    ///////////////////////////////////////////////////////////////////////////
+    // Lua Interface
+    /**
+    * Register a general game object
+    */
+    int RegisterGameObject(lua_State* state);
+    
+    /**
+    * Add Building Type
+    * (will replaced by RegisterGameObject
+    */
     int AddBuildingTypeLua(lua_State* state);
+    
+    /**
+    * Loads a Script
+    */
     int LoadScript(lua_State* state);
+    
     
     //int LoadScript(lua_State* state);
     //int CreateGameObject(lua_State* state); //string?
     //int AddGameObject(lua_State* state); //table, check for events the hame object (table) want
     
-    //adder
+    ///////////////////////////////////////////////////////////////////////////
+    // Adder
     void AddCreatureType();
     void AddBulletType();
     

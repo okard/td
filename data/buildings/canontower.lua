@@ -10,6 +10,7 @@ CanonTower.sprite = "data/buildings/canontower.png"
 CanonTower.spriteWidth =  50
 CanonTower.spriteHeight = 48
 CanonTower.icon = "data/buildings/canontower_icon.png"
+CanonTower.mesh = ""
 
 -- animations
 CanonTower.idleAnimationStart = 1
@@ -21,7 +22,7 @@ CanonTower.buildAnimationStop = 7
 
 --properties
 CanonTower.name = "CanonTower"
-CanonTower.category = "building"
+CanonTower.type = "Building"
 CanonTower.prefix = "ct"
 CanonTower.cost = 200
 CanonTower.range = 10
@@ -57,6 +58,7 @@ function CanonTower:Update(elapsedTime)
 
     --Bullet = new Bullet();
     --Shared.AddGameObject(Bullet);
+    --local bullet = Shared.Spawn(self.bullet);
 
     --target can be a creature or a position
     -- creature: bullet following automatically the aiming creature
@@ -64,5 +66,6 @@ function CanonTower:Update(elapsedTime)
 end
 
 --Register CanonTower String must be identical to variable 
-Shared.AddBuildingType("CanonTower");
+--Shared.AddBuildingType("CanonTower")
+Shared.RegisterGameObject(CanonTower, "CanonTower")
 
