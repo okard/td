@@ -60,6 +60,9 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         
         ///Current Engine State
         IEngineState*            mState;
+        
+        /// Elapsed Time
+        unsigned int            mElapsedTime;
     public:
         /**
         * Constructor
@@ -115,6 +118,11 @@ class EngineApplication :  public WindowEventListener, public FrameListener
         * Get Input Manager
         */
         InputManager& getInputManager();
+        
+        /**
+        * Get elapsed time in microseconds
+        */
+        unsigned int getElapsedTime();
         
     protected:
         /**

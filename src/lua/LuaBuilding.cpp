@@ -30,10 +30,7 @@
 
 using namespace Common;
 
-/**
-* Lua Class Name
-*/
-const char LuaBuilding::className[] = "Building";
+
 /**
 * Lua Functions
 */
@@ -94,9 +91,7 @@ LuaBuilding::~LuaBuilding()
 * Inform Lua Building about the elapsed time
 */
 void LuaBuilding::Update(int time)
-{
-    LogEvent(Log::Source()) << LuaGameObject::getObjectName();
-    
+{   
     LuaPushTableFunction(getLuaState(), LuaGameObject::getObjectName(), "Update");
     lua_pushnumber(getLuaState(), time);
     lua_call(getLuaState(), 2, 0);
@@ -124,8 +119,28 @@ BuildingType* LuaBuilding::GetType()
   return this->buildingType;
 }
 
-
+/**
+* Get Object Name
+*/
 const char* LuaBuilding::getObjectName() const
 {
     return LuaGameObject::getObjectName();
 }
+
+/**
+* get Fire Stratgy (Building Interface)
+*/
+Building::FireStrategy LuaBuilding::getFireStrategy() const
+{
+    return Building::Nearest;
+}
+
+/**
+* Get Fire Type (Building Interface)
+*/
+Building::FireType LuaBuilding::getFireType() const
+{
+    return Building::CurrentPosition;
+}
+
+

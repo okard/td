@@ -89,6 +89,9 @@ std::string LuaStringTableFunction(lua_State* state, const char* tableName, cons
     return getLuaString(state);
 };
 
+/**
+* Get Table String Field
+*/
 std::string LuaStringTableField(lua_State* state, const char* tableName, const char* fieldName)
 {
     //get table

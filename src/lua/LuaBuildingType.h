@@ -53,6 +53,9 @@ class LuaBuildingType : public BuildingType, public LuaGameObject
 
       ///////////////////////////////////////////////////////
       // Game Object
+      /**
+      * Get object name
+      */
       virtual const char* getObjectName() const;
       
       ///////////////////////////////////////////////////////

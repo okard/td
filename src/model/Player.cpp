@@ -18,27 +18,17 @@
 
 */
 
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#include "Player.h"
 
-/**
-* Base Class for Game Objects
-*/
-class GameObject
+Player::Player()
 {
-    public:
-        /**
-        * Virtual Destructor for Interfacing
-        */
-        virtual ~GameObject() {}
-        
-        /**
-        * Get Object Name
-        */
-        virtual const char* getObjectName() const = 0;
-        
-        //virtual void Update(int elapsedTime) = 0; 
-        //virtual template<T> getProperty(const char* name)=0; T = int,string
-};
 
-#endif // GAMEOBJECT_H
+}
+
+
+Player::~Player()
+{
+
+}
+
+

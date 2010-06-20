@@ -37,6 +37,7 @@ CanonTower.dependency = nil         -- depends not on research
 function CanonTower:OnCreate()
     print("On Create Called")
     -- New CanonTower Instance is already created from source
+    self.elapsedTime = 0
 end
 
 
@@ -52,10 +53,15 @@ function CanonTower:Update(elapsedTime)
     --for k,v in pairs(getmetatable(newBuilding_1)) do print(k,v) end
     --print(self)
 
-    self:Fire()
-    print(elapsedTime)
-    print(self.name)
 
+    self.elapsedTime = self.elapsedTime + elapsedTime
+
+    if self.elapsedTime > 10000 then
+        self:Fire()
+    --    print(elapsedTime)
+        --print(self.name)
+        self.elapsedTime = 0
+    end
     --Bullet = new Bullet();
     --Shared.AddGameObject(Bullet);
     --local bullet = Shared.Spawn(self.bullet);
@@ -66,6 +72,5 @@ function CanonTower:Update(elapsedTime)
 end
 
 --Register CanonTower String must be identical to variable 
---Shared.AddBuildingType("CanonTower")
 Shared.RegisterGameObject(CanonTower, "CanonTower")
 

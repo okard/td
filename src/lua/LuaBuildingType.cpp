@@ -67,7 +67,7 @@ const char* LuaBuildingType::getTypeName()
 }
 
 /**
-*
+* Create a new Building from this type
 */
 Building* LuaBuildingType::Create()
 {
@@ -76,6 +76,9 @@ Building* LuaBuildingType::Create()
    return new LuaBuilding(getLuaState(), id, this);
 }
 
+/**
+* Get Object Name
+*/
 const char* LuaBuildingType::getObjectName() const
 {
     return LuaGameObject::getObjectName();

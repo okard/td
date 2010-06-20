@@ -25,11 +25,8 @@
 #include<model/GameObject.h>
 #include<model/BuildingType.h>
 
+// Forward Declarations
 class BuildingType;
-
-
-
-
 
 /**
 * Represents a Building on the Map
@@ -38,6 +35,9 @@ class BuildingType;
 class Building : public GameObject
 {
   public:
+    /**
+    * Fire Strategy
+    */
     enum FireStrategy
     {
         Weakest = 0,
@@ -46,6 +46,9 @@ class Building : public GameObject
         Furthest = 3
     };
 
+    /**
+    * Fire Type
+    */
     enum FireType
     {
         FollowPosition,
@@ -53,14 +56,34 @@ class Building : public GameObject
         CurrentPosition
     };  
       
-      
+    
+    /**
+    * Virtual Destructor for Interfacing
+    */
     virtual ~Building(){}
     
+    /**
+    * Update game object
+    */
     virtual void Update(int time) = 0;
     
+    /**
+    * Get building type
+    */
     virtual BuildingType* GetType() = 0;
+    
+    /**
+    * Get Fire Strategy
+    */
+    virtual FireStrategy getFireStrategy() const = 0;
+    
+    //TODO virtual void setFireStrategy(FireStrategy strat) = 0;
+    
+    /**
+    * Get Fire Type
+    */
+    virtual FireType     getFireType() const = 0;
   
-    //TODO Strategy
     //TODO Upgrade
     //TODO Level
     //TODO Bullet

@@ -34,16 +34,17 @@ class Game : public EngineApplication
         /// The game state
         GameState gameState;
         
+        //MenuState
+        //LoadingState
+        //InGameMenuState
+        
     public:
         /**
         * Start game
         */
         void Start();
         
-        //GameState
-        //MenuState
-        //LoadingState
-        //InGameMenuState
+
 };
 
 #endif // GAME_H

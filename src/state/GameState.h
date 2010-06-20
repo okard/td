@@ -39,67 +39,91 @@
 #include <lua/LuaInterface.h>
 #include <lua/LuaBuildingType.h>
 #include <model/Building.h>
+#include <model/Player.h>
 
+
+typedef std::list<Building*> BuildingList;
 
 /**
 * The Game State
 */
 class GameState : public IEngineState, public RtsEnvironment, public OIS::MouseListener
 {
-  private:
-    /// Lua VM
-    LuaState luaState;
+    private:
+        /// Lua VM
+        LuaState luaState;
+        
+        /// Lua Game Interface
+        LuaInterface* luaInterface;
+        
+        /// Engine Application
+        EngineApplication* mEngine;
+        
+        /// Local Player
+        Player mLocalPlayer;
     
-    /// Lua Game Interface
-    LuaInterface* luaInterface;
+        //TODO Available Buildings
+        //TODO Available Researches
+        
+        //TODO Current Map
+        //TODO Current Buildings
+        BuildingList mBuildings;
+        //TODO Current Stage
+        //TODO 
+        
+        //BuildingEntity <- LuaBuilding <- Building?
+    public:
+        /**
+        * Constructor
+        */
+        GameState();
+        
+        /**
+        * Destructor
+        */
+        virtual ~GameState();
+        
+        /**
+        * Start GameState
+        */
+        virtual void Start(EngineApplication* engine);
+        
+        /**
+        * Shutdown GameState
+        */
+        virtual void Shutdown();
+        
+        /**
+        * Update State
+        */
+        virtual void Update();
+        
+        /**
+        * Mouse Moved
+        */
+        virtual bool mouseMoved( const OIS::MouseEvent &arg );
+        
+        /**
+        * Mouse Button Pressed
+        */
+        virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id ){};
+        
+        /**
+        * Mouse Released
+        */
+        virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id ){};
     
-    /// Engine Application
-    EngineApplication* mEngine;
-   
-    //TODO Available Buildings
-    //TODO Available Researches
     
-    //TODO Current Map
-    //TODO Current Buildings
-    std::list<Building*> buildings;
-    //TODO Current Stage
-    //TODO 
-    
-    //BuildingEntity <- LuaBuilding <- Building?
-  public:
-    GameState();
-    virtual ~GameState();
-    
-    /**
-    * Start GameState
-    */
-    virtual void Start(EngineApplication* engine);
-    
-    /**
-    * Shutdown GameState
-    */
-    virtual void Shutdown();
-    
-    /**
-    * Update State
-    */
-    virtual void Update();
-    
-    /**
-    * Mouse Moved
-    */
-    virtual bool mouseMoved( const OIS::MouseEvent &arg );
-    
-    /**
-    * Mouse Button Pressed
-    */
-    virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id ){};
-    
-    /**
-    * Mouse Released
-    */
-    virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id ){};
-
+    private:
+        /**
+        * Handle Input
+        */
+        void HandleInput();
+        
+        /**
+        * Update Game Objects
+        */
+        void UpdateGameObjects();
 };
 
 #endif // GAMESTATE_H

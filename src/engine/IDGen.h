@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,27 +18,37 @@
 
 */
 
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef IDGEN_H
+#define IDGEN_H
+
+#include <string>
+#include <sstream>
 
 /**
-* Base Class for Game Objects
+* A Id Generator
 */
-class GameObject
+template<class T> class IDGen
 {
-    public:
+    private:
+        /// current id count
+        static unsigned int mId;
+        //static std::ostringstream stream;
+    public: 
         /**
-        * Virtual Destructor for Interfacing
+        * Generate a new ID
         */
-        virtual ~GameObject() {}
-        
-        /**
-        * Get Object Name
-        */
-        virtual const char* getObjectName() const = 0;
-        
-        //virtual void Update(int elapsedTime) = 0; 
-        //virtual template<T> getProperty(const char* name)=0; T = int,string
+        static std::string get(std::string prefix)
+        {
+            std::ostringstream stream;
+            stream << prefix << '_';
+            stream.width(4);
+            stream.fill('0');
+            stream << std::hex << mId++;
+            return stream.str();
+        };
 };
 
-#endif // GAMEOBJECT_H
+template<class T> unsigned int IDGen<T>::mId = 0;
+
+
+#endif // IDGEN_H

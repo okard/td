@@ -35,7 +35,6 @@ const char LuaInterface::className[] = "LuaInterface";
 const LuaBind<LuaInterface>::RegType LuaInterface::Register[] = 
 {
     { "RegisterGameObject", &LuaInterface::RegisterGameObject},
-    { "AddBuildingType", &LuaInterface::AddBuildingTypeLua},
     { "LoadScript", &LuaInterface::LoadScript },
     {0,0}
 };
@@ -121,37 +120,14 @@ int LuaInterface::RegisterGameObject(lua_State* state)
         buildingTypes.insert(std::make_pair<std::string, LuaBuildingType*>(buildingType->getTypeName(), buildingType));
     }
     
+    // TODO Register GameObjects with Type Bullet, Research, Creature
+    
     LogEvent() << "RegisterGameObject: '" << objectName << "' with type: " << type << LogEvent::End;
     
     //pop table and string
     lua_pop(state, 2);
     
     //important to set return values
-    return 0;
-}
-
-
-/**
-* Lua Functions
-* registering a building type
-*/
-int LuaInterface::AddBuildingTypeLua(lua_State* state)
-{
-    //get string and create BuildingType Object from it
-    size_t len;
-    const char* str = lua_tolstring(state, -1, &len);
-    std::string name(str,len);// = std::string(str, len);
-    lua_pop(state, 1);
-    
-    LogEvent(LogType::Information) << "BuildingType added: " << name;
-    
-    LuaBuildingType* buildingType = new LuaBuildingType(state, name);
-    //AddBuildingType(buildingType);
-    //buildingTypes.insert(std::map<std::string, LuaBuildingType>::value_type(name, LuaBuildingType(state, name)));
-    //buildingTypes[buildingType->GetName()] = 0;
-    //building
-    buildingTypes.insert(std::make_pair<std::string, LuaBuildingType*>(buildingType->getTypeName(), buildingType));
-    
     return 0;
 }
 
@@ -188,21 +164,6 @@ BuildingType* LuaInterface::GetBuildingType(char* typeName)
         return buildingTypes[std::string(typeName)];
 }
 
-/**
-* Interface for register bullet types
-*/
-void LuaInterface::AddBulletType()
-{
-  //table
-}
-
-/**
-* Interface for register creature types
-*/
-void LuaInterface::AddCreatureType()
-{
-  //table
-}
 
 /**
 * Returne the LuaInterface instance for this lua_state

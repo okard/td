@@ -42,20 +42,29 @@ typedef std::map<std::string, GameObject*> GameObjectList;
 */
 class LuaInterface
 {
-  friend class LuaSingleton<LuaInterface>;
+    ///friend class for LuaSingleton implementation
+    friend class LuaSingleton<LuaInterface>;
   
   private:
+    /// the Lua State
     lua_State* state;
     
+    /// list with available building types
     BuildingTypeList buildingTypes;
+    
+    
     std::map<std::string, Bullet*> bulletTypes;
     std::map<std::string, Creature*> creatureTypes;
     
-  //Lua Functions from Game
   
-
+    /**
+    * Constructor
+    */
     LuaInterface(lua_State* state);
   public:
+    /**
+    * Destructor
+    */
     ~LuaInterface();
     
     ///////////////////////////////////////////////////////////////////////////
@@ -66,33 +75,29 @@ class LuaInterface
     int RegisterGameObject(lua_State* state);
     
     /**
-    * Add Building Type
-    * (will replaced by RegisterGameObject
-    */
-    int AddBuildingTypeLua(lua_State* state);
-    
-    /**
     * Loads a Script
     */
     int LoadScript(lua_State* state);
     
-    
-    //int LoadScript(lua_State* state);
-    //int CreateGameObject(lua_State* state); //string?
-    //int AddGameObject(lua_State* state); //table, check for events the hame object (table) want
-    
     ///////////////////////////////////////////////////////////////////////////
-    // Adder
-    void AddCreatureType();
-    void AddBulletType();
+    // Normal Methods
     
-    //getter
+    /**
+    * Get a Specific Building Type
+    */
     BuildingType* GetBuildingType(char*);
     
-    static const char className[];
-    static const LuaBind<LuaInterface>::RegType Register[];
     
+    /**
+    * Return the LuaInterface instance for this lua state
+    */
     static LuaInterface* Instance(lua_State*  state); 
+           
+    //Lua Binding Stuff
+    /// Lua Class Name
+    static const char className[];
+    /// Function List to Register
+    static const LuaBind<LuaInterface>::RegType Register[];
 };
 
 #endif // LUAINTERFACE_H

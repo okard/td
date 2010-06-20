@@ -35,14 +35,23 @@ class BuildingType : public GameObject
 {
   
   public:
+    /**
+    * Virtual Destructor for Interfacing
+    */
     virtual ~BuildingType(){}
     
+    /**
+    * Get the Type Name (getObjectName)
+    */
     virtual const char* getTypeName() = 0;
     
     
     //TODO Icon //Sprite? pure logical?
     //TODO Dependencies
     
+    /**
+    * Create new Building from this type
+    */
     virtual Building* Create() = 0;
 };
 

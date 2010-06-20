@@ -18,27 +18,43 @@
 
 */
 
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef PLAYER_H
+#define PLAYER_H
+
+//Cpp Includes
+#include <string>
 
 /**
-* Base Class for Game Objects
+* Represents a Player
 */
-class GameObject
+class Player
 {
+    private:
+        /// Current credits(money) of player 
+        int mCredits;
+        
+        /// Energy of player (for special abilities)
+        int mEnergy;
+        
+        // Lives/Health Points
+        // Buildings 
+        // Researches
+        
+        /// Name of Player
+        std::string name;
+    
     public:
         /**
-        * Virtual Destructor for Interfacing
+        * Constructor
         */
-        virtual ~GameObject() {}
-        
+        Player();
         /**
-        * Get Object Name
+        * Destructor
         */
-        virtual const char* getObjectName() const = 0;
-        
-        //virtual void Update(int elapsedTime) = 0; 
-        //virtual template<T> getProperty(const char* name)=0; T = int,string
+        ~Player();
+    
+        //Points 
+        //Energy
 };
 
-#endif // GAMEOBJECT_H
+#endif // PLAYER_H

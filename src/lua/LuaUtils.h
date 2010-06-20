@@ -29,17 +29,36 @@ extern "C"
 #include <lua.h>
 }
 
-
+/**
+* Get a string from lua 
+* must be at stack -1
+*/
 std::string getLuaString(lua_State* state);
 
+/**
+* Creates a new Table from given base table
+*/
 void LuaCreateTable(lua_State* state, const char* basisTable);
 
+/**
+* Pushs a Table Function on Stack
+* requires Parameter and a Call
+*/
 void LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName);
 
+/**
+* Bind Value on Stack to a Global Name
+*/
 void LuaGlobalBind(lua_State* state, const char* varName);
 
+/**
+* Calls a lua funtion returning a string
+*/
 std::string LuaStringTableFunction(lua_State* state, const char* tableName, const char* functionName);
 
+/**
+* Reads a lua table string field
+*/
 std::string LuaStringTableField(lua_State* state, const char* tableName, const char* fieldName);
 
 

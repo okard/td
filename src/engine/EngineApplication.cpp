@@ -95,6 +95,8 @@ EngineApplication::~EngineApplication()
 */
 bool EngineApplication::frameStarted(const Ogre::FrameEvent& evt)
 {
+    mElapsedTime = static_cast<unsigned int>(evt.timeSinceLastFrame*1000);
+    
     mInputManager.Capture();
     if (mInputManager.Keyboard()->isKeyDown(OIS::KC_ESCAPE))
         return mRunning = false;
@@ -198,6 +200,14 @@ RenderWindow* EngineApplication::getRenderWindow() const
 InputManager& EngineApplication::getInputManager()
 {
     return mInputManager;
+}
+
+/**
+* get elapsed time
+*/
+unsigned int EngineApplication::getElapsedTime()
+{
+    return mElapsedTime;
 }
 
 

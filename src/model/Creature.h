@@ -24,6 +24,9 @@
 //Project Includes
 #include<model/GameObject.h>
 
+/**
+* Represents a Creature(Enemy) on field
+*/
 class Creature : public GameObject
 {
     //TODO HP

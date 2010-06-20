@@ -29,31 +29,66 @@
 #include <lua/Luna.h>
 #include <lua/LuaBuildingType.h>
 
+//Forward Declarations
 class LuaBuildingType;
 
+/**
+* Represents a Building defined through lua script
+*/
 class LuaBuilding : public Building, public LuaGameObject
 {
   private:
+    /// The Building Type
     BuildingType* buildingType;
-    
-
-    
+ 
   public:
+    /**
+    * Constructor
+    */
     LuaBuilding(lua_State* state, std::string& name, LuaBuildingType* type);
+    /**
+    * Destructor
+    */
     virtual ~LuaBuilding();
     
-    //Game Object Interface
+    ///////////////////////////////////////////////////////////////////////////
+    // Game Object Interface
+    /**
+    * Get Object Name
+    */
     virtual const char* getObjectName() const;
     
-    //Building Interface
+    ///////////////////////////////////////////////////////////////////////////
+    // Building Interface
+    /**
+    * Get Building Type
+    */
     virtual BuildingType* GetType();
+    
+    /**
+    * Update Game Object
+    */
     virtual void Update(int time);
     
-    //Lua Interface
+    /**
+    * Get Fire Strategy
+    */
+    virtual FireStrategy getFireStrategy() const;
+    
+    /**
+    * Get FireType
+    */
+    virtual FireType     getFireType() const;
+    
+    ///////////////////////////////////////////////////////////////////////////
+    // Lua Interface
+    /**
+    * Fire Bullet (deprecated)
+    */
     int Fire(lua_State* state);
     
     //For Lua Registration
-    static const char className[];
+    /// List with Functions to bind
     static const LuaBind<LuaBuilding>::RegType Register[];
     
     

@@ -67,7 +67,7 @@ void GameState::Start(EngineApplication* engine)
       {
         Building* b = type->Create();
         b->Update(500);
-        buildings.push_back(b);
+        mBuildings.push_back(b);
       }
     }
     
@@ -92,6 +92,27 @@ void GameState::Shutdown()
 * Update State
 */
 void GameState::Update()
+{
+    //mEngine->getRoot()->get
+    // Update Game Objects
+    UpdateGameObjects();
+    
+    // Handle Input
+    HandleInput();
+}
+
+/**
+* Mouse Moved
+*/
+bool GameState::mouseMoved(const OIS::MouseEvent& arg)
+{
+    
+}
+
+/**
+* Handle Input
+*/
+void GameState::HandleInput()
 {
     const InputManager& input = mEngine->getInputManager();
     RtsCamera* camera = getRtsCamera();
@@ -121,26 +142,31 @@ void GameState::Update()
     if(z > 0)
         camera->zoomOut(z/12);
     
+    const int movSecSize = 40;
+    
     //Move on X Axis
     int x = mouseState.X.abs;
-    if(x < 20)
+    if(x < movSecSize)
         camera->moveLeft(2);
-    if(x > mouseState.width-20)
+    if(x > mouseState.width-movSecSize)
         camera->moveRight(2);
     
     //Move on Y Axis
-    if(mouseState.Y.abs < 20)
+    if(mouseState.Y.abs < movSecSize)
         camera->moveUp(2);
-    if(mouseState.Y.abs > mouseState.height -20)
+    if(mouseState.Y.abs > mouseState.height -movSecSize)
         camera->moveDown(2);
 }
 
 /**
-* Mouse Moved
+* Update all Game Objects
 */
-bool GameState::mouseMoved(const OIS::MouseEvent& arg)
+void GameState::UpdateGameObjects()
 {
+    //its not required each frame so limit time? all 500ms ?
     
+    //loop through all game objects and call update
+     for(BuildingList::iterator it = mBuildings.begin(); it != mBuildings.end(); it++)
+         (*it)->Update(mEngine->getElapsedTime());
 }
-
 

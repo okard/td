@@ -26,9 +26,12 @@
 */
 class Map
 {
-    //TODO File(name)
-    //TODO Tilesets
-    //TODO Layer
+    //TODO Size
+    //TODO Heightmap
+    //TODO Detailmap
+    //TODO Texturemap
+    //TODO Entities?
+    
 };
 
 #endif // MAP_H
