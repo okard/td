@@ -87,6 +87,8 @@ class LuaBuilding : public Building, public LuaGameObject
     */
     int Fire(lua_State* state);
     
+    //OnUpdate to inform Engine about changes from lua script (position changes etc)
+    
     //For Lua Registration
     /// List with Functions to bind
     static const LuaBind<LuaBuilding>::RegType Register[];

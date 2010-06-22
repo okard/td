@@ -2,7 +2,7 @@
 -- A canonball bullet fired by a canontower
 -- License GPLv2
 
-CanonBall = {}
+CanonBall = new(Bullet)
 
 CanonBall.type = "Bullet"
 CanonBall.name = "Canon Ball"
@@ -17,6 +17,10 @@ end
 -- update position?
 function CanonBall:Update(elapsedTime)
     -- movement with current speed
+
+end
+
+function CanonBall:setTarget(self)
 
 end
 

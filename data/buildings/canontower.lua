@@ -2,7 +2,7 @@
 -- A canon tower specified through lua script
 -- License GPLv2
 
-CanonTower = {}
+CanonTower = new(Building)
 
 -- Game Object Basic
 CanonTower.name = "CanonTower"
