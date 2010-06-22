@@ -40,6 +40,7 @@
 #include <lua/LuaBuildingType.h>
 #include <model/Building.h>
 #include <model/Player.h>
+#include <model/Map.h>
 
 
 typedef std::list<Building*> BuildingList;
@@ -59,8 +60,13 @@ class GameState : public IEngineState, public RtsEnvironment, public OIS::MouseL
         /// Engine Application
         EngineApplication* mEngine;
         
+        /// Map
+        Map* mMap;
+        
         /// Local Player
         Player mLocalPlayer;
+        
+        //List of game objects here?
     
         //TODO Available Buildings
         //TODO Available Researches
@@ -70,6 +76,9 @@ class GameState : public IEngineState, public RtsEnvironment, public OIS::MouseL
         BuildingList mBuildings;
         //TODO Current Stage
         //TODO 
+        
+        /// update time count for game objects (ms)
+        unsigned int mUpdateTimeGO;
         
         //BuildingEntity <- LuaBuilding <- Building?
     public:

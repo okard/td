@@ -24,6 +24,8 @@
 
 #include <common/Log.h>
 
+using namespace Common;
+
 /**
 * Constructor
 */
@@ -59,6 +61,8 @@ void LuaGameObject::Create(std::string& name)
     //Create Lua Table inherit from mName
     LuaCreateTable(mLuaState, mName.c_str());
     
+    //Call On Create here?
+
     //Save value
     LuaGlobalBind(mLuaState, name.c_str());
 }

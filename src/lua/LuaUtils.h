@@ -44,7 +44,14 @@ void LuaCreateTable(lua_State* state, const char* basisTable);
 * Pushs a Table Function on Stack
 * requires Parameter and a Call
 */
-void LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName);
+bool LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName);
+
+/**
+* Pushs a Function from current Table
+* return false when parent is not a table or function is not found
+* requires parameter and a call when returning true
+*/
+bool LuaPushFunction(lua_State* state,  const char* functionName);
 
 /**
 * Bind Value on Stack to a Global Name

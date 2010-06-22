@@ -20,6 +20,8 @@
 
 #include "RtsEnvironment.h"
 
+#include <OGRE/Terrain/OgreTerrainMaterialGeneratorA.h>
+
 
 /**
 * Constructor
@@ -41,6 +43,8 @@ void RtsEnvironment::Initialize(EngineApplication* engine)
      //Scene Manager, Viewport, Camera
     mSceneManager = engine->getRoot()->createSceneManager(Ogre::ST_EXTERIOR_CLOSE);
     
+    mTerrain = CreateTerrain();
+    
     //Camera
     mCamera = mSceneManager->createCamera("RtsCamera");
     
@@ -57,7 +61,7 @@ void RtsEnvironment::Initialize(EngineApplication* engine)
     
     //Rts Camera
     mRtsCamera = new RtsCamera(mCamera);
-    mRtsCamera->setLimits(Ogre::Vector3(250, 105, 250), Ogre::Vector3(750, 300, 750));
+    mRtsCamera->setLimits(Ogre::Vector3(0, 105, 0), Ogre::Vector3(1500, 1000, 1500));
     
     //Ray Scene Query
     mRaySceneQuery = mSceneManager->createRayQuery(Ogre::Ray());
@@ -99,4 +103,38 @@ RtsCamera* RtsEnvironment::getRtsCamera() const
     return mRtsCamera;
 }
 
+/**
+* Get Terrain
+*/
+Terrain* RtsEnvironment::getTerrain() const
+{
+    return mTerrain;
+}
+
+
+Ogre::Terrain* RtsEnvironment::CreateTerrain()
+{
+    Ogre::TerrainGlobalOptions* topt = new Ogre::TerrainGlobalOptions();
+    Ogre::Terrain* terrain = new Ogre::Terrain(mSceneManager);
+    
+    /*
+    Ogre::TerrainMaterialGeneratorA::SM2Profile* matProfile =
+    static_cast<Ogre::TerrainMaterialGeneratorA::SM2Profile*>(topt->getDefaultMaterialGenerator()->getActiveProfile());
+   
+    //matProfile->setLightmapEnabled(false);
+    
+    matProfile->setLayerNormalMappingEnabled(false);
+    matProfile->setLayerSpecularMappingEnabled(false);
+    matProfile->setLayerParallaxMappingEnabled(false);
+
+    matProfile->setGlobalColourMapEnabled(false);
+    matProfile->setReceiveDynamicShadowsDepth(false);
+
+    topt->getDefaultMaterialGenerator()->setActiveProfile(matProfile);
+    topt->setMaxPixelError(8);
+    topt->setSkirtSize(2);
+    */
+    
+    return terrain;
+}
 

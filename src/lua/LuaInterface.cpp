@@ -152,6 +152,20 @@ int LuaInterface::LoadScript(lua_State* state)
     return lua_pcall(state, 0, LUA_MULTRET, 0);
 }
 
+/**
+* Spawn Game Objects
+*/
+int LuaInterface::Spawn(lua_State* state)
+{
+    //get string from state
+    //get table from state?
+    //create new gameobejct for this type?
+    //Create GameObject?
+    
+    
+    return 0; //failed?
+}
+
 
 /**
 * Get Type

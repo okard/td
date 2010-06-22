@@ -46,29 +46,68 @@ void LuaCreateTable(lua_State* state, const char* basisTable)
     //New table
     lua_newtable(state);
     
+    //TODO better error checking
+    
     //set metatable
     lua_getglobal(state, basisTable);
-    if(lua_istable(state, -1))
-      lua_setmetatable(state, -2);
+    if(!lua_istable(state, -1))
+    {
+        lua_pop(state, 1);
+        return;
+    }
+    //required twice so push it again
+    lua_pushvalue(state, -1);
+    
+    //set metatable 
+    //new table at position 3 because of basis table laying twice on the stack
+    lua_setmetatable(state, -3);
     
     //set index field
-    lua_getglobal(state, basisTable);
     lua_setfield(state, -1, "__index");
 };
 
 /**
-* Pushs a Table Function in Lua
+* Pushs a Table Function in Lua,
 * Add also table as 'self' parameter 
 */
-void LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName)
+bool LuaPushTableFunction(lua_State* state, const char* tableName, const char* functionName)
 {
     //Calls Update Function from Lua Script
     lua_getfield(state, LUA_GLOBALSINDEX, tableName);
-    //lua_getmetatable(state, -1);
-    lua_getfield(state, -1, functionName);
-    //the table is the first argument 'self'
-    lua_getfield(state, LUA_GLOBALSINDEX, tableName);
+    
+    if(!LuaPushFunction(state, functionName))
+    {
+        lua_pop(state, -1); //pop table or nil value
+        return false;
+    }    
+    
+    return true;
 };
+
+/**
+* lua push function
+*/
+bool LuaPushFunction(lua_State* state, const char* functionName)
+{
+    //check top value must be a table
+    if(!lua_istable(state, -1))
+        return false;
+    
+    //get function
+    lua_getfield(state, -1, functionName);
+    
+    //check if function is found
+    if(!lua_isfunction(state, -1))
+    {
+        lua_pop(state, 1);
+        return false;
+    }
+    
+    //push table as self parameter
+    lua_pushvalue(state, -2);
+    
+    return true;
+}
 
 
 /**

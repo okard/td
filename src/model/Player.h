@@ -38,6 +38,7 @@ class Player
         
         // Lives/Health Points
         // Buildings 
+        // Building Nodes?
         // Researches
         
         /// Name of Player

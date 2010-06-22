@@ -52,15 +52,23 @@ LuaBuilding::LuaBuilding(lua_State* state, std::string& name, LuaBuildingType* b
     //Open Table
     lua_getglobal(state, getObjectName());
     
+    //check if exist
+    if(!lua_istable(state, -1))
+        throw "LuaBuilding Object does not exist";
+    
+    //copy table for registering functions
+    lua_pushvalue(state, -1);
+    
     //Register Instance Functions for new Table
+    //Pops one table
     LuaFunctions<LuaBuilding>::Register(state, this);
     
-    //Call OnCreate
-    LuaPushTableFunction(state, getObjectName(), "OnCreate");
-    lua_call(state, 1, 0);
     
-    //Load Fields now
-    lua_getglobal(state, getObjectName());
+    //Call OnCreate
+    if(LuaPushFunction(state, "OnCreate"))
+        lua_call(state, 1, 0);
+    else
+        LogEvent() << "Failed to call OnCreate for: " << getObjectName() << LogEvent::End;
     
     //Sprite
     /*

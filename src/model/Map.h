@@ -21,17 +21,34 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <engine/RtsEnvironment.h>
+
 /**
 * Map
 */
 class Map
 {
-    //TODO Size
-    //TODO Heightmap
-    //TODO Detailmap
-    //TODO Texturemap
-    //TODO Entities?
+    private:
+        /// RtsEnvironment
+        RtsEnvironment* mRtsEnv;
+        
+        //Map load from File to Ogre::Terrain
+        //TODO Size
+        //TODO Heightmap
+        //TODO Detailmap
+        //TODO Texturemap
+        //TODO Entities?
     
+    public:
+        /**
+        * Constructor
+        */
+        Map(RtsEnvironment *environment);
+        
+       /**
+       * Load Map from File
+       */ 
+       void Load(std::string fileName);
 };
 
 #endif // MAP_H

@@ -27,11 +27,11 @@
 * Constructor
 */
 GameState::GameState() 
-    :  luaInterface(LuaInterface::Instance(luaState)), mEngine(0)
+    :  luaInterface(LuaInterface::Instance(luaState)), mEngine(0), mUpdateTimeGO(0), mMap(0)
 {
     //Load Lua Game File
     luaState.LoadFile("data/game.lua");
-    luaState.Execute();   
+    luaState.Execute();
 }
 
 /**
@@ -51,6 +51,8 @@ void GameState::Start(EngineApplication* engine)
 {
     // Start up enviroment
     RtsEnvironment::Initialize(engine);
+    //Create Map
+    mMap = new Map(this);
     
     mEngine = engine;
     Common::LogEvent() << "GameState started" << Common::LogEvent::End;
@@ -71,8 +73,9 @@ void GameState::Start(EngineApplication* engine)
       }
     }
     
-    DotSceneLoader loader;
-    loader.ParseFile("map/map01.scene", this->getSceneManager());
+    //DotSceneLoader loader;
+    //loader.ParseFile("map/map01.scene", this->getSceneManager());
+    mMap->Load("map/map01.cfg");
     
     //Ogre test code
     //Ogre::MaterialManager::getSingleton().load("Ogre.material", "General");
@@ -84,7 +87,8 @@ void GameState::Start(EngineApplication* engine)
 */
 void GameState::Shutdown()
 {
-
+    delete mMap;
+    mMap = 0;
 }
 
 
@@ -163,10 +167,20 @@ void GameState::HandleInput()
 */
 void GameState::UpdateGameObjects()
 {
-    //its not required each frame so limit time? all 500ms ?
+    //its not required each frame so limit time? all 200ms ?
+    // 20 ms = max ~50 per second
+    mUpdateTimeGO += mEngine->getElapsedTime();
+    if(mUpdateTimeGO < 20)
+        return;
+    
     
     //loop through all game objects and call update
      for(BuildingList::iterator it = mBuildings.begin(); it != mBuildings.end(); it++)
-         (*it)->Update(mEngine->getElapsedTime());
+         (*it)->Update(mUpdateTimeGO);
+     
+     //TODO Creatures, Bullets?
+     //TODO Different Update Rate for each?
+     
+     mUpdateTimeGO = 0;
 }
 

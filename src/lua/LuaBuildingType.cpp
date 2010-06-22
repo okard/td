@@ -26,6 +26,7 @@
 
 //Project Includes
 #include <common/Log.h>
+#include <engine/IDGen.h>
 
 using namespace Common;
 
@@ -71,7 +72,9 @@ const char* LuaBuildingType::getTypeName()
 */
 Building* LuaBuildingType::Create()
 {
-   std::string id = LuaGameObject::id("Building"); 
+   //use prefix from building Type???
+   //std::string id = LuaGameObject::id("Building"); 
+   std::string id = IDGen<LuaBuildingType>::get("Building");
    LuaGameObject::Create(id);
    return new LuaBuilding(getLuaState(), id, this);
 }

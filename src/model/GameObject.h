@@ -39,6 +39,8 @@ class GameObject
         
         //virtual void Update(int elapsedTime) = 0; 
         //virtual template<T> getProperty(const char* name)=0; T = int,string
+        
+        //Type? Research, Building, BuildingType, Creature, CreatureType?, Research
 };
 
 #endif // GAMEOBJECT_H

@@ -4,6 +4,11 @@
 
 CanonTower = {}
 
+-- Game Object Basic
+CanonTower.name = "CanonTower"
+CanonTower.type = "Building"
+CanonTower.description = "A canon tower fires canon balls"
+
 
 -- image
 CanonTower.sprite = "data/buildings/canontower.png"
@@ -13,16 +18,10 @@ CanonTower.icon = "data/buildings/canontower_icon.png"
 CanonTower.mesh = ""
 
 -- animations
-CanonTower.idleAnimationStart = 1
-CanonTower.idleAnimationStop = 1
-CanonTower.fireAnimationStart = 2
-CanonTower.fireAnimationStop = 6
-CanonTower.buildAnimationStart = 7
-CanonTower.buildAnimationStop = 7
+CanonTower.idle = "Idle"
+CanonTower.shoot = "Shoot"
 
---properties
-CanonTower.name = "CanonTower"
-CanonTower.type = "Building"
+--properties logic
 CanonTower.prefix = "ct"
 CanonTower.cost = 200
 CanonTower.range = 10
@@ -65,6 +64,8 @@ function CanonTower:Update(elapsedTime)
     --Bullet = new Bullet();
     --Shared.AddGameObject(Bullet);
     --local bullet = Shared.Spawn(self.bullet);
+    --local bullet = Shared.Spawn(CanonBall); 
+    -- use directly the table as parameter
 
     --target can be a creature or a position
     -- creature: bullet following automatically the aiming creature

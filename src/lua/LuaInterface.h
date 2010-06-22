@@ -24,17 +24,22 @@
 //STL Includes
 #include <string>
 #include <map>
+#include <list>
 
 //Project Includes
-#include<model/Bullet.h>
-#include<model/Creature.h>
-#include<lua/LuaState.h>
-#include<lua/LuaBuildingType.h>
+#include <model/Bullet.h>
+#include <model/Creature.h>
+
+#include <lua/LuaState.h>
+#include <lua/LuaGameObject.h>
+#include <lua/LuaBuildingType.h>
 
 class LuaBuildingType;
 
+typedef std::list<LuaGameObject*> GameObjectList;
+
 typedef std::map<std::string, LuaBuildingType*> BuildingTypeList;
-typedef std::map<std::string, GameObject*> GameObjectList;
+
 
 
 /**
@@ -48,6 +53,9 @@ class LuaInterface
   private:
     /// the Lua State
     lua_State* state;
+    
+    /// All Game Objects
+    ///GameObjectList gameObjects;
     
     /// list with available building types
     BuildingTypeList buildingTypes;
@@ -78,6 +86,11 @@ class LuaInterface
     * Loads a Script
     */
     int LoadScript(lua_State* state);
+    
+    /**
+    * Spawn Game Objects?
+    */
+    int Spawn(lua_State* state);
     
     ///////////////////////////////////////////////////////////////////////////
     // Normal Methods

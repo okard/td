@@ -21,7 +21,7 @@
 #ifndef RTSAPPLICATION_H
 #define RTSAPPLICATION_H
 
-//#include <OGRE/Plugins/OctreeSceneManager/OgreTerrainSceneManager.h>
+#include <OGRE/Terrain/OgreTerrain.h>
 
 #include <OGRE/OgreViewport.h>
 #include <OGRE/OgreCamera.h>
@@ -51,6 +51,9 @@ class RtsEnvironment : public IEnvironment
         
         /// Rts Camera
         RtsCamera* mRtsCamera;
+        
+        /// Terrain Component
+        Ogre::Terrain* mTerrain;
         
         /// Is initialized
         bool mInitialized;
@@ -87,6 +90,17 @@ class RtsEnvironment : public IEnvironment
         * Get Scene Manager
         */
         Ogre::SceneManager* getSceneManager() const;
+        
+        /**
+        * Get Terrain Class
+        */
+        Ogre::Terrain* getTerrain() const;
+        
+    private:
+        /**
+        * Setup terrain environment
+        */
+        Ogre::Terrain* CreateTerrain();
 };
 
 #endif // RTSAPPLICATION_H
