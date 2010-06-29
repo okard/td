@@ -101,6 +101,8 @@ class LuaInterface
     BuildingType* GetBuildingType(char*);
     
     
+    //add update method
+    
     /**
     * Return the LuaInterface instance for this lua state
     */

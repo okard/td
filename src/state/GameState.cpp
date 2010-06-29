@@ -65,10 +65,9 @@ void GameState::Start(EngineApplication* engine)
     }
     else
     {
-      for(int i=0;i < 1;i++)
+      for(int i=0;i < 500;i++)
       {
         Building* b = type->Create();
-        b->Update(500);
         mBuildings.push_back(b);
       }
     }
@@ -87,6 +86,8 @@ void GameState::Start(EngineApplication* engine)
 */
 void GameState::Shutdown()
 {
+    float avFps = mEngine->getRenderWindow()->getAverageFPS();
+    Common::LogEvent() << "fps: " << avFps << Common::LogEvent::End;
     delete mMap;
     mMap = 0;
 }
@@ -170,9 +171,10 @@ void GameState::UpdateGameObjects()
     //its not required each frame so limit time? all 200ms ?
     // 20 ms = max ~50 per second
     mUpdateTimeGO += mEngine->getElapsedTime();
-    if(mUpdateTimeGO < 20)
+    if(mUpdateTimeGO < 200)
         return;
     
+    //access per string is slow, maybe a table where objects can be added an loop trough
     
     //loop through all game objects and call update
      for(BuildingList::iterator it = mBuildings.begin(); it != mBuildings.end(); it++)
@@ -180,6 +182,14 @@ void GameState::UpdateGameObjects()
      
      //TODO Creatures, Bullets?
      //TODO Different Update Rate for each?
+     
+     //TODO each objects per frame for better balancing of lua calls?
+     //TODO a general update list objects can register iteself?
+     
+     //Buildings and Researches needs lesser update rate
+     
+     //bullets and creatures need higher update rate because of movement?
+        //store movement command in c++ and move to point with given speed then call script again?
      
      mUpdateTimeGO = 0;
 }

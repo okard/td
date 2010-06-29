@@ -36,6 +36,7 @@ const LuaBind<LuaInterface>::RegType LuaInterface::Register[] =
 {
     { "RegisterGameObject", &LuaInterface::RegisterGameObject},
     { "LoadScript", &LuaInterface::LoadScript },
+    { "Spawn", &LuaInterface::Spawn },
     {0,0}
 };
 
@@ -157,6 +158,21 @@ int LuaInterface::LoadScript(lua_State* state)
 */
 int LuaInterface::Spawn(lua_State* state)
 {
+    //create anonymous objects
+    
+    //if it is table create a object inherited from this table
+    if(lua_istable(state, -1))
+    {
+        
+    }
+    
+    //use string as basis class
+    if(lua_isstring(state, -1))
+    {
+        
+    }
+   
+    
     //get string from state
     //get table from state?
     //create new gameobejct for this type?

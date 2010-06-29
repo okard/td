@@ -25,7 +25,7 @@ CanonTower.shoot = "Shoot"
 CanonTower.prefix = "ct"
 CanonTower.cost = 200
 CanonTower.range = 10
-CanonTower.bullet = "canonball"
+CanonTower.bullet = CanonBall       -- bullet table
 CanonTower.bulletLevel = 5
 CanonTower.speed = 3                -- fire rate seconds
 CanonTower.buildTime = 20           -- 20 seconds to build     
@@ -56,14 +56,21 @@ function CanonTower:Update(elapsedTime)
     self.elapsedTime = self.elapsedTime + elapsedTime
 
     if self.elapsedTime > 10000 then
+        self.elapsedTime = 0
+        -- find creatures in range
+        -- local target = getTargets(self, strategy)
+        -- local bullet = Shared.Spawn(self.bullet)
+        -- local bullet = new(self.bullet)
+        -- bullet:OnCreate();
+        -- bullet:setTarget(target)
         self:Fire()
     --    print(elapsedTime)
         --print(self.name)
-        self.elapsedTime = 0
+        
     end
     --Bullet = new Bullet();
     --Shared.AddGameObject(Bullet);
-    --local bullet = Shared.Spawn(self.bullet);
+    --local bullet = Shared.Spawn(self.bullet.name);
     --local bullet = Shared.Spawn(CanonBall); 
     -- use directly the table as parameter
 

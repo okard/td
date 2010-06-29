@@ -41,11 +41,18 @@ class LuaGameObject : public GameObject
         /// Lua State
         lua_State* mLuaState;
         
+        //TODO use lua ref?
+        int mLuaRef;
+        
     public:
         /**
         * Constructor
         */
         LuaGameObject(lua_State* state, std::string& name);
+        
+        
+        //Create "anonymous" object when a table is lying on stack???
+        //LuaGameObject(lua_State* state);
         
         /**
         * Destructor
@@ -67,6 +74,11 @@ class LuaGameObject : public GameObject
         */
         virtual void Create(std::string& name);
         
+    protected:
+        /**
+        * Push this game object on lua stack
+        */
+        void PushThis();
         
         //get property?
         //getStringProperty()
@@ -74,13 +86,6 @@ class LuaGameObject : public GameObject
         
         //general: LuaTable?
         //get type? Building, Bullet, Research, Creatures
-        
-    private:
-        /// id count for id generator
-        static unsigned short idIndex;
-    protected:
-        /// id generator function
-        static const char* id(const char* typeName);
 };
 
 #endif // LUAGAMEOBJECT_H

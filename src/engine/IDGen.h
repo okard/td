@@ -39,12 +39,21 @@ template<class T> class IDGen
         */
         static std::string get(std::string prefix)
         {
+            //TODO optimize
             std::ostringstream stream;
             stream << prefix << '_';
             stream.width(4);
             stream.fill('0');
             stream << std::hex << mId++;
             return stream.str();
+        };
+        
+        /**
+        * Generate pure int id
+        */
+        static unsigned int get()
+        {
+            return mId++;
         };
 };
 

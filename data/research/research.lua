@@ -3,4 +3,10 @@
 -- License GPLv2
 -------------------------------------------------------------------------------
 
-Research = new(Research)
+Research = {}
+
+
+-- Research.isResearched
+-- 
+
+

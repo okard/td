@@ -22,6 +22,11 @@
 
 #include <sstream>
 
+extern "C" 
+{
+#include <lauxlib.h>
+}
+
 #include <common/Log.h>
 
 using namespace Common;
@@ -31,9 +36,20 @@ using namespace Common;
 */
 LuaGameObject::LuaGameObject(lua_State* state, std::string& name): mLuaState(state), mName(name)
 {
-    //check if table with given name exist?
-    //else throw exception
+    //get table
+    lua_getglobal(mLuaState, name.c_str());
     
+    //check if exist
+    if(!lua_istable(state, -1))
+    {
+        lua_pop(state, 1); //pop X from getglobal value
+        throw "LuaGameObject does not exist";
+    }
+    
+    //get lua reference (pops table)
+    mLuaRef = luaL_ref(state, LUA_REGISTRYINDEX);
+    
+    //game object created
     Common::LogEvent() << "GameObject created: " << mName << Common::LogEvent::End;
 }
 
@@ -43,6 +59,7 @@ LuaGameObject::LuaGameObject(lua_State* state, std::string& name): mLuaState(sta
 LuaGameObject::~LuaGameObject()
 {
     //set to nil?
+    luaL_unref(mLuaState, LUA_REGISTRYINDEX, mLuaRef);
 }
 
 /**
@@ -58,10 +75,19 @@ const char* LuaGameObject::getObjectName() const
 */
 void LuaGameObject::Create(std::string& name)
 {
-    //Create Lua Table inherit from mName
-    LuaCreateTable(mLuaState, mName.c_str());
+    //New table
+    lua_newtable(mLuaState);
+    //push itself
+    PushThis();
+    //required twice so push it again
+    lua_pushvalue(mLuaState, -1);
     
-    //Call On Create here?
+    //set metatable 
+    //new table at position 3 because of basis table laying twice on the stack
+    lua_setmetatable(mLuaState, -3);
+    
+    //set index field
+    lua_setfield(mLuaState, -1, "__index");
 
     //Save value
     LuaGlobalBind(mLuaState, name.c_str());
@@ -75,20 +101,17 @@ lua_State* LuaGameObject::getLuaState()
     return mLuaState;
 }
 
-
-//id_index
-unsigned short LuaGameObject::idIndex = 0;
-
-
 /**
-* ID Generator
+* Push this lua object on stack
 */
-const char* LuaGameObject::id(const char* typeName)
+void LuaGameObject::PushThis()
 {
-  std::ostringstream stream;
-  stream << typeName << '_';
-  stream.width(4);
-  stream.fill('0');
-  stream << std::hex << idIndex++;
-  return stream.str().c_str();
+    //TODO Error Checks
+    
+    //push reference instead of string
+    lua_rawgeti(mLuaState, LUA_REGISTRYINDEX, mLuaRef);
+
+    
+    //Open Table
+    //lua_getglobal(mLuaState, getObjectName());
 }

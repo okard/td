@@ -50,11 +50,7 @@ LuaBuilding::LuaBuilding(lua_State* state, std::string& name, LuaBuildingType* b
     : LuaGameObject(state, name), buildingType(buildingType)
 {
     //Open Table
-    lua_getglobal(state, getObjectName());
-    
-    //check if exist
-    if(!lua_istable(state, -1))
-        throw "LuaBuilding Object does not exist";
+    PushThis();
     
     //copy table for registering functions
     lua_pushvalue(state, -1);
@@ -100,9 +96,20 @@ LuaBuilding::~LuaBuilding()
 */
 void LuaBuilding::Update(int time)
 {   
-    LuaPushTableFunction(getLuaState(), LuaGameObject::getObjectName(), "Update");
-    lua_pushnumber(getLuaState(), time);
-    lua_call(getLuaState(), 2, 0);
+    //save reference for this function?
+    //push itself on stack
+    PushThis();
+    
+    //push function
+    if(LuaPushFunction(getLuaState(), "Update"))
+    {
+        //call
+        lua_pushnumber(getLuaState(), time);
+        lua_call(getLuaState(), 2, 0); 
+       
+        //something is left on the stack make clear what?
+        lua_pop(getLuaState(), 1);
+    }
 }
 
 /**

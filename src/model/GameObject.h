@@ -41,6 +41,10 @@ class GameObject
         //virtual template<T> getProperty(const char* name)=0; T = int,string
         
         //Type? Research, Building, BuildingType, Creature, CreatureType?, Research
+        
+        //virtual bool getBoolProperty() const = 0;
+        //virtual int getIntProperty() const = 0;
+        //virtual string getStringProperty() const = 0;
 };
 
 #endif // GAMEOBJECT_H

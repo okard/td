@@ -216,6 +216,8 @@ unsigned int EngineApplication::getElapsedTime()
 */
 RenderWindow* EngineApplication::createRenderWindow()
 {
+    //Ogre::ConfigFile conf;
+    //conf.load("data/ogre.cfg", "General", "\t:=", true);
     //add config parser for default window
     return mRoot->createRenderWindow("td", 1024, 768, false);
 }
