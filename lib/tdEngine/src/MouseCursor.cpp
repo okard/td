@@ -18,7 +18,7 @@
 
 */
 
-#include "MouseCursor.h"
+#include <tdEngine/MouseCursor.h>
 
 /**
 * Constructor

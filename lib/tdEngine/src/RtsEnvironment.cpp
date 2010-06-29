@@ -18,7 +18,7 @@
 
 */
 
-#include "RtsEnvironment.h"
+#include <tdEngine/RtsEnvironment.h>
 
 #include <OGRE/Terrain/OgreTerrainMaterialGeneratorA.h>
 

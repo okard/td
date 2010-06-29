@@ -18,9 +18,9 @@
 
 */
 
-#include "RtsCamera.h"
+#include <tdEngine/RtsCamera.h>
 
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
 /**
 * Constructor

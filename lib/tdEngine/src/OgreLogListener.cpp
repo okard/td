@@ -18,7 +18,7 @@
 
 */
 
-#include "OgreLogListener.h"
+#include <tdEngine/OgreLogListener.h>
 
 /**
 * Constructor

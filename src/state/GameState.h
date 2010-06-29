@@ -28,12 +28,12 @@
 #include <OIS/OISMouse.h>
 
 //Project Includes
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
-#include <engine/IEngineState.h>
-#include <engine/EngineApplication.h>
-#include <engine/RtsCamera.h>
-#include <engine/RtsEnvironment.h>
+#include <tdEngine/IEngineState.h>
+#include <tdEngine/EngineApplication.h>
+#include <tdEngine/RtsCamera.h>
+#include <tdEngine/RtsEnvironment.h>
 
 #include <lua/LuaState.h>
 #include <lua/LuaInterface.h>

@@ -18,10 +18,10 @@
 
 */
 
-#include "DotSceneLoader.h"
+#include <tdEngine/DotSceneLoader.h>
 
 //Project Includes
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
 /**
 * Parse .scene file

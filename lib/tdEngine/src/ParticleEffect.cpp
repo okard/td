@@ -18,11 +18,11 @@
 
 */
 
-#include "ParticleEffect.h"
+#include <tdEngine/ParticleEffect.h>
 
 #include <OGRE/OgreMovableObject.h>
 
-#include "IDGen.h"
+#include <tdEngine/IDGen.h>
 
 /**
 * Create new Particle Effect

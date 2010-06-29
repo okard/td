@@ -25,7 +25,7 @@
 #include <sstream>
 
 //Project Includes
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 #include <lua/LuaUtils.h>
 
 using namespace Common;
@@ -79,8 +79,7 @@ LuaBuilding::LuaBuilding(lua_State* state, std::string& name, LuaBuildingType* b
     */
     
     //pop table
-    lua_pop(state, 1);
-    
+    lua_pop(state, 1); 
 }
 
 /**
@@ -106,10 +105,10 @@ void LuaBuilding::Update(int time)
         //call
         lua_pushnumber(getLuaState(), time);
         lua_call(getLuaState(), 2, 0); 
-       
-        //something is left on the stack make clear what?
-        lua_pop(getLuaState(), 1);
     }
+    
+    //pop table from stack
+    lua_pop(getLuaState(), 1);
 }
 
 /**

@@ -25,8 +25,8 @@
 #include <cstring>
 
 //Project Includes
-#include <common/Log.h>
-#include <engine/IDGen.h>
+#include <tdEngine/Log.h>
+#include <tdEngine/IDGen.h>
 
 using namespace Common;
 

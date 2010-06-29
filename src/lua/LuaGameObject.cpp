@@ -27,7 +27,7 @@ extern "C"
 #include <lauxlib.h>
 }
 
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
 using namespace Common;
 

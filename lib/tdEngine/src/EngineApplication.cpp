@@ -18,10 +18,10 @@
 
 */
 
-#include "EngineApplication.h"
+#include <tdEngine/EngineApplication.h>
 
 //Project Includes
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
 //Due Ogres stupidity? plugins.cfg seems not to work cross platform specific 
 // so diff filename here

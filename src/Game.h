@@ -22,7 +22,7 @@
 #define GAME_H
 
 //Project Includes
-#include <engine/EngineApplication.h>
+#include <tdEngine/EngineApplication.h>
 #include <state/GameState.h>
 
 /**

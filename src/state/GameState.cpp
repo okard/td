@@ -21,7 +21,7 @@
 #include "GameState.h"
 
 #include <list>
-#include <engine/DotSceneLoader.h>
+#include <tdEngine/DotSceneLoader.h>
 
 /**
 * Constructor
@@ -65,7 +65,7 @@ void GameState::Start(EngineApplication* engine)
     }
     else
     {
-      for(int i=0;i < 500;i++)
+      for(int i=0;i < 50;i++)
       {
         Building* b = type->Create();
         mBuildings.push_back(b);

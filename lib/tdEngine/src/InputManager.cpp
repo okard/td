@@ -18,10 +18,10 @@
 
 */
 
-#include "InputManager.h"
+#include <tdEngine/InputManager.h>
 
 //Project Includes
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
 #ifdef OIS_WIN32_PLATFORM
 	#include<windows.h>

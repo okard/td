@@ -17,8 +17,8 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include <common/Log.h>
-#include <engine/OgreLogListener.h>
+#include <tdEngine/Log.h>
+#include <tdEngine/OgreLogListener.h>
 
 #include "Game.h"
 

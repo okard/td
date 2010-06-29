@@ -26,7 +26,7 @@
 #include <OGRE/OgreLogManager.h>
 
 //Project Includes
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
 /**
 * Use the Ogre Log Listener for Logging Output

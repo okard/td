@@ -20,7 +20,7 @@
 
 #include "LuaInterface.h"
 
-#include <common/Log.h>
+#include <tdEngine/Log.h>
 
 using namespace Common;
 
