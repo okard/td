@@ -35,7 +35,7 @@
 #include <tdEngine/RtsCamera.h>
 #include <tdEngine/RtsEnvironment.h>
 
-#include <lua/LuaState.h>
+#include <tdEngine/lua/LuaState.h>
 #include <lua/LuaInterface.h>
 #include <lua/LuaBuildingType.h>
 #include <model/Building.h>
@@ -52,7 +52,7 @@ class GameState : public IEngineState, public RtsEnvironment, public OIS::MouseL
 {
     private:
         /// Lua VM
-        LuaState luaState;
+        tdEngine::lua::LuaState luaState;
         
         /// Lua Game Interface
         LuaInterface* luaInterface;

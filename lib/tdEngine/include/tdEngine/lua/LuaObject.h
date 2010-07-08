@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,46 +18,40 @@
 
 */
 
-#ifndef IDGEN_H
-#define IDGEN_H
+#ifndef LUAOBJECT_H
+#define LUAOBJECT_H
+    
+extern "C" {
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
+}
 
-#include <string>
-#include <sstream>
+namespace tdEngine {
+namespace lua {
 
 /**
-* An Id Generator
-*/
-template<class T> class IDGen
+* Represents a LuaTable
+*/    
+class LuaObject
 {
     private:
-        /// current id count
-        static unsigned int mId;
-        //static std::ostringstream stream;
-    public: 
+        /// Lua Reference
+        int mLuaRef;
+        
+    public:
         /**
-        * Generate a new ID
+        * Creates a new LuaObject from table lying on Stack
         */
-        static std::string get(std::string prefix)
-        {
-            //TODO optimize
-            std::ostringstream stream;
-            stream << prefix << '_';
-            stream.width(4);
-            stream.fill('0');
-            stream << std::hex << mId++;
-            return stream.str();
-        };
+        LuaObject(lua_State* state);
         
         /**
-        * Generate pure int id
+        * Destructor
         */
-        static unsigned int get()
-        {
-            return mId++;
-        };
+        ~LuaObject();
 };
 
-template<class T> unsigned int IDGen<T>::mId = 0;
+} //namespace lua
+} //namespace tdEngine
 
-
-#endif // IDGEN_H
+#endif // LUAOBJECT_H

@@ -30,7 +30,7 @@
 #include <model/Bullet.h>
 #include <model/Creature.h>
 
-#include <lua/LuaState.h>
+//#include <lua/LuaState.h>
 #include <lua/LuaGameObject.h>
 #include <lua/LuaBuildingType.h>
 

@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,59 +18,23 @@
 
 */
 
-#ifndef LUASTATE_H
-#define LUASTATE_H
+#include "LuaSceneNode.h"
 
-//Cpp Includes
-#include<iostream>
-
-//Lua Includes
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-}
-
-
-/**
-* Lua State
-*/
-class LuaState
+LuaSceneNode::LuaSceneNode()
 {
-  private:
-    /// the lua state
-    lua_State *state;
+    //mEntity->setUserAny
     
-  public:
-    /**
-    * Creates a new LuaState
-    */
-    LuaState();
+    //map LuaObject to this
+    /*
     
-    /**
-    * Destructor
-    */
-    ~LuaState();
-    
-    /**
-    * Load a file
-    */
-    void LoadFile(const char* file);
-    
-    /**
-    * Execute Lua Scripts
-    */
-    int Execute();
-    
-    /**
-    * Cast Operator for lua_State*
-    */
-    operator lua_State* ();
-    
-    /**
-    * Get the lua state manually
-    */
-    lua_State* getState() const;  
-};
+    Whatever w;
+    renderable->setUserAny(Ogre::Any(w));
 
-#endif // LUASTATE_H
+    Whatever w2 = Ogre::any_cast<Whatever>(renderable->getUserAny());
+    
+    if (Ogre::any_cast<Whatever>(&rend->getUserAny()))
+    {
+        Whatever w2 = Ogre::any_cast<Whatever>(renderable->getUserAny());
+    }
+    */
+}

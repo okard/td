@@ -147,7 +147,7 @@ int LuaInterface::LoadScript(lua_State* state)
     int status = luaL_loadfile(state, scriptName.c_str());
     if (status) 
     {
-        std::cerr << "Couldn't load file: " << lua_tostring(state, -1) << std::endl;
+        Log::Source().Event() << "Couldn't load file: " << lua_tostring(state, -1) << LogEvent::End;
         return 0;
     }
     return lua_pcall(state, 0, LUA_MULTRET, 0);

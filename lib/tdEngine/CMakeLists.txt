@@ -6,6 +6,9 @@ INCLUDE_DIRECTORIES(include)
 
 
 ADD_LIBRARY(tdEngine STATIC
+                src/lua/LuaState.cpp
+                src/lua/LuaObject.cpp
+                src/EffectManager.cpp 
                 src/Log.cpp
                 src/DotSceneLoader.cpp     
                 src/InputManager.cpp  
@@ -14,6 +17,6 @@ ADD_LIBRARY(tdEngine STATIC
                 src/EngineApplication.cpp  
                 src/MouseCursor.cpp   
                 src/ParticleEffect.cpp   
-                src/RtsEnvironment.cpp)
-TARGET_LINK_LIBRARIES(tdEngine ${OGRE_LIBRARY})
+                src/RtsEnvironment.cpp )
+TARGET_LINK_LIBRARIES(tdEngine QuickGUI ${OGRE_LIBRARY} ${LUA_LIB})
 

@@ -55,7 +55,7 @@ void GameState::Start(EngineApplication* engine)
     mMap = new Map(this);
     
     mEngine = engine;
-    Common::LogEvent() << "GameState started" << Common::LogEvent::End;
+    LOG("GameState started")
     
     //test lua building
     BuildingType* type = luaInterface->GetBuildingType("CanonTower");

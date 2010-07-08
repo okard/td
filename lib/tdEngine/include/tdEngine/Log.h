@@ -28,6 +28,19 @@
 //STL Includes
 #include<vector>
 
+//Basic Log Macro
+#define LOG(x) Common::Log::Source().Event() << x << Common::LogEvent::End;
+
+//Debug Log Macro
+#ifdef DEBUG
+    #define DEBUGMSG(x) Common::LogEvent() << x << Common::LogEvent::End;
+#else
+    #define DEBUGMSG(x) /*x*/
+#endif
+
+
+
+
 // Common Namespace
 namespace Common
 {

@@ -26,7 +26,7 @@
 
 //Project Includes
 #include <model/Building.h>
-#include <lua/Luna.h>
+#include <tdEngine/lua/Luna.h>
 #include <lua/LuaBuildingType.h>
 
 //Forward Declarations

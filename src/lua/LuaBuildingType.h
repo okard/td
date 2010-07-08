@@ -26,8 +26,8 @@
 
 //Project Includes
 #include <model/BuildingType.h>
-#include "Luna.h"
-#include "LuaState.h"
+#include <tdEngine/lua/Luna.h>
+//#include "LuaState.h"
 #include "LuaInterface.h"
 #include "LuaGameObject.h"
 #include "LuaBuilding.h"

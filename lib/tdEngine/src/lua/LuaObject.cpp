@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,60 +18,17 @@
 
 */
 
-#include "LuaState.h"
+#include <tdEngine/lua/LuaObject.h>
 
-
-/**
-* Constructor
-*/
-LuaState::LuaState() : state(lua_open())
-{
-  luaL_openlibs(state); 
-}
-
-/**
-* Destructor
-*/
-LuaState::~LuaState()
-{
-  //delete luastate
-  lua_close(state);
-  state = 0;
-}
-
-/**
-* returning lua_state
-*/
-lua_State* LuaState::getState() const
-{
-  return state;
-}
-
-/**
-* Cast to lua_State
-*/
-LuaState::operator lua_State*()
-{
-    return state;
-}
-
-/**
-* Load lua file
-*/
-void LuaState::LoadFile(const char* file)
-{
-    int status = luaL_loadfile(state, file);
-    if (status) 
+namespace tdEngine {
+namespace lua {
+    /**
+    * Creates a new LuaObject from table lying on Stack
+    */
+    LuaObject::LuaObject(lua_State* state)
     {
-	std::cerr << "Couldn't load file: " << lua_tostring(state, -1) << std::endl;
+        //check table is lying on stack
     }
-
-}
-
-/**
-* Execute
-*/
-int LuaState::Execute()
-{
-  return lua_pcall(state, 0, LUA_MULTRET, 0);
-}
+    
+} //namespace lua
+} //namespace tdEngine

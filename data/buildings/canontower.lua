@@ -37,6 +37,11 @@ function CanonTower:OnCreate()
     print("On Create Called")
     -- New CanonTower Instance is already created from source
     self.elapsedTime = 0
+
+    -- creates a new entity on scene graph and assign this table as lua instance
+    -- self.model = Entity(self, self.mesh)
+    -- a entity model can has animations and so on ....
+    
 end
 
 
@@ -77,6 +82,12 @@ function CanonTower:Update(elapsedTime)
     --target can be a creature or a position
     -- creature: bullet following automatically the aiming creature
     -- position: bullet fly to position and hit the stuff there
+end
+
+-- gets called when the entity get selected due mouse click on it
+function CanonTower:OnSelect()
+    -- set gui details window
+    -- Shared.Gui.showDetails(self)
 end
 
 --Register CanonTower String must be identical to variable 

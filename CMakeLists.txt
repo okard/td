@@ -50,6 +50,6 @@ SUBDIRS(lib/QuickGUI)
 SUBDIRS(lib/tdEngine)
 INCLUDE_DIRECTORIES(lib/tdEngine/include)
 
-ADD_EXECUTABLE(td src/scene/BuildingNode.cpp src/model/Player.cpp src/lua/LuaUtils.cpp src/lua/LuaGameObject.cpp src/Game.cpp src/state/LoadingState.cpp src/lua/LuaBuilding.cpp src/lua/LuaBuildingType.cpp src/lua/LuaInterface.cpp src/lua/LuaState.cpp src/state/InGameMenuState.cpp src/state/GameState.cpp src/state/MenuState.cpp src/model/Map.cpp src/main.cpp)
+ADD_EXECUTABLE(td src/scene/LuaSceneNode.cpp src/scene/BuildingNode.cpp src/model/Player.cpp src/lua/LuaUtils.cpp src/lua/LuaGameObject.cpp src/Game.cpp src/state/LoadingState.cpp src/lua/LuaBuilding.cpp src/lua/LuaBuildingType.cpp src/lua/LuaInterface.cpp src/state/InGameMenuState.cpp src/state/GameState.cpp src/state/MenuState.cpp src/model/Map.cpp src/main.cpp)
 
 TARGET_LINK_LIBRARIES(td tdEngine ${OGRE_LIBRARY} ${OGRE_TERRAIN} ${OIS_LIB} ${LUA_LIB} TINYXML)
