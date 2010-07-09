@@ -62,6 +62,7 @@ class RtsCamera
         //The Edges 
         /**
         * Set Limits of the Map given top left and down right point
+        * (Box)
         */
         void setLimits(Ogre::Vector3 tl, Ogre::Vector3 dr);
         

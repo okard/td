@@ -29,12 +29,24 @@ class EngineApplication;
 class IEngineState
 {
     public:
+        /**
+        * Interface destructor
+        */
         virtual ~IEngineState(){}
    
+        /**
+        * Start the State
+        */
         virtual void Start(EngineApplication* engine) = 0;
+        
+        /**
+        * Stop the State and Shutdown
+        */
         virtual void Shutdown() = 0;
         
-        
+        /**
+        * Update State 
+        */
         virtual void Update() = 0;
         
         //virtual void Pause() = 0;

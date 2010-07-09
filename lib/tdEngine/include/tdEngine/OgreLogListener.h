@@ -42,6 +42,9 @@ class OgreLogListener : public Common::LogListener
         */
         OgreLogListener();
         
+        /**
+        * Initialize the Logger with name
+        */
         void init(std::string name);
     public:        
         /**

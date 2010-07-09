@@ -26,6 +26,8 @@ class EngineApplication;
 /**
 * Represents a Engine Environment
 * e.g. SceneManager + Viewport + Camera
+*
+* Allow EngineStates to share an enviroment
 */
 class IEnvironment
 {

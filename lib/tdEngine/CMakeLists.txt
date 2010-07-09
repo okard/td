@@ -9,8 +9,7 @@ ADD_LIBRARY(tdEngine STATIC
                 src/lua/LuaState.cpp
                 src/lua/LuaObject.cpp
                 src/EffectManager.cpp 
-                src/Log.cpp
-                src/DotSceneLoader.cpp     
+                src/Log.cpp    
                 src/InputManager.cpp  
                 src/OgreLogListener.cpp  
                 src/RtsCamera.cpp                                           

@@ -57,6 +57,7 @@ template<class T> class IDGen
         };
 };
 
+// Initialize ID Generator for Class
 template<class T> unsigned int IDGen<T>::mId = 0;
 
 

@@ -22,6 +22,7 @@
 
 namespace tdEngine {
 namespace lua {
+    
     /**
     * Creates a new LuaObject from table lying on Stack
     */

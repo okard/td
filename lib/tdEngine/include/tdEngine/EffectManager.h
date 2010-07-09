@@ -28,12 +28,15 @@ class EffectManager
 {
     
     public:
-        //EffectManager(ScenegRAPH)
+        //EffectManager(SceneGraph)
         //hook into scene Manager
         // is a frame listener
         //attach/detach?
         
         //createParticleEffect
+        //void createParticleEffect(std::string particleName);
+        
+    private:
         //destroyParticleEffect
 };
 

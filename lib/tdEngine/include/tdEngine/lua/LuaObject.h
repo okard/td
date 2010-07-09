@@ -30,6 +30,8 @@ extern "C" {
 namespace tdEngine {
 namespace lua {
 
+//TODO Seperate LuaObject for Tables, Functions, Numbers?
+    
 /**
 * Represents a LuaTable
 */    
@@ -49,7 +51,17 @@ class LuaObject
         * Destructor
         */
         ~LuaObject();
+        
+        
+        //Push (return LuaObject)
+        //Pop
+        
+        //chaining
+        //object.Push().PushFunc("abc").Push(5).Call(2).Pop()
 };
+
+
+//LuaNumber, LuaTable, LuaBool, LuaFunction, ...
 
 } //namespace lua
 } //namespace tdEngine

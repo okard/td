@@ -21,7 +21,6 @@
 #include "GameState.h"
 
 #include <list>
-#include <tdEngine/DotSceneLoader.h>
 
 /**
 * Constructor
@@ -30,7 +29,7 @@ GameState::GameState()
     :  luaInterface(LuaInterface::Instance(luaState)), mEngine(0), mUpdateTimeGO(0), mMap(0)
 {
     //Load Lua Game File
-    luaState.LoadFile("data/game.lua");
+    luaState.LoadFile("data/main.lua");
     luaState.Execute();
 }
 

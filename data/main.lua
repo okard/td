@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- General Game Script
+-- General Game Start Script
 -- License GPLv2
 -------------------------------------------------------------------------------
 
@@ -8,6 +8,8 @@
 function new( baseTable)
     local new_table = { __index= baseTable }
     setmetatable( new_table, baseTable)
+
+    --todo look if OnCreate exist call it
 
     return new_table
 end

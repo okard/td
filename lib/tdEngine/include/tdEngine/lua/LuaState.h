@@ -35,6 +35,7 @@ extern "C" {
 namespace tdEngine {
 namespace lua {
 
+//TODO Add Script.Load to vm at creation
 
 /**
 * Lua State
