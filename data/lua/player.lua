@@ -10,6 +10,6 @@ Player = {}
 function Player:OnCreate()
     self.Health = 100
     self.Money = 1000
-    
+    self.Energy = 1000
 
 end

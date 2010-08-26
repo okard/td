@@ -33,6 +33,8 @@ class EffectManager
         // is a frame listener
         //attach/detach?
         
+        //billboard effect?
+        
         //createParticleEffect
         //void createParticleEffect(std::string particleName);
         

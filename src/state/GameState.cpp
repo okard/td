@@ -120,15 +120,18 @@ void GameState::HandleInput()
 {
     const InputManager& input = mEngine->getInputManager();
     RtsCamera* camera = getRtsCamera();
+   
+    unsigned int move = (0.5 * mEngine->getElapsedTime());
+    
     
     if(input.Keyboard()->isKeyDown(OIS::KC_W))
-        camera->moveUp(1);
+        camera->moveUp(move);
     if(input.Keyboard()->isKeyDown(OIS::KC_S))
-        camera->moveDown(1);
+        camera->moveDown(move);
     if(input.Keyboard()->isKeyDown(OIS::KC_A))
-        camera->moveLeft(1);
+        camera->moveLeft(move);
     if(input.Keyboard()->isKeyDown(OIS::KC_D))
-        camera->moveRight(1);
+        camera->moveRight(move);
     
     if(input.Keyboard()->isKeyDown(OIS::KC_PERIOD))
         camera->zoomIn(1);
@@ -147,19 +150,20 @@ void GameState::HandleInput()
         camera->zoomOut(z/12);
     
     const int movSecSize = 40;
+   
     
     //Move on X Axis
     int x = mouseState.X.abs;
     if(x < movSecSize)
-        camera->moveLeft(2);
+        camera->moveLeft(move);
     if(x > mouseState.width-movSecSize)
-        camera->moveRight(2);
+        camera->moveRight(move);
     
     //Move on Y Axis
     if(mouseState.Y.abs < movSecSize)
-        camera->moveUp(2);
+        camera->moveUp(move);
     if(mouseState.Y.abs > mouseState.height -movSecSize)
-        camera->moveDown(2);
+        camera->moveDown(move);
 }
 
 /**
