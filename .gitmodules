@@ -1,0 +1,6 @@
+[submodule "cul"]
+        path = lib/cul
+        url = git://github.com/okard/cul.git
+[submodule "glul"]
+        path = lib/glul
+        url = git://github.com/okard/glul.git
