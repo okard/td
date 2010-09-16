@@ -1,20 +1,31 @@
+td - An open source tower defense game.
+=========================================
 
-An open source tower defense game.
 
-Libraries used:
-Ogre 1.7.1
-Lua 5.1 or luajit2 beta4
+Libraries used
+--------------------
+- OpenGL
+- Glew
+- LuaJIT 2
 
-==============================================
-== Build td under Windows
-==============================================
+
+TODO
+--------------------
+- Switch from OGRE to Horde3D
+- Use CUL and GLUL library
+- Rewrite engine
+- Start implementing editor with QT4 
+
+
+Build td under Windows
+--------------------------
 
 Software required:
-        * GIT [1.7.0.2]                 http://code.google.com/p/msysgit/downloads/list
-        * CMAKE [2.8.1]                 http://www.cmake.org/cmake/resources/software.html
-        * TDM MinGW [4.4.1-2]           http://www.tdragon.net/recentgcc/
-        * OgreSDK MinGW [1.7.1]         http://www.ogre3d.org/download/sdk
-        * LuaJIT [2.0.0-beta4]          http://luajit.org/download.html
+- GIT [1.7.0.2]                 http://code.google.com/p/msysgit/downloads/list
+- CMAKE [2.8.1]                 http://www.cmake.org/cmake/resources/software.html
+- TDM MinGW [4.4.1-2]           http://www.tdragon.net/recentgcc/
+- OgreSDK MinGW [1.7.1]         http://www.ogre3d.org/download/sdk
+- LuaJIT [2.0.0-beta4]          http://luajit.org/download.html
         
 Current used build environment:
         root_folder/
