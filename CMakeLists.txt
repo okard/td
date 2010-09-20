@@ -13,6 +13,7 @@ SUBDIRS(lib/horde3d)
 
 # Components Engine, Game, Editor
 SUBDIRS(engine)
+SUBDIRS(game)
 
 
 #Platform Configuration
