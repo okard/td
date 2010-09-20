@@ -19,13 +19,14 @@
 #include "Engine.hpp"
  
 #include "egRenderer.h"
+#include "egModules.h"
 
 using namespace engine;
+using namespace Horde3D;
 
 Engine::Engine()
     : renderer(new Horde3D::Renderer())
 {
-    
 }
 
 Engine::~Engine()
@@ -33,6 +34,12 @@ Engine::~Engine()
     delete renderer;
 }
 
+
+void Engine::init()
+{
+    Modules::init();
+    renderer->init();
+}
 
 
 

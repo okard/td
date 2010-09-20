@@ -39,6 +39,7 @@ public:
     Engine();
     ~Engine();
     
+    void init();
     
     
 };

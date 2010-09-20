@@ -18,16 +18,16 @@
 */
 #include "GameWindow.hpp"
 
+#include <glul/GlContext>
+
 using namespace game;
 using namespace engine;
 using namespace glul;
 
-
-
-
 GameWindow::GameWindow()
     : glul::GlWindow("game", 800, 600)
 {
+    engine.init();
 }
 
 GameWindow::~GameWindow()
