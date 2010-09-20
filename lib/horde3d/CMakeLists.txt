@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 project(horde3d)
 
 include_directories(shared)
+include_directories(source)
 
 
 

@@ -6,10 +6,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 PROJECT(td)
 
-#Library
+#Libraries
 SUBDIRS(lib/cul)
 SUBDIRS(lib/glul)
 SUBDIRS(lib/horde3d)
+
+# Components Engine, Game, Editor
+SUBDIRS(engine)
 
 
 #Platform Configuration
