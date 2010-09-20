@@ -19,8 +19,12 @@
 #ifndef __ENGINE_HPP__
 #define __ENGINE_HPP__
 
-#include "egRenderer.h"
+//forward declaration
+namespace Horde3D {
+    class Renderer;
+}
 
+//engine namespace
 namespace engine {
 
 /**
@@ -29,10 +33,11 @@ namespace engine {
 class Engine
 {
 private:
-    Horde3D::Renderer renderer;
+    Horde3D::Renderer* renderer;
     
 public:
-    
+    Engine();
+    ~Engine();
     
     
     

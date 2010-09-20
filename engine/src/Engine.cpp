@@ -17,6 +17,23 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 #include "Engine.hpp"
+ 
+#include "egRenderer.h"
 
 using namespace engine;
+
+Engine::Engine()
+    : renderer(new Horde3D::Renderer())
+{
+    
+}
+
+Engine::~Engine()
+{
+    delete renderer;
+}
+
+
+
+
 
