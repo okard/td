@@ -16,8 +16,8 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __ENGINE_HPP__
-#define __ENGINE_HPP__
+#ifndef __ENGINECORE_HPP__
+#define __ENGINECORE_HPP__
 
 //forward declaration
 namespace Horde3D {
@@ -30,21 +30,40 @@ namespace engine {
 /**
 * TD Game Engine
 */
-class Engine
+class EngineCore
 {
 private:
+    /// Renderer
     Horde3D::Renderer* renderer;
     
 public:
-    Engine();
-    ~Engine();
+    /**
+    * Create new Engine Core
+    */
+    EngineCore();
     
+    /**
+    * Destructor
+    */
+    ~EngineCore();
+    
+    /**
+    * Initialize
+    */
     void init();
     
+    /**
+    * Resize Renderer
+    */
+    void resize(int width, int height);
     
+    /**
+    * Render a frame
+    */
+    void render();    
 };
 
 
 } //end namespace engine
 
-#endif /* __ENGINE_HPP__ */
+#endif /* __ENGINECORE_HPP__ */

@@ -16,27 +16,56 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __GAMEWINDOW_HPP__
-#define __GAMEWINDOW_HPP__
+#include "EngineCore.hpp"
 
-#include <glul/GlWindow>
-#include <engine/EngineCore>
+#include "egCom.h"
+#include "egModules.h"
+#include "egRenderer.h"
 
-namespace game {
+using namespace engine;
+using namespace Horde3D;
 
 /**
-* Game Window
+* Create new engine core
 */
-class GameWindow : public glul::GlWindow
+EngineCore::EngineCore()
+    : renderer(new Horde3D::Renderer())
 {
-    private:
-        engine::EngineCore engine;
-        
-    public:
-        GameWindow();
-        ~GameWindow();
-};
+}
+
+/**
+* Destructor
+*/
+EngineCore::~EngineCore()
+{
+    delete renderer;
+}
+
+/**
+* Initialize Engine core
+*/
+void EngineCore::init()
+{
+    //fix Module Class
+    Modules::init();
+    Modules::config().setOption(EngineOptions::MaxLogLevel, 4.0);
+    renderer->init();
+}
+
+/**
+* Resize Renderer
+*/
+void EngineCore::resize(int width, int height)
+{
     
-} //end namespace game
+}
+
+/**
+* Render a frame
+*/
+void EngineCore::render()
+{
     
-#endif /* __GAMEWINDOW_HPP__ */
+}
+
+

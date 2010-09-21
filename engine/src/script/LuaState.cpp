@@ -15,32 +15,67 @@
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 */
-#include "Engine.hpp"
- 
-#include "egRenderer.h"
-#include "egModules.h"
+
+#include "LuaState.hpp"
+
+#include <cul/log/Log>
 
 using namespace engine;
-using namespace Horde3D;
+using namespace script;
 
-Engine::Engine()
-    : renderer(new Horde3D::Renderer())
+/**
+* Constructor
+*/
+LuaState::LuaState() : state(lua_open())
 {
+  luaL_openlibs(state); 
 }
 
-Engine::~Engine()
+/**
+* Destructor
+*/
+LuaState::~LuaState()
 {
-    delete renderer;
+  //delete luastate
+  lua_close(state);
+  state = 0;
 }
 
-
-void Engine::init()
+/**
+* returning lua_state
+*/
+lua_State* LuaState::getState() const
 {
-    Modules::init();
-    renderer->init();
+  return state;
 }
 
+/**
+* Cast to lua_State
+*/
+LuaState::operator lua_State*()
+{
+    return state;
+}
 
+/**
+* Load lua file
+*/
+void LuaState::LoadFile(const char* file)
+{
+    int status = luaL_loadfile(state, file);
+    if (status) 
+    {
+        LOG("Couldn't load file: " << lua_tostring(state, -1))
+    }
 
+}
 
+/**
+* Execute
+*/
+int LuaState::Execute()
+{
+  return lua_pcall(state, 0, LUA_MULTRET, 0);
+}

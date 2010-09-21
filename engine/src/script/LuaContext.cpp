@@ -16,27 +16,33 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __GAMEWINDOW_HPP__
-#define __GAMEWINDOW_HPP__
+#include "LuaContext.hpp"
 
-#include <glul/GlWindow>
-#include <engine/EngineCore>
+using namespace engine;
+using namespace script;
 
-namespace game {
 
-/**
-* Game Window
-*/
-class GameWindow : public glul::GlWindow
+LuaContext::LuaContext(lua_State* state)
+    : luaState(state), stacksize(lua_gettop (luaState))
 {
-    private:
-        engine::EngineCore engine;
-        
-    public:
-        GameWindow();
-        ~GameWindow();
-};
-    
-} //end namespace game
-    
-#endif /* __GAMEWINDOW_HPP__ */
+}
+
+LuaContext::~LuaContext()
+{
+}
+
+void LuaContext::assign(lua_State* state)
+{
+    luaState = state;
+    stacksize = lua_gettop (luaState);
+}
+
+bool LuaContext::validate()
+{
+    return (stacksize == lua_gettop (luaState));
+}
+
+bool LuaContext::validate(unsigned int grow)
+{
+    return (stacksize + grow == lua_gettop (luaState));
+}
