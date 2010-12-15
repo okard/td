@@ -1,17 +1,26 @@
 #!/usr/bin/env ruby
+
+#imports
 require 'pathname'
 require 'fileutils'
 
-# example howto call
-# includegen.rb src include/lib/
+# check for arguments
+unless ARGV.length == 2
+    # includegen.rb src include/lib/
+    puts "Wrong numbers of arguments"
+    puts "Usage: ./includegen.rb srcdir includedir\n"
+    exit
+end
 
 
+#doit
 dfiles = File.join(ARGV[0],"**", "*.{hpp,h}")
 files = Dir.glob(dfiles)
 
 source_dir = File.expand_path(ARGV[0])
 puts source_dir
 
+#foreach source file
 files.each{|file|
        
        file_orig = File.basename(file)
