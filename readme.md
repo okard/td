@@ -5,7 +5,6 @@ td - An open source tower defense game.
 Libraries used
 --------------------
 - [OpenGL](http://www.opengl.org/)
-- [Glew](http://glew.sourceforge.net/)
 - [Horde3D](http://www.horde3d.org/)
 - [glul](http://github.com/okard/glul)
 - [cul](http://github.com/okard/cul)
