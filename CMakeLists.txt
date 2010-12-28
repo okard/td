@@ -23,6 +23,7 @@ ENDIF()
 SUBDIRS(lib/cul)
 SUBDIRS(lib/glul)
 SUBDIRS(lib/horde3d)
+SUBDIRS(lib/libRocket)
 
 # Components Engine, Game, Editor
 SUBDIRS(engine)

@@ -30,10 +30,19 @@ namespace game {
 class GameWindow : public glul::GlWindow
 {
     private:
+        /// Engine Core
         engine::EngineCore engine;
         
+        // Current Camera
+        
     public:
+        /**
+        * Create new Game Window
+        */
         GameWindow();
+        /**
+        * Destructes Game Window
+        */
         ~GameWindow();
 };
     

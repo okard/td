@@ -33,7 +33,14 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     Q_OBJECT
     
 public:
+    /**
+    * Creates a new Main Window
+    */
     MainWindow(QWidget *parent = 0);
+    
+    /**
+    * Destructs Main Window
+    */
     virtual ~MainWindow();
 
     

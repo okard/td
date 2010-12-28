@@ -5,14 +5,17 @@ cmake_minimum_required(VERSION 2.8)
 project(editor)
 
 find_package(Qt4 REQUIRED)
+set(QT_USE_QTOPENGL TRUE)
 
 # include dirs
 include(${QT_USE_FILE})
+include_directories(${CMAKE_SOURCE_DIR}/engine/include)
 
 # src
 set(editor_src
     src/main.cpp
     src/MainWindow.cpp
+    src/EngineWidget.cpp
 )
 
 # auto moc
@@ -32,7 +35,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # the editor application
 add_executable(editor ${editor_src} ${editor_ui_h})
-target_link_libraries(editor ${QT_LIBRARIES})
+target_link_libraries(editor engine ${QT_LIBRARIES})
 
 
 

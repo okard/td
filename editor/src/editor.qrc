@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="icons">
+    <file alias="script">../img/text-x-script.png</file>
+  </qresource>
+</RCC>

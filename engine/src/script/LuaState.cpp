@@ -20,7 +20,7 @@
 
 #include "LuaState.hpp"
 
-#include <cul/log/Log>
+//#include <cul/log/Log>
 
 using namespace engine;
 using namespace script;
@@ -67,7 +67,7 @@ void LuaState::LoadFile(const char* file)
     int status = luaL_loadfile(state, file);
     if (status) 
     {
-        LOG("Couldn't load file: " << lua_tostring(state, -1))
+        //LOG("Couldn't load file: " << lua_tostring(state, -1))
     }
 
 }

@@ -19,6 +19,8 @@
 #ifndef __ENGINECORE_HPP__
 #define __ENGINECORE_HPP__
 
+#include "script/LuaState.hpp"
+
 //forward declaration
 namespace Horde3D {
     class Renderer;
@@ -35,6 +37,11 @@ class EngineCore
 private:
     /// Renderer
     Horde3D::Renderer* renderer;
+    
+    /// Lua State
+    script::LuaState lua;
+    
+    /// GUI 
     
 public:
     /**

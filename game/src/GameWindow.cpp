@@ -24,12 +24,18 @@ using namespace game;
 using namespace engine;
 using namespace glul;
 
+/**
+* Game Window Constructor
+*/
 GameWindow::GameWindow()
     : glul::GlWindow("game", 800, 600)
 {
     engine.init();
 }
 
+/**
+* Game Window Destructor
+*/
 GameWindow::~GameWindow()
 {
 }

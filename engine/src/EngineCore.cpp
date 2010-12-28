@@ -57,7 +57,7 @@ void EngineCore::init()
 */
 void EngineCore::resize(int width, int height)
 {
-    
+    renderer->resize(0,0, width, height);
 }
 
 /**
