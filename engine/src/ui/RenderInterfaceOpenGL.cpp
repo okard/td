@@ -25,17 +25,19 @@
  *
  */
 
-#include <ShellRenderInterfaceOpenGL.h>
+#include "RenderInterfaceOpenGL.hpp"
 #include <Rocket/Core.h>
+#include "ShellOpenGL.h"
+//#include "utOpenGL.h"
 
 #define GL_CLAMP_TO_EDGE 0x812F
 
-ShellRenderInterfaceOpenGL::ShellRenderInterfaceOpenGL()
+RenderInterfaceOpenGL::RenderInterfaceOpenGL()
 {
 }
 
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
-void ShellRenderInterfaceOpenGL::RenderGeometry(Rocket::Core::Vertex* vertices, int ROCKET_UNUSED(num_vertices), int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
+void RenderInterfaceOpenGL::RenderGeometry(Rocket::Core::Vertex* vertices, int ROCKET_UNUSED(num_vertices), int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
 {
 	glPushMatrix();
 	glTranslatef(translation.x, translation.y, 0);
@@ -62,23 +64,23 @@ void ShellRenderInterfaceOpenGL::RenderGeometry(Rocket::Core::Vertex* vertices, 
 }
 
 // Called by Rocket when it wants to compile geometry it believes will be static for the forseeable future.		
-Rocket::Core::CompiledGeometryHandle ShellRenderInterfaceOpenGL::CompileGeometry(Rocket::Core::Vertex* ROCKET_UNUSED(vertices), int ROCKET_UNUSED(num_vertices), int* ROCKET_UNUSED(indices), int ROCKET_UNUSED(num_indices), const Rocket::Core::TextureHandle ROCKET_UNUSED(texture))
+Rocket::Core::CompiledGeometryHandle RenderInterfaceOpenGL::CompileGeometry(Rocket::Core::Vertex* ROCKET_UNUSED(vertices), int ROCKET_UNUSED(num_vertices), int* ROCKET_UNUSED(indices), int ROCKET_UNUSED(num_indices), const Rocket::Core::TextureHandle ROCKET_UNUSED(texture))
 {
 	return (Rocket::Core::CompiledGeometryHandle) NULL;
 }
 
 // Called by Rocket when it wants to render application-compiled geometry.		
-void ShellRenderInterfaceOpenGL::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle ROCKET_UNUSED(geometry), const Rocket::Core::Vector2f& ROCKET_UNUSED(translation))
+void RenderInterfaceOpenGL::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle ROCKET_UNUSED(geometry), const Rocket::Core::Vector2f& ROCKET_UNUSED(translation))
 {
 }
 
 // Called by Rocket when it wants to release application-compiled geometry.		
-void ShellRenderInterfaceOpenGL::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle ROCKET_UNUSED(geometry))
+void RenderInterfaceOpenGL::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle ROCKET_UNUSED(geometry))
 {
 }
 
 // Called by Rocket when it wants to enable or disable scissoring to clip content.		
-void ShellRenderInterfaceOpenGL::EnableScissorRegion(bool enable)
+void RenderInterfaceOpenGL::EnableScissorRegion(bool enable)
 {
 	if (enable)
 		glEnable(GL_SCISSOR_TEST);
@@ -87,7 +89,7 @@ void ShellRenderInterfaceOpenGL::EnableScissorRegion(bool enable)
 }
 
 // Called by Rocket when it wants to change the scissor region.		
-void ShellRenderInterfaceOpenGL::SetScissorRegion(int x, int y, int width, int height)
+void RenderInterfaceOpenGL::SetScissorRegion(int x, int y, int width, int height)
 {
 	glScissor(x, 768 - (y + height), width, height);
 }
@@ -113,7 +115,7 @@ struct TGAHeader
 #pragma pack()
 
 // Called by Rocket when a texture is required by the library.		
-bool ShellRenderInterfaceOpenGL::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)
+bool RenderInterfaceOpenGL::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)
 {
 	Rocket::Core::FileInterface* file_interface = Rocket::Core::GetFileInterface();
 	Rocket::Core::FileHandle file_handle = file_interface->Open(source);
@@ -184,7 +186,7 @@ bool ShellRenderInterfaceOpenGL::LoadTexture(Rocket::Core::TextureHandle& textur
 }
 
 // Called by Rocket when a texture is required to be built from an internally-generated sequence of pixels.
-bool ShellRenderInterfaceOpenGL::GenerateTexture(Rocket::Core::TextureHandle& texture_handle, const Rocket::Core::byte* source, const Rocket::Core::Vector2i& source_dimensions)
+bool RenderInterfaceOpenGL::GenerateTexture(Rocket::Core::TextureHandle& texture_handle, const Rocket::Core::byte* source, const Rocket::Core::Vector2i& source_dimensions)
 {
 	GLuint texture_id = 0;
 	glGenTextures(1, &texture_id);
@@ -209,7 +211,7 @@ bool ShellRenderInterfaceOpenGL::GenerateTexture(Rocket::Core::TextureHandle& te
 }
 
 // Called by Rocket when a loaded texture is no longer required.		
-void ShellRenderInterfaceOpenGL::ReleaseTexture(Rocket::Core::TextureHandle texture_handle)
+void RenderInterfaceOpenGL::ReleaseTexture(Rocket::Core::TextureHandle texture_handle)
 {
 	glDeleteTextures(1, (GLuint*) &texture_handle);
 }

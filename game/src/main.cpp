@@ -27,11 +27,17 @@ using namespace game;
 */
 int main(int argc, char **argv) 
 {
+    //Game Window with Engine
     GameWindow gw;
     gw.show();
     
     
-    glul::EventLoopPtr->run();
+    //TODO Improve Loop
+    while(glul::EventLoopPtr->getEvent())
+    {
+        glul::EventLoopPtr->dispatch();
+    }
+    
     return 0;
 }
 

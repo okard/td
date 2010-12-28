@@ -16,36 +16,22 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __EDITOR_ENGINEWIDGET_HPP__
-#define __EDITOR_ENGINEWIDGET_HPP__
+#ifndef __SYSTEMINTERFACE_HPP__
+#define __SYSTEMINTERFACE_HPP__
 
-#include <QGLWidget>
-#include <engine/EngineCore>
-
-namespace editor {
+#include <Rocket/Core/SystemInterface.h>
 
 /**
-* Engine Widget
+* System Interface
 */
-class EngineWidget : public QGLWidget
+class SystemInterface : public Rocket::Core::SystemInterface
 {
-    Q_OBJECT
-    
-private:
-    ///Engine Core
-    engine::EngineCore* engine;
-    
-    ///Camera to Render
-    
-public:
-    EngineWidget(engine::EngineCore* engine);
-
-protected:
-    void initializeGL();
-    void paintGL();
-    void resizeGL(int width, int height);   
+    /**
+    * Get Elapsed Time
+    */
+    virtual float GetElapsedTime();
 };
-    
-} //end namespace editor
 
-#endif //  __EDITOR_ENGINEWIDGET_HPP__
+
+
+#endif // __SYSTEMINTERFACE_HPP__

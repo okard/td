@@ -8,14 +8,17 @@ project(engine)
 include_directories(${CMAKE_SOURCE_DIR}/lib/horde3d/shared)
 include_directories(${CMAKE_SOURCE_DIR}/lib/horde3d/source)
 include_directories(${CMAKE_SOURCE_DIR}/lib/cul/include)
+include_directories(${CMAKE_SOURCE_DIR}/lib/libRocket/Include)
 
 #source files for engine
 set( ENGINE_SRC
     src/EngineCore.cpp
     src/script/LuaState.cpp
     src/script/LuaContext.cpp
+    src/ui/RenderInterfaceOpenGL.cpp
+    src/ui/SystemInterface.cpp
 )
 
 #library
 add_library(engine ${ENGINE_SRC})
-target_link_libraries(engine horde3d ${LUA_LIB})
+target_link_libraries(engine horde3d libRocket ${LUA_LIB})

@@ -29,17 +29,17 @@
 #define ROCKETSHELLRENDERINTERFACE_H
 
 #include "Rocket/Core/RenderInterface.h"
-#include "ShellOpenGL.h"
+
 
 /**
 	Low level OpenGL render interface for Rocket
 	@author Peter Curry
  */
 
-class ShellRenderInterfaceOpenGL : public Rocket::Core::RenderInterface
+class RenderInterfaceOpenGL : public Rocket::Core::RenderInterface
 {
 public:
-	ShellRenderInterfaceOpenGL();
+	RenderInterfaceOpenGL();
 
 	/// Called by Rocket when it wants to render geometry that it does not wish to optimise.
 	virtual void RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation);

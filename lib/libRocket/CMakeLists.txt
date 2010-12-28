@@ -151,4 +151,5 @@ Source/Core/XMLParser.cpp
 Source/Core/XMLParseTools.cpp
 ) 
 
-add_library(libRocket ${libRocket_core_src})
+add_library(libRocket SHARED ${libRocket_core_src})
+target_link_libraries(libRocket ${CORE_LINK_LIBS})

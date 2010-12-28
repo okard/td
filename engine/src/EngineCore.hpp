@@ -26,6 +26,12 @@ namespace Horde3D {
     class Renderer;
 }
 
+namespace Rocket {
+    namespace Core {
+        class Context;
+    }
+}
+
 //engine namespace
 namespace engine {
 
@@ -42,6 +48,10 @@ private:
     script::LuaState lua;
     
     /// GUI 
+    Rocket::Core::Context* ui;
+
+private:
+    static void initialize();
     
 public:
     /**

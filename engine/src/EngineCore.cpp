@@ -18,9 +18,16 @@
 */
 #include "EngineCore.hpp"
 
+//Horde3D
 #include "egCom.h"
 #include "egModules.h"
 #include "egRenderer.h"
+
+//LibRocket
+#include <Rocket/Core.h>
+
+#include "ui/SystemInterface.hpp"
+#include "ui/RenderInterfaceOpenGL.hpp"
 
 using namespace engine;
 using namespace Horde3D;
@@ -29,8 +36,11 @@ using namespace Horde3D;
 * Create new engine core
 */
 EngineCore::EngineCore()
-    : renderer(new Horde3D::Renderer())
-{
+    : renderer(new Horde3D::Renderer()),
+      ui(Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(1024, 768)))
+{    
+    initialize();
+    renderer->init();
 }
 
 /**
@@ -39,17 +49,41 @@ EngineCore::EngineCore()
 EngineCore::~EngineCore()
 {
     delete renderer;
+    delete ui;
 }
+
+
+/**
+* EngineCore Initialize
+*/
+void EngineCore::initialize()
+{
+    static bool init = false;
+    
+    if(!init)
+    {
+        //Initialize Static Horde3D Stuff
+        //TODO Rewrite Horde3D Module Class for more generic initialization
+        Modules::init();
+        Modules::config().setOption(EngineOptions::MaxLogLevel, 4.0);
+    
+        //Initialize Static liBRocket Stuff
+        Rocket::Core::SetSystemInterface(new SystemInterface());
+        Rocket::Core::SetRenderInterface(new RenderInterfaceOpenGL());
+        Rocket::Core::Initialise();
+        
+        //init done
+        init = true;
+    }
+}
+
 
 /**
 * Initialize Engine core
 */
 void EngineCore::init()
 {
-    //fix Module Class
-    Modules::init();
-    Modules::config().setOption(EngineOptions::MaxLogLevel, 4.0);
-    renderer->init();
+
 }
 
 /**
@@ -57,7 +91,11 @@ void EngineCore::init()
 */
 void EngineCore::resize(int width, int height)
 {
+    //resize horde renderer
     renderer->resize(0,0, width, height);
+    
+    //resize libRocket ui
+    ui->SetDimensions(Rocket::Core::Vector2i(width, height));
 }
 
 /**
@@ -65,7 +103,12 @@ void EngineCore::resize(int width, int height)
 */
 void EngineCore::render()
 {
+    //render Horde3D
+    //renderer->render( CameraNode *camNode );
     
+    //render UI
+    ui->Update();
+    ui->Render();
 }
 
 

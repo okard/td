@@ -16,36 +16,17 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __EDITOR_ENGINEWIDGET_HPP__
-#define __EDITOR_ENGINEWIDGET_HPP__
+#include "SystemInterface.hpp"
 
-#include <QGLWidget>
-#include <engine/EngineCore>
-
-namespace editor {
+#include "utTimer.h"
 
 /**
-* Engine Widget
+* Return Elapsed Time in Seconds
 */
-class EngineWidget : public QGLWidget
+float SystemInterface::GetElapsedTime()
 {
-    Q_OBJECT
+    static Horde3D::Timer timer;
     
-private:
-    ///Engine Core
-    engine::EngineCore* engine;
+    return timer.getElapsedTimeMS()*1000;
     
-    ///Camera to Render
-    
-public:
-    EngineWidget(engine::EngineCore* engine);
-
-protected:
-    void initializeGL();
-    void paintGL();
-    void resizeGL(int width, int height);   
-};
-    
-} //end namespace editor
-
-#endif //  __EDITOR_ENGINEWIDGET_HPP__
+}
