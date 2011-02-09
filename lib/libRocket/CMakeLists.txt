@@ -2,7 +2,7 @@
 # CMake File for libRocket
 ######################################### 
 cmake_minimum_required(VERSION 2.8)
-project(libRocket C CXX)
+project(Rocket C CXX)
 
 include_directories(Include)
 
@@ -151,5 +151,5 @@ Source/Core/XMLParser.cpp
 Source/Core/XMLParseTools.cpp
 ) 
 
-add_library(libRocket SHARED ${libRocket_core_src})
-target_link_libraries(libRocket ${CORE_LINK_LIBS})
+add_library(Rocket SHARED ${libRocket_core_src})
+target_link_libraries(Rocket ${CORE_LINK_LIBS})

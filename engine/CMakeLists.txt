@@ -21,4 +21,4 @@ set( ENGINE_SRC
 
 #library
 add_library(engine ${ENGINE_SRC})
-target_link_libraries(engine horde3d libRocket ${LUA_LIB})
+target_link_libraries(engine horde3d Rocket ${LUA_LIB})
