@@ -26,6 +26,7 @@
 //LibRocket
 #include <Rocket/Core.h>
 
+#include "script/LuaState.hpp"
 #include "ui/SystemInterface.hpp"
 #include "ui/RenderInterfaceOpenGL.hpp"
 
@@ -37,7 +38,8 @@ using namespace Horde3D;
 */
 EngineCore::EngineCore()
     : renderer(new Horde3D::Renderer()),
-      ui(Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(1024, 768)))
+      ui(Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(1024, 768))),
+      lua(new script::LuaState())
 {    
     initialize();
     renderer->init();
@@ -72,6 +74,8 @@ void EngineCore::initialize()
         Rocket::Core::SetRenderInterface(new RenderInterfaceOpenGL());
         Rocket::Core::Initialise();
         
+        //TODO Register Lua Interface
+        
         //init done
         init = true;
     }
@@ -105,10 +109,28 @@ void EngineCore::render()
 {
     //render Horde3D
     //renderer->render( CameraNode *camNode );
+    //renderer->finalizeFrame();
     
     //render UI
-    ui->Update();
-    ui->Render();
+    //ui->Update();
+    //ui->Render();
+}
+
+/**
+* Get Lua State
+*/
+script::LuaState* EngineCore::getLuaState()
+{
+    return lua;
+}
+
+
+/**
+* Get libRocket Context
+*/
+Rocket::Core::Context* EngineCore::getUiContext()
+{
+    return ui;
 }
 
 

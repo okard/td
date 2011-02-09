@@ -16,7 +16,6 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include <glul/EventLoop>
 
 #include "GameWindow.hpp"
 
@@ -31,13 +30,9 @@ int main(int argc, char **argv)
     GameWindow gw;
     gw.show();
     
-    
-    //TODO Improve Loop
-    while(glul::EventLoopPtr->getEvent())
-    {
-        glul::EventLoopPtr->dispatch();
-    }
-    
+    //TODO Parse Arguments to load a startup lua script
+
+    gw.run();
     return 0;
 }
 

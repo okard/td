@@ -19,6 +19,9 @@
 #include "GameWindow.hpp"
 
 #include <glul/GlContext>
+#include <glul/EventLoop>
+
+#include <engine/script/LuaState>
 
 using namespace game;
 using namespace engine;
@@ -38,4 +41,34 @@ GameWindow::GameWindow()
 */
 GameWindow::~GameWindow()
 {
+}
+
+/**
+* Startup with specific script
+*/
+void GameWindow::startup(const char* file)
+{
+    engine.getLuaState()->LoadFile(file);
+    engine.getLuaState()->Execute();
+}
+        
+/**
+* run
+*/
+void GameWindow::run()
+{
+    //TODO Improve Loop
+    while(glul::EventLoopPtr->getEvent())
+    {
+        glul::EventLoopPtr->dispatch();
+        engine.render();
+    }
+}
+
+/**
+* Get Engine
+*/
+engine::EngineCore& GameWindow::getEngine()
+{
+    return engine;
 }

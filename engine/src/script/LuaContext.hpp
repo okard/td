@@ -27,13 +27,16 @@ extern "C"
     #include <lualib.h>
 }
 
+#include <cul/Singleton>
+
 namespace engine {
 namespace script {
 
 /**
 * Higher Level Access to LuaState
+* Provides utility functions for lua_State
 */
-class LuaContext
+class LuaContext : cul::Singleton<LuaContext>
 {
     private:
         ///stack size at start
@@ -50,6 +53,11 @@ class LuaContext
         bool validate();
         bool validate(unsigned int grow);
     
+        
+        //int getStackSize(); lua_gettop
+        //LuaContext& operator= (lua_State* state);
+        //make a default singleton instance
+        
         //GetString
         //PushFunction
         //CreateTable

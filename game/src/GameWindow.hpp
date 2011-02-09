@@ -32,18 +32,34 @@ class GameWindow : public glul::GlWindow
     private:
         /// Engine Core
         engine::EngineCore engine;
-        
+
         // Current Camera
-        
+
     public:
         /**
         * Create new Game Window
         */
         GameWindow();
+
         /**
         * Destructes Game Window
         */
         ~GameWindow();
+        
+        /**
+        * Startup with specific script
+        */
+        void startup(const char* file);
+        
+        /**
+        * run
+        */
+        void run();
+
+        /**
+        * Get Engine
+        */
+        engine::EngineCore& getEngine();
 };
     
 } //end namespace game

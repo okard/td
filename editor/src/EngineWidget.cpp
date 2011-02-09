@@ -42,6 +42,7 @@ void EngineWidget::initializeGL()
 void EngineWidget::paintGL()
 {
     //Render Camera Node
+    engine->render();
 }
 
 /**

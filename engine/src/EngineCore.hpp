@@ -19,7 +19,6 @@
 #ifndef __ENGINECORE_HPP__
 #define __ENGINECORE_HPP__
 
-#include "script/LuaState.hpp"
 
 //forward declaration
 namespace Horde3D {
@@ -29,6 +28,12 @@ namespace Horde3D {
 namespace Rocket {
     namespace Core {
         class Context;
+    }
+}
+
+namespace engine {
+    namespace script {
+        class LuaState;
     }
 }
 
@@ -45,7 +50,7 @@ private:
     Horde3D::Renderer* renderer;
     
     /// Lua State
-    script::LuaState lua;
+    script::LuaState* lua;
     
     /// GUI 
     Rocket::Core::Context* ui;
@@ -77,7 +82,18 @@ public:
     /**
     * Render a frame
     */
-    void render();    
+    void render();
+
+    /**
+    * Get Lua State
+    */
+    script::LuaState* getLuaState();
+    
+    /**
+    * Get libRocket Context
+    */
+    Rocket::Core::Context* getUiContext();
+    
 };
 
 
