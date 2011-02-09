@@ -20,14 +20,15 @@ ENDIF()
 
 
 #Libraries
-SUBDIRS(lib/cul)
-SUBDIRS(lib/glul)
-SUBDIRS(lib/horde3d)
-SUBDIRS(lib/libRocket)
+ADD_SUBDIRECTORY(lib/cul)
+ADD_SUBDIRECTORY(lib/glul)
+ADD_SUBDIRECTORY(lib/aul)
+ADD_SUBDIRECTORY(lib/horde3d)
+ADD_SUBDIRECTORY(lib/libRocket)
 
 # Components Engine, Game, Editor
-SUBDIRS(engine)
-SUBDIRS(game)
-SUBDIRS(editor)
+ADD_SUBDIRECTORY(engine)
+ADD_SUBDIRECTORY(game)
+ADD_SUBDIRECTORY(editor)
 
 
