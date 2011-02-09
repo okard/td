@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file alias="engine">../img/applications-system.png</file>
     <file alias="script">../img/text-x-script.png</file>
   </qresource>
 </RCC>

@@ -43,6 +43,9 @@ public:
     */
     virtual ~MainWindow();
 
+public slots:
+    void newEngineTab();
+    void newScriptTab();
     
 };
 

@@ -55,6 +55,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionNewScriptWindow"/>
+   <addaction name="actionNewEngineWindow"/>
   </widget>
   <action name="actionQuit">
    <property name="text">
@@ -68,6 +69,18 @@
    </property>
    <property name="text">
     <string>New Script Window</string>
+   </property>
+  </action>
+  <action name="actionNewEngineWindow">
+   <property name="icon">
+    <iconset resource="../editor.qrc">
+     <normaloff>:/icons/engine</normaloff>:/icons/engine</iconset>
+   </property>
+   <property name="text">
+    <string>New Engine Window</string>
+   </property>
+   <property name="toolTip">
+    <string>New Engine Window</string>
    </property>
   </action>
  </widget>

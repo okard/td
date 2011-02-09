@@ -18,6 +18,8 @@
 */
 #include "MainWindow.moc"
 
+#include <QTextEdit>
+
 using namespace editor;
 
 /**
@@ -28,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     //setup ui
     setupUi(this);
     
+    // Connect actions to slots
+    connect(actionNewEngineWindow, SIGNAL(triggered()), this, SLOT(newEngineTab()));
+    connect(actionNewScriptWindow, SIGNAL(triggered()), this, SLOT(newScriptTab()));
 }
 
 /**
@@ -35,4 +40,25 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 */
 MainWindow::~MainWindow()
 {
+}
+
+
+/**
+* Add new EngineTab
+*/
+void MainWindow::newEngineTab()
+{
+    //TODO Add here a Engine Widget
+    QString str = "engine test";
+    TabContainer->addTab(static_cast<QWidget*>(new QTextEdit(this)), str);
+}
+
+/**
+* New Script Tab
+*/
+void MainWindow::newScriptTab()
+{
+    //TODO Add here a QScintilla
+    QString str = "script test";
+    TabContainer->addTab(static_cast<QWidget*>(new QTextEdit(this)), str);
 }

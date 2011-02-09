@@ -18,23 +18,28 @@ set(editor_src
     src/EngineWidget.cpp
 )
 
-# auto moc
-qt4_automoc(${editor_src})
-
 # uis
-SET(editor_ui
+set(editor_ui
     src/ui/MainWindow.ui
 )
 
+#qt resources
+set(editor_qrc
+    src/editor.qrc
+)
+
+# auto moc
+qt4_automoc(${editor_src})
 # generate ui header
-QT4_WRAP_UI(editor_ui_h ${editor_ui})
+qt4_wrap_ui(editor_ui_h ${editor_ui})
+# generate resources
+qt4_add_resources(editor_qrc_gen ${editor_qrc})
 
 # include generated ui header
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-
 # the editor application
-add_executable(editor ${editor_src} ${editor_ui_h})
+add_executable(editor ${editor_src} ${editor_ui_h} ${editor_qrc_gen})
 target_link_libraries(editor engine ${QT_LIBRARIES})
 
 
