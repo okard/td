@@ -1,7 +1,7 @@
-[submodule "cul"]
+[submodule "lib/cul"]
         path = lib/cul
         url = git://github.com/okard/cul.git
-[submodule "glul"]
+[submodule "lib/glul"]
         path = lib/glul
         url = git://github.com/okard/glul.git
 [submodule "lib/aul"]

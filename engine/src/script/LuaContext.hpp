@@ -46,17 +46,43 @@ class LuaContext : cul::Singleton<LuaContext>
         lua_State* luaState;
       
     public:
+        /**
+        * Creates a new LuaConext for given lua_State
+        */
         LuaContext(lua_State* state);
+        /**
+        * Destructor
+        */
         ~LuaContext();
+        
+        /**
+        * Assign lua_State
+        */
+        void operator= (lua_State* state);
     
+        /**
+        * Assign Context to a lua_State
+        */
         void assign(lua_State* state);
+        
+        /**
+        * validate the lua stack
+        */
         bool validate();
+        
+        /**
+        * validate grow of lua lua stack
+        */
         bool validate(unsigned int grow);
     
+        /**
+        * get stack count
+        */
+        int stackCount();
         
-        //int getStackSize(); lua_gettop
+
+        
         //LuaContext& operator= (lua_State* state);
-        //make a default singleton instance
         
         //GetString
         //PushFunction

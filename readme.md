@@ -14,12 +14,12 @@ Libraries used
 
 Directory Structure
 --------------------
-/editor/ contains the qt4 editor
-/engine/ the game engine
-/game/ game executable
-/data/ game script files and resources
-/lib/ the required libraries
-/tools/ small utilities
+- /editor/ contains the qt4 editor
+- /engine/ the game engine
+- /game/ game executable
+- /data/ game script files and resources
+- /lib/ the required libraries
+- /tools/ small utilities
 
 
 TODO

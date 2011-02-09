@@ -18,31 +18,62 @@
 */
 #include "LuaContext.hpp"
 
-using namespace engine;
-using namespace script;
 
+using engine::script::LuaContext;
 
+/**
+* Creates a new LuaConext for given lua_State
+*/
 LuaContext::LuaContext(lua_State* state)
     : luaState(state), stacksize(lua_gettop (luaState))
 {
 }
 
+/**
+* Destructor
+*/
 LuaContext::~LuaContext()
 {
 }
 
+/**
+* Assign lua_State
+*/
+void LuaContext::operator=(lua_State* state)
+{
+    assign(state);
+}
+
+
+/**
+* Assign Context to a lua_State
+*/
 void LuaContext::assign(lua_State* state)
 {
     luaState = state;
     stacksize = lua_gettop (luaState);
 }
 
+/**
+* validate the lua stack
+*/
 bool LuaContext::validate()
 {
     return (stacksize == lua_gettop (luaState));
 }
 
+/**
+* validate grow of lua lua stack
+*/
 bool LuaContext::validate(unsigned int grow)
 {
     return (stacksize + grow == lua_gettop (luaState));
+}
+
+/**
+* get stack count
+*/
+int LuaContext::stackCount()
+{
+    return lua_gettop (luaState);
 }
