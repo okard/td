@@ -27,7 +27,7 @@ extern "C"
     #include <lualib.h>
 }
 
-#include <cul/Singleton>
+#include <cul/Singleton.hpp>
 
 namespace engine {
 namespace script {
