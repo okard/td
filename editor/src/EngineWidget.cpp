@@ -43,7 +43,12 @@ void EngineWidget::initializeGL()
 */
 void EngineWidget::paintGL()
 {
-    //Render Camera Node
+    if(!this->isValid())
+    {
+        //no render context
+    }
+    
+    //Call Engine Render Function
     engine->render();
 }
 

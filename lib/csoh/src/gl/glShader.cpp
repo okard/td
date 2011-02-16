@@ -24,6 +24,7 @@
 #include <csoh/gl/glShader.hpp>
 
 using csoh::glShader;
+using csoh::glProgram;
 
 /**
 * Create new OpenGL Shader
@@ -44,18 +45,53 @@ void glShader::compile(const char* src)
     glCompileShader(shaderId);
 }
 
-/*
-GLuint glCreateShader(GL_VERTEX_SHADER);
-GLuint glCreateShader(GL_FRAGMENT_SHADER); 
 
-glShaderSource(v, 1, &vv,NULL);
-glCompileShader(v);
-
-//program
-GLuint glCreateProgram();
-glAttachShader(p,f);
-glLinkProgram(p);
-glUseProgram(p);
-
-
+/**
+* Create new opengl shader program
 */
+glProgram::glProgram()
+{
+    progId = glCreateProgram();
+}
+
+/**
+* Destructs opengl shader program
+*/
+glProgram::~glProgram()
+{
+    glDeleteProgram(progId);
+}
+
+/**
+* Attach a shader to program
+*/
+void glProgram::attach(glShader* shader)
+{
+    glAttachShader(progId, shader->shaderId);
+}
+
+/**
+* Detach shader from program
+*/
+void glProgram::detach(glShader* shader)
+{
+     glDetachShader(progId, shader->shaderId);
+}
+
+/**
+* Link shader
+*/
+void glProgram::link()
+{
+    glLinkProgram(progId);
+}
+
+/**
+* Use shader
+*/
+void glProgram::use()
+{
+    glUseProgram(progId);
+}
+
+

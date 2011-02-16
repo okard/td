@@ -21,44 +21,30 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#include <csoh/Renderer.hpp>
+#ifndef __CSOH_SCENE_HPP__
+#define __CSOH_SCENE_HPP__
 
-using csoh::Renderer;
+namespace csoh {
 
-
-Renderer::Renderer()
+/**
+* Represents a Scene
+*/
+class Scene
 {
-    //Initialize all Stuff that doesnt require a active graphic context
-}
-
-Renderer::~Renderer()
-{
+    //Hold Tree of SceneNodes?
     
-}
+    //TODO Nodes for
+    //Billboards
+    //QuadTree
+    //Octree
+    //Particle
+    //Lights
+    //Camera
+    //Model (Mesh + Material (Texture / Shader)
+    
+};
+    
+ 
+} //end namespace csoh
 
-
-/**
-* Initialize Renderer
-* May require valid Graphic Context
-*/
-void Renderer::init()
-{
-    render.initialize();
-}
-
-/**
-* Resize Render Viewport
-*/
-void Renderer::resize(int x, int y, int width, int height)
-{
-    render.resize(x, y, width, height);
-}
-
-/**
-* Start Render Scene
-*/
-void Renderer::startRender()
-{
-    render.renderStart();
-}
-
+#endif // __CSOH_SCENE_HPP__

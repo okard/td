@@ -53,9 +53,21 @@ public:
     */
     void initialize();
     
-    //resize
+    /**
+    * Resize OpenGL Viewport
+    */
+    void resize(int x, int y, int width, int height);
+    
+    /**
+    * Start Rendering Scene
+    */
+    void renderStart();
+    
     //renderStart
     //renderFinish
+    
+    //primitive render interfaces
+    //render mesh
 };
 
 } //end namespace csoh

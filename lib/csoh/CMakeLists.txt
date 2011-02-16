@@ -18,4 +18,4 @@ set(CSOH_SRC
     )
 
 add_library(csoh ${CSOH_SRC})
-target_link_libraries(csoh "rt" ${OPENGL_LIBRARIES})
+target_link_libraries(csoh "rt" "GLEW" ${OPENGL_LIBRARIES})

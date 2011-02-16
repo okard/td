@@ -64,6 +64,11 @@ public:
     */
     void resize(int x, int y, int width, int height);
     
+    /**
+    * Start Render Scene
+    */
+    void startRender();
+    
     //Interface for SceneManager?
     //render(Camera* cam)
 };

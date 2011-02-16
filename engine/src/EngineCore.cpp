@@ -33,6 +33,17 @@
 using engine::EngineCore;
 using engine::script::LuaState;
 
+#include <string>
+
+template<typename T>
+const char* GenId()
+{
+    static unsigned int id = 0;
+    std::string str("id-");
+    str += ++id;
+    return str.c_str();
+}
+
 /**
 * Create new engine core
 */
@@ -43,6 +54,8 @@ EngineCore::EngineCore()
     //general init
     initialize();
     
+    // Can Initialize Rocket Context without valuid OpenGL Context
+    ui = Rocket::Core::CreateContext(GenId<Rocket::Core::Context>(), Rocket::Core::Vector2i(1024, 768));
     
     //TODO Register Lua Interface
 }
@@ -84,16 +97,11 @@ void EngineCore::initialize()
     }
 }
 
-
 /**
 * Initialize Engine core
 */
 void EngineCore::init()
 {
-    // initialize context here
-    // because of horde required the opengl context
-    ui = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(1024, 768));
-    
     //Initialize Render Stuff
     renderer->init();
 }
@@ -116,7 +124,8 @@ void EngineCore::resize(int width, int height)
 */
 void EngineCore::render()
 {
-    //render Horde3D
+    //render
+    renderer->startRender();
     //renderer->render( CameraNode *camNode );
     //renderer->finalizeFrame();
     

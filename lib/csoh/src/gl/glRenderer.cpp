@@ -49,3 +49,36 @@ void glRenderer::initialize()
     //Check for OpenGL Context
     //at this moment a OpenGL Context must exist
 }
+
+
+/**
+* Resize OpenGL Viewport
+*/
+void glRenderer::resize(int x, int y, int width, int height)
+{
+    if (height==0)                             
+        height=1;                          
+
+    glViewport(0, 0, width, height);                    // Reset The Current Viewport
+
+    glMatrixMode(GL_PROJECTION);                        
+    glLoadIdentity();                          
+    
+    //near/far clipping?
+    gluPerspective(45.0, width/height, 1, 1000);  
+
+    glMatrixMode(GL_MODELVIEW);                     // Select The Modelview Matrix
+    glLoadIdentity();   
+}
+
+/**
+* Start Render
+*/
+void glRenderer::renderStart()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+}
+
+
+

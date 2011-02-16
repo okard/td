@@ -81,12 +81,21 @@ class LuaContext : cul::Singleton<LuaContext>
         int stackCount();
         
 
+        //Push-Methods
+        //* String
+        //* Function
         
-        //LuaContext& operator= (lua_State* state);
         
-        //GetString
-        //PushFunction
-        //CreateTable
+        //Get-Methods
+        //* Number
+        //* String
+        
+        //Call
+        
+        //Create-Methods
+        //* CreateTable
+        
+        
         //LoadScript?
 };
 

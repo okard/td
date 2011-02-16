@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>799</width>
+    <width>800</width>
     <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Editor</string>
@@ -16,7 +22,14 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTabWidget" name="TabContainer"/>
+     <widget class="QTabWidget" name="TabContainer">
+      <property name="tabShape">
+       <enum>QTabWidget::Triangular</enum>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -25,7 +38,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>799</width>
+     <width>800</width>
      <height>25</height>
     </rect>
    </property>
@@ -37,7 +50,23 @@
    </widget>
    <addaction name="menuFIle"/>
   </widget>
-  <widget class="QStatusBar" name="StatusBar"/>
+  <widget class="QStatusBar" name="StatusBar">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>16</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>50</height>
+    </size>
+   </property>
+   <property name="sizeGripEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
   <widget class="QToolBar" name="ToolBar">
    <property name="minimumSize">
     <size>

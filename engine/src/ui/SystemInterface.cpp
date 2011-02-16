@@ -26,10 +26,7 @@
 */
 float SystemInterface::GetElapsedTime()
 {
-    static csoh::Timer timer;
-    
-    if(!timer.isRunning())
-        timer.start();
+    static csoh::Timer timer(true);
     
     float t = timer.time();
     timer.reset();

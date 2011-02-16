@@ -33,6 +33,8 @@ namespace csoh {
 */
 class glShader
 {
+    friend class glProgram;
+    
 private:
     /// Shader Id
     GLuint shaderId;
@@ -41,13 +43,62 @@ private:
     GLenum type;
     
 public:
+    /**
+    * Create new OpenGL Shader
+    * GL_VERTEX_SHADER or
+    * GL_FRAGMENT_SHADER
+    */
     glShader(GLenum type);
+    
+    /**
+    * Destructor
+    */
     ~glShader();
     
-    void compile(const char* src);
+    /**
+    * Compile Shader
+    */
+    void compile(const char* src); 
+};
+
+/**
+* OpenGL Shader Program
+*/
+class glProgram
+{
+private:
+    GLint progId;
     
+public:
+    /**
+    * Create new opengl shader program
+    */
+    glProgram();
     
+    /**
+    * Destructs opengl shader program
+    */
+    ~glProgram();
     
+    /**
+    * Attach a shader to program
+    */
+    void attach(glShader* shader);
+    
+    /**
+    * Detach shader from program
+    */
+    void detach(glShader* shader);
+    
+    /**
+    * Link shader
+    */
+    void link();
+    
+    /**
+    * Use shader
+    */
+    void use();
 };
     
     
