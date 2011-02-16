@@ -24,6 +24,8 @@
 #ifndef __CSOH_GLRENDERER_HPP__
 #define __CSOH_GLRENDERER_HPP__
 
+#include "GL.hpp"
+
 namespace csoh {
 
 /**

@@ -24,7 +24,8 @@ using namespace engine;
 /**
 * Creates new Engine Widget
 */
-EngineWidget::EngineWidget(EngineCore* engine)
+EngineWidget::EngineWidget(QWidget* parent, EngineCore* engine)
+    : QGLWidget(parent), engine(engine)
 {
     
 }
@@ -34,6 +35,7 @@ EngineWidget::EngineWidget(EngineCore* engine)
 */
 void EngineWidget::initializeGL()
 {
+    engine->init();
 }
 
 /**

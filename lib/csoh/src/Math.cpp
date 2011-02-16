@@ -23,6 +23,9 @@
 */
 #include <csoh/Math.hpp>
 
+
+//TODO add SSE Implementation
+
 using csoh::Vector3f;
 
 

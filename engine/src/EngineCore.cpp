@@ -16,7 +16,7 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "EngineCore.hpp"
+#include <engine/EngineCore.hpp>
 
 //Horde3D
 #include "egCom.h"
@@ -26,9 +26,9 @@
 //LibRocket
 #include <Rocket/Core.h>
 
-#include "script/LuaState.hpp"
-#include "ui/SystemInterface.hpp"
-#include "ui/RenderInterfaceOpenGL.hpp"
+#include <engine/script/LuaState.hpp>
+#include <engine/ui/SystemInterface.hpp>
+#include <engine/ui/RenderInterfaceOpenGL.hpp>
 
 using namespace engine;
 using namespace Horde3D;
@@ -38,11 +38,10 @@ using namespace Horde3D;
 */
 EngineCore::EngineCore()
     : renderer(new Horde3D::Renderer()),
-      ui(Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(1024, 768))),
       lua(new script::LuaState())
 {    
-    initialize();
-    renderer->init();
+    Rocket::Core::Vector2i dim(1024, 768);
+    ui = Rocket::Core::CreateContext("default", dim);
 }
 
 /**
@@ -51,6 +50,7 @@ EngineCore::EngineCore()
 EngineCore::~EngineCore()
 {
     delete renderer;
+    ui->RemoveReference();
     delete ui;
 }
 
@@ -72,7 +72,9 @@ void EngineCore::initialize()
         //Initialize Static liBRocket Stuff
         Rocket::Core::SetSystemInterface(new SystemInterface());
         Rocket::Core::SetRenderInterface(new RenderInterfaceOpenGL());
-        Rocket::Core::Initialise();
+        if(!Rocket::Core::Initialise())
+        {
+        }
         
         //TODO Register Lua Interface
         
@@ -87,7 +89,11 @@ void EngineCore::initialize()
 */
 void EngineCore::init()
 {
-
+    //general init
+    initialize();
+    
+    //Initialize Render Stuff
+    renderer->init();
 }
 
 /**
@@ -98,8 +104,9 @@ void EngineCore::resize(int width, int height)
     //resize horde renderer
     renderer->resize(0,0, width, height);
     
-    //resize libRocket ui
-    ui->SetDimensions(Rocket::Core::Vector2i(width, height));
+    //resize libRocket ui 
+    //Rocket::Core::Vector2i dim(width, height);
+    //ui->SetDimensions(dim);
 }
 
 /**

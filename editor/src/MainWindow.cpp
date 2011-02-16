@@ -18,6 +18,10 @@
 */
 #include "MainWindow.moc"
 
+#include <engine/EngineCore.hpp>
+#include "EngineWidget.hpp"
+
+
 #include <QTextEdit>
 
 using namespace editor;
@@ -49,8 +53,11 @@ MainWindow::~MainWindow()
 void MainWindow::newEngineTab()
 {
     //TODO Add here a Engine Widget
+    
+    engine::EngineCore* engine = new engine::EngineCore();
+    
     QString str = "engine test";
-    TabContainer->addTab(static_cast<QWidget*>(new QTextEdit(this)), str);
+    TabContainer->addTab(static_cast<QWidget*>(new EngineWidget(this, engine)), str);
 }
 
 /**

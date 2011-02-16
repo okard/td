@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    Tower Defense Game Engine
+    Copyright (C) 2011  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,17 +16,40 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include <engine/ui/SystemInterface.hpp>
+#ifndef __ENGINE_EXCEPTION_HPP__
+#define __ENGINE_EXCEPTION_HPP__
 
-#include "utTimer.h"
+#include <exception>
+
+namespace engine {
 
 /**
-* Return Elapsed Time in Seconds
+* Engine Exception
 */
-float SystemInterface::GetElapsedTime()
+class Exception : public std::exception
 {
-    static Horde3D::Timer timer;
+    private:
+        /// exception msg
+        const char* msg;
     
-    return timer.getElapsedTimeMS()*1000;
-    
-}
+    public:
+        /**
+        * Constructor
+        */
+        Exception(const char* msg)
+            : msg(msg)
+        {
+        }
+        
+        /**
+        * Description
+        */
+        virtual const char* what() const throw()
+        {
+            return msg;
+        }
+};
+        
+} //end namespace engine
+
+#endif //__ENGINE_EXCEPTION_HPP__

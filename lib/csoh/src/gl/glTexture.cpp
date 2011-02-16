@@ -21,44 +21,55 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLTEXTURE_HPP__
-#define __CSOH_GLTEXTURE_HPP__
+#include <csoh/gl/glTexture.hpp>
 
-#include "GL.hpp"
+using csoh::glTexture;
 
-namespace csoh {
- 
 /**
-* OpenGL Texture 
+* Create a new OpenGL Texture
 */
-class glTexture
+glTexture::glTexture()
 {
-private:
-    GLuint texId;
-    
-    
-public:
-    /**
-    * Create a new OpenGL Texture
-    */
-    glTexture();
-    
-    /**
-    * Destructs Texture
-    */
-    ~glTexture();
-    
-    /**
-    * Bind Texture
-    */
-    void bind();
-    
-    //set(void[])
-    //config 
-    
-};
-    
-} //end namespace csoh
+    //Generate Texture ID
+    glGenTextures(1, &texId);
+}
+
+/**
+* Destructs Texture
+*/
+glTexture::~glTexture()
+{
+    glDeleteTextures(1, &texId);
+}
+
+/**
+* Bind Texture
+*/
+void glTexture::bind()
+{
+    glBindTexture(GL_TEXTURE_2D, texId);
+}
 
 
-#endif // __CSOH_GLTEXTURE_HPP__
+
+/*
+Settings
+
+glTexParameteri 
+
+void glTexImage2D(  
+    GLenum      target, 
+    GLint   level, 
+    GLint   internalFormat, 
+    GLsizei     width, 
+    GLsizei     height, 
+    GLint   border, 
+    GLenum      format, 
+    GLenum      type, 
+    const GLvoid *      data);
+
+*/
+
+
+
+   

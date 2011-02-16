@@ -21,44 +21,12 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLTEXTURE_HPP__
-#define __CSOH_GLTEXTURE_HPP__
+#ifndef __CSOH_GL_HPP__
+#define __CSOH_GL_HPP__
 
-#include "GL.hpp"
-
-namespace csoh {
- 
-/**
-* OpenGL Texture 
-*/
-class glTexture
-{
-private:
-    GLuint texId;
-    
-    
-public:
-    /**
-    * Create a new OpenGL Texture
-    */
-    glTexture();
-    
-    /**
-    * Destructs Texture
-    */
-    ~glTexture();
-    
-    /**
-    * Bind Texture
-    */
-    void bind();
-    
-    //set(void[])
-    //config 
-    
-};
-    
-} //end namespace csoh
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 
-#endif // __CSOH_GLTEXTURE_HPP__
+#endif // __CSOH_GL_HPP__

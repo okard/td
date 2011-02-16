@@ -21,44 +21,41 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLTEXTURE_HPP__
-#define __CSOH_GLTEXTURE_HPP__
+#include <csoh/gl/glShader.hpp>
 
-#include "GL.hpp"
+using csoh::glShader;
 
-namespace csoh {
- 
 /**
-* OpenGL Texture 
+* Create new OpenGL Shader
 */
-class glTexture
+glShader::glShader(GLenum type)
 {
-private:
-    GLuint texId;
+    shaderId = glCreateShader(type);
+}
+
+glShader::~glShader()
+{
+    glDeleteShader(shaderId);
+}
     
-    
-public:
-    /**
-    * Create a new OpenGL Texture
-    */
-    glTexture();
-    
-    /**
-    * Destructs Texture
-    */
-    ~glTexture();
-    
-    /**
-    * Bind Texture
-    */
-    void bind();
-    
-    //set(void[])
-    //config 
-    
-};
-    
-} //end namespace csoh
+void glShader::compile(const char* src)
+{
+    glShaderSource(shaderId, 1, &src, NULL);
+    glCompileShader(shaderId);
+}
+
+/*
+GLuint glCreateShader(GL_VERTEX_SHADER);
+GLuint glCreateShader(GL_FRAGMENT_SHADER); 
+
+glShaderSource(v, 1, &vv,NULL);
+glCompileShader(v);
+
+//program
+GLuint glCreateProgram();
+glAttachShader(p,f);
+glLinkProgram(p);
+glUseProgram(p);
 
 
-#endif // __CSOH_GLTEXTURE_HPP__
+*/

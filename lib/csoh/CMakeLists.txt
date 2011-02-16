@@ -9,8 +9,12 @@ include_directories(include)
 
 
 set(CSOH_SRC
-   src/Math.cpp
-   )
+    src/Math.cpp
+    src/Renderer.cpp
+    src/gl/glTexture.cpp
+    src/gl/glShader.cpp
+    src/gl/glRenderer.cpp
+    )
 
 
 add_library(csoh ${CSOH_SRC})

@@ -20,7 +20,7 @@
 #define __GAMEWINDOW_HPP__
 
 #include <glul/GlWindow>
-#include <engine/EngineCore>
+#include <engine/EngineCore.hpp>
 
 namespace game {
 

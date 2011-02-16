@@ -21,44 +21,24 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLTEXTURE_HPP__
-#define __CSOH_GLTEXTURE_HPP__
-
-#include "GL.hpp"
+#ifndef __CSOH_RENDERER_HPP__
+#define __CSOH_RENDERER_HPP__
 
 namespace csoh {
- 
+
 /**
-* OpenGL Texture 
-*/
-class glTexture
+* Basic Renderer Interface
+*/    
+class Renderer
 {
-private:
-    GLuint texId;
+    //Interface for SceneManager?
     
     
-public:
-    /**
-    * Create a new OpenGL Texture
-    */
-    glTexture();
-    
-    /**
-    * Destructs Texture
-    */
-    ~glTexture();
-    
-    /**
-    * Bind Texture
-    */
-    void bind();
-    
-    //set(void[])
-    //config 
-    
+    //render(Camera)
+    //resize
 };
     
+
 } //end namespace csoh
 
-
-#endif // __CSOH_GLTEXTURE_HPP__
+#endif // __CSOH_RENDERER_HPP__

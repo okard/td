@@ -4,6 +4,8 @@
 cmake_minimum_required(VERSION 2.8)
 project(engine)
 
+include_directories(include)
+
 #include directory for horde3d
 include_directories(${CMAKE_SOURCE_DIR}/lib/horde3d/shared)
 include_directories(${CMAKE_SOURCE_DIR}/lib/horde3d/source)
@@ -21,4 +23,4 @@ set( ENGINE_SRC
 
 #library
 add_library(engine ${ENGINE_SRC})
-target_link_libraries(engine horde3d Rocket ${LUA_LIB})
+target_link_libraries(engine csoh horde3d Rocket ${LUA_LIB})

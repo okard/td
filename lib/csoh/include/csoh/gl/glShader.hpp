@@ -24,6 +24,8 @@
 #ifndef __CSOH_GLSHADER_HPP__
 #define __CSOH_GLSHADER_HPP__
 
+#include "GL.hpp"
+
 namespace csoh {
   
 /**
@@ -31,6 +33,20 @@ namespace csoh {
 */
 class glShader
 {
+private:
+    /// Shader Id
+    GLuint shaderId;
+    
+    /// Shader Type
+    GLenum type;
+    
+public:
+    glShader(GLenum type);
+    ~glShader();
+    
+    void compile(const char* src);
+    
+    
     
 };
     

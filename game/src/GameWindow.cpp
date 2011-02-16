@@ -21,7 +21,7 @@
 #include <glul/GlContext>
 #include <glul/EventLoop>
 
-#include <engine/script/LuaState>
+#include <engine/script/LuaState.hpp>
 
 using namespace game;
 using namespace engine;

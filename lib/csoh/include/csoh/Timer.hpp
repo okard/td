@@ -21,44 +21,20 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLTEXTURE_HPP__
-#define __CSOH_GLTEXTURE_HPP__
+#ifndef __CSOH_TIMER_HPP__
+#define __CSOH_TIMER_HPP__
 
-#include "GL.hpp"
-
-namespace csoh {
- 
 /**
-* OpenGL Texture 
+* High Precesion Timer
 */
-class glTexture
+class Timer
 {
-private:
-    GLuint texId;
-    
-    
-public:
-    /**
-    * Create a new OpenGL Texture
-    */
-    glTexture();
-    
-    /**
-    * Destructs Texture
-    */
-    ~glTexture();
-    
-    /**
-    * Bind Texture
-    */
-    void bind();
-    
-    //set(void[])
-    //config 
-    
+    //start
+    //stop
+    //reset
+    //time
+    //running
 };
-    
-} //end namespace csoh
 
 
-#endif // __CSOH_GLTEXTURE_HPP__
+#endif // __CSOH_TIMER_HPP__
