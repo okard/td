@@ -18,15 +18,22 @@
 */
 #include <engine/ui/SystemInterface.hpp>
 
-#include "utTimer.h"
+#include <csoh/Timer.hpp>
+
 
 /**
 * Return Elapsed Time in Seconds
 */
 float SystemInterface::GetElapsedTime()
 {
-    static Horde3D::Timer timer;
+    static csoh::Timer timer;
     
-    return timer.getElapsedTimeMS()*1000;
+    if(!timer.isRunning())
+        timer.start();
+    
+    float t = timer.time();
+    timer.reset();
+    
+    return t*1000;
     
 }

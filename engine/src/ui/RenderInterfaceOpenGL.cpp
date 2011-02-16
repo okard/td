@@ -26,17 +26,22 @@
  */
 
 #include <engine/ui/RenderInterfaceOpenGL.hpp>
-#include <Rocket/Core.h>
 #include <engine/ui/ShellOpenGL.h>
-//#include "utOpenGL.h"
+
+#include <Rocket/Core.h>
 
 #define GL_CLAMP_TO_EDGE 0x812F
 
+/**
+* Create new OpenGL libRocket Interface
+*/
 RenderInterfaceOpenGL::RenderInterfaceOpenGL()
 {
 }
 
-// Called by Rocket when it wants to render geometry that it does not wish to optimise.
+/**
+* Called by Rocket when it wants to render geometry that it does not wish to optimise.
+*/
 void RenderInterfaceOpenGL::RenderGeometry(Rocket::Core::Vertex* vertices, int ROCKET_UNUSED(num_vertices), int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
 {
 	glPushMatrix();

@@ -21,88 +21,22 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_MATH_HPP__
-#define __CSOH_MATH_HPP__
-
-namespace csoh {
-    
-/**
-* Clamp Value 
-*/    
-template<typename T>
-static inline T clamp(T value, T max, T min)
-{
-    if(value > max)
-        return max;
-    if(value < min)
-        return min;
-    return value;
-}
-
-/**
-* Vector 3 Floats
-*/
-class Vector3f
-{
-private:
-    ///Internal Error Access
-    enum {vx=0, vy=1, vz =0 };
-    
-    ///value array
-    float val[3];
-    
-public:
-    /**
-    * Create new default vector
-    */
-    Vector3f(bool init=true);
-    
-    /**
-    * Create new Vector
-    */
-    Vector3f(const float x, const float y, const float z);
-    
-    /// x value
-    float x() const;
-    
-    /// y value
-    float y() const; 
-    
-    /// z value
-    float z() const;
-};
-   
-/**
-* Matrix 3x3 floats
-*/
-class Matrix3f
-{
-private:
-    float val[3][3];
-    
-public:
-    
-};
+#ifndef __CSOH_PLATFORM_HPP__
+#define __CSOH_PLATFORM_HPP__
 
 
-/**
-* Quaternion
-*/
-class Quaternion
-{
-private:
-    enum {vx=0, vy=1, vz=2, vw=3};
-    float val[4];
+#ifdef WIN32
+    #define CSOH_WIN32
     
-public:
-    
-};
-
-    
-    
-    
-    
-} //end namespace csoh
+    #ifdef CSOH_LIBRARY
+        #define CSOH_EXPORT __declspec(dllexport)
+    #else 
+        #define CSOH_EXPORT __declspec(dllimport)
+    #endif
+#else
+    #define CSOH_LINUX
+    #define CSOH_EXPORT
+#endif
 
 
-#endif // __CSOH_MATH_HPP__
+#endif // __CSOH_PLATFORM_HPP__

@@ -18,30 +18,33 @@
 */
 #include <engine/EngineCore.hpp>
 
-//Horde3D
-#include "egCom.h"
-#include "egModules.h"
-#include "egRenderer.h"
+//CSOH Includes
+#include <csoh/Renderer.hpp>
 
-//LibRocket
+//libRocket Includes
 #include <Rocket/Core.h>
 
+// Engine Includes
+#include <engine/Exception.hpp>
 #include <engine/script/LuaState.hpp>
 #include <engine/ui/SystemInterface.hpp>
 #include <engine/ui/RenderInterfaceOpenGL.hpp>
 
-using namespace engine;
-using namespace Horde3D;
+using engine::EngineCore;
+using engine::script::LuaState;
 
 /**
 * Create new engine core
 */
 EngineCore::EngineCore()
-    : renderer(new Horde3D::Renderer()),
-      lua(new script::LuaState())
+    : renderer(new csoh::Renderer()),
+      lua(new script::LuaState()), ui(0)
 {    
-    Rocket::Core::Vector2i dim(1024, 768);
-    ui = Rocket::Core::CreateContext("default", dim);
+    //general init
+    initialize();
+    
+    
+    //TODO Register Lua Interface
 }
 
 /**
@@ -49,34 +52,32 @@ EngineCore::EngineCore()
 */
 EngineCore::~EngineCore()
 {
+    //delete horde renderer
     delete renderer;
+    
+    //delete ui
     ui->RemoveReference();
     delete ui;
 }
 
 
 /**
-* EngineCore Initialize
+* Static EngineCore Initialize
 */
 void EngineCore::initialize()
 {
     static bool init = false;
     
+    // Initialize Things here only once in whole program
     if(!init)
     {
-        //Initialize Static Horde3D Stuff
-        //TODO Rewrite Horde3D Module Class for more generic initialization
-        Modules::init();
-        Modules::config().setOption(EngineOptions::MaxLogLevel, 4.0);
-    
         //Initialize Static liBRocket Stuff
         Rocket::Core::SetSystemInterface(new SystemInterface());
         Rocket::Core::SetRenderInterface(new RenderInterfaceOpenGL());
         if(!Rocket::Core::Initialise())
         {
+            throw Exception("Can't initialize Rocket::Core");
         }
-        
-        //TODO Register Lua Interface
         
         //init done
         init = true;
@@ -89,8 +90,9 @@ void EngineCore::initialize()
 */
 void EngineCore::init()
 {
-    //general init
-    initialize();
+    // initialize context here
+    // because of horde required the opengl context
+    ui = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(1024, 768));
     
     //Initialize Render Stuff
     renderer->init();
@@ -119,14 +121,15 @@ void EngineCore::render()
     //renderer->finalizeFrame();
     
     //render UI
-    //ui->Update();
-    //ui->Render();
+    //ui->
+    ui->Render();
+    ui->Update();
 }
 
 /**
 * Get Lua State
 */
-script::LuaState* EngineCore::getLuaState()
+LuaState* EngineCore::getLuaState()
 {
     return lua;
 }

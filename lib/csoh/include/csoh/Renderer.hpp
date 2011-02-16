@@ -24,6 +24,9 @@
 #ifndef __CSOH_RENDERER_HPP__
 #define __CSOH_RENDERER_HPP__
 
+#include <csoh/Timer.hpp>
+#include <csoh/gl/glRenderer.hpp>
+
 namespace csoh {
 
 /**
@@ -31,11 +34,38 @@ namespace csoh {
 */    
 class Renderer
 {
+private:
+    /// Implemented Renderer
+    //NOTICE: This can be replace with an dxRenderer for a DirectX-Build
+    glRenderer render;
+    
+    /// Timer
+    Timer timer;
+    
+public:
+    /**
+    * Create new renderer
+    */
+    Renderer();
+    
+    /**
+    * Destructs renderer
+    */
+    ~Renderer();
+    
+    /**
+    * Initialize Renderer
+    * May require valid Graphic Context
+    */
+    void init();
+    
+    /**
+    * Resize Render Viewport
+    */
+    void resize(int x, int y, int width, int height);
+    
     //Interface for SceneManager?
-    
-    
-    //render(Camera)
-    //resize
+    //render(Camera* cam)
 };
     
 

@@ -21,88 +21,40 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_MATH_HPP__
-#define __CSOH_MATH_HPP__
+#ifndef __CSOH_EXCEPTION_HPP__
+#define __CSOH_EXCEPTION_HPP__
+
+#include <exception>
 
 namespace csoh {
-    
-/**
-* Clamp Value 
-*/    
-template<typename T>
-static inline T clamp(T value, T max, T min)
-{
-    if(value > max)
-        return max;
-    if(value < min)
-        return min;
-    return value;
-}
 
 /**
-* Vector 3 Floats
+* Engine Exception
 */
-class Vector3f
+class Exception : public std::exception
 {
-private:
-    ///Internal Error Access
-    enum {vx=0, vy=1, vz =0 };
+    private:
+        /// exception msg
+        const char* msg;
     
-    ///value array
-    float val[3];
-    
-public:
-    /**
-    * Create new default vector
-    */
-    Vector3f(bool init=true);
-    
-    /**
-    * Create new Vector
-    */
-    Vector3f(const float x, const float y, const float z);
-    
-    /// x value
-    float x() const;
-    
-    /// y value
-    float y() const; 
-    
-    /// z value
-    float z() const;
+    public:
+        /**
+        * Constructor
+        */
+        Exception(const char* msg)
+            : msg(msg)
+        {
+        }
+        
+        /**
+        * Description
+        */
+        virtual const char* what() const throw()
+        {
+            return msg;
+        }
 };
-   
-/**
-* Matrix 3x3 floats
-*/
-class Matrix3f
-{
-private:
-    float val[3][3];
-    
-public:
-    
-};
-
-
-/**
-* Quaternion
-*/
-class Quaternion
-{
-private:
-    enum {vx=0, vy=1, vz=2, vw=3};
-    float val[4];
-    
-public:
-    
-};
-
-    
-    
-    
-    
+        
 } //end namespace csoh
 
-
-#endif // __CSOH_MATH_HPP__
+#endif //__CSOH_EXCEPTION_HPP__

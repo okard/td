@@ -7,10 +7,9 @@ project(engine)
 include_directories(include)
 
 #include directory for horde3d
-include_directories(${CMAKE_SOURCE_DIR}/lib/horde3d/shared)
-include_directories(${CMAKE_SOURCE_DIR}/lib/horde3d/source)
 include_directories(${CMAKE_SOURCE_DIR}/lib/cul/include)
 include_directories(${CMAKE_SOURCE_DIR}/lib/libRocket/Include)
+include_directories(${CMAKE_SOURCE_DIR}/lib/csoh/include)
 
 #source files for engine
 set( ENGINE_SRC
@@ -23,4 +22,4 @@ set( ENGINE_SRC
 
 #library
 add_library(engine ${ENGINE_SRC})
-target_link_libraries(engine csoh horde3d Rocket ${LUA_LIB})
+target_link_libraries(engine csoh Rocket ${LUA_LIB})

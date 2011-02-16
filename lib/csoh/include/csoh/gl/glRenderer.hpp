@@ -29,11 +29,33 @@
 namespace csoh {
 
 /**
-* Open GL Renderer
+* OpenGL Renderer
 */
 class glRenderer
 {
+private:
+    /// Is Render Initialized
+    bool initialized;
+public:
+
+    /**
+    * Create new OpenGL renderer
+    */
+    glRenderer();
     
+    /**
+    * Destroy OpenGL renderer
+    */
+    ~glRenderer();
+    
+    /**
+    * Initialize Renderer
+    */
+    void initialize();
+    
+    //resize
+    //renderStart
+    //renderFinish
 };
 
 } //end namespace csoh

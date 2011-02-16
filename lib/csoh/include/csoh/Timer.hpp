@@ -24,17 +24,64 @@
 #ifndef __CSOH_TIMER_HPP__
 #define __CSOH_TIMER_HPP__
 
+
+namespace csoh {
+
 /**
 * High Precesion Timer
 */
 class Timer
 {
-    //start
-    //stop
-    //reset
-    //time
-    //running
+private:
+    /// is running
+    bool running;
+    
+    /// Last time value
+    float lastTime;
+    
+public:
+    /**
+    * Create new Timer
+    */
+    Timer();
+    
+    /**
+    * Create new Timer
+    */
+    Timer(bool start);
+    
+    /**
+    * Destructs timer
+    */
+    ~Timer();
+   
+    /**
+    * Start timer
+    */
+    void start();
+    
+    /**
+    * Stop timer
+    */
+    float stop();
+    
+    /**
+    * Reset timer
+    */
+    void reset();
+    
+    /**
+    * Elapsed time
+    */
+    float time();
+    
+    /**
+    * Is the timer running or stopped
+    */
+    bool isRunning();
 };
+
+} //end namespace csoh
 
 
 #endif // __CSOH_TIMER_HPP__

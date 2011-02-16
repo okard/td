@@ -21,7 +21,7 @@
 
 
 //forward declaration
-namespace Horde3D {
+namespace csoh {
     class Renderer;
 }
 
@@ -47,7 +47,7 @@ class EngineCore
 {
 private:
     /// Renderer
-    Horde3D::Renderer* renderer;
+    csoh::Renderer* renderer;
     
     /// Lua State
     script::LuaState* lua;

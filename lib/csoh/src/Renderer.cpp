@@ -23,3 +23,34 @@
 */
 #include <csoh/Renderer.hpp>
 
+using csoh::Renderer;
+
+
+Renderer::Renderer()
+{
+    //Initialize all Stuff that doesnt require a active graphic context
+}
+
+Renderer::~Renderer()
+{
+    
+}
+
+
+/**
+* Initialize Renderer
+* May require valid Graphic Context
+*/
+void Renderer::init()
+{
+    render.initialize();
+}
+
+/**
+* Resize Render Viewport
+*/
+void Renderer::resize(int x, int y, int width, int height)
+{
+    //render.resize();
+}
+

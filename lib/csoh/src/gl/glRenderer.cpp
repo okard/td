@@ -22,3 +22,30 @@
     THE SOFTWARE.
 */
 #include <csoh/gl/glRenderer.hpp>
+
+using csoh::glRenderer;
+
+/**
+* Create new OpenGL renderer
+*/
+glRenderer::glRenderer()
+{
+    //initialize stuff which doesnt require opengl context
+}
+
+/**
+* Destroy OpenGL renderer
+*/
+glRenderer::~glRenderer()
+{
+    
+}
+
+/**
+* Initialize Renderer
+*/
+void glRenderer::initialize()
+{
+    //Check for OpenGL Context
+    //at this moment a OpenGL Context must exist
+}
