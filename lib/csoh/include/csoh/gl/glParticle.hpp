@@ -21,90 +21,26 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLSHADER_HPP__
-#define __CSOH_GLSHADER_HPP__
-
-#include "GL.hpp"
+#ifndef __CSOH_GLPARTICLE_HPP__
+#define __CSOH_GLPARTICLE_HPP__
 
 namespace csoh {
-  
+ 
 /**
-* Open GL Shader
+* Particle Emitter
 */
-class glShader
+class glParticleEmitter
 {
-    friend class glProgram;
     
 private:
-    /// Shader Id
-    GLuint shaderId;
-    
-    /// Shader Type
-    GLenum type;
     
 public:
-    /**
-    * Create new OpenGL Shader
-    * GL_VERTEX_SHADER or
-    * GL_FRAGMENT_SHADER
-    */
-    glShader(GLenum type);
     
-    /**
-    * Destructor
-    */
-    ~glShader();
-    
-    /**
-    * Compile Shader
-    */
-    void compile(const char* src); 
 };
-
-/**
-* OpenGL Shader Program
-*/
-class glProgram
-{
-private:
-    /// Program Id
-    GLint progId;
-    
-    ///TODO Internal State tracker?
-    
-public:
-    /**
-    * Create new opengl shader program
-    */
-    glProgram();
-    
-    /**
-    * Destructs opengl shader program
-    */
-    ~glProgram();
-    
-    /**
-    * Attach a shader to program
-    */
-    void attach(glShader* shader);
-    
-    /**
-    * Detach shader from program
-    */
-    void detach(glShader* shader);
-    
-    /**
-    * Link shader
-    */
-    void link();
-    
-    /**
-    * Use shader
-    */
-    void use();
-};
-    
+      
     
 } //end namespace csoh
 
-#endif // __CSOH_GLSHADER_HPP__
+
+
+#endif //__CSOH_GLPARTICLE_HPP__

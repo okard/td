@@ -73,7 +73,7 @@ public:
     /**
     * Elapsed time
     */
-    float time();
+    float time(bool reset = false);
     
     /**
     * Is the timer running or stopped

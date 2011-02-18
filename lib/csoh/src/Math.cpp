@@ -42,6 +42,59 @@ Vector3f::Vector3f(const float x, const float y, const float z)
     val[vz] = z;
 }
 
+/**
+* Add a another vector and results in a new Vector
+*/
+Vector3f Vector3f::operator+(const Vector3f& vec)
+{
+    return Vector3f(val[vx]+vec.x(), val[vy]+vec.y(), val[vz]+vec.z());
+}
+
+/**
+* Add the another vector
+*/
+Vector3f& Vector3f::operator+=(const Vector3f& vec)
+{
+    val[vx] += vec.val[vx];
+    val[vy] += vec.val[vy];
+    val[vz] += vec.val[vz];
+    
+    return *this;
+}
+
+/**
+* Subtract Vector
+*/
+Vector3f Vector3f::operator-(const Vector3f& vec)
+{
+    return Vector3f(val[vx]-vec.x(), val[vy]-vec.y(), val[vz]-vec.z());
+}
+
+/**
+* Subtract Vector
+*/
+Vector3f& Vector3f::operator-=(const Vector3f& vec)
+{
+    val[vx] -= vec.val[vx];
+    val[vy] -= vec.val[vy];
+    val[vz] -= vec.val[vz];
+    
+    return *this;
+}
+
+/**
+* Assign a Vector
+*/
+Vector3f& Vector3f::operator=(const Vector3f& vec)
+{
+    val[vx] = vec.val[vx];
+    val[vy] = vec.val[vy];
+    val[vz] = vec.val[vz];
+    
+    return *this;
+}
+
+
 float Vector3f::x() const
 {
     return val[vx];

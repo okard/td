@@ -32,7 +32,7 @@ namespace Rocket {
 }
 
 namespace engine {
-    namespace script {
+    namespace lua {
         class LuaState;
     }
 }
@@ -50,7 +50,7 @@ private:
     csoh::Renderer* renderer;
     
     /// Lua State
-    script::LuaState* lua;
+    lua::LuaState* lua;
     
     /// GUI 
     Rocket::Core::Context* ui;
@@ -87,7 +87,7 @@ public:
     /**
     * Get Lua State
     */
-    script::LuaState* getLuaState();
+    lua::LuaState* getLuaState();
     
     /**
     * Get libRocket Context

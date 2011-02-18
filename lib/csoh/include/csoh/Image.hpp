@@ -21,90 +21,23 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLSHADER_HPP__
-#define __CSOH_GLSHADER_HPP__
+#ifndef __CSOH_IMAGE_HPP__
+#define __CSOH_IMAGE_HPP__
 
-#include "GL.hpp"
 
 namespace csoh {
-  
-/**
-* Open GL Shader
-*/
-class glShader
-{
-    friend class glProgram;
-    
-private:
-    /// Shader Id
-    GLuint shaderId;
-    
-    /// Shader Type
-    GLenum type;
-    
-public:
-    /**
-    * Create new OpenGL Shader
-    * GL_VERTEX_SHADER or
-    * GL_FRAGMENT_SHADER
-    */
-    glShader(GLenum type);
-    
-    /**
-    * Destructor
-    */
-    ~glShader();
-    
-    /**
-    * Compile Shader
-    */
-    void compile(const char* src); 
-};
 
 /**
-* OpenGL Shader Program
+* Represents a Image
+* Interface for image loading from hdd
 */
-class glProgram
+class Image
 {
-private:
-    /// Program Id
-    GLint progId;
     
-    ///TODO Internal State tracker?
-    
-public:
-    /**
-    * Create new opengl shader program
-    */
-    glProgram();
-    
-    /**
-    * Destructs opengl shader program
-    */
-    ~glProgram();
-    
-    /**
-    * Attach a shader to program
-    */
-    void attach(glShader* shader);
-    
-    /**
-    * Detach shader from program
-    */
-    void detach(glShader* shader);
-    
-    /**
-    * Link shader
-    */
-    void link();
-    
-    /**
-    * Use shader
-    */
-    void use();
 };
     
     
 } //end namespace csoh
 
-#endif // __CSOH_GLSHADER_HPP__
+
+#endif // __CSOH_IMAGE_HPP__

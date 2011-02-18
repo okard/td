@@ -28,8 +28,7 @@ float SystemInterface::GetElapsedTime()
 {
     static csoh::Timer timer(true);
     
-    float t = timer.time();
-    timer.reset();
+    float t = timer.time(true);
     
     return t*1000;
     

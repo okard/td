@@ -18,12 +18,11 @@
 
 */
 
-#include <engine/script/LuaState.hpp>
+#include <engine/lua/LuaState.hpp>
 
-//#include <cul/log/Log>
+#include <engine/Exception.hpp>
 
-using namespace engine;
-using namespace script;
+using engine::lua::LuaState;
 
 /**
 * Constructor
@@ -67,6 +66,7 @@ void LuaState::LoadFile(const char* file)
     int status = luaL_loadfile(state, file);
     if (status) 
     {
+        throw engine::Exception("Can't load lua file");
         //LOG("Couldn't load file: " << lua_tostring(state, -1))
     }
 

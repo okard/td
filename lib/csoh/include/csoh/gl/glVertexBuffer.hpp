@@ -21,90 +21,40 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#ifndef __CSOH_GLSHADER_HPP__
-#define __CSOH_GLSHADER_HPP__
+#ifndef __CSOH_GLVERTEXBUFFER_HPP__
+#define __CSOH_GLVERTEXBUFFER_HPP__
 
 #include "GL.hpp"
 
 namespace csoh {
-  
-/**
-* Open GL Shader
-*/
-class glShader
-{
-    friend class glProgram;
-    
-private:
-    /// Shader Id
-    GLuint shaderId;
-    
-    /// Shader Type
-    GLenum type;
-    
-public:
-    /**
-    * Create new OpenGL Shader
-    * GL_VERTEX_SHADER or
-    * GL_FRAGMENT_SHADER
-    */
-    glShader(GLenum type);
-    
-    /**
-    * Destructor
-    */
-    ~glShader();
-    
-    /**
-    * Compile Shader
-    */
-    void compile(const char* src); 
-};
 
 /**
-* OpenGL Shader Program
+* OOP Wrapper for Vertex Buffer Object
 */
-class glProgram
+class glVertexBuffer
 {
 private:
-    /// Program Id
-    GLint progId;
-    
-    ///TODO Internal State tracker?
-    
+    GLuint vboId;
 public:
     /**
-    * Create new opengl shader program
+    * Create new Vertex Buffer Object
     */
-    glProgram();
+    glVertexBuffer();
     
     /**
-    * Destructs opengl shader program
+    * Destructs Vertex Buffer Object
     */
-    ~glProgram();
+    ~glVertexBuffer();
     
     /**
-    * Attach a shader to program
+    * Bind Vertex Buffer
     */
-    void attach(glShader* shader);
+    void bind();
     
-    /**
-    * Detach shader from program
-    */
-    void detach(glShader* shader);
-    
-    /**
-    * Link shader
-    */
-    void link();
-    
-    /**
-    * Use shader
-    */
-    void use();
+    ///TODO SetVertexBufferData
 };
-    
     
 } //end namespace csoh
 
-#endif // __CSOH_GLSHADER_HPP__
+
+#endif //__CSOH_GLVERTEXBUFFER_HPP__

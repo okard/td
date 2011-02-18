@@ -29,6 +29,8 @@ using csoh::Renderer;
 Renderer::Renderer()
 {
     //Initialize all Stuff that doesnt require a active graphic context
+    
+    timer.start();
 }
 
 Renderer::~Renderer()

@@ -21,7 +21,7 @@
 #include <glul/GlContext>
 #include <glul/EventLoop>
 
-#include <engine/script/LuaState.hpp>
+#include <engine/lua/LuaState.hpp>
 
 using namespace game;
 using namespace engine;
@@ -64,6 +64,33 @@ void GameWindow::run()
         engine.render();
     }
 }
+
+/**
+* Resize Event
+*/
+void GameWindow::OnResize(const glul::Rect& rect)
+{
+    //engine.resize(rect.width, rect.height);
+}
+
+/**
+* Render Event
+*/
+void GameWindow::OnRender()
+{
+    //engine.render();
+    
+    glBegin(GL_TRIANGLES);
+        glColor3f(1, 0, 0);
+        glVertex3f( 0.0f, 1.0f, 0.0f);              // Top
+        glColor3f(0, 1, 0);
+        glVertex3f(-1.0f,-1.0f, 0.0f);              // Bottom Left
+        glColor3f(0, 0, 1);
+        glVertex3f( 1.0f,-1.0f, 0.0f);              // Bottom Right
+    glEnd();
+}
+
+
 
 /**
 * Get Engine

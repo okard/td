@@ -20,6 +20,7 @@
 #define __GAMEWINDOW_HPP__
 
 #include <glul/GlWindow>
+#include <glul/Types>
 #include <engine/EngineCore.hpp>
 
 namespace game {
@@ -55,6 +56,16 @@ class GameWindow : public glul::GlWindow
         * run
         */
         void run();
+        
+        /**
+        * Resize Event
+        */
+        virtual void OnResize(const glul::Rect& rect);
+        
+        /**
+        * Render Event
+        */
+        virtual void OnRender();
 
         /**
         * Get Engine

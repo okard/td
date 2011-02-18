@@ -26,12 +26,12 @@
 
 // Engine Includes
 #include <engine/Exception.hpp>
-#include <engine/script/LuaState.hpp>
+#include <engine/lua/LuaState.hpp>
 #include <engine/ui/SystemInterface.hpp>
 #include <engine/ui/RenderInterfaceOpenGL.hpp>
 
 using engine::EngineCore;
-using engine::script::LuaState;
+using engine::lua::LuaState;
 
 #include <string>
 
@@ -49,7 +49,7 @@ const char* GenId()
 */
 EngineCore::EngineCore()
     : renderer(new csoh::Renderer()),
-      lua(new script::LuaState()), ui(0)
+      lua(new lua::LuaState()), ui(0)
 {    
     //general init
     initialize();

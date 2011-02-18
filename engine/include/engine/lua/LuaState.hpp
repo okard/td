@@ -28,7 +28,7 @@ extern "C" {
 
 
 namespace engine {
-namespace script {
+namespace lua {
 
 //TODO Add Script.Load to vm at creation
 

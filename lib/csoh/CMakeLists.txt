@@ -15,6 +15,7 @@ set(CSOH_SRC
     src/gl/glTexture.cpp
     src/gl/glShader.cpp
     src/gl/glRenderer.cpp
+    src/gl/glVertexBuffer.cpp
     )
 
 add_library(csoh ${CSOH_SRC})

@@ -111,15 +111,18 @@ void Timer::reset()
 /**
 * Elapsed time in ms
 */
-float Timer::time()
+float Timer::time(bool reset)
 {
     if(!running)
         return .0f;
     
     //get cur time and subtract
-    float curt = getTimeMS();
+    float t = getTimeMS() - lastTime;
     
-    return curt-lastTime;
+    if(reset)
+        this->reset();
+    
+    return t;
 }
 
 /**

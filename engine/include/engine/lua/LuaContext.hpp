@@ -30,7 +30,7 @@ extern "C"
 #include <cul/Singleton.hpp>
 
 namespace engine {
-namespace script {
+namespace lua {
 
 /**
 * Higher Level Access to LuaState

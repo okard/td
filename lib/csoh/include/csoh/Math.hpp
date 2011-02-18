@@ -62,14 +62,41 @@ public:
     */
     Vector3f(const float x, const float y, const float z);
     
+    //TODO mul div
+    
+    /**
+    * Add a another vector and results in a new Vector
+    */
+    Vector3f operator+(const Vector3f& vec);
+    
+    /**
+    * Add the another vector
+    */
+    Vector3f& operator+=(const Vector3f& vec);
+    
+    /**
+    * Subtract Vector
+    */
+    Vector3f operator-(const Vector3f& vec);
+    
+    /**
+    * Subtract Vector
+    */
+    Vector3f& operator-=(const Vector3f& vec);
+    
+    /**
+    * Assign a Vector
+    */
+    Vector3f& operator=(const Vector3f& vec);
+    
     /// x value
-    float x() const;
+    float inline x() const;
     
     /// y value
-    float y() const; 
+    float inline y() const; 
     
     /// z value
-    float z() const;
+    float inline z() const;
 };
    
 /**
@@ -84,6 +111,9 @@ public:
     
 };
 
+//Matrix4f
+//Vector4f
+
 
 /**
 * Quaternion
@@ -96,11 +126,10 @@ private:
     
 public:
     
+    //rotation?
+    
 };
 
-    
-    
-    
     
 } //end namespace csoh
 
