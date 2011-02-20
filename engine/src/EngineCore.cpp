@@ -1,5 +1,5 @@
 /*
-    Tower Defense Game
+    TD Game Engine
     Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
@@ -17,6 +17,10 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 #include <engine/EngineCore.hpp>
+
+//cul includes
+#include <cul/String.hpp>
+#include <cul/Convert.hpp>
 
 //CSOH Includes
 #include <csoh/Renderer.hpp>
@@ -36,12 +40,16 @@ using engine::lua::LuaState;
 #include <string>
 
 template<typename T>
-const char* GenId()
+cul::string GenId()
 {
+    //TODO optimize?
     static unsigned int id = 0;
-    std::string str("id-");
-    str += ++id;
-    return str.c_str();
+    cul::string str("id-\0");
+    char* idStr = cul::Str::to(++id);
+    str += idStr;
+    delete idStr;
+    
+    return str;
 }
 
 /**
@@ -49,13 +57,17 @@ const char* GenId()
 */
 EngineCore::EngineCore()
     : renderer(new csoh::Renderer()),
-      lua(new lua::LuaState()), ui(0)
+      lua(new lua::LuaState()), 
+      ui(0),
+      uiName(5)
 {    
     //general init
     initialize();
     
-    // Can Initialize Rocket Context without valuid OpenGL Context
-    ui = Rocket::Core::CreateContext(GenId<Rocket::Core::Context>(), Rocket::Core::Vector2i(1024, 768));
+    // Initialize libRocket Context
+    // Store name in a memory safe container
+    uiName = GenId<Rocket::Core::Context>();
+    ui = Rocket::Core::CreateContext(uiName.c_str(), Rocket::Core::Vector2i(1024, 768));
     
     //TODO Register Lua Interface
 }
@@ -65,10 +77,10 @@ EngineCore::EngineCore()
 */
 EngineCore::~EngineCore()
 {
-    //delete horde renderer
+    //destroy csoh renderer
     delete renderer;
     
-    //delete ui
+    //destroy librocket context
     ui->RemoveReference();
     delete ui;
 }

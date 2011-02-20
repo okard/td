@@ -23,23 +23,41 @@
 */
 #include <csoh/Math.hpp>
 
-
 //TODO add SSE Implementation
 
 using csoh::Vector3f;
 
+//=============================================================================
+// Vector3f Implementation
+//=============================================================================
 
+/**
+* Create a new Vector 
+*/
 Vector3f::Vector3f(bool init)
 {
     if(init)
         val[vx] = val[vy] = val[vz] = 0.f;
 }
 
+/**
+* 
+*/
 Vector3f::Vector3f(const float x, const float y, const float z)
 {
     val[vx] = x;
     val[vy] = y;
     val[vz] = z;
+}
+
+/**
+* Copy Constructor
+*/
+Vector3f::Vector3f(const Vector3f& vec)
+{
+    val[vx] = vec.x();
+    val[vy] = vec.y();
+    val[vz] = vec.z();
 }
 
 /**
@@ -94,7 +112,6 @@ Vector3f& Vector3f::operator=(const Vector3f& vec)
     return *this;
 }
 
-
 float Vector3f::x() const
 {
     return val[vx];
@@ -109,4 +126,9 @@ float Vector3f::z() const
 {
     return val[vz];
 }
+
+
+//=============================================================================
+// 
+//=============================================================================
 

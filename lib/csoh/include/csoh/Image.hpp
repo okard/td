@@ -33,6 +33,9 @@ namespace csoh {
 */
 class Image
 {
+    //size widht/height
+    //pixel size
+    //compression (S3TC ...)
     
 };
     

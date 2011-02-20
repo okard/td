@@ -1,5 +1,5 @@
 /*
-    Tower Defense Game
+    TD Game Engine
     Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
@@ -79,3 +79,8 @@ int LuaState::Execute()
 {
   return lua_pcall(state, 0, LUA_MULTRET, 0);
 }
+
+//TODO hooking functions int lua_sethook (lua_State *L, lua_Hook f, int mask, int count);
+//hook function: typedef void (*lua_Hook) (lua_State *L, lua_Debug *ar);
+//lua_getinfo
+//add error handling function to lua? with stacktrace?

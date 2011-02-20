@@ -1,5 +1,5 @@
 /*
-    Tower Defense Game
+    TD Game Engine
     Copyright (C) 2010  okard
 
     This program is free software; you can redistribute it and/or modify
@@ -18,6 +18,8 @@
 */
 #ifndef __ENGINECORE_HPP__
 #define __ENGINECORE_HPP__
+
+#include <cul/String.hpp>
 
 
 //forward declaration
@@ -40,6 +42,8 @@ namespace engine {
 //engine namespace
 namespace engine {
 
+//fix double named init functions
+    
 /**
 * TD Game Engine
 */
@@ -52,8 +56,10 @@ private:
     /// Lua State
     lua::LuaState* lua;
     
-    /// GUI 
+    /// GUI Context
     Rocket::Core::Context* ui;
+    /// GUI Context Name
+    cul::string uiName;
 
 private:
     static void initialize();

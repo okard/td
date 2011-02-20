@@ -9,6 +9,7 @@ set(QT_USE_QTOPENGL TRUE)
 
 # include dirs
 include(${QT_USE_FILE})
+include_directories(${CMAKE_SOURCE_DIR}/lib/cul/include)
 include_directories(${CMAKE_SOURCE_DIR}/engine/include)
 
 # src

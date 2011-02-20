@@ -70,6 +70,7 @@ public:
     void startRender();
     
     //Interface for SceneManager?
+    // Rederer.render(Scene->CreateRenderList(Camera))
     //render(Camera* cam)
 };
     

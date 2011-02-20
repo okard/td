@@ -13,6 +13,7 @@ else()
 endif()
 
 #set up includes
+include_directories(${CMAKE_SOURCE_DIR}/lib/cul/include)
 include_directories(${CMAKE_SOURCE_DIR}/lib/glul/include)
 include_directories(${CMAKE_SOURCE_DIR}/engine/include)
 

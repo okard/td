@@ -1,5 +1,5 @@
 /*
-    Tower Defense Game Engine
+    TD Game Engine
     Copyright (C) 2011  okard
 
     This program is free software; you can redistribute it and/or modify

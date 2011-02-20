@@ -21,40 +21,21 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-#include <csoh/gl/glVertexBuffer.hpp>
+#include <csoh/Math.hpp>
+#include <cassert>
 
-using csoh::glVertexBuffer;
+using namespace csoh;
+
+
+
+
 
 /**
-* Create new Vertex Buffer Object
+* Main Function
 */
-glVertexBuffer::glVertexBuffer()
+int main(void)
 {
-    glGenBuffers(1, &vboId);
-}
     
-/**
-* Destructs Vertex Buffer Object
-*/
-glVertexBuffer::~glVertexBuffer()
-{
-    glDeleteBuffers(1, &vboId );
+    
+    return 0;
 }
-
-/**
-* Bind Vertex Buffer
-*/
-void glVertexBuffer::bind()
-{
-    glBindBufferARB(GL_ARRAY_BUFFER, vboId);
-    glEnableClientState(GL_VERTEX_ARRAY);
-}
-
-//glBufferDataARB(GL_ARRAY_BUFFER, size, NULL, GL_STATIC_DRAW);
-//glBufferDataARB
-//render function?
-// glVertexPointer(4, GL_FLOAT, STRIDE, POS_OFFSET);
-// glColorPointer(4, GL_FLOAT, STRIDE, COL_OFFSET);
-// glDrawElements
-
-

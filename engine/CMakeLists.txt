@@ -14,6 +14,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib/csoh/include)
 #source files for engine
 set( ENGINE_SRC
     src/EngineCore.cpp
+    src/Binding.cpp
     src/lua/LuaState.cpp
     src/lua/LuaContext.cpp
     src/ui/RenderInterfaceOpenGL.cpp
@@ -22,4 +23,4 @@ set( ENGINE_SRC
 
 #library
 add_library(engine ${ENGINE_SRC})
-target_link_libraries(engine csoh Rocket ${LUA_LIB})
+target_link_libraries(engine cul csoh Rocket ${LUA_LIB})

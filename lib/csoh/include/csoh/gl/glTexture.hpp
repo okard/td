@@ -35,8 +35,7 @@ class glTexture
 {
 private:
     GLuint texId;
-    
-    
+     
 public:
     /**
     * Create a new OpenGL Texture
@@ -55,6 +54,7 @@ public:
     
     //set(void[])
     //config 
+    //mipmap handling
     
 };
     

@@ -26,6 +26,8 @@
 using csoh::glShader;
 using csoh::glProgram;
 
+//TODO Error Handling see http://duriansoftware.com/joe/An-intro-to-modern-OpenGL.-Chapter-2.2:-Shaders.html
+
 /**
 * Create new OpenGL Shader
 */

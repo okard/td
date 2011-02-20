@@ -48,6 +48,8 @@ void glRenderer::initialize()
 {
     //Check for OpenGL Context
     //at this moment a OpenGL Context must exist
+    //when embedding glew init glew here?
+    //only when not already initialized
 }
 
 

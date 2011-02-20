@@ -27,19 +27,6 @@
 namespace csoh {
     
 /**
-* Clamp Value 
-*/    
-template<typename T>
-static inline T clamp(T value, T max, T min)
-{
-    if(value > max)
-        return max;
-    if(value < min)
-        return min;
-    return value;
-}
-
-/**
 * Vector 3 Floats
 */
 class Vector3f
@@ -62,8 +49,16 @@ public:
     */
     Vector3f(const float x, const float y, const float z);
     
-    //TODO mul div
+    /**
+    * Copy Constructor
+    */
+    Vector3f(const Vector3f& vec);
     
+    /**
+    * Assign a Vector
+    */
+    Vector3f& operator=(const Vector3f& vec);
+
     /**
     * Add a another vector and results in a new Vector
     */
@@ -84,11 +79,8 @@ public:
     */
     Vector3f& operator-=(const Vector3f& vec);
     
-    /**
-    * Assign a Vector
-    */
-    Vector3f& operator=(const Vector3f& vec);
-    
+    //TODO mul div
+ 
     /// x value
     float inline x() const;
     
@@ -111,8 +103,18 @@ public:
     
 };
 
-//Matrix4f
-//Vector4f
+
+/**
+* Matrix 4x4 float
+*/
+class Matrix4f
+{
+private:
+    
+public:
+    
+};
+
 
 
 /**
@@ -129,6 +131,29 @@ public:
     //rotation?
     
 };
+
+
+//Plane
+//Ray
+//...
+
+//=============================================================================
+// Utility Functions
+//=============================================================================
+
+/**
+* Clamp Value 
+*/    
+template<typename T>
+static inline T clamp(T value, T max, T min)
+{
+    if(value > max)
+        return max;
+    if(value < min)
+        return min;
+    return value;
+}
+
 
     
 } //end namespace csoh

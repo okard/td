@@ -1,6 +1,6 @@
 /*
     TD Game Engine
-    Copyright (C) 2010  okard
+    Copyright (C) 2011  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,22 +16,6 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __SYSTEMINTERFACE_HPP__
-#define __SYSTEMINTERFACE_HPP__
-
-#include <Rocket/Core/SystemInterface.h>
-
-/**
-* System Interface
-*/
-class SystemInterface : public Rocket::Core::SystemInterface
-{
-    /**
-    * Get Elapsed Time
-    */
-    virtual float GetElapsedTime();
-};
 
 
-
-#endif // __SYSTEMINTERFACE_HPP__
+//TODO C Interface for Engine
