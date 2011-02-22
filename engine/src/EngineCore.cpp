@@ -62,7 +62,21 @@ EngineCore::EngineCore()
       uiName(5)
 {    
     //general init
-    initialize();
+    static bool init = false;
+    // Initialize Things here only once in whole program
+    if(!init)
+    {
+        //Initialize Static liBRocket Stuff
+        Rocket::Core::SetSystemInterface(new SystemInterface());
+        Rocket::Core::SetRenderInterface(new RenderInterfaceOpenGL());
+        if(!Rocket::Core::Initialise())
+        {
+            throw Exception("Can't initialize Rocket::Core");
+        }
+        
+        //init done
+        init = true;
+    }
     
     // Initialize libRocket Context
     // Store name in a memory safe container
@@ -82,38 +96,13 @@ EngineCore::~EngineCore()
     
     //destroy librocket context
     ui->RemoveReference();
-    delete ui;
-}
-
-
-/**
-* Static EngineCore Initialize
-*/
-void EngineCore::initialize()
-{
-    static bool init = false;
-    
-    // Initialize Things here only once in whole program
-    if(!init)
-    {
-        //Initialize Static liBRocket Stuff
-        Rocket::Core::SetSystemInterface(new SystemInterface());
-        Rocket::Core::SetRenderInterface(new RenderInterfaceOpenGL());
-        if(!Rocket::Core::Initialise())
-        {
-            throw Exception("Can't initialize Rocket::Core");
-        }
-        
-        //init done
-        init = true;
-    }
 }
 
 /**
 * Initialize Engine core
 */
 void EngineCore::init()
-{
+{   
     //Initialize Render Stuff
     renderer->init();
 }

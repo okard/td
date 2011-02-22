@@ -60,9 +60,6 @@ private:
     Rocket::Core::Context* ui;
     /// GUI Context Name
     cul::string uiName;
-
-private:
-    static void initialize();
     
 public:
     /**

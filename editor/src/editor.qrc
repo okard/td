@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file alias="open">../img/document-open.png</file>
+    <file alias="console">../img/utilities-system-monitor.png</file>
     <file alias="engine">../img/applications-system.png</file>
     <file alias="script">../img/text-x-script.png</file>
   </qresource>

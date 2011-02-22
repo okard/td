@@ -8,6 +8,7 @@ Here getting all things merged
 * Scripting (lua/luajit)
 * User Interface (libRocket)
 * Physics (Bullet?)
+* Network
 
 
 TODO

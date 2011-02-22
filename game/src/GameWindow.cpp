@@ -70,7 +70,7 @@ void GameWindow::run()
 */
 void GameWindow::OnResize(const glul::Rect& rect)
 {
-    //engine.resize(rect.width, rect.height);
+    engine.resize(rect.width, rect.height);
 }
 
 /**
@@ -78,7 +78,7 @@ void GameWindow::OnResize(const glul::Rect& rect)
 */
 void GameWindow::OnRender()
 {
-    //engine.render();
+    engine.render();
     
     glBegin(GL_TRIANGLES);
         glColor3f(1, 0, 0);

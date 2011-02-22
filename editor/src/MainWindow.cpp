@@ -18,11 +18,14 @@
 */
 #include "MainWindow.moc"
 
-#include <engine/EngineCore.hpp>
-#include "EngineWidget.hpp"
-
-
 #include <QTextEdit>
+
+
+#include <engine/EngineCore.hpp>
+
+#include "EngineWidget.hpp"
+#include "EngineTab.hpp"
+
 
 using namespace editor;
 
@@ -33,10 +36,40 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     //setup ui
     setupUi(this);
+    showMaximized();
+    
+    //what is better?
+    TabContainer->setMovable(true);
+    TabContainer->setTabPosition(QTabWidget::South);
     
     // Connect actions to slots
     connect(actionNewEngineWindow, SIGNAL(triggered()), this, SLOT(newEngineTab()));
     connect(actionNewScriptWindow, SIGNAL(triggered()), this, SLOT(newScriptTab()));
+    
+    //EngineWidgets with specific startup lua for 
+    //- Map Editor
+    //- Material Editor
+    //- Model Viewer
+    //- Animation Viewer
+    
+    /*
+    struct EngineApp
+    {
+        QString name;
+        QString script;
+    }
+    QList<EngineApp> logins;
+
+    QSettings settings;
+    settings.beginWriteArray("logins");
+    for (int i = 0; i < logins.size(); ++i) {
+        settings.setArrayIndex(i);
+        settings.setValue("name", list.at(i).name);
+        settings.setValue("script", list.at(i).script);
+    }
+    settings.endArray();
+    
+    */
 }
 
 /**
@@ -53,11 +86,8 @@ MainWindow::~MainWindow()
 void MainWindow::newEngineTab()
 {
     //TODO Add here a Engine Widget
-    
-    engine::EngineCore* engine = new engine::EngineCore();
-    
-    QString str = "engine test";
-    TabContainer->addTab(static_cast<QWidget*>(new EngineWidget(this, engine)), str);
+    int id = TabContainer->addTab(new EngineTab(this), tr("Engine"));
+    TabContainer->setTabIcon(id, actionNewEngineWindow->icon());
 }
 
 /**
@@ -66,6 +96,6 @@ void MainWindow::newEngineTab()
 void MainWindow::newScriptTab()
 {
     //TODO Add here a QScintilla
-    QString str = "script test";
-    TabContainer->addTab(static_cast<QWidget*>(new QTextEdit(this)), str);
+    int id = TabContainer->addTab(new QTextEdit(this), tr("Script Editor"));
+    TabContainer->setTabIcon(id, actionNewScriptWindow->icon());
 }

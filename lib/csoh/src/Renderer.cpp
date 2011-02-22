@@ -35,7 +35,7 @@ Renderer::Renderer()
 
 Renderer::~Renderer()
 {
-    
+    timer.stop();
 }
 
 
@@ -61,6 +61,10 @@ void Renderer::resize(int x, int y, int width, int height)
 */
 void Renderer::startRender()
 {
+    //get time here?
+    //calcualte frames?
+    float t = timer.time(true);
+    
     render.renderStart();
 }
 

@@ -31,6 +31,7 @@ int main(int argc, char **argv)
     gw.show();
     
     //TODO Parse Arguments to load a startup lua script
+    //TODO Parse Configuration
 
     gw.run();
     return 0;

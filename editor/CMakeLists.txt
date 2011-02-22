@@ -17,11 +17,13 @@ set(editor_src
     src/main.cpp
     src/MainWindow.cpp
     src/EngineWidget.cpp
+    src/EngineTab.cpp
 )
 
 # uis
 set(editor_ui
     src/ui/MainWindow.ui
+    src/ui/EngineTab.ui
 )
 
 #qt resources

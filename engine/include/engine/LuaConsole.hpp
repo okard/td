@@ -1,6 +1,6 @@
 /*
-    Tower Defense Game
-    Copyright (C) 2010  okard
+    TD Game Engine
+    Copyright (C) 2011  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,48 +16,19 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "EngineWidget.moc"
+#ifndef __ENGINE_LUACONSOLE_HPP__
+#define __ENGINE_LUACONSOLE_HPP__
 
-using namespace editor;
-using namespace engine;
-
-/**
-* Creates new Engine Widget
-*/
-EngineWidget::EngineWidget(QWidget* parent, EngineCore* engine)
-    : QGLWidget(parent), engine(engine)
-{
-    //Register Editor Lua Functions here to
-    //engine->getLuaState()
-}
+namespace engine {
 
 /**
-* Initialize OpenGL
-*/
-void EngineWidget::initializeGL()
+* Lua Console with libRocket
+*/    
+class LuaConsole
 {
-    engine->init();
-}
-
-/**
-* Paint OpenGL
-*/
-void EngineWidget::paintGL()
-{
-    if(!this->isValid())
-    {
-        //no render context
-    }
     
-    //Call Engine Render Function
-    engine->render();
-}
+};
+    
+} //end namespace engine
 
-/**
-* Resize 
-*/
-void EngineWidget::resizeGL(int width, int height)
-{
-    //resize engine
-    engine->resize(width, height);
-}
+#endif // __ENGINE_LUACONSOLE_HPP__

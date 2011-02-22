@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EngineTab</class>
+ <widget class="QWidget" name="EngineTab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>547</width>
+    <height>279</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2"/>
+  <action name="actionLoadScript">
+   <property name="icon">
+    <iconset resource="../editor.qrc">
+     <normaloff>:/icons/open</normaloff>:/icons/open</iconset>
+   </property>
+   <property name="text">
+    <string>Load Script</string>
+   </property>
+   <property name="toolTip">
+    <string>Load Script</string>
+   </property>
+  </action>
+  <action name="actionOpenLuaConsole">
+   <property name="icon">
+    <iconset resource="../editor.qrc">
+     <normaloff>:/icons/console</normaloff>:/icons/console</iconset>
+   </property>
+   <property name="text">
+    <string>Open Lua Console</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Lua Console</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../editor.qrc"/>
+ </resources>
+ <connections/>
+</ui>

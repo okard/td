@@ -1,6 +1,6 @@
 /*
     Tower Defense Game
-    Copyright (C) 2010  okard
+    Copyright (C) 2011  okard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,48 +16,51 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "EngineWidget.moc"
+#ifndef __EDITOR_ENGINETAB_HPP__
+#define __EDITOR_ENGINETAB_HPP__
 
-using namespace editor;
-using namespace engine;
+#include <QWidget> 
 
+#include <engine/EngineCore.hpp>
+
+#include "ui_EngineTab.h"
+#include "EngineWidget.hpp"
+
+namespace editor {
+ 
 /**
-* Creates new Engine Widget
+* The Engine Tab
 */
-EngineWidget::EngineWidget(QWidget* parent, EngineCore* engine)
-    : QGLWidget(parent), engine(engine)
+class EngineTab : public QWidget, private Ui::EngineTab
 {
-    //Register Editor Lua Functions here to
-    //engine->getLuaState()
-}
-
-/**
-* Initialize OpenGL
-*/
-void EngineWidget::initializeGL()
-{
-    engine->init();
-}
-
-/**
-* Paint OpenGL
-*/
-void EngineWidget::paintGL()
-{
-    if(!this->isValid())
-    {
-        //no render context
-    }
+    Q_OBJECT
+        
+private:
+    /// Engine
+    engine::EngineCore engine;
     
-    //Call Engine Render Function
-    engine->render();
-}
+    /// Engine Widget
+    EngineWidget engineWidget;
+    
+public:
+    /**
+    * Creates a new Main Window
+    */
+    EngineTab(QWidget *parent = 0);
+    
+    /**
+    * Destructs Main Window
+    */
+    virtual ~EngineTab();
+    
+public slots:
+    /**
+    * Load a lua script into engine
+    */
+    void loadScript();
+};
+    
+} //end namespace editor
 
-/**
-* Resize 
-*/
-void EngineWidget::resizeGL(int width, int height)
-{
-    //resize engine
-    engine->resize(width, height);
-}
+
+#endif // __EDITOR_ENGINETAB_HPP__
