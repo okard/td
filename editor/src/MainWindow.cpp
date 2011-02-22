@@ -46,6 +46,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(actionNewEngineWindow, SIGNAL(triggered()), this, SLOT(newEngineTab()));
     connect(actionNewScriptWindow, SIGNAL(triggered()), this, SLOT(newScriptTab()));
     
+    
+    connect(TabContainer, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+    
     //EngineWidgets with specific startup lua for 
     //- Map Editor
     //- Material Editor
@@ -79,6 +82,10 @@ MainWindow::~MainWindow()
 {
 }
 
+void MainWindow::closeTab(int index)
+{
+    TabContainer->removeTab(index);
+}
 
 /**
 * Add new EngineTab
@@ -88,6 +95,7 @@ void MainWindow::newEngineTab()
     //TODO Add here a Engine Widget
     int id = TabContainer->addTab(new EngineTab(this), tr("Engine"));
     TabContainer->setTabIcon(id, actionNewEngineWindow->icon());
+    TabContainer->setCurrentIndex(id);
 }
 
 /**
@@ -98,4 +106,5 @@ void MainWindow::newScriptTab()
     //TODO Add here a QScintilla
     int id = TabContainer->addTab(new QTextEdit(this), tr("Script Editor"));
     TabContainer->setTabIcon(id, actionNewScriptWindow->icon());
+    TabContainer->setCurrentIndex(id);
 }

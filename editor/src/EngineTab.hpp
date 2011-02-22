@@ -20,6 +20,7 @@
 #define __EDITOR_ENGINETAB_HPP__
 
 #include <QWidget> 
+#include <QToolBar>
 
 #include <engine/EngineCore.hpp>
 
@@ -41,6 +42,9 @@ private:
     
     /// Engine Widget
     EngineWidget engineWidget;
+    
+    /// Toolbar
+    QToolBar* toolBar;
     
 public:
     /**

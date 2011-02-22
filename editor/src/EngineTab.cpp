@@ -35,12 +35,12 @@ EngineTab::EngineTab(QWidget *parent)
       //setup ui
     setupUi(this);
 
-    QToolBar* bar = new QToolBar(this);
-    bar->addAction(actionLoadScript);
-    bar->addAction(actionOpenLuaConsole);
-    bar->setMovable(false);
+    toolBar = new QToolBar(this);
+    toolBar->addAction(actionLoadScript);
+    toolBar->addAction(actionOpenLuaConsole);
+    toolBar->setMovable(false);
 
-    this->layout()->addWidget(bar);
+    this->layout()->addWidget(toolBar);
     this->layout()->addWidget(&engineWidget);
     
     

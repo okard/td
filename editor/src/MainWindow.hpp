@@ -47,6 +47,8 @@ public slots:
     void newEngineTab();
     void newScriptTab();
     
+    void closeTab(int index);
+    
 };
 
 } //end namespace editor
