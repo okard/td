@@ -66,5 +66,5 @@ void EngineTab::loadScript()
          return;
      
      engine.getLuaState()->LoadFile(fileName.toStdString().c_str());
-    
+     engine.getLuaState()->Execute();
 }

@@ -27,6 +27,8 @@ function makereadonly(t)
     return setmetatable({}, mt)
 end
 
+print("Startup Game main.lua")
+
 -- Load Base Table/Classes
 -- Shared.LoadScript("data/bullets/bullet.lua");
 -- Shared.LoadScript("data/research/research.lua");

@@ -7,3 +7,6 @@
 [submodule "lib/aul"]
 	path = lib/aul
 	url = git://github.com/okard/aul.git
+[submodule "lib/csoh"]
+	path = lib/csoh
+	url = https://github.com/okard/csoh.git
