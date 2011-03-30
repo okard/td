@@ -18,8 +18,8 @@
 */
 #include "GameWindow.hpp"
 
-#include <glul/GlContext>
-#include <glul/EventLoop>
+#include <glul/GlContext.hpp>
+#include <glul/EventLoop.hpp>
 
 #include <engine/lua/LuaState.hpp>
 
@@ -95,7 +95,7 @@ void GameWindow::OnRender()
 /**
 * Get Engine
 */
-engine::EngineCore& GameWindow::getEngine()
+engine::EngineInstance& GameWindow::getEngine()
 {
     return engine;
 }

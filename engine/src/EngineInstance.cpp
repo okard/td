@@ -16,7 +16,7 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include <engine/EngineCore.hpp>
+#include <engine/EngineInstance.hpp>
 
 //cul includes
 #include <cul/String.hpp>
@@ -34,7 +34,7 @@
 #include <engine/ui/SystemInterface.hpp>
 #include <engine/ui/RenderInterfaceOpenGL.hpp>
 
-using engine::EngineCore;
+using engine::EngineInstance;
 using engine::lua::LuaState;
 
 #include <string>
@@ -55,7 +55,7 @@ cul::string GenId()
 /**
 * Create new engine core
 */
-EngineCore::EngineCore()
+EngineInstance::EngineInstance()
     : renderer(new csoh::Renderer()),
       lua(new lua::LuaState()), 
       ui(0),
@@ -89,7 +89,7 @@ EngineCore::EngineCore()
 /**
 * Destructor
 */
-EngineCore::~EngineCore()
+EngineInstance::~EngineInstance()
 {
     //destroy csoh renderer
     delete renderer;
@@ -101,7 +101,7 @@ EngineCore::~EngineCore()
 /**
 * Initialize Engine core
 */
-void EngineCore::init()
+void EngineInstance::init()
 {   
     //Initialize Render Stuff
     renderer->init();
@@ -110,7 +110,7 @@ void EngineCore::init()
 /**
 * Resize Renderer
 */
-void EngineCore::resize(int width, int height)
+void EngineInstance::resize(int width, int height)
 {
     //resize horde renderer
     renderer->resize(0,0, width, height);
@@ -123,7 +123,7 @@ void EngineCore::resize(int width, int height)
 /**
 * Render a frame
 */
-void EngineCore::render()
+void EngineInstance::render()
 {
     //render
     renderer->startRender();
@@ -139,7 +139,7 @@ void EngineCore::render()
 /**
 * Get Lua State
 */
-LuaState* EngineCore::getLuaState()
+LuaState* EngineInstance::getLuaState()
 {
     return lua;
 }
@@ -148,7 +148,7 @@ LuaState* EngineCore::getLuaState()
 /**
 * Get libRocket Context
 */
-Rocket::Core::Context* EngineCore::getUiContext()
+Rocket::Core::Context* EngineInstance::getUiContext()
 {
     return ui;
 }

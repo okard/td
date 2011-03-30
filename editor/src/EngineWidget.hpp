@@ -20,7 +20,7 @@
 #define __EDITOR_ENGINEWIDGET_HPP__
 
 #include <QGLWidget>
-#include <engine/EngineCore.hpp>
+#include <engine/EngineInstance.hpp>
 
 namespace editor {
 
@@ -33,12 +33,12 @@ class EngineWidget : public QGLWidget
     
 private:
     ///Engine Core
-    engine::EngineCore* engine;
+    engine::EngineInstance* engine;
     
     ///Camera to Render
     
 public:
-    EngineWidget(QWidget* parent, engine::EngineCore* engine);
+    EngineWidget(QWidget* parent, engine::EngineInstance* engine);
 
 protected:
     void initializeGL();

@@ -24,7 +24,7 @@ using namespace engine;
 /**
 * Creates new Engine Widget
 */
-EngineWidget::EngineWidget(QWidget* parent, EngineCore* engine)
+EngineWidget::EngineWidget(QWidget* parent, EngineInstance* engine)
     : QGLWidget(parent), engine(engine)
 {
     //Register Editor Lua Functions here to

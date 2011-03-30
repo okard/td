@@ -22,7 +22,7 @@
 #include <QWidget> 
 #include <QToolBar>
 
-#include <engine/EngineCore.hpp>
+#include <engine/EngineInstance.hpp>
 
 #include "ui_EngineTab.h"
 #include "EngineWidget.hpp"
@@ -38,7 +38,7 @@ class EngineTab : public QWidget, private Ui::EngineTab
         
 private:
     /// Engine
-    engine::EngineCore engine;
+    engine::EngineInstance engine;
     
     /// Engine Widget
     EngineWidget engineWidget;

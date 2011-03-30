@@ -19,9 +19,9 @@
 #ifndef __GAMEWINDOW_HPP__
 #define __GAMEWINDOW_HPP__
 
-#include <glul/GlWindow>
-#include <glul/Types>
-#include <engine/EngineCore.hpp>
+#include <glul/GlWindow.hpp>
+#include <glul/Types.hpp>
+#include <engine/EngineInstance.hpp>
 
 namespace game {
 
@@ -32,7 +32,7 @@ class GameWindow : public glul::GlWindow
 {
     private:
         /// Engine Core
-        engine::EngineCore engine;
+        engine::EngineInstance engine;
 
         // Current Camera
 
@@ -70,7 +70,7 @@ class GameWindow : public glul::GlWindow
         /**
         * Get Engine
         */
-        engine::EngineCore& getEngine();
+        engine::EngineInstance& getEngine();
 };
     
 } //end namespace game

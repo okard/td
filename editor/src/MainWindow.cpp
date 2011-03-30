@@ -21,7 +21,7 @@
 #include <QTextEdit>
 
 
-#include <engine/EngineCore.hpp>
+#include <engine/EngineInstance.hpp>
 
 #include "EngineWidget.hpp"
 #include "EngineTab.hpp"

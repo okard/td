@@ -13,7 +13,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib/csoh/include)
 
 #source files for engine
 set( ENGINE_SRC
-    src/EngineCore.cpp
+    src/EngineInstance.cpp
     src/Binding.cpp
     src/lua/LuaState.cpp
     src/lua/LuaContext.cpp

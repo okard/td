@@ -47,7 +47,7 @@ namespace engine {
 /**
 * TD Game Engine
 */
-class EngineCore
+class EngineInstance
 {
 private:
     /// Renderer
@@ -65,12 +65,12 @@ public:
     /**
     * Create new Engine Core
     */
-    EngineCore();
+    EngineInstance();
     
     /**
     * Destructor
     */
-    ~EngineCore();
+    ~EngineInstance();
     
     /**
     * Initialize
