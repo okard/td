@@ -4,12 +4,13 @@ td - An open source tower defense game.
 
 Libraries used
 --------------------
-- [OpenGL](http://www.opengl.org/)
-- [glul](http://github.com/okard/glul)
-- [cul](http://github.com/okard/cul)
-- [LuaJIT 2](http://luajit.org/)
+
+- [cul](https://github.com/okard/cul)
+- [glul](https://github.com/okard/glul)
+- [csoh](https://github.com/okard/csoh)
 - [libRocket](http://librocket.com/)
-- [Horde3D](http://www.horde3d.org/)
+- [LuaJIT 2](http://luajit.org/)
+- [Qt4](http://qt.nokia.com/)
 
 
 Directory Structure
