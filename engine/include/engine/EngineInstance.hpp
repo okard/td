@@ -24,7 +24,7 @@
 
 //forward declaration
 namespace csoh {
-    class Renderer;
+    class RenderContext;
 }
 
 namespace Rocket {
@@ -51,7 +51,7 @@ class EngineInstance
 {
 private:
     /// Renderer
-    csoh::Renderer* renderer;
+    csoh::RenderContext* renderer;
     
     /// Lua State
     lua::LuaState* lua;

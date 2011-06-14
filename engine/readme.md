@@ -3,12 +3,16 @@ td - the engine
 
 Here getting all things merged
 
+Components:
 * Graphic Engine (csoh)
 * Audio Interface (AUL)
 * Scripting (lua/luajit)
 * User Interface (libRocket)
 * Physics (Bullet?)
 * Network
+
+Other Dependencies:
+* C++ Utility Library (cul)
 
 
 TODO

@@ -23,7 +23,7 @@
 #include <cul/Convert.hpp>
 
 //CSOH Includes
-#include <csoh/Renderer.hpp>
+#include <csoh/RenderContext.hpp>
 
 //libRocket Includes
 #include <Rocket/Core.h>
@@ -56,7 +56,7 @@ cul::string GenId()
 * Create new engine core
 */
 EngineInstance::EngineInstance()
-    : renderer(new csoh::Renderer()),
+    : renderer(new csoh::RenderContext()),
       lua(new lua::LuaState()), 
       ui(0),
       uiName(5)
