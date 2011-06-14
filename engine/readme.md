@@ -4,6 +4,7 @@ td - the engine
 Here getting all things merged
 
 Components:
+
 * Graphic Engine (csoh)
 * Audio Interface (AUL)
 * Scripting (lua/luajit)
@@ -12,6 +13,7 @@ Components:
 * Network
 
 Other Dependencies:
+
 * C++ Utility Library (cul)
 
 
